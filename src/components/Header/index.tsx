@@ -105,13 +105,13 @@ const Header = () => {
                   Trade
                 </Link>
                 <Link
-                  href=""
+                  href="/pool"
                   className="nav_font text-[#fff] text-xs font-medium"
                 >
                   Pool
                 </Link>
                 <Link
-                  href=""
+                  href="/stake"
                   className="nav_font text-[#fff] text-xs font-medium"
                 >
                   Stake
@@ -163,7 +163,7 @@ const Header = () => {
 
               <div>
                 <div className="flex items-center gap-[22px] w-full">
-                  <div className="flex items-start gap-3  btn py-[10px] px-3">
+                  <div className="flex items-start gap-[4px]  btn py-[10px] px-3">
                     <Image
                       className="w-[16px]"
                       priority
@@ -397,7 +397,7 @@ const Header = () => {
               </Link>
             </div>
             <div className="">
-              <Link href="" onClick={handleLink}>
+              <Link href="/stake" onClick={handleLink}>
                 Stake
               </Link>
             </div>
@@ -441,7 +441,7 @@ const Header = () => {
               </Link>
             </div>
             <div className="">
-              <div className="flex items-center gap-3  btn py-2 px-3">
+              <div className="flex items-center gap-[4px]  btn py-2 px-3">
                 <Image
                   className="w-[16px]"
                   priority
