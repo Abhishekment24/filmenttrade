@@ -15,13 +15,120 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
+.nav_font {
+  font-family: "Onest", sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+.pool_font {
+  font-family: "Inter", sans-serif;
+}
+.box_wallet {
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #1a1a1a;
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 58px;
+}
+.wallet_popup {
+ border-radius: 8px;
+border: 1px solid #181818;
+background: #000;
+backdrop-filter: blur(12.5px);
+}
+.wallet_connected_font {
+  font-family: "Poppins", sans-serif;
+}
+.logo_font {
+  font-family: "Montserrat", sans-serif;
+}
+.header_bg {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.bg-1 {
+  background: rgba(13, 13, 13, 0.4);
+  backdrop-filter: blur(42px);
+}
+.box_shadow {
+  box-shadow: 0px -6px 24px 0px rgba(255, 255, 255, 0.1) inset,
+    0px 2px 12px 0px rgba(0, 0, 0, 0.25);
+}
+.btn {
+  border-radius: 4px;
+  border: 1px solid rgba(64, 224, 208, 0.2);
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    180deg,
+    rgba(64, 224, 208, 0) 0%,
+    rgba(42, 204, 187, 0.05) 100%
+  );
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.2);
+}
+.btn_one {
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: linear-gradient(180deg, #40e0d0 0%, #2accbb 100%);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.4);
+}
+.wallet_coonected {
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.03);
+}
+body {
+  color: #fff;
+  background: #111113;
+}
+/*-------------------Pool Page css----------------------*/
+
+.pool_bg {
+  height: 60px;
+  background: linear-gradient(180deg, rgba(17, 17, 19, 0) 0%, #111113 100%),
+    url("./../../public/assest/poolbackground.png"),
+    lightgray 50% / cover no-repeat;
+}
+.pool_box_shadow {
+  box-shadow: 0px 6px 4px 0px rgba(0, 0, 0, 0.2);
+}
+.pool_charts_box {
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+}
+.pool_right_box {
+  border-radius: 8px;
+  border: 1px solid rgba(56, 216, 200, 0.4);
+
+  background: radial-gradient(
+      95.76% 90.91% at 50% 0%,
+      rgba(64, 224, 208, 0.2) 0%,
+      rgba(64, 224, 208, 0) 100%
+    ),
+    #1b1c1e;
+}
+
+
+
+
+
+
+
+/*-------------------responsive css ------------*/
+@media(max-width: 1023px){
+  .pool_bg {
+    height: auto;
+   background: linear-gradient(180deg, rgba(17, 17, 19, 0) 0%, #111113 100%),
+    url("./../../public/assest/poolbackground.png"),
+    lightgray 50% / cover no-repeat;
+    background-repeat: no-repeat;
+    background-position: cover;
+    background-size: cover;
+}
 }
