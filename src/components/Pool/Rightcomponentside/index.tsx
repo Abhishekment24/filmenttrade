@@ -25,7 +25,7 @@ const Rightcomponentside = () => {
         <div className="flex items-center gap-[16px] my-5">
           <div>
             <Image
-              className="w-[40px]"
+              className="w-[40px] max-[420px]:w-[23px]"
               priority
               src={Suppliedicon}
               alt="Suppliedicon"
@@ -35,7 +35,7 @@ const Rightcomponentside = () => {
             <span className="nav_font text-[#fff] text-sm font-semibold">
               Supplied Liquidity
             </span>
-            <span className="wallet_connected_font text-[#fff] text-[20px] font-semibold">
+            <span className="wallet_connected_font text-[#fff] max-[320px]:text-base text-[20px] font-semibold">
               42.86 USDC
             </span>
           </div>
@@ -44,7 +44,7 @@ const Rightcomponentside = () => {
         <div className="flex items-start gap-[16px] mt-5">
           <div>
             <Image
-              className="w-[40px]"
+              className="w-[40px] max-[420px]:w-[23px] "
               priority
               src={Stakeicons}
               alt="Stakeicons"
@@ -135,7 +135,7 @@ const Rightcomponentside = () => {
                 </span>
               </div>
               <div>
-                <button className="items-center w-full nav_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[10px] px-[16px]">
+                <button className="items-center w-full nav_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]">
                   Withdraw
                 </button>
               </div>

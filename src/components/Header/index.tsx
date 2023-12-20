@@ -448,7 +448,7 @@ const Header = () => {
                   src={Buttonicons}
                   alt="Buttonicons"
                 />
-                <span className="nav_font text-[#fff] font-medium text-[16px] ">
+                <span className="nav_font text-[#40CABC] font-semibold text-[16px] ">
                   Earn 62% APR on USDC
                 </span>
               </div>

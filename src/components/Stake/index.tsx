@@ -81,23 +81,23 @@ const Stakepage = () => {
                         <p className="pool_font text-[#939191] text-sm font-semibold">
                           Available to Stake
                         </p>
-                        <p className="pool_font text-[#E8E8E8] text-base font-medium tracking-[0.08px]">
-                          1,500,500.65 FLP
+                        <p className="pool_font text-[#939191] text-base font-medium tracking-[0.08px]">
+                          0 USDC
                         </p>
                       </div>
-                      <div className="">
+                      {/* <div className="">
                         <button className="items-center nav_font text-[#40CABC] text-sm font-semibold  btn  w-[140px]  py-[12px] px-[16px]">
                           Stake
                         </button>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
                 <div className="lg:w-[50%] w-full relative">
-                  <div className="pool_right_box pl-[40px] py-[33px] pool_box_shadow ">
-                    <div className="absolute top-[1px] right-[1px] ">
+                  <div className="pool_right_box sm:px-[40px] px-4 py-[33px] pool_box_shadow ">
+                    <div className="absolute top-[1px] right-[1px]  ">
                       <Image
-                        className="w-[206px] overflow-hidden"
+                        className="w-[206px] overflow-hidden max-[320px]:w-[190px]"
                         priority
                         src={Timerbg}
                         alt="Timerbg"
@@ -110,8 +110,8 @@ const Stakepage = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="flex  flex-wrap items-center gap-[36px]">
-                      <div>
+                    <div className="flex  max-[550px]:flex-col items-center gap-3 sm:gap-[36px] max-[550px]:mt-5">
+                      <div className="max-[550px]:flex  max-[550px]:justify-center">
                         <Image
                           className="w-[88px]"
                           priority
@@ -119,14 +119,14 @@ const Stakepage = () => {
                           alt="Coin"
                         />
                       </div>
-                      <div className="flex flex-col gap-[4px]">
-                        <span className="pool_font text-[#fff] text-xs font-semibold tracking-[0.06px]">
+                      <div className="flex flex-col gap-[4px] max-[550px]:justify-center">
+                        <span className="pool_font text-[#fff] text-xs max-[550px]:text-center font-semibold tracking-[0.06px]">
                           Your Reward
                         </span>
-                        <span className="pool_font text-[#fff] text-[20px] font-semibold tracking-[0.1px]">
+                        <span className="pool_font text-[#fff] text-[20px] max-[400px]:text-base max-[550px]:text-center font-semibold tracking-[0.1px]">
                           0.1563 Filament Token
                         </span>
-                        <div className="mt-3">
+                        <div className="mt-3 max-[550px]:text-center">
                           <button className="items-center w-[140px] nav_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[12px] px-[16px]">
                             Claim
                           </button>
@@ -139,30 +139,30 @@ const Stakepage = () => {
             </div>
             <div className="w-full relative  bg-[#242527]   pool_box_shadow border-t-[1px] border-solid border-[#25272A]  p-[24px]">
               <div className="rewards-blocks">
-                <div className="flex justify-between mb-8">
-                  <div className="pool_font text-[#fff] text-sm">
+                <div className="flex justify-between items-center gap-2 flex-wrap">
+                  <div className="pool_font text-[#fff] text-sm max-[345px]:text-xs">
                     Reward History
                   </div>
                   <button onClick={toggleVisibility} className="">
                     {isVisible ? (
                       <>
                         <div className="flex items-center gap-1">
-                          <span className="text-[#40E0D0] pool_font  text-sm font-medium">
+                          <span className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs">
                             Hide reward history
                           </span>
                           <span>
-                            <IoMdArrowDropup className="text-[#40E0D0] pool_font  text-sm font-medium" />
+                            <IoMdArrowDropup className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs" />
                           </span>
                         </div>
                       </>
                     ) : (
                       <>
                         <div className="flex items-center gap-1">
-                          <span className="text-[#40E0D0] pool_font  text-sm font-medium">
+                          <span className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs">
                             Show reward history
                           </span>
                           <span>
-                            <IoMdArrowDropdown className="text-[#40E0D0] pool_font  text-sm font-medium" />
+                            <IoMdArrowDropdown className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs" />
                           </span>
                         </div>
                       </>
@@ -171,10 +171,28 @@ const Stakepage = () => {
                 </div>
                 {isVisible && (
                   <>
-                    <div className="flex align-center">
-                      <button className="bg-[#3c3d40] px-[9px] py-[8px] text-center rounded-[4px]"><IoMdArrowDropleft /></button>
-                      <ul className="flex justify-between stakereward-ul">
-                        <li className="flex flex-col justify-center text-center px-8">
+                    <div className="flex align-center md:flex-row flex-col mt-8">
+                      <button className="bg-[#3c3d40] px-[9px] py-[8px] text-center rounded-[4px] max-[767px]:w-[36px]">
+                        <IoMdArrowDropleft />
+                      </button>
+                      <ul className="flex justify-between md:flex-row flex-col items-center stakereward-ul">
+                        <li className="border_list max-[767px]:my-3 flex flex-col justify-center text-center px-8 max-[767px]:py-3">
+                          <span className="m-auto bg-[#34d5c4] w-[27px] h-[27] rounded-full p-1 ">
+                            <Image
+                              className=""
+                              priority
+                              src={Tick}
+                              alt="Tick"
+                            />
+                          </span>
+                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8] ">
+                            0.1563 Filament Token
+                          </h3>
+                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">
+                            15 Dec
+                          </p>
+                        </li>
+                        <li className="border_list flex flex-col justify-center text-center px-8 max-[767px]:py-3">
                           <span className="m-auto bg-[#34d5c4] w-[27px] h-[27] rounded-full p-1">
                             <Image
                               className=""
@@ -183,10 +201,14 @@ const Stakepage = () => {
                               alt="Tick"
                             />
                           </span>
-                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">0.1563 Filament Token</h3>
-                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">15 Dec</p>
+                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">
+                            0.1563 Filament Token
+                          </h3>
+                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">
+                            16 Dec
+                          </p>
                         </li>
-                        <li className="flex flex-col justify-center text-center px-8">
+                        <li className="border_list max-[767px]:my-3 flex flex-col justify-center text-center px-8 max-[767px]:py-3">
                           <span className="m-auto bg-[#34d5c4] w-[27px] h-[27] rounded-full p-1">
                             <Image
                               className=""
@@ -195,22 +217,14 @@ const Stakepage = () => {
                               alt="Tick"
                             />
                           </span>
-                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">0.1563 Filament Token</h3>
-                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">16 Dec</p>
+                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">
+                            0.1563 Filament Token
+                          </h3>
+                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">
+                            17 Dec
+                          </p>
                         </li>
-                        <li className="flex flex-col justify-center text-center px-8">
-                          <span className="m-auto bg-[#34d5c4] w-[27px] h-[27] rounded-full p-1">
-                            <Image
-                              className=""
-                              priority
-                              src={Tick}
-                              alt="Tick"
-                            />
-                          </span>
-                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">0.1563 Filament Token</h3>
-                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">17 Dec</p>
-                        </li>
-                        <li className="flex flex-col justify-center text-center px-8">
+                        <li className=" border_list flex flex-col justify-center text-center px-8 max-[767px]:py-3">
                           <span className="m-auto bg-[#C35200] w-[27px] h-[27] rounded-full p-1 text-center">
                             <Image
                               className=""
@@ -219,10 +233,14 @@ const Stakepage = () => {
                               alt="Cross"
                             />
                           </span>
-                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">0.1563 Filament Token</h3>
-                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">18 Dec</p>
+                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">
+                            0.1563 Filament Token
+                          </h3>
+                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">
+                            18 Dec
+                          </p>
                         </li>
-                        <li className="flex flex-col justify-center text-center px-8">
+                        <li className="border_list max-[767px]:my-3 flex flex-col justify-center text-center px-8 max-[767px]:py-3">
                           <span className="m-auto bg-[#3B82F6] w-[27px] h-[27] rounded-full p-1 text-center">
                             <Image
                               className=""
@@ -231,14 +249,17 @@ const Stakepage = () => {
                               alt="Clock"
                             />
                           </span>
-                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">0.1563 Filament Token</h3>
-                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">19 Dec</p>
+                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">
+                            0.1563 Filament Token
+                          </h3>
+                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">
+                            19 Dec
+                          </p>
                         </li>
                       </ul>
                     </div>
                   </>
                 )}
-               
               </div>
             </div>
           </div>

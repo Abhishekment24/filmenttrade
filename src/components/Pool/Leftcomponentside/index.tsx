@@ -18,7 +18,7 @@ const tabs = [
 ];
 const Leftcomponentside = () => {
   const [selectedTab, setSelectedTab] = useState("liquidity");
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
