@@ -137,3 +137,35 @@ body {
     background-size: cover;
   }
 }
+
+.stakereward-ul{
+  position: relative;
+  z-index: 9;
+}
+
+.stakereward-ul::before{
+  content: '';
+  position: absolute;
+  top:14px;
+  left: 0;
+  width: 90%;
+  height: 1px;
+  background-color: #2d333c;
+  z-index: -9;
+}
+
+.stakereward-ul li:nth-child(1){
+  position: relative;
+}
+
+.stakereward-ul li:nth-child(1)::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160px;
+  height: 28px;
+  background-image: url(../../public/assest/stakeshadow.png);
+  background-repeat: no-repeat;
+  z-index: 9;
+}

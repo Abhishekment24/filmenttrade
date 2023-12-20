@@ -5,6 +5,9 @@ import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import Lock from "../../../public/assest/Lock.png";
 import Coin from "../../../public/assest/Coin.png";
 import Timerbg from "../../../public/assest/timerbg.png";
+import Tick from "../../../public/assest/check.png";
+import Cross from "../../../public/assest/Cross.png";
+import Clock from "../../../public/assest/Clock.png";
 const Stakepage = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -134,37 +137,106 @@ const Stakepage = () => {
               </div>
             </div>
             <div className="w-full relative  bg-[#242527]   pool_box_shadow border-t-[1px] border-solid border-[#25272A]  p-[24px]">
-              <div className="">
+              <div className="rewards-blocks">
+                <div className="flex justify-between mb-8">
+                  <div className="pool_font text-[#fff] text-sm">
+                    Reward History
+                  </div>
+                  <button onClick={toggleVisibility} className="">
+                    {isVisible ? (
+                      <>
+                        <div className="flex items-center gap-1">
+                          <span className="text-[#40E0D0] pool_font  text-sm font-medium">
+                            Hide reward history
+                          </span>
+                          <span>
+                            <IoMdArrowDropup className="text-[#40E0D0] pool_font  text-sm font-medium" />
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="flex items-center gap-1">
+                          <span className="text-[#40E0D0] pool_font  text-sm font-medium">
+                            Show reward history
+                          </span>
+                          <span>
+                            <IoMdArrowDropdown className="text-[#40E0D0] pool_font  text-sm font-medium" />
+                          </span>
+                        </div>
+                      </>
+                    )}
+                  </button>
+                </div>
                 {isVisible && (
                   <>
-                    <div className="">bjvbhkvjhvj</div>
+                    <div className="">
+                      <ul className="flex justify-between stakereward-ul">
+                        <li className="flex flex-col justify-center text-center px-8">
+                          <span className="m-auto bg-[#34d5c4] w-[27px] h-[27] rounded-full p-1">
+                            <Image
+                              className=""
+                              priority
+                              src={Tick}
+                              alt="Tick"
+                            />
+                          </span>
+                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">0.1563 Filament Token</h3>
+                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">15 Dec</p>
+                        </li>
+                        <li className="flex flex-col justify-center text-center px-8">
+                          <span className="m-auto bg-[#34d5c4] w-[27px] h-[27] rounded-full p-1">
+                            <Image
+                              className=""
+                              priority
+                              src={Tick}
+                              alt="Tick"
+                            />
+                          </span>
+                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">0.1563 Filament Token</h3>
+                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">16 Dec</p>
+                        </li>
+                        <li className="flex flex-col justify-center text-center px-8">
+                          <span className="m-auto bg-[#34d5c4] w-[27px] h-[27] rounded-full p-1">
+                            <Image
+                              className=""
+                              priority
+                              src={Tick}
+                              alt="Tick"
+                            />
+                          </span>
+                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">0.1563 Filament Token</h3>
+                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">17 Dec</p>
+                        </li>
+                        <li className="flex flex-col justify-center text-center px-8">
+                          <span className="m-auto bg-[#C35200] w-[27px] h-[27] rounded-full p-1 text-center">
+                            <Image
+                              className=""
+                              priority
+                              src={Cross}
+                              alt="Cross"
+                            />
+                          </span>
+                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">0.1563 Filament Token</h3>
+                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">18 Dec</p>
+                        </li>
+                        <li className="flex flex-col justify-center text-center px-8">
+                          <span className="m-auto bg-[#3B82F6] w-[27px] h-[27] rounded-full p-1 text-center">
+                            <Image
+                              className=""
+                              priority
+                              src={Clock}
+                              alt="Clock"
+                            />
+                          </span>
+                          <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">0.1563 Filament Token</h3>
+                          <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">19 Dec</p>
+                        </li>
+                      </ul>
+                    </div>
                   </>
                 )}
-                <button onClick={toggleVisibility} className="">
-                  {isVisible ? (
-                    <>
-                      <div className="flex items-center gap-1">
-                        <span className="text-[#40E0D0] pool_font  text-sm font-medium">
-                          Hide reward history
-                        </span>
-                        <span>
-                          <IoMdArrowDropup className="text-[#40E0D0] pool_font  text-sm font-medium" />
-                        </span>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="flex items-center gap-1">
-                        <span className="text-[#40E0D0] pool_font  text-sm font-medium">
-                          Show reward history
-                        </span>
-                        <span>
-                          <IoMdArrowDropdown className="text-[#40E0D0] pool_font  text-sm font-medium" />
-                        </span>
-                      </div>
-                    </>
-                  )}
-                </button>
+               
               </div>
             </div>
           </div>
