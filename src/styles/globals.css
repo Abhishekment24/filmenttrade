@@ -16,7 +16,7 @@
   }
 }
 .nav_font {
-  font-family: "Onest", sans-serif;
+  font-family: "Onest", sans-serif !important;
 }
 h1,
 h2,
@@ -24,10 +24,10 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif !important;
 }
 .pool_font {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif !important;
 }
 .box_wallet {
   border-radius: 4px;
@@ -41,16 +41,16 @@ h6 {
   height: 58px;
 }
 .wallet_popup {
- border-radius: 8px;
-border: 1px solid #181818;
-background: #000;
-backdrop-filter: blur(12.5px);
+  border-radius: 8px;
+  border: 1px solid #181818;
+  background: #000;
+  backdrop-filter: blur(12.5px);
 }
 .wallet_connected_font {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif !important;
 }
 .logo_font {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .header_bg {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -114,21 +114,26 @@ body {
     #1b1c1e;
 }
 
+/*-------------------Stake Page css----------------------*/
 
-
-
-
-
+.stake_box {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
 
 /*-------------------responsive css ------------*/
-@media(max-width: 1023px){
+@media (max-width: 1023px) {
   .pool_bg {
     height: auto;
-   background: linear-gradient(180deg, rgba(17, 17, 19, 0) 0%, #111113 100%),
-    url("./../../public/assest/poolbackground.png"),
-    lightgray 50% / cover no-repeat;
+    background: linear-gradient(180deg, rgba(17, 17, 19, 0) 0%, #111113 100%),
+      url("./../../public/assest/poolbackground.png"),
+      lightgray 50% / cover no-repeat;
     background-repeat: no-repeat;
     background-position: cover;
     background-size: cover;
-}
+  }
 }
