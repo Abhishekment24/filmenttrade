@@ -91,7 +91,7 @@ body {
 /*-------------------Pool Page css----------------------*/
 
 .pool_bg {
-  height: 60px;
+  /* height: 60px; */
   background: linear-gradient(180deg, rgba(17, 17, 19, 0) 0%, #111113 100%),
     url("./../../public/assest/poolbackground.png"),
     lightgray 50% / cover no-repeat;

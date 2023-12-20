@@ -58,7 +58,7 @@ const Rightcomponentside = () => {
               Bonding period ~ 21 days
             </span>
             <div className="mt-3">
-              <button className="items-center nav_font text-[#40CABC] text-xs font-semibold  btn  w-[120px] py-[10px] px-[16px]">
+              <button className="items-center nav_font text-[#40CABC] text-[14px] w-[120px] font-semibold  btn  w-[120px] p-[16px]">
                 Stake
               </button>
             </div>
@@ -108,7 +108,7 @@ const Rightcomponentside = () => {
                 </span>
               </div>
               <div>
-                <button className="items-center w-full nav_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[10px] px-[16px]">
+                <button className="items-center w-full nav_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]">
                   Deposit
                 </button>
               </div>

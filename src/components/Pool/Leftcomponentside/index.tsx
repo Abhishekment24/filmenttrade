@@ -71,9 +71,9 @@ const Leftcomponentside = () => {
               return (
                 <button
                   onClick={() => setSelectedTab(tab.key)}
-                  className={`py-3 px-4 pool_font rounded-[8px] font-normal text-base  ${
+                  className={`py-[6px] px-[12px] pool_font rounded-[8px] font-normal text-base  ${
                     tab.key == selectedTab
-                      ? " bg-[#1A1A1A] text-[#fff] "
+                      ? " bg-[#1A1A1A] text-[#E8E8E8] "
                       : "text-[#BABABA] "
                   }`}
                   key={index}
@@ -83,7 +83,7 @@ const Leftcomponentside = () => {
               );
             })}
           </div>
-          <div className="flex items-center py-3 px-4 gap-[20px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  ">
+          <div className="flex items-center py-[6px] px-[12px] gap-[20px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  ">
             <p className=" pool_font text-[#BABABA] text-base font-normal">
               1 Year
             </p>
@@ -122,7 +122,7 @@ const Leftcomponentside = () => {
               key={index}
               className="flex justify-between items-center gap-3 my-3"
             >
-              <p className="pool_font text-[#fff] text-sm font-medium">
+              <p className="pool_font text-[#E8E8E8] text-sm font-medium">
                 {item.titles}
               </p>
               <p className="pool_font text-[#fff] text-sm font-semibold ">
@@ -142,7 +142,7 @@ const Leftcomponentside = () => {
                     key={index}
                     className="flex justify-between items-center gap-3 my-3"
                   >
-                    <p className="pool_font text-[#fff] text-sm font-medium">
+                    <p className="pool_font text-[#E8E8E8] text-sm font-medium">
                       {item.titles}
                     </p>
                     <p className="pool_font text-[#fff] text-sm font-semibold ">
