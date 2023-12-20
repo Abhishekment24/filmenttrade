@@ -8,6 +8,7 @@ import Timerbg from "../../../public/assest/timerbg.png";
 import Tick from "../../../public/assest/check.png";
 import Cross from "../../../public/assest/Cross.png";
 import Clock from "../../../public/assest/Clock.png";
+import { IoMdArrowDropleft } from "react-icons/io";
 const Stakepage = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -170,7 +171,8 @@ const Stakepage = () => {
                 </div>
                 {isVisible && (
                   <>
-                    <div className="">
+                    <div className="flex align-center">
+                      <button className="bg-[#3c3d40] px-[9px] py-[8px] text-center rounded-[4px]"><IoMdArrowDropleft /></button>
                       <ul className="flex justify-between stakereward-ul">
                         <li className="flex flex-col justify-center text-center px-8">
                           <span className="m-auto bg-[#34d5c4] w-[27px] h-[27] rounded-full p-1">
