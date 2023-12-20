@@ -8,27 +8,31 @@ import Leftcomponentside from "./Leftcomponentside";
 const Pool = () => {
   return (
     <>
-      <section className="py-[100px] pool_bg max-[1023px]:overflow-hidden">
-        <div className="container mx-auto max-[1023px]:px-4">
-          <div className="flex items-center gap-[16px]">
-            <div>
-              <Image
-                className="w-[32px]"
-                priority
-                src={Poolicons}
-                alt="Poolicons"
-              />
-            </div>
-            <div className="flex flex-col gap-[4px]">
-              <span className="nav_font text-[#fff] text-[20px] font-semibold">
-                USDC
-              </span>
-              <span className="nav_font text-[#939191] text-xs font-normal">
-                Liquidity Pool
-              </span>
+      <section className="max-[1023px]:overflow-hidden relative">
+        <div className="pt-[95px] pb-[24px] pool_bg lg:sticky lg:top-0 z-10">
+          <div className="container mx-auto max-[1023px]:px-4">
+            <div className="flex items-center gap-[16px]">
+              <div>
+                <Image
+                  className="w-[32px]"
+                  priority
+                  src={Poolicons}
+                  alt="Poolicons"
+                />
+              </div>
+              <div className="flex flex-col gap-[4px]">
+                <span className="nav_font text-[#fff] text-[20px] font-semibold">
+                  USDC
+                </span>
+                <span className="nav_font text-[#939191] text-xs font-normal">
+                  Liquidity Pool
+                </span>
+              </div>
             </div>
           </div>
-          <div className="flex items-start gap-[30px] lg:flex-row flex-col w-full relative">
+        </div>
+        <div className="container mx-auto max-[1023px]:px-4">
+          <div className="flex items-start gap-[30px] lg:flex-row flex-col w-full relative  pb-[80px]">
             <div className="lg:w-[65%] w-full lg:overflow-y-auto">
               <Leftcomponentside />
             </div>
