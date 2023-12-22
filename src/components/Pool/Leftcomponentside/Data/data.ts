@@ -80,3 +80,30 @@ export const edata = [
     description: "223.11",
   },
 ];
+
+export const mdata = [
+  {
+    id: 1,
+
+    titles: "Fixed Earning",
+    description: "233.11",
+  },
+  {
+    id: 2,
+
+    titles: "Variable Earning",
+    description: "233.11",
+  },
+  {
+    id: 3,
+
+    titles: "Total Number of Referrals",
+    description: "233.11",
+  },
+  {
+    id: 4,
+
+    titles: "Epoch Countdown",
+    description: "0D : 2H : 4BM : 32S",
+  },
+];

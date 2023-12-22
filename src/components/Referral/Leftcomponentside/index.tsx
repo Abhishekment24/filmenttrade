@@ -7,7 +7,7 @@ const Leftcomponentside = () => {
 
   return (
     <>
-      <div className="flex items-center flex-wrap max-[550px]:gap-4  bg-[#1B1C1E] mb-5 pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] p-[24px] justify-between  w-full ">
+      <div className="flex items-center flex-wrap max-[550px]:gap-4  bg-[#1B1C1E] my-5 pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] p-[24px] justify-between  w-full ">
         <div className="flex flex-col w-full">
           <span className="nav_font text-[#fff] text-[16px] font-semibold mb-[12px]">
             Referral Link
