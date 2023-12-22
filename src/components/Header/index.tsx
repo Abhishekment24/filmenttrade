@@ -117,7 +117,7 @@ const Header = () => {
                   Stake
                 </Link>
                 <Link
-                  href=""
+                  href="/referral"
                   className="nav_font text-[#fff] text-xs font-medium"
                 >
                   Referral
