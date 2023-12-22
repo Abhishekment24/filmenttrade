@@ -113,6 +113,14 @@ body {
     ),
     #1b1c1e;
 }
+.pool_wallet_popup {
+  border-radius: 8px;
+  border: 1px solid #25272a;
+  background: #1b1c1e;
+
+  /* T Card 1 Shadow 1 */
+  box-shadow: 0px 6px 4px 0px rgba(0, 0, 0, 0.2);
+}
 
 /*-------------------Stake Page css----------------------*/
 
@@ -178,8 +186,8 @@ body {
     background-color: #2d333c;
     z-index: -9;
     display: none;
-}
-.stakereward-ul li:nth-child(1)::before {
+  }
+  .stakereward-ul li:nth-child(1)::before {
     content: "";
     position: absolute;
     top: 0;
@@ -190,9 +198,9 @@ body {
     background-repeat: no-repeat;
     z-index: 9;
     display: none;
-}
-.border_list{
-  border: 1px solid #3b3f46;
-  border-radius: 8px;
-}
+  }
+  .border_list {
+    border: 1px solid #3b3f46;
+    border-radius: 8px;
+  }
 }
