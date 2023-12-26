@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../../public/assest/Logo.png";
 import Buttonicons from "../../../public/assest/buttonicons.png";
 import Metamaskicon from "../../../public/assest/metamaskicon.png";
-import Metamaskimg from "../../../public/assest/metamsakimg.png";
+import Metamaskimg from "../../../public/assest/metamsakimgs.png";
 import Wallecticons from "../../../public/assest/wallecticons.png";
 import Coinicons from "../../../public/assest/coinicons.png";
 import { RxHamburgerMenu, RxCross2 } from "react-icons/rx";
@@ -306,7 +306,7 @@ const Header = () => {
                       WalletConnect
                     </span>
                   </Link>
-                  <Link
+                  {/*  <Link
                     href={""}
                     className="flex items-center gap-3 box_wallet"
                   >
@@ -319,13 +319,14 @@ const Header = () => {
                     <span className="text-base text-[#fff] font-medium nav_font">
                       Coinbase Wallet
                     </span>
-                  </Link>
+                  </Link> */}
                 </div>
                 <p className="text-[#939191] text-xs font-medium nav_font ">
                   Can’t connect your wallet?{""}
                   <span className="text-[#40E0D0]"> Get Help</span>
                 </p>
-                <p className="text-[#939191] mt-5 text-xs font-medium nav_font ">
+                <div className="border-[1px] border-dashed border-[#FFFFFF1A] my-[24px]"></div>
+                <p className="text-[#939191]  text-xs font-medium nav_font ">
                   By continuing, you agree to Filament’s Terms of Service &
                   Privacy Policy
                 </p>
@@ -354,25 +355,17 @@ const Header = () => {
                 <div className="py-7">
                   <div className="flex justify-center">
                     <Image
-                      className="w-[148px]"
+                      className="w-[317px]"
                       src={Metamaskimg}
                       priority
                       alt="Metamaskimg"
                     />
                   </div>
                   <Link href={""} className=" ">
-                    <div className="flex items-center justify-center   gap-3">
-                      <span>
-                        <FaRegCircleCheck className="text-[#40E0D0] text-lg" />
-                      </span>
-                      <span className="text-[20px] text-[#fff] font-semibold nav_font">
-                        Connecting to MetaMask
-                      </span>
-                    </div>
+                    <p className="text-[20px] text-center text-[#fff] font-semibold nav_font">
+                      Connecting to MetaMask
+                    </p>
                   </Link>
-                  <p className="text-[#939191] text-xs font-medium nav_font text-center mt-2">
-                    Abort Connection
-                  </p>
                 </div>
               </div>
             </div>
