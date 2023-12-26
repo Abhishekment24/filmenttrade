@@ -43,8 +43,18 @@ h6 {
 .wallet_popup {
   border-radius: 8px;
   border: 1px solid #181818;
-  background: #1B1C1E;
+  background: #1b1c1e;
   backdrop-filter: blur(12.5px);
+}
+.sidebar_wallet_menu {
+  border-left: 1px solid #25272a;
+  background: #1b1c1e;
+  box-shadow: 0px 2px 24px 4px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12.5px);
+}
+.wallet_img_box {
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
 }
 .wallet_connected_font {
   font-family: "Poppins", sans-serif !important;
@@ -75,7 +85,7 @@ h6 {
 }
 .btn_one {
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  /*border: 1px solid rgba(255, 255, 255, 0.5);*/
   background: linear-gradient(180deg, #40e0d0 0%, #2accbb 100%);
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.4);
 }
