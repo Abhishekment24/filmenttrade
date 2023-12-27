@@ -1,7 +1,17 @@
 import Sites from "@/components/Site";
 import "@/styles/globals.css";
+import { WagmiConfig, createConfig, mainnet } from 'wagmi'
+import { createPublicClient, http } from 'viem'
 import type { AppProps } from "next/app";
 import React from "react";
+
+const config = createConfig({
+  autoConnect: true,
+  publicClient: createPublicClient({
+    chain: mainnet,
+    transport: http()
+  }),
+})
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -21,9 +31,12 @@ export default function App({ Component, pageProps }: AppProps) {
         rel="stylesheet"
       ></link>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"></link>
-      <Sites>
-        <Component {...pageProps} />
-      </Sites>
+      <WagmiConfig config={config}>
+
+        <Sites>
+          <Component {...pageProps} />
+        </Sites>
+      </WagmiConfig>
     </>
   );
 }

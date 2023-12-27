@@ -6,8 +6,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Myapp() {
   return (
-  <div className=''>
-   <Pool />
-  </div>
+    <div className=''>
+      <Pool />
+    </div>
   )
 }
