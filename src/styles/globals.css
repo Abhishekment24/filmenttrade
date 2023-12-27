@@ -98,6 +98,16 @@ body {
   color: #fff;
   background: #111113;
 }
+.grid-width {
+    grid-template-columns: 60% 15% 25%;
+}
+#tradingview_0396b #widget-container {
+   border: 1px solid #25272A !important;
+}
+input[type=checkbox]{
+  background-color: #a77e2d !important;
+  color: #ffffff !important;
+}
 /*-------------------Pool Page css----------------------*/
 
 .pool_bg {

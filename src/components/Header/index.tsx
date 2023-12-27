@@ -101,7 +101,7 @@ const Header = () => {
                   </div>
                 )}
                 <Link
-                  href=""
+                  href="/trade"
                   className="nav_font text-[#fff] text-xs font-medium"
                 >
                   Trade
@@ -562,7 +562,7 @@ const Header = () => {
         >
           <div className=" flex items-start px-4 flex-col nav_font text-[#fff] text-base font-medium">
             <div className="">
-              <Link href="#" onClick={handleLink}>
+              <Link href="/trade" onClick={handleLink}>
                 Trade
               </Link>
             </div>
@@ -577,7 +577,7 @@ const Header = () => {
               </Link>
             </div>
             <div className="py-4">
-              <Link href="" onClick={handleLink}>
+              <Link href="/referral" onClick={handleLink}>
                 Referral
               </Link>
             </div>
