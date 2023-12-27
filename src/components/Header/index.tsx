@@ -60,13 +60,16 @@ const Header = () => {
 
 
   const handleWalletConnect = () => {
-    connect()
-    setIsWalletOpen(true);
-    setIsPopupOpen(false);
+    if (window.ethereum) {
+      connect()
+      setIsWalletOpen(true);
+      setIsPopupOpen(false);
+    } else {
+      alert("Install metamask")
+    }
   };
 
   const connectWallet = () => {
-
     setIsPopupOpen(true);
     setIsWalletOpen(false);
   };
@@ -75,6 +78,7 @@ const Header = () => {
     setIsPopupOpen(false);
     setIsWalletOpen(false);
   };
+
   useEffect(() => {
     const handleClickOutside = (event: { target: any }) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -85,6 +89,12 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownRef]);
   useEffect(() => {
+    let isWagmiConnected = localStorage.getItem("wagmi.connected")
+    if (isWagmiConnected) {
+
+      connect()
+    }
+    // handleWalletConnect()
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0); // Set isScrolled to true when scrolled
     };
@@ -106,14 +116,12 @@ const Header = () => {
 
     })()
 
-    // alert(address)
-
   }, [address, walletDetails])
   const disconnectMetamask = () => {
     disconnect()
     setIsWalletOpen(false)
     setWalletSideNav(false)
-    // setIsPopupOpen
+    localStorage.clear()
   }
 
   const handleNetworkChange = () => {
@@ -122,7 +130,6 @@ const Header = () => {
 
   const copyIt = async () => {
     try {
-
       await navigator.clipboard.writeText(`${address}`)
     } catch (error) {
       console.log(error)
@@ -621,27 +628,36 @@ const Header = () => {
                     </p>
                   </Link>
                   {/* Switch to injected Network  */}
-                  {isConnected && chainId != InjectedChainId &&
-                    <div>
-                      <button
-                        // disabled={!switchNetwork || x.id === chain?.id}
+                  {isConnected && chainId != InjectedChainId ?
+                    <>
 
-                        onClick={handleNetworkChange}
+                      <div className="flex justify-center">
+                        <button
+                          // disabled={!switchNetwork || x.id === chain?.id}
+                          className="items-center nav_font w-[234px] text-[#0B2B28] text-base font-semibold  btn_one  py-[10px] px-[16px]"
+
+                          onClick={handleNetworkChange}
+                        >
+                          Switch to injective
+
+                        </button>
+                      </div>
+                      <div
+                        onClick={disconnectMetamask}
+                        className="items-center text-center  text-[#ffffff] text-xs font-semibold    py-[10px] px-[16px]"
                       >
-                        Switch to injective
-
-                      </button>
+                        Disconnect Wallet
+                      </div>
+                    </>
+                    :
+                    <div
+                      onClick={disconnectMetamask}
+                      className="items-center text-center  text-[#ffffff] text-xs font-semibold    py-[10px] px-[16px]"
+                    >
+                      Metamask Connected
                     </div>
                   }
-                  <div onClick={disconnectMetamask}>
 
-                    <button
-                      onClick={disconnectMetamask}
-                      className="items-center nav_font text-[#0B2B28] text-xs font-semibold  btn_one  py-[10px] px-[16px]"
-                    >
-                      Disconnect Wallet
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
