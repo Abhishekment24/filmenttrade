@@ -3,20 +3,31 @@ import Logo from "../../../public/assest/Logo.png";
 import Buttonicons from "../../../public/assest/buttonicons.png";
 import Metamaskicon from "../../../public/assest/metamaskicon.png";
 import Metamaskimg from "../../../public/assest/metamsakimgs.png";
+import Yellowimg from "../../../public/assest/yellowimg.png";
 import Walletimg from "../../../public/assest/walletimg.png";
 import Wallecticons from "../../../public/assest/wallecticons.png";
 import Coinicons from "../../../public/assest/coinicons.png";
 import { RxHamburgerMenu, RxCross2 } from "react-icons/rx";
-import COMMON_FUNCTIONS from "@/components/CommonFunctions/CommonFunctions"
+import COMMON_FUNCTIONS from "@/components/CommonFunctions/CommonFunctions";
 import Link from "next/link";
-
-import { MdNotifications, MdOutlineContentCopy, MdOutlineLogout } from "react-icons/md";
+import { IoMdWarning } from "react-icons/io";
+import {
+  MdNotifications,
+  MdOutlineContentCopy,
+  MdOutlineLogout,
+} from "react-icons/md";
 import { FaArrowRightLong, FaLock } from "react-icons/fa6";
 import Image from "next/image";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { AiOutlineClose } from "react-icons/ai";
-import { useAccount, useBalance, useConnect, useDisconnect, useSwitchNetwork } from 'wagmi'
-import { InjectedConnector } from 'wagmi/connectors/injected'
+import {
+  useAccount,
+  useBalance,
+  useConnect,
+  useDisconnect,
+  useSwitchNetwork,
+} from "wagmi";
+import { InjectedConnector } from "wagmi/connectors/injected";
 
 const innerLinks = [
   { text: "Help Center", href: "/" },
@@ -28,44 +39,42 @@ const innerLinks = [
   { text: "Explore Community", href: "/" },
 ];
 
-const InjectedChainId = 5
+const InjectedChainId = 5;
 const Header = () => {
   // --- Wallet Functions
   // const { data, isError, isLoading } = useBalance({
 
   const { chains, error, isLoading, pendingChainId, switchNetwork } =
-    useSwitchNetwork()
+    useSwitchNetwork();
 
-  const walletDetails = useAccount()
-  console.log(chains, "<<<<thesearechains")
-  const { address, isConnected } = useAccount()
+  const walletDetails = useAccount();
+  console.log(chains, "<<<<thesearechains");
+  const { address, isConnected } = useAccount();
   const walletBalance = useBalance({
     address: address,
-  })
+  });
   const { connect } = useConnect({
     connector: new InjectedConnector(),
-  })
-  const { disconnect } = useDisconnect()
+  });
+  const { disconnect } = useDisconnect();
 
   //  ---
   const [showDropNav, setShowDropNav] = useState(false);
   const [showWalletSideNav, setWalletSideNav] = useState(false);
   const [showLangDrop, setshowLangDrop] = useState(false);
-  const [chainId, setchainId] = useState<any>(null)
+  const [chainId, setchainId] = useState<any>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isWalletOpen, setIsWalletOpen] = useState(false);
 
-
-
   const handleWalletConnect = () => {
     if (window.ethereum) {
-      connect()
+      connect();
       setIsWalletOpen(true);
       setIsPopupOpen(false);
     } else {
-      alert("Install metamask")
+      alert("Install metamask");
     }
   };
 
@@ -89,10 +98,9 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownRef]);
   useEffect(() => {
-    let isWagmiConnected = localStorage.getItem("wagmi.connected")
+    let isWagmiConnected = localStorage.getItem("wagmi.connected");
     if (isWagmiConnected) {
-
-      connect()
+      connect();
     }
     // handleWalletConnect()
     const handleScroll = () => {
@@ -109,41 +117,38 @@ const Header = () => {
   const currentChainId = async () => {
     if (window.hasOwnProperty("ethereum"))
       return Number(await window?.ethereum.request({ method: "eth_chainId" }));
-  }
+  };
   useEffect(() => {
     (async () => {
-      setchainId(await currentChainId())
-
-    })()
-
-  }, [address, walletDetails])
+      setchainId(await currentChainId());
+    })();
+  }, [address, walletDetails]);
   const disconnectMetamask = () => {
-    disconnect()
-    setIsWalletOpen(false)
-    setWalletSideNav(false)
-    localStorage.clear()
-  }
+    disconnect();
+    setIsWalletOpen(false);
+    setWalletSideNav(false);
+    localStorage.clear();
+  };
 
   const handleNetworkChange = () => {
-    switchNetwork?.(InjectedChainId)
-  }
+    switchNetwork?.(InjectedChainId);
+  };
 
   const copyIt = async () => {
     try {
-      await navigator.clipboard.writeText(`${address}`)
+      await navigator.clipboard.writeText(`${address}`);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
-
   };
 
   return (
     <div>
       <>
         <div
-          className={`navbartop fixed top-0 z-[300] header_bg py-[12px] lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${isScrolled ? "bg-1" : ""
-            }`}
+          className={`navbartop fixed top-0 z-[300] header_bg py-[12px] lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${
+            isScrolled ? "bg-1" : ""
+          }`}
         >
           <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
             <div className="flex justify-between text-[#fff] items-center max-[1023px]:hidden">
@@ -246,21 +251,23 @@ const Header = () => {
                     </span>
                   </div>
                   <div className="w-[1px] h-[34px] bg-[#272727]"> </div>
-                  {!isConnected ? <button
-                    onClick={connectWallet}
-                    className="items-center nav_font text-[#0B2B28] text-xs font-semibold  btn_one  py-[10px] px-[16px]"
-                  >
-                    Connect Wallet
-                  </button> :
+                  {!isConnected ? (
+                    <button
+                      onClick={connectWallet}
+                      className="items-center nav_font text-[#0B2B28] text-xs font-semibold  btn_one  py-[10px] px-[16px]"
+                    >
+                      Connect Wallet
+                    </button>
+                  ) : (
                     <>
-
                       <div className="flex items-center gap-[8px] wallet_coonected  px-[12px] h-[38px]">
                         <div className="flex flex-col text-right justify-end ">
                           <span className="text-[#939191] wallet_connected_font font-medium text-[10px] tracking-{0.2px} ">
                             Portfolio Value
                           </span>
                           <span className="nav_font text-[#fff] font-medium text-[10px] ">
-                            {walletBalance?.data && `${(walletBalance.data).formatted} ${walletBalance.data.symbol}`}
+                            {walletBalance?.data &&
+                              `${walletBalance.data.formatted} ${walletBalance.data.symbol}`}
                           </span>
                         </div>
                         <div className="w-[1px] h-[34px] bg-[#272727]"> </div>
@@ -277,14 +284,18 @@ const Header = () => {
                           {!showWalletSideNav ? (
                             <div
                               className="cursor-pointer"
-                              onClick={() => setWalletSideNav(!showWalletSideNav)}
+                              onClick={() =>
+                                setWalletSideNav(!showWalletSideNav)
+                              }
                             >
                               <RiArrowDownSFill />
                             </div>
                           ) : (
                             <div
                               className="cursor-pointer"
-                              onClick={() => setWalletSideNav(!showWalletSideNav)}
+                              onClick={() =>
+                                setWalletSideNav(!showWalletSideNav)
+                              }
                             >
                               <RiArrowDownSFill />
                             </div>
@@ -294,7 +305,8 @@ const Header = () => {
                       <div className="wallet_coonected w-[34px] h-[34px] flex items-center justify-center">
                         <MdNotifications className="text-[#fff] text-base" />
                       </div>
-                    </>}
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -326,7 +338,7 @@ const Header = () => {
         {/**-----------------after wallet connected sidebar */}
         <div
           className={`
-          sidebar_wallet_menu moblie-nav  px-3  max-[991px]:z-[50] z-[300] fixed lg:w-[360px]  w-full  top-0 overflow-y-auto overflow-x-hidden  bottom-0 pt-5 
+          sidebar_wallet_menu moblie-nav  px-3  max-[991px]:z-[50] z-[400] fixed lg:w-[360px]  w-full  top-0 overflow-y-auto overflow-x-hidden  bottom-0 pt-5 
         duration-500 ${showWalletSideNav ? "right-0" : "right-[-100%]"}
         `}
         >
@@ -341,16 +353,20 @@ const Header = () => {
                 />
                 <span className="pool_font text-[#fff] font-medium text-xs truncate ">
                   {COMMON_FUNCTIONS.formatMetamaskAddress(address)}
-
-
                 </span>
               </div>
               <div className="flex items-center gap-[8px]">
                 <span>
-                  <MdOutlineContentCopy onClick={copyIt} className="text-[#fff] text-base cursor-pointer " />
+                  <MdOutlineContentCopy
+                    onClick={copyIt}
+                    className="text-[#fff] text-base cursor-pointer "
+                  />
                 </span>
                 <span>
-                  <MdOutlineLogout onClick={disconnectMetamask} className="text-[#fff] cursor-pointer text-base" />
+                  <MdOutlineLogout
+                    onClick={disconnectMetamask}
+                    className="text-[#fff] cursor-pointer text-base"
+                  />
                 </span>
               </div>
             </div>
@@ -598,7 +614,7 @@ const Header = () => {
               <div className="  wallet_popup w-full max-w-md transform  p-5 text-left align-middle shadow-xl transition-all ">
                 <div className="flex items-center justify-between gap-2 ">
                   <p className="text-[#fff] text-2xl font-semibold nav_font ">
-                    Manage Wallet
+                    Connect Wallet
                   </p>
                   <button
                     className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[34px] h-[34px] flex items-center justify-center"
@@ -610,54 +626,71 @@ const Header = () => {
 
                 <div className="py-7">
                   <div className="flex justify-center">
-                    {isConnected ? <Image
-                      className="w-[317px]"
-                      src={Metamaskimg}  // green metamask
-                      priority
-                      alt="Metamaskimg"
-                    /> : <Image
-                      className="w-[317px]"
-                      src={Metamaskimg}
-                      priority
-                      alt="Metamaskimg"
-                    />}
+                    {!isConnected ||
+                    (isConnected && chainId != InjectedChainId) ? (
+                      <Image
+                        className="w-[317px]"
+                        src={Yellowimg} // green metamask
+                        priority
+                        alt="Metamaskimg"
+                      />
+                    ) : (
+                      <Image
+                        className="w-[317px]"
+                        src={Metamaskimg}
+                        priority
+                        alt="Yellowimg"
+                      />
+                    )}
                   </div>
                   <Link href={""} className=" ">
                     <p className="text-[20px] text-center text-[#fff] font-semibold nav_font">
-                      {isConnected ? "Connected to metamask" : "Connecting to MetaMask"}
+                      {isConnected
+                        ? "Connected to metamask"
+                        : "Connecting to MetaMask"}
                     </p>
                   </Link>
                   {/* Switch to injected Network  */}
-                  {isConnected && chainId != InjectedChainId ?
+                  {isConnected && chainId != InjectedChainId ? (
                     <>
-
-                      <div className="flex justify-center">
-                        <button
-                          // disabled={!switchNetwork || x.id === chain?.id}
-                          className="items-center nav_font w-[234px] text-[#0B2B28] text-base font-semibold  btn_one  py-[10px] px-[16px]"
-
-                          onClick={handleNetworkChange}
-                        >
-                          Switch to injective
-
-                        </button>
+                      <div className="wallet_card_bg py-[12px] px-[16px] my-6">
+                        <div className="flex items-start gap-[12px]">
+                          <span>
+                            <IoMdWarning className="text-[#D57501] text-2xl" />
+                          </span>
+                          <div>
+                            <p className="text-[#D57501] pool_font text-base font-bold">
+                              Switch to Injective network
+                            </p>
+                            <p className="text-[#939191] pool_font text-base font-light">
+                              You need to be on Injective network to open &
+                              execute orders
+                            </p>
+                          </div>
+                        </div>
+                        <div className="my-3 justify-center flex">
+                          <button
+                            // disabled={!switchNetwork || x.id === chain?.id}
+                            className="items-center nav_font w-[384px] text-[#0B2B28] text-sm font-semibold  btn_one  py-[10px] px-[16px]"
+                            onClick={handleNetworkChange}
+                          >
+                            Switch to injective
+                          </button>
+                        </div>
                       </div>
                       <div
                         onClick={disconnectMetamask}
-                        className="items-center text-center  text-[#ffffff] text-xs font-semibold    py-[10px] px-[16px]"
+                        className="text-[#939191] text-center nav_font text-xs font-medium"
                       >
                         Disconnect Wallet
                       </div>
                     </>
-                    :
+                  ) : (
                     <div
                       onClick={disconnectMetamask}
-                      className="items-center text-center  text-[#ffffff] text-xs font-semibold    py-[10px] px-[16px]"
-                    >
-                      Metamask Connected
-                    </div>
-                  }
-
+                      className=" text-center justify-center flex  text-[#ffffff] text-xs font-semibold "
+                    ></div>
+                  )}
                 </div>
               </div>
             </div>
