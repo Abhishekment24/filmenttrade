@@ -23,7 +23,7 @@ const Rightsidecomponent = () => {
   };
   return (
     <>
-      <div className="border-[1px] border-solid border-[#FFFFFF0D] h-[100vh] overflow-y-scroll">
+      <div className="border-[1px] border-solid border-[#FFFFFF0D] min-h-[100vh] w-[25%] fixed overflow-y-scroll">
         <div className="flex justify-between items-center gap-[10px] w-full border-b-[1px] border-[#272727] px-4">
           <div className="flex items-center  gap-[19px]  border-b-[1px] border-[#272727]">
             {tabs.map((tab, index) => {
