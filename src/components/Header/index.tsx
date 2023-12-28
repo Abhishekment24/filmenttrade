@@ -49,7 +49,7 @@ const Header = () => {
 
   const walletDetails = useAccount();
   console.log(chains, "<<<<thesearechains");
-  const { address, isConnected } = useAccount();
+  const { address, isConnected, isConnecting } = useAccount();
   const walletBalance = useBalance({
     address: address,
   });
@@ -146,9 +146,8 @@ const Header = () => {
     <div>
       <>
         <div
-          className={`navbartop fixed top-0 z-[300] header_bg py-[12px] lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${
-            isScrolled ? "bg-1" : ""
-          }`}
+          className={`navbartop fixed top-0 z-[300] header_bg py-[12px] lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${isScrolled ? "bg-1" : ""
+            }`}
         >
           <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
             <div className="flex justify-between text-[#fff] items-center max-[1023px]:hidden">
@@ -626,22 +625,22 @@ const Header = () => {
 
                 <div className="py-7">
                   <div className="flex justify-center">
-                    {!isConnected ||
-                    (isConnected && chainId != InjectedChainId) ? (
-                      <Image
-                        className="w-[317px]"
-                        src={Yellowimg} // green metamask
-                        priority
-                        alt="Metamaskimg"
-                      />
-                    ) : (
-                      <Image
-                        className="w-[317px]"
-                        src={Metamaskimg}
-                        priority
-                        alt="Yellowimg"
-                      />
-                    )}
+                    {isConnecting || (isConnected && chainId == InjectedChainId)
+                      ? (
+                        <Image
+                          className="w-[317px]"
+                          src={Metamaskimg} // green metamask
+                          priority
+                          alt="Metamaskimg"
+                        />
+                      ) : (
+                        <Image
+                          className="w-[317px]"
+                          src={Yellowimg}
+                          priority
+                          alt="Yellowimg"
+                        />
+                      )}
                   </div>
                   <Link href={""} className=" ">
                     <p className="text-[20px] text-center text-[#fff] font-semibold nav_font">
