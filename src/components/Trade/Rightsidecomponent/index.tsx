@@ -32,7 +32,7 @@ const Rightsidecomponent = () => {
                   onClick={() => setSelectedTab(tab.key)}
                   className={`pool_font font-medium text-sm  ${
                     tab.key == selectedTab
-                      ? "py-2 text-[#40E0D0] border-b-[2px] border-[#40E0D0] w-[101px]"
+                      ? "py-[8.5px] text-[#40E0D0] border-b-[2px] border-[#40E0D0] w-[101px]"
                       : "text-[#fff] w-[101px] "
                   }`}
                   key={index}
