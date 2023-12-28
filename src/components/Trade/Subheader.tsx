@@ -37,7 +37,7 @@ const Subheader = () => {
   return (
     <>
       <div
-        className={`navbartop fixed top-[62px] z-[300] bg-[#1B1C1E]  header_bg lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${
+        className={`navbartop fixed top-[62px] z-[300] bg-[#1B1C1E] max-[1179px]:hidden header_bg lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${
           isScrolled ? "" : "bg-[#1B1C1E]"
         }`}
       >
@@ -165,7 +165,7 @@ const Subheader = () => {
 
                 <div className="w-[1px] py-[30px] bg-[#FFFFFF0D]"> </div>
               </div>
-              <div className=" flex items-center gap-[43px]">
+              <div className=" flex items-center lg:gap-[18px] xl:gap-[25px] min-[1380px]:gap-[43px]">
                 <div className="flex items-center gap-[8px]">
                   <span>
                     <MdOutlineArrowDropUp className="text-[#00CC99] text-base" />

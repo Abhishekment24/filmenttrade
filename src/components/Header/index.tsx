@@ -146,11 +146,12 @@ const Header = () => {
     <div>
       <>
         <div
-          className={`navbartop fixed top-0 z-[400] header_bg py-[12px] lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${isScrolled ? "bg-1" : ""
-            }`}
+          className={`navbartop fixed top-0 z-[400] header_bg py-[12px] lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${
+            isScrolled ? "bg-1" : ""
+          }`}
         >
           <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
-            <div className="flex justify-between text-[#fff] items-center max-[1023px]:hidden">
+            <div className="flex justify-between text-[#fff] items-center max-[1179px]:hidden">
               <div className="flex items-center gap-10">
                 <Link href="/" className="flex items-center gap-[8px]">
                   <Image className="w-[16px]" priority src={Logo} alt="logo" />
@@ -309,7 +310,7 @@ const Header = () => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-between items-center gap-3 lg:hidden">
+            <div className="flex justify-between items-center gap-3 nav_moblie_bar">
               <Link href="/" className="flex items-center gap-[8px]">
                 <Image className="w-[16px]" priority src={Logo} alt="logo" />
                 <span className="text-[#40E0D0] logo_font font-medium text-base tracking-{0.96px}">
@@ -318,14 +319,14 @@ const Header = () => {
               </Link>
               {!showDropNav ? (
                 <div
-                  className="lg:hidden menu-icon text-3xl"
+                  className=" menu-icon text-3xl"
                   onClick={() => setShowDropNav(!showDropNav)}
                 >
                   <RxHamburgerMenu />
                 </div>
               ) : (
                 <div
-                  className="lg:hidden menu-icon text-3xl"
+                  className=" menu-icon text-3xl"
                   onClick={() => setShowDropNav(!showDropNav)}
                 >
                   <RxCross2 />
@@ -337,7 +338,7 @@ const Header = () => {
         {/**-----------------after wallet connected sidebar */}
         <div
           className={`
-          sidebar_wallet_menu moblie-nav  px-3  max-[991px]:z-[50] z-[400] fixed lg:w-[360px]  w-full  top-0 overflow-y-auto overflow-x-hidden  bottom-0 pt-5 
+          sidebar_wallet_menu moblie-nav  px-3  max-[991px]:z-[400] z-[400] fixed lg:w-[360px]  w-full  top-0 overflow-y-auto overflow-x-hidden  bottom-0 pt-5 
         duration-500 ${showWalletSideNav ? "right-0" : "right-[-100%]"}
         `}
         >
@@ -625,22 +626,22 @@ const Header = () => {
 
                 <div className="py-7">
                   <div className="flex justify-center">
-                    {isConnecting || (isConnected && chainId == InjectedChainId)
-                      ? (
-                        <Image
-                          className="w-[317px]"
-                          src={Metamaskimg} // green metamask
-                          priority
-                          alt="Metamaskimg"
-                        />
-                      ) : (
-                        <Image
-                          className="w-[317px]"
-                          src={Yellowimg}
-                          priority
-                          alt="Yellowimg"
-                        />
-                      )}
+                    {isConnecting ||
+                    (isConnected && chainId == InjectedChainId) ? (
+                      <Image
+                        className="w-[317px]"
+                        src={Metamaskimg} // green metamask
+                        priority
+                        alt="Metamaskimg"
+                      />
+                    ) : (
+                      <Image
+                        className="w-[317px]"
+                        src={Yellowimg}
+                        priority
+                        alt="Yellowimg"
+                      />
+                    )}
                   </div>
                   <Link href={""} className=" ">
                     <p className="text-[20px] text-center text-[#fff] font-semibold nav_font">
@@ -772,14 +773,62 @@ const Header = () => {
                 </span>
               </div>
             </div>
+
             <div className="py-4">
-              <button
-                onClick={connectWallet}
-                className="items-center nav_font w-[234px] text-[#0B2B28] text-base font-semibold  btn_one  py-[10px] px-[16px]"
-              >
-                Connect Wallet
-              </button>
+              {!isConnected ? (
+                <button
+                  onClick={connectWallet}
+                  className="items-center nav_font w-[234px] text-[#0B2B28] text-base font-semibold  btn_one  py-[10px] px-[16px]"
+                >
+                  Connect Wallet
+                </button>
+              ) : (
+                <>
+                  <div className="flex items-center gap-[8px] wallet_coonected  px-[12px] h-[38px]">
+                    <div className="flex flex-col text-right justify-end ">
+                      <span className="text-[#939191] wallet_connected_font font-medium text-xs tracking-{0.2px} ">
+                        Portfolio Value
+                      </span>
+                      <span className="nav_font text-[#fff] font-medium text-xs ">
+                        {walletBalance?.data &&
+                          `${walletBalance.data.formatted} ${walletBalance.data.symbol}`}
+                      </span>
+                    </div>
+                    <div className="w-[1px] h-[34px] bg-[#272727]"> </div>
+                    <div className="flex items-center gap-3">
+                      <div className="flex flex-col text-right justify-end ">
+                        <span className="text-[#939191] wallet_connected_font font-medium text-xs tracking-{0.2px} ">
+                          Linked Wallet
+                        </span>
+                        <span className="nav_font text-[#fff] font-medium text-xs ">
+                          {COMMON_FUNCTIONS.formatMetamaskAddress(address)}
+                        </span>
+                      </div>
+
+                      {!showWalletSideNav ? (
+                        <div
+                          className="cursor-pointer"
+                          onClick={() => setWalletSideNav(!showWalletSideNav)}
+                        >
+                          <RiArrowDownSFill />
+                        </div>
+                      ) : (
+                        <div
+                          className="cursor-pointer"
+                          onClick={() => setWalletSideNav(!showWalletSideNav)}
+                        >
+                          <RiArrowDownSFill />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="mt-4 wallet_coonected w-[34px] h-[34px] flex items-center justify-center">
+                    <MdNotifications className="text-[#fff] text-base" />
+                  </div>
+                </>
+              )}
             </div>
+
             {/*<Link href="#">
               <div className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[34px] h-[34px] flex items-center justify-center">
                 <MdNotifications className="text-[#fff] text-base" />

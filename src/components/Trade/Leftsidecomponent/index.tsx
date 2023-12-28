@@ -3,7 +3,7 @@ import Charts from './Charts'
 
 const Leftsidecomponent = () => {
   return (
-    <div className="overflow-y-scroll h-[632px]">
+    <div className="overflow-y-scroll lg:h-[632px] h-[400px]">
       <Charts />
     </div>
   );

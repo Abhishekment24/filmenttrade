@@ -98,15 +98,16 @@ body {
   color: #fff;
   background: #111113;
 }
-.grid-width {
-  grid-template-columns: 60% 15% 25%;
-}
+
 #tradingview_0396b #widget-container {
   border: 1px solid #25272a !important;
 }
-input[type="checkbox"] {
-  background-color: #a77e2d !important;
-  color: #ffffff !important;
+
+input[type="checkbox"]:checked {
+  background-image: url("../../public/assest/control.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .wallet_card_bg {
   border-radius: 4px;
@@ -206,8 +207,82 @@ input[type="checkbox"] {
   align-items: end;
   text-align: end;
 }
+/*--------------------Trades page css----------------*/
+/* src/styles.css */
+.range-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 256px;
+  background: linear-gradient(to right
+      0deg,
+      rgba(64, 224, 208, 0.1) 0%,
+      rgba(64, 224, 208, 0.1) 100%
+    ),
+    #1a1a1a;
+  outline: none;
+ 
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+ 
+  display: flex;
+ width: 30px;
+  height: 30px;
+background-image: url("../../public/assest/Knob.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 6px 11px 6px 8px;
+
+  justify-content: center;
+  align-items: center;
+ 
+  cursor: pointer;
+}
+
+.range-slider::-moz-range-thumb {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  width: 28px;
+
+  padding: 6px 11px 6px 8px;
+
+  justify-content: center;
+  align-items: center;
+ background-image: url("../../public/assest/Knob.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
 
 /*-------------------responsive css ------------*/
+@media (min-width: 1024px) {
+  .grids-width {
+    grid-template-columns: 70% 30%;
+  }
+  .grid-width {
+    grid-template-columns: 78% 22%;
+  }
+}
+@media (min-width: 1280px) {
+  .grids-width {
+    grid-template-columns: 75% 25%;
+  }
+  .grid-width {
+    grid-template-columns: 78% 22%;
+  }
+}
+@media (min-width: 1180px) {
+  .nav_moblie_bar {
+    display: none;
+  }
+}
 @media (max-width: 1023px) {
   .pool_bg {
     height: auto;

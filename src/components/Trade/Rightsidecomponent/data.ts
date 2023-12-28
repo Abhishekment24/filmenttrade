@@ -42,3 +42,31 @@ export const cdata = [
     description: "0.015 BTC",
   },
 ];
+export const edata = [
+  {
+    id: 1,
+
+    titles: "Avg. Price",
+    description: "100 USDC",
+  },
+  {
+    id: 2,
+
+    titles: "Liquidation Price",
+    description: "100 USDC",
+  },
+];
+export const mdata = [
+  {
+    id: 1,
+
+    titles: "Trade Fees",
+    description: "0.01 USDC",
+  },
+  {
+    id: 2,
+
+    titles: "Borrow Fees",
+    description: "0.01 USDC",
+  },
+];
