@@ -146,7 +146,7 @@ const Header = () => {
     <div>
       <>
         <div
-          className={`navbartop fixed top-0 z-[300] header_bg py-[12px] lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${isScrolled ? "bg-1" : ""
+          className={`navbartop fixed top-0 z-[400] header_bg py-[12px] lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${isScrolled ? "bg-1" : ""
             }`}
         >
           <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
