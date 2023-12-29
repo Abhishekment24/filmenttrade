@@ -114,6 +114,11 @@ input[type="checkbox"]:checked {
   border: 1px solid #8a4c00;
   background: rgba(213, 117, 1, 0.1);
 }
+.incorrect_network_bg {
+  border-radius: 4px;
+  border: 1px solid #8e4d00;
+  background: rgba(213, 117, 1, 0.05);
+}
 /*-------------------Pool Page css----------------------*/
 
 .pool_bg {
@@ -214,24 +219,23 @@ input[type="checkbox"]:checked {
   width: 100%;
   height: 5px;
   border-radius: 256px;
-  background: linear-gradient(to right
-      0deg,
+  background: linear-gradient(
+      to right 0deg,
       rgba(64, 224, 208, 0.1) 0%,
       rgba(64, 224, 208, 0.1) 100%
     ),
     #1a1a1a;
   outline: none;
- 
 }
 
 .range-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
- 
+
   display: flex;
- width: 30px;
+  width: 30px;
   height: 30px;
-background-image: url("../../public/assest/Knob.png");
+  background-image: url("../../public/assest/Knob.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -239,7 +243,7 @@ background-image: url("../../public/assest/Knob.png");
 
   justify-content: center;
   align-items: center;
- 
+
   cursor: pointer;
 }
 
@@ -254,7 +258,7 @@ background-image: url("../../public/assest/Knob.png");
 
   justify-content: center;
   align-items: center;
- background-image: url("../../public/assest/Knob.png");
+  background-image: url("../../public/assest/Knob.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
