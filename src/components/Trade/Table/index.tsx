@@ -35,7 +35,7 @@ const Tablesection = () => {
                   onClick={() => setSelectedTab(tab.key)}
                   className={`py-3  pool_font font-medium text-sm  ${
                     tab.key == selectedTab
-                      ? " text-[#3B82F6] border-b-[2px] border-[#3B82F6] max-[639px]:max-[1699px]:min-w-[8rem] sm:w-[117px] "
+                      ? " text-[#40E0D0] border-b-[2px] border-[#40E0D0] max-[639px]:max-[1699px]:min-w-[8rem] sm:w-[117px] "
                       : "text-[#fff] max-[639px]:max-[1699px]:min-w-[8rem]  sm:w-[117px]"
                   }`}
                   key={index}
