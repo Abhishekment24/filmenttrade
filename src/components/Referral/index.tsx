@@ -34,7 +34,7 @@ const Referral = () => {
             <div className="lg:w-[65%] w-full lg:overflow-y-auto">
               <Leftcomponentside />
             </div>
-            <div className="lg:w-[35%] w-full mb-5  lg:sticky lg:top-44">
+            <div className="lg:w-[35%] w-full my-5">
               <Rightcomponentside />
             </div>
           </div>
