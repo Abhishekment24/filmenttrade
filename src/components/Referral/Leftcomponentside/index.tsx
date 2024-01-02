@@ -4,10 +4,9 @@ import { FaCopy } from "react-icons/fa6";
 import Suppliedicon from "../../../../public/assest/referral.png";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 const Leftcomponentside = () => {
-
   return (
     <>
-      <div className="flex items-center flex-wrap max-[550px]:gap-4  bg-[#1B1C1E] my-5 pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] p-[24px] justify-between  w-full ">
+      <div className="flex items-center flex-wrap max-[550px]:gap-3  bg-[#1B1C1E]  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] p-[24px] justify-between  w-full ">
         <div className="flex flex-col w-full">
           <span className="nav_font text-[#fff] text-[16px] font-semibold mb-[12px]">
             Referral Link
@@ -25,12 +24,12 @@ const Leftcomponentside = () => {
           </p>
         </div>
       </div>
-      <div className="flex items-center flex-wrap max-[550px]:gap-4  bg-[#1B1C1E] mb-5 pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] p-[24px] justify-between  w-full ">
+      <div className="flex items-center mt-[24px] flex-wrap max-[550px]:gap-3   bg-[#1B1C1E]  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] p-[24px] justify-between  w-full ">
         <div className="flex flex-col w-full">
-          <span className="nav_font text-[#fff] text-[16px] font-semibold mb-[12px]">
+          <span className="nav_font text-[#fff] text-[16px] font-semibold">
             Referral Benefits
           </span>
-          <div className="flex items-start gap-[16px] mt-5">
+          <div className="flex items-start gap-[16px] mt-6">
             <div>
               <Image
                 className="w-[40px] max-[420px]:w-[23px] "
@@ -43,7 +42,7 @@ const Leftcomponentside = () => {
               <span className="nav_font text-[#fff] text-sm font-bold">
                 Referral’s fees
               </span>
-              <span className="nav_font text-[#fff] text-sm font-normal">
+              <span className="wallet_connected_font text-[#fff] text-sm font-normal">
                 You get a portion of the referred user’s fees
               </span>
             </div>
@@ -62,15 +61,15 @@ const Leftcomponentside = () => {
               <span className="nav_font text-[#fff] text-sm font-bold">
                 Referral’s fees
               </span>
-              <span className="nav_font text-[#fff] text-sm font-normal">
+              <span className="wallet_connected_font text-[#fff] text-sm font-normal">
                 You get a portion of the referred user’s fees
               </span>
             </div>
           </div>
         </div>
-        <div className="flex items-center mt-5 w-full bg-[#262729] p-[16px] rounded-xl border-[1px] border-solid border-[#3c3d3e]">
+        <div className="flex items-center mt-6 w-full bg-[#262729] p-[16px] rounded-xl border-[1px] border-solid border-[#3c3d3e]">
           <AiOutlineInfoCircle className="text-[18px] text-[#9CA3AF] mr-4" />
-          <div className="text-[18px] text-[#9CA3AF]">
+          <div className="text-lg text-[#9CA3AF] pool_font font-normal tracking-[0.09px]">
             When a new user enters & deposits via your link, they become your
             referral
           </div>

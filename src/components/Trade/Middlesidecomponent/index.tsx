@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { cdata, edata } from "./data";
 import React, { useState } from "react";
 const tabs = [
@@ -55,14 +56,15 @@ const Middlesidecomponent = () => {
                   className="flex justify-between items-center py-[4px] px-2"
                   key={index}
                 >
-                  <span className="pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">
+                  <span className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">
                     {item.price}
                   </span>
-                  <div className="flex items-center gap-[19px]">
-                    <p className="pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
+
+                  <div className=" flex items-center gap-[19px]">
+                    <p className="cursor-pointer pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
                       {item.size}
                     </p>
-                    <p className="pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
+                    <p className="cursor-pointer pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
                       {item.total}
                     </p>
                   </div>
@@ -70,7 +72,7 @@ const Middlesidecomponent = () => {
               ))}
             </div>
             <div className="flex justify-between items-center  py-4 px-2 border-t-[1px] border-b-[1px] border-solid border-[#25272A] bg-[#1B1C1E]">
-              <span className="nav_font text-[#00CC99] font-medium text-base">
+              <span className="cursor-pointer nav_font text-[#00CC99] font-medium text-base">
                 43,998.5
               </span>
             </div>
@@ -80,14 +82,14 @@ const Middlesidecomponent = () => {
                   className="flex justify-between items-center py-[4px] px-2"
                   key={index}
                 >
-                  <span className="pool_font text-[#00CC99] font-normal text-xs tracking-[0.06px]">
+                  <span className="cursor-pointer pool_font text-[#00CC99] font-normal text-xs tracking-[0.06px]">
                     {item.price}
                   </span>
                   <div className="flex items-center gap-[19px]">
-                    <p className="pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
+                    <p className="cursor-pointer pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
                       {item.size}
                     </p>
-                    <p className="pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
+                    <p className="cursor-pointer pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
                       {item.total}
                     </p>
                   </div>
@@ -117,14 +119,14 @@ const Middlesidecomponent = () => {
                   className="flex justify-between items-center py-[4px] px-2"
                   key={index}
                 >
-                  <span className="pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">
+                  <span className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">
                     {item.price}
                   </span>
                   <div className="flex items-center gap-[19px]">
-                    <p className="pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
+                    <p className="cursor-pointer pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
                       {item.size}
                     </p>
-                    <p className="pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
+                    <p className=" cursor-pointer pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
                       {item.time}
                     </p>
                   </div>
@@ -138,14 +140,14 @@ const Middlesidecomponent = () => {
                   className="flex justify-between items-center py-[4px] px-2"
                   key={index}
                 >
-                  <span className="pool_font text-[#00CC99] font-normal text-xs tracking-[0.06px]">
+                  <span className="cursor-pointer pool_font text-[#00CC99] font-normal text-xs tracking-[0.06px]">
                     {item.price}
                   </span>
                   <div className="flex items-center gap-[19px]">
-                    <p className="pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
+                    <p className="cursor-pointer pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
                       {item.size}
                     </p>
-                    <p className="pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
+                    <p className="cursor-pointer pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
                       {item.time}
                     </p>
                   </div>
@@ -158,14 +160,14 @@ const Middlesidecomponent = () => {
                   className="flex justify-between items-center py-[4px] px-2"
                   key={index}
                 >
-                  <span className="pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">
+                  <span className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">
                     {item.price}
                   </span>
                   <div className="flex items-center gap-[19px]">
-                    <p className="pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
+                    <p className="cursor-pointer pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
                       {item.size}
                     </p>
-                    <p className="pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
+                    <p className="cursor-pointer pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
                       {item.time}
                     </p>
                   </div>

@@ -119,6 +119,28 @@ input[type="checkbox"]:checked {
   border: 1px solid #8e4d00;
   background: rgba(213, 117, 1, 0.05);
 }
+.animated-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 70px;
+  height: 38px;
+  background-size: 200% 100%;
+  background-color: #115e594d; /* Green background color */
+  animation: slideBg 2s linear infinite; /* Adjust the duration as needed */
+}
+
+@keyframes slideBg {
+  to {
+    left: 100%;
+  }
+}
 /*-------------------Pool Page css----------------------*/
 
 .pool_bg {
@@ -264,8 +286,40 @@ input[type="checkbox"]:checked {
   background-size: cover;
   cursor: pointer;
 }
+/*--------------------Portfolio page css----------------*/
 
+.portfolio_grids-width {
+  grid-template-columns: 18% 82%;
+}
+.portfolio_box_shadow {
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.16),
+    0px 2px 1px 0px rgba(0, 0, 0, 0.12), 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+}
+.bg_coin::after {
+  content: "";
+  position: absolute;
+  right: -12px;
+  width: 70px;
+  height: 70px;
+  bottom: -6px;
+  opacity: 0.4;
+  background: linear-gradient(0deg, #40e0d0 0%, #40e0d0 100%),
+    url("../../public/assest/coin2.png"), lightgray 50% / cover no-repeat;
+
+  background-blend-mode: hue, normal;
+}
 /*-------------------responsive css ------------*/
+
+@media (min-width: 1280px) and (max-width: 1360px) {
+  .container {
+    max-width: 1180px !important;
+  }
+}
+@media (min-width: 1536px) and (max-width: 1700px) {
+  .container {
+    max-width: 1436px !important;
+  }
+}
 @media (min-width: 1024px) {
   .grids-width {
     grid-template-columns: 70% 30%;

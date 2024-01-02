@@ -204,7 +204,7 @@ const Header = () => {
                 </Link>
                 <div className="w-[1px] h-[12px] bg-[#2A2A2A]"> </div>
                 <Link
-                  href=""
+                  href="/portfolio"
                   className="nav_font text-[#fff] text-xs font-medium"
                 >
                   Portfolio
@@ -244,7 +244,7 @@ const Header = () => {
               <div>
                 <div className="flex items-center gap-[22px] w-full">
                   <Link href="/stake">
-                    <div className="flex items-start gap-[4px]  btn py-[10px] px-3">
+                    <div className="flex items-start gap-[4px]  btn py-[10px] px-3 animated-bg">
                       <Image
                         className="w-[16px]"
                         priority
@@ -854,7 +854,7 @@ const Header = () => {
               </Link>
             </div>
             <div className="">
-              <Link href="" onClick={handleLink}>
+              <Link href="/portfolio" onClick={handleLink}>
                 Portfolio
               </Link>
             </div>
@@ -889,7 +889,7 @@ const Header = () => {
             </div>
             <div className="">
               <Link href="/stake">
-                <div className="flex items-center gap-[4px]  btn py-2 px-3">
+                <div className="flex items-center gap-[4px]  btn py-2 px-3 animated-bg">
                   <Image
                     className="w-[16px]"
                     priority

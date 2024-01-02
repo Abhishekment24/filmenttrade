@@ -23,12 +23,11 @@ const Rightsidecomponent = () => {
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSliderValue(parseInt(event.target.value, 10));
   };
- const calculateBgColor = (sliderValue: number) => {
-   // Example: Change color based on the value
-   const percentage = (sliderValue / 5) * 100;
-   return `linear-gradient(to right, #40e0d0 ${percentage}%, #1a1a1a ${percentage}%)`;
- };
-
+  const calculateBgColor = (sliderValue: number) => {
+    // Example: Change color based on the value
+    const percentage = (sliderValue / 5) * 100;
+    return `linear-gradient(to right, #40e0d0 ${percentage}%, #1a1a1a ${percentage}%)`;
+  };
 
   const sliderStyle = {
     background: calculateBgColor(sliderValue),
