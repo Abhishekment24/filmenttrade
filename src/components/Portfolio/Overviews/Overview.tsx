@@ -4,6 +4,7 @@ import { IoMdTrendingUp } from "react-icons/io";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import Charts from "../../Pool/Leftcomponentside/Charts";
 import Table from "./Table";
+import Dropdown from "@/components/Commoncomponent/Dropdown";
 const tabs = [
   {
     title: "Portfolio",
@@ -137,15 +138,8 @@ const Overview = () => {
                 );
               })}
             </div>
-            <div className="flex items-center py-[6px] px-[12px] gap-[20px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  ">
-              <p className=" pool_font text-[#BABABA] text-base font-normal">
-                1 Year
-              </p>
-              <div className="">
-                <IoMdArrowDropup className="text-[#BABABA] text-base" />
-
-                <IoMdArrowDropdown className="text-[#BABABA] text-base mt-[-10px]" />
-              </div>
+            <div>
+              <Dropdown />
             </div>
           </div>
           {selectedTab == "portfolio" && (

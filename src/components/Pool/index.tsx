@@ -4,7 +4,7 @@ import Poolicons from "../../../public/assest/poolicons.png";
 import Link from "next/link";
 import DepositPupopup from "./Rightcomponentside/Depositpopup";
 import { MdInfoOutline } from "react-icons/md";
-
+import Line from "../../../public/assest/Line.png";
 import Suppliedicon from "../../../public/assest/supplied.png";
 import Stakeicons from "../../../public/assest/stakeicons.png";
 
@@ -94,7 +94,12 @@ const Pool = () => {
                     </span>
                   </div>
                 </div>
-                <div className="border-[1px] border-dashed border-[#FFFFFF1A]"></div>
+                <Image
+                  className="w-[100%]"
+                  priority
+                  src={Line}
+                  alt="line"
+                />
                 <div className="flex items-start gap-[16px] mt-5">
                   <div>
                     <Image

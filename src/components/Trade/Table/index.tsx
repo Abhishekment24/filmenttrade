@@ -100,7 +100,7 @@ const Tablesection = () => {
                 {[1, 2, 3].map((item, key) => {
                   return (
                     <div key={key} className="relative w-full">
-                      <div className="nav_font w-full  text-xs flex font-light text-[#fff]  ">
+                      <div className="nav_font w-full hover:bg-[#25272A] hover:w-fit text-xs flex font-light text-[#fff]  ">
                         <div className="text-left py-3 px-3 flex flex-col max-[1699px]:min-w-[8rem]  min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
                           BTC/USDC <span className="font-black">BUY</span>
                         </div>
@@ -204,7 +204,7 @@ const Tablesection = () => {
                   {[1].map((item, key) => {
                     return (
                       <div key={key} className="relative w-full">
-                        <div className="nav_font w-full  text-xs flex font-light text-[#fff]  ">
+                        <div className="nav_font w-full hover:bg-[#25272A] hover:w-fit text-xs flex font-light text-[#fff]  ">
                           <div className="text-left py-3 px-3 flex flex-col max-[1699px]:min-w-[8rem] min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
                             BTC/USDC <span className="font-black">BUY</span>
                           </div>
@@ -310,7 +310,7 @@ const Tablesection = () => {
                   {[1].map((item, key) => {
                     return (
                       <div key={key} className="relative w-full">
-                        <div className="nav_font w-full  text-xs flex font-light text-[#fff]  ">
+                        <div className="nav_font w-full hover:bg-[#25272A] hover:w-fit text-xs flex font-light text-[#fff]  ">
                           <div className="text-left py-3 px-3 flex flex-col max-[1699px]:min-w-[8rem] min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
                             BTC/USDC <span className="font-black">BUY</span>
                           </div>
@@ -416,7 +416,7 @@ const Tablesection = () => {
                   {[1].map((item, key) => {
                     return (
                       <div key={key} className="relative w-full">
-                        <div className="nav_font w-full  text-xs flex font-light text-[#fff]  ">
+                        <div className="nav_font w-full hover:bg-[#25272A] hover:w-fit text-xs flex font-light text-[#fff]  ">
                           <div className="text-left py-3 px-3 flex flex-col max-[1699px]:min-w-[8rem] min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
                             BTC/USDC <span className="font-black">BUY</span>
                           </div>
@@ -522,7 +522,7 @@ const Tablesection = () => {
                   {[1].map((item, key) => {
                     return (
                       <div key={key} className="relative w-full">
-                        <div className="nav_font w-full  text-xs flex font-light text-[#fff]  ">
+                        <div className="nav_font w-full hover:bg-[#25272A] hover:w-fit text-xs flex font-light text-[#fff]  ">
                           <div className="text-left py-3 px-3 flex flex-col max-[1699px]:min-w-[8rem] min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
                             BTC/USDC <span className="font-black">BUY</span>
                           </div>

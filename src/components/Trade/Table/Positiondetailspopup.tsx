@@ -4,7 +4,7 @@ import Btc from "../../../../public/assest/btc.png";
 import { cdata, edata, mdata } from "../Rightsidecomponent/data";
 import Link from "next/link";
 import { MdEdit } from "react-icons/md";
-
+import { Tooltip } from "react-tooltip";
 import { CiCircleQuestion } from "react-icons/ci";
 import Image from "next/image";
 import { FaRegCopy } from "react-icons/fa6";
@@ -23,11 +23,11 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSliderValue(parseInt(event.target.value, 10));
   };
-  const calculateBgColor = (sliderValue: number) => {
-    // Example: Change color based on the value
-    const percentage = (sliderValue / 5) * 100;
-    return `linear-gradient(to right, #40e0d0 ${percentage}%, #1a1a1a ${percentage}%)`;
-  };
+ const calculateBgColor = (sliderValue: number) => {
+   // Example: Change color based on the value
+   const percentage = (sliderValue / 100) * 100;
+   return `linear-gradient(to right, #40E0D0 ${percentage}%, rgba(64, 224, 208, 0.1) ${percentage}%, rgba(64, 224, 208, 0.1) 100%), #1a1a1a`;
+ };
 
   const sliderStyle = {
     background: calculateBgColor(sliderValue),
@@ -208,35 +208,175 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
 
               <div className="my-5">
                 <div className="">
-                  {cdata.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center gap-3 my-[4px]"
-                    >
+                  <div className="flex justify-between items-center gap-3 my-[4px]">
+                    <p className="nav_font text-[#939191] text-[10px] font-medium">
+                      Position Size
+                    </p>
+
+                    <p className="nav_font text-[#fff] text-[10px] font-medium">
+                      0.024 BTC
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center gap-3 my-[4px]">
+                    <div className="flex items-center gap-1">
                       <p className="nav_font text-[#939191] text-[10px] font-medium">
-                        {item.titles}
+                        Leverage
                       </p>
-                      <p className="nav_font text-[#fff] text-[10px] font-medium">
-                        {item.description}
-                      </p>
+                      <span data-tooltip-id="my-tooltip">
+                        <CiCircleQuestion className="text-[#939191] text-[12px]" />
+                        <Tooltip id="my-tooltip" className="tooltip_bg">
+                          <div className="w-[300px]">
+                            <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
+                              Leverage
+                            </h3>
+                            <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                              Leverage changes the multiplier on your gains or
+                              losses increasing your leverage increases how much
+                              you would gain/loose on a trade with the same
+                              price movement
+                            </p>
+                          </div>
+                        </Tooltip>
+                      </span>
                     </div>
-                  ))}
+                    <p className="nav_font text-[#fff] text-[10px] font-medium">
+                      10x
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center gap-3 my-[4px]">
+                    <div className="flex items-center gap-1">
+                      <p className="nav_font text-[#939191] text-[10px] font-medium">
+                        Take Profit
+                      </p>
+                      <span data-tooltip-id="my-tooltip1">
+                        <CiCircleQuestion className="text-[#939191] text-[12px]" />
+                        <Tooltip id="my-tooltip1" className="tooltip_bg">
+                          <div className="w-[300px]">
+                            <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
+                              Take Profit & Stop Loss
+                            </h3>
+                            <ul className="list-disc">
+                              <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                                TP/SL are reduce only, which means that they can
+                                only close an existing postion, which means that
+                                they can only close an existing position
+                              </li>
+                              <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px] my-2">
+                                TP/SL are fill-or-kill stop market orders where
+                                excution is not guaranteed. if the orders cannot
+                                be filled within the slippage limits, then the
+                                order will not execute.
+                              </li>
+                              <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                                1CT must be enabled to use TP/SL
+                              </li>
+                            </ul>
+                          </div>
+                        </Tooltip>
+                      </span>
+                    </div>
+                    <p className="nav_font text-[#fff] text-[10px] font-medium">
+                      0.250 BTC
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center gap-3 my-[4px]">
+                    <p className="nav_font text-[#939191] text-[10px] font-medium">
+                      Stop Loss
+                    </p>
+
+                    <p className="nav_font text-[#fff] text-[10px] font-medium">
+                      0.015 BTC
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center gap-3 my-[4px]">
+                    <p className="nav_font text-[#939191] text-[10px] font-medium">
+                      Slippage Tolerance
+                    </p>
+
+                    <p className="nav_font text-[#fff] text-[10px] font-medium">
+                      0.015 BTC
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center gap-3 my-[4px]">
+                    <p className="nav_font text-[#939191] text-[10px] font-medium">
+                      Price Impact
+                    </p>
+
+                    <p className="nav_font text-[#fff] text-[10px] font-medium">
+                      0.015 BTC
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center gap-3 my-[4px]">
+                    <div className="flex items-center gap-1">
+                      <p className="nav_font text-[#939191] text-[10px] font-medium">
+                        Funding Rate
+                      </p>
+                      <span data-tooltip-id="my-tooltip2">
+                        <CiCircleQuestion className="text-[#939191] text-[12px]" />
+                        <Tooltip id="my-tooltip2" className="tooltip_bg">
+                          <div className="w-[300px]">
+                            <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
+                              Funding
+                            </h3>
+                            <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                              The total funding payments you have received(+) or
+                              paid(-) payments are made early in usdc.e the
+                              funding rate for the payments is calculated based
+                              on the difference between TWAP of filaments&apos;s
+                              large price and index price
+                            </p>
+                          </div>
+                        </Tooltip>
+                      </span>
+                    </div>
+                    <p className="nav_font text-[#fff] text-[10px] font-medium">
+                      0.015 BTC
+                    </p>
+                  </div>
                 </div>
                 <div className="border-[1px] border-dashed border-[#FFFFFF1A]"></div>
                 <div className="">
-                  {edata.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center gap-3 my-[4px]"
-                    >
+                  <div className="flex justify-between items-center gap-3 my-[4px]">
+                    <p className="nav_font text-[#939191] text-[10px] font-medium">
+                      Avg. Price
+                    </p>
+
+                    <p className="nav_font text-[#fff] text-[10px] font-medium">
+                      100 USDC
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center gap-3 my-[4px]">
+                    <div className="flex items-center gap-1">
                       <p className="nav_font text-[#939191] text-[10px] font-medium">
-                        {item.titles}
+                        Liquidation Price
                       </p>
-                      <p className="nav_font text-[#fff] text-[10px] font-medium">
-                        {item.description}
-                      </p>
+                      <span data-tooltip-id="my-tooltip3">
+                        <CiCircleQuestion className="text-[#939191] text-[12px]" />
+                        <Tooltip id="my-tooltip3" className="tooltip_bg">
+                          <div className="w-[300px]">
+                            <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
+                              Est. Liq Price
+                            </h3>
+                            <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                              The estimated price at which a position would make
+                              a user eligible for liquidation
+                            </p>
+                            <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                              <span className="font-bold"> Please note -</span>{" "}
+                              this is this works for a move in a single
+                              underlying position for users with multiple
+                              positions risk should be valuated on a portfolio
+                              basis using alternative metrics
+                            </p>
+                          </div>
+                        </Tooltip>
+                      </span>
                     </div>
-                  ))}
+
+                    <p className="nav_font text-[#fff] text-[10px] font-medium">
+                      100 USDC
+                    </p>
+                  </div>
                 </div>
                 <div className="border-[1px] border-dashed border-[#FFFFFF1A]"></div>
                 <div className="">

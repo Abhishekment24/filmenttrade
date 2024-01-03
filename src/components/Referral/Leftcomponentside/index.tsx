@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaCopy } from "react-icons/fa6";
+import Line from "../../../../public/assest/Line1.png";
 import Suppliedicon from "../../../../public/assest/referral.png";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 const Leftcomponentside = () => {
   return (
     <>
       <div className="flex items-center flex-wrap max-[550px]:gap-3  bg-[#1B1C1E]  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] p-[24px] justify-between  w-full ">
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full cursor-pointer">
           <span className="nav_font text-[#fff] text-[16px] font-semibold mb-[12px]">
             Referral Link
           </span>
@@ -47,7 +48,9 @@ const Leftcomponentside = () => {
               </span>
             </div>
           </div>
-          <div className="border-[1px] border-dashed border-[#FFFFFF1A] my-6"></div>
+          <div className=" my-6">
+            <Image className="w-[100%]" priority src={Line} alt="line" />
+          </div>
           <div className="flex items-start gap-[16px]">
             <div>
               <Image

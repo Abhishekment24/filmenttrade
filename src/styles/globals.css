@@ -129,11 +129,11 @@ input[type="checkbox"]:checked {
   position: absolute;
   top: 0;
   left: -100%;
-  width: 70px;
-  height: 38px;
+  width: 100px;
+  height: 40px;
   background-size: 200% 100%;
-  background-color: #115e594d; /* Green background color */
-  animation: slideBg 2s linear infinite; /* Adjust the duration as needed */
+  background-color: #115e599d; /* Green background color */
+  animation: slideBg 1s linear infinite; /* Adjust the duration as needed */
 }
 
 @keyframes slideBg {
@@ -236,17 +236,19 @@ input[type="checkbox"]:checked {
 }
 /*--------------------Trades page css----------------*/
 /* src/styles.css */
+
 .range-slider {
   -webkit-appearance: none;
   width: 100%;
   height: 5px;
   border-radius: 256px;
   background: linear-gradient(
-      to right 0deg,
+      0deg,
       rgba(64, 224, 208, 0.1) 0%,
       rgba(64, 224, 208, 0.1) 100%
     ),
     #1a1a1a;
+
   outline: none;
 }
 
@@ -286,6 +288,14 @@ input[type="checkbox"]:checked {
   background-size: cover;
   cursor: pointer;
 }
+.tooltip_bg {
+  border-radius: 8px;
+
+  border: 1px solid #272727;
+  background: rgba(28, 28, 28, 0.9);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
+}
 /*--------------------Portfolio page css----------------*/
 
 .portfolio_grids-width {
@@ -307,6 +317,16 @@ input[type="checkbox"]:checked {
     url("../../public/assest/coin2.png"), lightgray 50% / cover no-repeat;
 
   background-blend-mode: hue, normal;
+}
+.nav_link:hover {
+  background: #25272a;
+  color: #fff;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  height: 30px;
+  align-items: center;
+  border-radius: 4px;
 }
 /*-------------------responsive css ------------*/
 

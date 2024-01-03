@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { cdata, edata } from "./Data/data";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import Charts from "./Charts";
+import Dropdown from "../../Commoncomponent/Dropdown";
 const tabs = [
   {
     title: "Liquidity",
@@ -19,10 +20,24 @@ const tabs = [
 const Leftcomponentside = () => {
   const [selectedTab, setSelectedTab] = useState("liquidity");
   const [isVisible, setIsVisible] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
+  useEffect(() => {
+    const handleClickOutside = (event: { target: any }) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsVisible(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownRef]);
   return (
     <>
       <div className="flex items-center flex-wrap max-[550px]:gap-4  bg-[#1B1C1E] mb-5  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] p-[24px] justify-between  w-full ">
@@ -83,29 +98,22 @@ const Leftcomponentside = () => {
               );
             })}
           </div>
-          <div className="flex items-center py-[6px] px-[12px] gap-[20px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  ">
-            <p className=" pool_font text-[#BABABA] text-base font-normal">
-              1 Year
-            </p>
-            <div className="">
-              <IoMdArrowDropup className="text-[#BABABA] text-base" />
-
-              <IoMdArrowDropdown className="text-[#BABABA] text-base mt-[-10px]" />
-            </div>
+          <div>
+            <Dropdown />
           </div>
         </div>
         {selectedTab == "liquidity" && (
-          <div className="w-full h-[160px] mt-5">
+          <div className="w-full h-[200px] mt-5">
             <Charts />
           </div>
         )}
         {selectedTab == "utilisation" && (
-          <div className="w-full h-[160px] mt-5">
+          <div className="w-full h-[200px] mt-5">
             <Charts />
           </div>
         )}
         {selectedTab == "fees" && (
-          <div className="w-full h-[160px] mt-5">
+          <div className="w-full h-[200px] mt-5">
             <Charts />
           </div>
         )}
@@ -120,12 +128,12 @@ const Leftcomponentside = () => {
           {cdata.map((item, index) => (
             <div
               key={index}
-              className="flex justify-between items-center gap-3 my-3"
+              className="flex justify-between items-center gap-3 my-4"
             >
-              <p className="pool_font text-[#E8E8E8] text-sm font-medium">
+              <p className="pool_font text-[#E8E8E8] text-sm font-normal">
                 {item.titles}
               </p>
-              <p className="pool_font text-[#fff] text-sm font-semibold ">
+              <p className="pool_font text-[#fff] text-sm font-semibold tracking-[0.07px]">
                 {item.description}
               </p>
             </div>
@@ -140,12 +148,12 @@ const Leftcomponentside = () => {
                 {edata.map((item, index) => (
                   <div
                     key={index}
-                    className="flex justify-between items-center gap-3 my-3"
+                    className="flex justify-between items-center gap-3 mb-4"
                   >
-                    <p className="pool_font text-[#E8E8E8] text-sm font-medium">
+                    <p className="pool_font text-[#E8E8E8] text-sm font-normal">
                       {item.titles}
                     </p>
-                    <p className="pool_font text-[#fff] text-sm font-semibold ">
+                    <p className="pool_font text-[#fff] text-sm font-semibold tracking-[0.07px]">
                       {item.description}
                     </p>
                   </div>
@@ -156,7 +164,7 @@ const Leftcomponentside = () => {
           <button onClick={toggleVisibility}>
             {isVisible ? (
               <>
-                <div className="flex items-center gap-1">
+                <div ref={dropdownRef} className="flex items-center gap-1">
                   <span className="text-[#40E0D0] pool_font  text-[13px] font-medium">
                     Hide other info
                   </span>
@@ -199,7 +207,7 @@ const Leftcomponentside = () => {
                 <th className="text-right px-[24px] py-3">Borrowing Rate</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="hover:bg-[#25272A]">
               <tr className="pool_font text-sm font-medium text-[#fff] border-b-[1px] border-solid border-[#25272A]">
                 <td className="text-left px-[24px] py-3">USDC</td>
                 <td className="text-center px-[24px] py-3">223.11/223.11</td>
@@ -208,7 +216,7 @@ const Leftcomponentside = () => {
                 <td className="text-right px-[24px] py-3">223.11</td>
               </tr>
             </tbody>
-            <tbody>
+            <tbody className="hover:bg-[#25272A]">
               <tr className="pool_font text-sm font-medium text-[#fff] border-b-[1px] border-solid border-[#25272A]">
                 <td className="text-left px-[24px] py-3">FLP</td>
                 <td className="text-center px-[24px] py-3">223.11/223.11</td>

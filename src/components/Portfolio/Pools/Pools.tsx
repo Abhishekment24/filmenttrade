@@ -7,8 +7,8 @@ import Table from "./Table";
 import Dropdown from "@/components/Commoncomponent/Dropdown";
 const tabs = [
   {
-    title: "Value",
-    key: "value",
+    title: "Deposited",
+    key: "deposited",
   },
   {
     title: "PnL",
@@ -18,34 +18,27 @@ const tabs = [
 const edata = [
   {
     id: 1,
-    title: "24h PnL",
-    price: "$1001.54",
-    value: "(18.27%)",
-  },
-  {
-    id: 2,
-    title: "Total PnL",
-    price: "$1001.54",
-    value: "(18.27%)",
+    title: "Avg. APR",
+    price: "48.73%",
   },
 ];
 
-const Perpetuals = () => {
-  const [selectedTab, setSelectedTab] = useState("value");
+const Pools = () => {
+  const [selectedTab, setSelectedTab] = useState("deposited");
   return (
     <>
       <div className="flex flex-col gap-[4px]">
         <span className="pool_font text-[#fff] text-2xl font-semibold">
-          Perpetuals
+          Pools
         </span>
       </div>
       <div className="flex mt-[40px] items-start bg-[#1B1C1E] gap-6 justify-between  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] sm:px-[24px] px-5 w-full relative">
         <div className="w-[30%] py-[24px]">
           <span className="pool_font text-[#939191] text-sm font-normal tracking-[0.06px]">
-            Perpetuals Value
+            Deposited
           </span>
           <p className="pool_font text-[#fff] text-2xl font-medium tracking-[0.12px]">
-            $10,001.54
+            $52,522.59
           </p>
           <div className="border-t-[1px] border-[#262626] border-solid my-4"></div>
           {edata.map((items, index) => {
@@ -55,23 +48,18 @@ const Perpetuals = () => {
                   key={index}
                   className=" flex justify-between items-center gap-4 w-full mb-[8px]"
                 >
-                  <div>
+             
                     <span className="pool_font text-[#939191] text-xs font-normal tracking-[0.06px]">
                       {items.title}
                     </span>
-                  </div>
-                  <div className="flex items-center gap-[4px]">
-                    <span className="text-[#00CC99] text-xs">
-                      <FaArrowUp />
-                    </span>
-                    <p className="pool_font text-[#00CC99] text-xs font-semibold tracking-[0.06px]">
+               
+                
+                    <p className="pool_font text-[#fff] text-xs font-semibold tracking-[0.06px]">
                       {items.price}
                     </p>
-                    <p className="pool_font text-[#00CC99] text-xs font-normal tracking-[0.06px]">
-                      {items.value}
-                    </p>
+                   
                   </div>
-                </div>
+                
               </>
             );
           })}
@@ -100,7 +88,7 @@ const Perpetuals = () => {
               <Dropdown />
             </div>
           </div>
-          {selectedTab == "value" && (
+          {selectedTab == "deposited" && (
             <div className="w-full h-[200px] mt-[35px]">
               <Charts />
             </div>
@@ -118,4 +106,4 @@ const Perpetuals = () => {
   );
 };
 
-export default Perpetuals;
+export default Pools;

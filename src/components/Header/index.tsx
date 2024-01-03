@@ -8,6 +8,7 @@ import Walletimg from "../../../public/assest/walletimg.png";
 import Wallecticons from "../../../public/assest/wallecticons.png";
 import Coinicons from "../../../public/assest/coinicons.png";
 import { RxHamburgerMenu, RxCross2 } from "react-icons/rx";
+import Line from "../../../public/assest/Line.png";
 import COMMON_FUNCTIONS from "@/components/CommonFunctions/CommonFunctions";
 import Link from "next/link";
 import { Tooltip } from "react-tooltip";
@@ -43,6 +44,11 @@ const innerLinks = [
 
 const InjectedChainId = 5;
 const Header = () => {
+  const [activeTab, setActiveTab] = useState("");
+
+  const handleTabClick = (tabName: string) => {
+    setActiveTab(tabName);
+  };
   // --- Wallet Functions
   // const { data, isError, isLoading } = useBalance({
 
@@ -180,38 +186,68 @@ const Header = () => {
                 )}
                 <Link
                   href="/trade"
-                  className="nav_font text-[#fff] text-xs font-medium"
+                  className={`nav_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "trade"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
+                  onClick={() => handleTabClick("trade")}
                 >
                   Trade
                 </Link>
                 <Link
                   href="/pool"
-                  className="nav_font text-[#fff] text-xs font-medium"
+                  className={`nav_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "pool"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
+                  onClick={() => handleTabClick("pool")}
                 >
                   Pool
                 </Link>
                 <Link
                   href="/stake"
-                  className="nav_font text-[#fff] text-xs font-medium"
+                  className={`nav_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "stake"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
+                  onClick={() => handleTabClick("stake")}
                 >
                   Stake
                 </Link>
                 <Link
                   href="/referral"
-                  className="nav_font text-[#fff] text-xs font-medium"
+                  className={`nav_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "referral"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
+                  onClick={() => handleTabClick("referral")}
                 >
                   Referral
                 </Link>
                 <div className="w-[1px] h-[12px] bg-[#2A2A2A]"> </div>
                 <Link
                   href="/portfolio"
-                  className="nav_font text-[#fff] text-xs font-medium"
+                  className={`nav_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "portfolio"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
+                  onClick={() => handleTabClick("portfolio")}
                 >
                   Portfolio
                 </Link>
                 <Link
                   href=""
-                  className="nav_font text-[#fff] text-xs font-medium flex items-center gap-1"
+                  className={`nav_font text-[#fff] text-xs flex items-center gap-1 transition-all duration-300 ${
+                    activeTab === "More"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium "
+                  }`}
+                  onClick={() => handleTabClick("More")}
                 >
                   More
                   <div className="relative">
@@ -340,7 +376,7 @@ const Header = () => {
 
                           {!showWalletSideNav ? (
                             <div
-                              className="cursor-pointer"
+                              className="cursor-pointer "
                               onClick={() =>
                                 setWalletSideNav(!showWalletSideNav)
                               }
@@ -393,263 +429,277 @@ const Header = () => {
           </div>
         </div>
         {/**-----------------after wallet connected sidebar */}
-        <div
-          className={`
-          sidebar_wallet_menu moblie-nav  px-3  max-[991px]:z-[400] z-[400] fixed lg:w-[360px]  w-full  top-0 overflow-y-auto overflow-x-hidden  bottom-0 pt-5 
+        {showWalletSideNav && (
+          <>
+            <div
+              className="fixed inset-0 bg-black opacity-90 z-[400]"
+              onClick={() => setWalletSideNav(false)}
+            ></div>
+            <div
+              className={`
+          sidebar_wallet_menu moblie-nav  px-3  max-[991px]:z-[400] z-[400] fixed lg:w-[360px]  w-full h-[100vh]  top-0 overflow-y-auto overflow-x-hidden  bottom-0 py-5
         duration-500 ${showWalletSideNav ? "right-0" : "right-[-100%]"}
         `}
-        >
-          <div className="flex justify-between items-center  pb-3 ">
-            <div className="wallet_img_box flex items-center justify-between gap-[8px] pl-[4px] pr-[12px] py-[4px] w-[280px]">
-              <div className="flex items-center gap-[8px]">
-                <Image
-                  className="w-[40px]"
-                  src={Walletimg}
-                  priority
-                  alt="Walletimg"
-                />
-                <span className="pool_font text-[#fff] font-medium text-xs truncate ">
-                  {COMMON_FUNCTIONS.formatMetamaskAddress(address)}
-                </span>
-              </div>
-
-              <div className="flex items-center gap-[8px]">
-                <span>
-                  <MdOutlineContentCopy
-                    className="text-[#fff] text-base cursor-pointer border-none focus:outline-none"
-                    data-tooltip-id="my-tooltip-inline"
-                    data-tooltip-html={
-                      isCopied ? "Copied!" : "Copy wallet address"
-                    }
-                    onClick={() => {
-                      if (!isCopied) {
-                        copyIt();
-                      }
-                    }}
-                  />
-                  <Tooltip
-                    id="my-tooltip-inline"
-                    place="bottom"
-                    style={{
-                      border: "none",
-                      color: "#fff",
-                      fontSize: "11px",
-                    }}
-                  />
-                </span>
-                <span>
-                  <MdOutlineLogout
-                    onClick={disconnectMetamask}
-                    className="text-[#fff] cursor-pointer text-base border-none focus:outline-none"
-                    data-tooltip-id="my-tooltip-inline"
-                    data-tooltip-html="Disconnect Wallet"
-                  />
-                  <Tooltip
-                    id="my-tooltip-inline"
-                    place="bottom"
-                    style={{
-                      border: "none",
-                      color: "#fff",
-                      fontSize: "11px",
-                    }}
-                  />
-                </span>
-              </div>
-            </div>
-            <button
-              className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[48px] h-[48px] flex items-center justify-center"
-              onClick={() => setWalletSideNav(!showWalletSideNav)}
             >
-              <AiOutlineClose className="text-2xl text-white" />
-            </button>
-          </div>
-          {isConnected && chainId != InjectedChainId ? (
-            <>
-              <div className="wallet_card_bg py-[12px] px-[16px] my-6">
-                <div className="flex items-start gap-[12px]">
-                  <span>
-                    <IoMdWarning className="text-[#D57501] text-2xl" />
-                  </span>
-                  <div>
-                    <p className="text-[#D57501] pool_font text-base font-bold">
-                      Switch to Injective network
-                    </p>
-                    <p className="text-[#939191] pool_font text-base font-light">
-                      You need to be on Injective network to open & execute
-                      orders
-                    </p>
+              <div className="flex justify-between items-center">
+                <div className="wallet_img_box flex items-center justify-between gap-[8px] pl-[4px] pr-[12px] py-[4px] w-[280px]">
+                  <div className="flex items-center gap-[8px]">
+                    <Image
+                      className="w-[40px]"
+                      src={Walletimg}
+                      priority
+                      alt="Walletimg"
+                    />
+                    <span className="pool_font text-[#fff] font-medium text-xs truncate ">
+                      {COMMON_FUNCTIONS.formatMetamaskAddress(address)}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-[8px]">
+                    <span>
+                      <MdOutlineContentCopy
+                        className="text-[#fff] text-base cursor-pointer border-none focus:outline-none"
+                        data-tooltip-id="my-tooltip-inline"
+                        data-tooltip-html={
+                          isCopied ? "Copied!" : "Copy wallet address"
+                        }
+                        onClick={() => {
+                          if (!isCopied) {
+                            copyIt();
+                          }
+                        }}
+                      />
+                      <Tooltip
+                        id="my-tooltip-inline"
+                        place="bottom"
+                        style={{
+                          border: "none",
+                          color: "#fff",
+                          fontSize: "11px",
+                        }}
+                      />
+                    </span>
+                    <span>
+                      <MdOutlineLogout
+                        onClick={disconnectMetamask}
+                        className="text-[#fff] cursor-pointer text-base border-none focus:outline-none"
+                        data-tooltip-id="my-tooltip-inline"
+                        data-tooltip-html="Disconnect Wallet"
+                      />
+                      <Tooltip
+                        id="my-tooltip-inline"
+                        place="bottom"
+                        style={{
+                          border: "none",
+                          color: "#fff",
+                          fontSize: "11px",
+                        }}
+                      />
+                    </span>
                   </div>
                 </div>
-                <div className="my-3 justify-center flex">
-                  <button
-                    // disabled={!switchNetwork || x.id === chain?.id}
-                    className="items-center nav_font w-[384px] text-[#0B2B28] text-sm font-semibold  btn_one  py-[10px] px-[16px]"
-                    onClick={handleNetworkChange}
-                  >
-                    Switch to injective
-                  </button>
+                <button
+                  className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[48px] h-[48px] flex items-center justify-center"
+                  onClick={() => setWalletSideNav(!showWalletSideNav)}
+                >
+                  <AiOutlineClose className="text-2xl text-white" />
+                </button>
+              </div>
+              {isConnected && chainId != InjectedChainId ? (
+                <>
+                  <div className="wallet_card_bg py-[12px] px-[16px] my-3">
+                    <div className="flex items-start gap-[12px]">
+                      <span>
+                        <IoMdWarning className="text-[#D57501] text-2xl" />
+                      </span>
+                      <div>
+                        <p className="text-[#D57501] pool_font text-base font-bold">
+                          Switch to Injective network
+                        </p>
+                        <p className="text-[#939191] pool_font text-base font-light">
+                          You need to be on Injective network to open & execute
+                          orders
+                        </p>
+                      </div>
+                    </div>
+                    <div className="my-3 justify-center flex">
+                      <button
+                        // disabled={!switchNetwork || x.id === chain?.id}
+                        className="items-center nav_font w-[384px] text-[#0B2B28] text-sm font-semibold  btn_one  py-[10px] px-[16px]"
+                        onClick={handleNetworkChange}
+                      >
+                        Switch to Injective network
+                      </button>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div
+                  onClick={disconnectMetamask}
+                  className=" text-center justify-center flex  text-[#ffffff] text-xs font-semibold "
+                ></div>
+              )}
+              <div className="flex justify-between mt-[24px] items-center  pb-3 ">
+                <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  Portfolio Value
+                </span>
+                <p className="pool_font text-[#fff] font-semibold text-[20px] tracking-[0.1px]">
+                  $2,430,330
+                </p>
+              </div>
+              <div className="flex justify-between items-center  pb-3">
+                <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  PnL (24h)
+                </span>
+                <p className="pool_font text-[#00CC99] font-medium text-xs tracking-[0.06px]">
+                  +$48,600 (2.08%)
+                </p>
+              </div>
+              <div className="my-[16px]">
+                <Image className="w-[100%]" priority src={Line} alt="line" />
+              </div>
+              <div className="flex justify-between items-center  pb-4">
+                <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  Claimable Rewards
+                </span>
+                <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  100,000 FLP
+                </p>
+              </div>
+              <div className="flex justify-between items-center  pb-4">
+                <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  LP Staked
+                </span>
+                <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  100,000 LP
+                </p>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  Liquidity Provided
+                </span>
+                <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  500,000 USDC
+                </p>
+              </div>
+              <div className="my-[16px]">
+                <Image className="w-[100%]" priority src={Line} alt="line" />
+              </div>
+              <div className="flex justify-between items-center  pb-4">
+                <span className="pool_font text-[#6B7280] font-normal text-xs tracking-[0.06px]">
+                  Open Positions
+                </span>
+                <p className="pool_font text-[#6B7280] font-normal text-xs tracking-[0.06px]">
+                  Change (24h)
+                </p>
+              </div>
+              <div className="flex justify-between items-center  pb-4">
+                <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  ETH-PERP
+                </span>
+                <p className="pool_font text-[#00CC99] font-medium text-xs tracking-[0.06px]">
+                  +$14,350 (2.08%)
+                </p>
+              </div>
+              <div className="flex justify-between items-center  pb-4">
+                <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  BTC-PERP
+                </span>
+                <p className="pool_font text-[#D65454] font-medium text-xs tracking-[0.06px]">
+                  -$1,228 (0.024%)
+                </p>
+              </div>
+              <div className="flex justify-between items-center  pb-4">
+                <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  LIM-PERP
+                </span>
+                <p className="pool_font text-[#00CC99] font-medium text-xs tracking-[0.06px]">
+                  +$14,350 (2.08%)
+                </p>
+              </div>
+              <div className="flex gap-[4px] items-center">
+                <p className="pool_font text-[#40E0D0] font-medium text-xs tracking-[0.06px]">
+                  View all
+                </p>
+                <span>
+                  <FaArrowRightLong className="text-[#40E0D0] text-xs" />
+                </span>
+              </div>
+              <div className="my-[16px]">
+                <Image className="w-[100%]" priority src={Line} alt="line" />
+              </div>
+              <div className="flex justify-between items-center  pb-4">
+                <span className="pool_font text-[#6B7280] font-normal text-xs tracking-[0.06px]">
+                  Assets
+                </span>
+                <div className="flex items-center gap-[8px]">
+                  <p className="pool_font text-[#6B7280]  w-[88px] font-normal text-xs tracking-[0.06px]">
+                    Amt
+                  </p>
+                  <p className="pool_font text-[#6B7280]   font-normal text-xs tracking-[0.06px]">
+                    Val
+                  </p>
                 </div>
               </div>
-            </>
-          ) : (
-            <div
-              onClick={disconnectMetamask}
-              className=" text-center justify-center flex  text-[#ffffff] text-xs font-semibold "
-            ></div>
-          )}
-          <div className="flex justify-between mt-[24px] items-center  pb-3 ">
-            <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              Portfolio Value
-            </span>
-            <p className="pool_font text-[#fff] font-semibold text-[20px] tracking-[0.1px]">
-              $2,430,330
-            </p>
-          </div>
-          <div className="flex justify-between items-center  pb-3">
-            <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              PnL (24h)
-            </span>
-            <p className="pool_font text-[#00CC99] font-medium text-xs tracking-[0.06px]">
-              +$48,600 (2.08%)
-            </p>
-          </div>
-          <div className="border-[1px] border-dashed border-[#FFFFFF1A] my-[16px]"></div>
-          <div className="flex justify-between items-center  pb-4">
-            <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              Claimable Rewards
-            </span>
-            <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              100,000 FLP
-            </p>
-          </div>
-          <div className="flex justify-between items-center  pb-4">
-            <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              LP Staked
-            </span>
-            <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              100,000 LP
-            </p>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              Liquidity Provided
-            </span>
-            <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              500,000 USDC
-            </p>
-          </div>
-          <div className="border-[1px] border-dashed border-[#FFFFFF1A] my-[16px]"></div>
-          <div className="flex justify-between items-center  pb-4">
-            <span className="pool_font text-[#6B7280] font-normal text-xs tracking-[0.06px]">
-              Open Positions
-            </span>
-            <p className="pool_font text-[#6B7280] font-normal text-xs tracking-[0.06px]">
-              Change (24h)
-            </p>
-          </div>
-          <div className="flex justify-between items-center  pb-4">
-            <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              ETH-PERP
-            </span>
-            <p className="pool_font text-[#00CC99] font-medium text-xs tracking-[0.06px]">
-              +$14,350 (2.08%)
-            </p>
-          </div>
-          <div className="flex justify-between items-center  pb-4">
-            <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              BTC-PERP
-            </span>
-            <p className="pool_font text-[#D65454] font-medium text-xs tracking-[0.06px]">
-              -$1,228 (0.024%)
-            </p>
-          </div>
-          <div className="flex justify-between items-center  pb-4">
-            <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              LIM-PERP
-            </span>
-            <p className="pool_font text-[#00CC99] font-medium text-xs tracking-[0.06px]">
-              +$14,350 (2.08%)
-            </p>
-          </div>
-          <div className="flex gap-[4px] items-center">
-            <p className="pool_font text-[#00CC99] font-medium text-xs tracking-[0.06px]">
-              View all
-            </p>
-            <span>
-              <FaArrowRightLong className="text-[#00CC99] text-xs" />
-            </span>
-          </div>
-          <div className="border-[1px] border-dashed border-[#FFFFFF1A] my-[16px]"></div>
-          <div className="flex justify-between items-center  pb-4">
-            <span className="pool_font text-[#6B7280] font-normal text-xs tracking-[0.06px]">
-              Assets
-            </span>
-            <div className="flex items-center gap-[8px]">
-              <p className="pool_font text-[#6B7280]  w-[88px] font-normal text-xs tracking-[0.06px]">
-                Amt
-              </p>
-              <p className="pool_font text-[#6B7280]   font-normal text-xs tracking-[0.06px]">
-                Val
-              </p>
+              <div className="flex justify-between items-center  pb-4">
+                <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  USDC
+                </span>
+                <div className="flex items-center gap-[8px]">
+                  <p className="pool_font text-[#fff] w-[88px] text-center font-medium text-xs tracking-[0.06px]">
+                    24.52
+                  </p>
+                  <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                    $1,602.24
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-between items-center  pb-4">
+                <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  Filament Tokens
+                </span>
+                <div className="flex items-center gap-[8px]">
+                  <p className="pool_font text-[#fff] w-[88px] text-center font-medium text-xs tracking-[0.06px]">
+                    1202.77
+                  </p>
+                  <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                    $1,602.24
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-between items-center  pb-4">
+                <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                  LP Tokens
+                </span>
+                <div className="flex items-center gap-[8px]">
+                  <p className="pool_font text-[#fff] w-[88px] text-center font-medium text-xs tracking-[0.06px]">
+                    987.14
+                  </p>
+                  <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                    $1,602.24
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-[4px] items-center">
+                <p className="pool_font text-[#40E0D0] font-medium text-xs tracking-[0.06px]">
+                  View all
+                </p>
+                <span>
+                  <FaArrowRightLong className="text-[#40E0D0] text-xs" />
+                </span>
+              </div>
+              <div className="border-[1px] border-solid border-[#FFFFFF1A] my-[16px]"></div>
+              <div className="flex gap-[8px] items-center">
+                <span>
+                  <FaLock className="text-[#40E0D0] text-xs" />
+                </span>
+                <p className="pool_font text-[#40E0D0] font-medium text-xs tracking-[0.06px]">
+                  View Portfolio
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="flex justify-between items-center  pb-4">
-            <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              USDC
-            </span>
-            <div className="flex items-center gap-[8px]">
-              <p className="pool_font text-[#fff] w-[88px] text-center font-medium text-xs tracking-[0.06px]">
-                24.52
-              </p>
-              <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-                $1,602.24
-              </p>
-            </div>
-          </div>
-          <div className="flex justify-between items-center  pb-4">
-            <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              Filament Tokens
-            </span>
-            <div className="flex items-center gap-[8px]">
-              <p className="pool_font text-[#fff] w-[88px] text-center font-medium text-xs tracking-[0.06px]">
-                1202.77
-              </p>
-              <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-                $1,602.24
-              </p>
-            </div>
-          </div>
-          <div className="flex justify-between items-center  pb-4">
-            <span className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-              LP Tokens
-            </span>
-            <div className="flex items-center gap-[8px]">
-              <p className="pool_font text-[#fff] w-[88px] text-center font-medium text-xs tracking-[0.06px]">
-                987.14
-              </p>
-              <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-                $1,602.24
-              </p>
-            </div>
-          </div>
-          <div className="flex gap-[4px] items-center">
-            <p className="pool_font text-[#00CC99] font-medium text-xs tracking-[0.06px]">
-              View all
-            </p>
-            <span>
-              <FaArrowRightLong className="text-[#00CC99] text-xs" />
-            </span>
-          </div>
-          <div className="border-[1px] border-solid border-[#FFFFFF1A] my-[16px]"></div>
-          <div className="flex gap-[8px] items-center">
-            <span>
-              <FaLock className="text-[#00CC99] text-xs" />
-            </span>
-            <p className="pool_font text-[#00CC99] font-medium text-xs tracking-[0.06px]">
-              View Portfolio
-            </p>
-          </div>
-        </div>
+          </>
+        )}
         {/*wallet popup  */}
         {isPopupOpen && (
           <>
@@ -807,7 +857,7 @@ const Header = () => {
                       </div>
                       <div
                         onClick={disconnectMetamask}
-                        className="text-[#939191] text-center nav_font text-xs font-medium"
+                        className="text-[#939191] cursor-pointer text-center nav_font text-xs font-medium"
                       >
                         Disconnect Wallet
                       </div>
@@ -815,7 +865,7 @@ const Header = () => {
                   ) : (
                     <div
                       onClick={disconnectMetamask}
-                      className=" text-center justify-center flex  text-[#ffffff] text-xs font-semibold "
+                      className=" text-center cursor-pointer justify-center flex  text-[#ffffff] text-xs font-semibold "
                     ></div>
                   )}
                 </div>

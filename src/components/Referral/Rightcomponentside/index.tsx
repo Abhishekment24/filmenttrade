@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { mdata } from "@/components/Pool/Leftcomponentside/Data/data";
-
+import Line from "../../../../public/assest/Line.png";
+import Image from "next/image";
 const Rightcomponentside = () => {
   return (
     <>
@@ -13,7 +14,8 @@ const Rightcomponentside = () => {
             102.54 FLP
           </p>
         </div>
-        <div className="border-[1px] border-dashed border-[#FFFFFF1A] my-5"></div>
+        <Image className="w-[100%] my-5" priority src={Line} alt="line" />
+       
         <div className="">
           {mdata.map((item, index) => (
             <div

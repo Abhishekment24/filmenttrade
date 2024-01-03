@@ -1,3 +1,4 @@
+import { CiCircleQuestion } from "react-icons/ci";
 export const cdata = [
   {
     id: 1,
@@ -9,12 +10,14 @@ export const cdata = [
     id: 2,
 
     titles: "Leverage",
+
     description: "10x",
   },
   {
     id: 3,
 
     titles: "Take Profit",
+
     description: "0.250 BTC",
   },
   {

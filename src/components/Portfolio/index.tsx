@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Overviews from "./Overviews/Overview";
 import Perpetuals from "./Perpetuals/Perpetuals";
+import Pools from "./Pools/Pools";
+import Rewards from "./Rewards/Rewards";
+import Historys from "./Historys";
 const tabs = [
   {
     title: "Overview",
@@ -63,6 +66,21 @@ const Portfolio = () => {
               {selectedTab == "perpetuals" && (
                 <>
                   <Perpetuals />
+                </>
+              )}
+              {selectedTab == "pools" && (
+                <>
+                  <Pools />
+                </>
+              )}
+              {selectedTab == "rewards" && (
+                <>
+                  <Rewards />
+                </>
+              )}
+              {selectedTab == "history" && (
+                <>
+                  <Historys />
                 </>
               )}
             </div>

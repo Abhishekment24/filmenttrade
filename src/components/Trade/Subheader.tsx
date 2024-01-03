@@ -44,7 +44,7 @@ const Subheader = () => {
         <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
           <div className="flex justify-between text-[#fff] items-center max-[1023px]:hidden gap-[14px]">
             <div className="flex items-center gap-[14px]">
-              <div className="flex justify-between items-center gap-[14px]">
+              <div className="flex cursor-pointer justify-between items-center gap-[14px]">
                 <div className="flex items-center gap-[14px]">
                   <Image className="w-[24px]" priority src={Btc} alt="Btc" />
                   <span className="text-[#fff] nav_font font-semibold text-base w-[138px]">
