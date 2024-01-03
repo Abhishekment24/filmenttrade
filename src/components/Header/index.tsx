@@ -432,7 +432,7 @@ const Header = () => {
         {showWalletSideNav && (
           <>
             <div
-              className="fixed inset-0 bg-black opacity-90 z-[400]"
+              className="fixed inset-0 bg-black opacity-60 z-[400]"
               onClick={() => setWalletSideNav(false)}
             ></div>
             <div
