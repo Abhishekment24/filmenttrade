@@ -25,7 +25,7 @@ const Leftcomponentside = () => {
           </p>
         </div>
       </div>
-      <div className="flex items-center mt-[24px] flex-wrap max-[550px]:gap-3   bg-[#1B1C1E]  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] p-[24px] justify-between  w-full ">
+      <div className="flex items-center mt-[24px] mb-[60px] flex-wrap max-[550px]:gap-3   bg-[#1B1C1E]  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] p-[24px] justify-between  w-full ">
         <div className="flex flex-col w-full">
           <span className="nav_font text-[#fff] text-[16px] font-semibold">
             Referral Benefits

@@ -21,6 +21,7 @@ import {
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaArrowRightLong, FaLock } from "react-icons/fa6";
 import Image from "next/image";
+import { FaXTwitter, FaDiscord } from "react-icons/fa6";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { AiOutlineClose } from "react-icons/ai";
 import {
@@ -33,13 +34,13 @@ import {
 import { InjectedConnector } from "wagmi/connectors/injected";
 
 const innerLinks = [
-  { text: "Help Center", href: "/" },
-  { text: "Terms of Use", href: "/" },
-  { text: "Privacy Policy", href: "/" },
-  { text: "Reports Bug", href: "/" },
-  { text: "Provide Feedback", href: "/" },
-  { text: "Platform Status", href: "/" },
-  { text: "Explore Community", href: "/" },
+  { text: "Help Center", href: "#" },
+  { text: "Docs", href: "/docs" },
+  { text: "Terms of Use", href: "/terms-of-use" },
+  { text: "Privacy Policy", href: "/privacy-policy" },
+  { text: "Report Bug", href: "/report-bug" },
+  { text: "Share Feedback", href: "/share-feedback" },
+  { text: "Platform Status", href: "/platform-status" },
 ];
 
 const InjectedChainId = 5;
@@ -69,14 +70,14 @@ const Header = () => {
   //  ---
   const [showDropNav, setShowDropNav] = useState(false);
   const [showWalletSideNav, setWalletSideNav] = useState(false);
-  const [showLangDrop, setshowLangDrop] = useState(false);
+  const [showLangDrop, setShowLangDrop] = useState(false);
   const [chainId, setchainId] = useState<any>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isWalletOpen, setIsWalletOpen] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
-
+  const [testnet, setTestnet] = useState(false);
   const handleWalletConnect = () => {
     if (window.ethereum) {
       connect();
@@ -100,7 +101,7 @@ const Header = () => {
   useEffect(() => {
     const handleClickOutside = (event: { target: any }) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setshowLangDrop(false);
+        setTestnet(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -162,7 +163,7 @@ const Header = () => {
         >
           <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
             <div className="flex justify-between text-[#fff] items-center max-[1179px]:hidden">
-              <div className="flex items-center gap-10">
+              <div className="flex items-center xl:gap-10 lg:gap-6">
                 <Link href="/" className="flex items-center gap-[8px]">
                   <Image className="w-[16px]" priority src={Logo} alt="logo" />
                   <span className="text-[#40E0D0] logo_font font-medium text-xs tracking-{0.96px}">
@@ -240,41 +241,84 @@ const Header = () => {
                 >
                   Portfolio
                 </Link>
-                <Link
-                  href=""
-                  className={`nav_font text-[#fff] text-xs flex items-center gap-1 transition-all duration-300 ${
-                    activeTab === "More"
-                      ? "font-bold text-[#fff]  "
-                      : "text-[#fff] font-medium "
-                  }`}
-                  onClick={() => handleTabClick("More")}
-                >
-                  More
-                  <div className="relative">
+                <div className="relative" ref={dropdownRef}>
+                  <div
+                    className="flex items-center gap-1"
+                    onClick={() => setTestnet(!testnet)}
+                  >
+                    <Link
+                      href=""
+                      className={`nav_font text-[#fff] text-xs flex items-center gap-1 transition-all duration-300 ${
+                        activeTab === "More"
+                          ? "font-bold text-[#fff]  "
+                          : "text-[#fff] font-medium "
+                      }`}
+                      onClick={() => handleTabClick("More")}
+                    >
+                      More
+                    </Link>
                     <RiArrowDownSFill
-                      onClick={() => setshowLangDrop(!showLangDrop)}
-                      className="text-[#fff] text-base"
+                      className={` cursor-pointer ${
+                        testnet ? "transform rotate-180" : ""
+                      } w-4 h-4`}
+                      aria-hidden="true"
                     />
-
-                    {showLangDrop && (
-                      <div
-                        ref={dropdownRef}
-                        className="absolute bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px]  top-6 right-[-98px] min-w-[150px] px-2 w-full  text-left"
-                      >
+                  </div>
+                  <div
+                    className={`${
+                      testnet ? "block" : "hidden"
+                    } absolute  mt-4 w-full  min-w-[376px] left-[-36px]`}
+                  >
+                    <div className="flex">
+                      <div className="bg-[#1B1B1B] min-w-[216px] py-4 px-[8px] rounded-l-[8px] border-[1px] border-solid border-[#25272A] ">
                         {innerLinks.map((link, index) => (
                           <Link key={index} href={link.href}>
                             <div
-                              onClick={() => setshowLangDrop(!showLangDrop)}
-                              className="nav_font text-[#fff] my-4 text-xs font-medium"
+                              onClick={() => setTestnet(!testnet)}
+                              className="pool_font text-[#fff] mb-1 text-xs font-normal tracking-[0.06px] hover:bg-[#25272A] rounded-[4px] px-2 py-2 active:bg-[#25272A]"
                             >
                               {link.text}
                             </div>
                           </Link>
                         ))}
                       </div>
-                    )}
+                      <div className="bg-[#161818] min-w-[160px] py-4 px-[8px] rounded-r-[8px] border-t-[1px] border-b-[1px] border-r-[1px] border-solid border-[#25272A]">
+                        <div onClick={() => setTestnet(!testnet)} className="">
+                          <span className="pool_font text-[#6B7280] pl-2  mb-4 text-[10px] font-normal tracking-[0.05px]">
+                            Join Community
+                          </span>
+
+                          <Link href="#">
+                            <div
+                              onClick={() => setTestnet(!testnet)}
+                              className="flex items-center gap-[12px]  hover:bg-[#25272A] rounded-[4px] px-2 py-2 active:bg-[#25272A]"
+                            >
+                              <span>
+                                <FaDiscord className="text-xl text-[#fff]" />
+                              </span>
+                              <span className="pool_font text-[#fff] text-xs font-normal tracking-[0.06px]">
+                                Discord
+                              </span>
+                            </div>
+                          </Link>
+                          <Link href="">
+                            <div
+                              onClick={() => setTestnet(!testnet)}
+                              className="flex items-center gap-[12px] hover:bg-[#25272A] rounded-[4px] px-2 py-2 active:bg-[#25272A]"
+                            >
+                              <span>
+                                <FaXTwitter className="text-xl text-[#fff]" />
+                              </span>
+                              <span className="pool_font text-[#fff] text-xs font-normal tracking-[0.06px]">
+                                Twitter
+                              </span>
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </Link>
+                </div>
               </div>
 
               <div>
@@ -617,14 +661,16 @@ const Header = () => {
                   +$14,350 (2.08%)
                 </p>
               </div>
-              <div className="flex gap-[4px] items-center">
-                <p className="pool_font text-[#40E0D0] font-medium text-xs tracking-[0.06px]">
-                  View all
-                </p>
-                <span>
-                  <FaArrowRightLong className="text-[#40E0D0] text-xs" />
-                </span>
-              </div>
+              <Link href="/portfolio">
+                <div className="flex gap-[4px] items-center">
+                  <p className="pool_font text-[#40E0D0] font-medium text-xs tracking-[0.06px]">
+                    View all
+                  </p>
+                  <span>
+                    <FaArrowRightLong className="text-[#40E0D0] text-xs" />
+                  </span>
+                </div>
+              </Link>
               <div className="my-[16px]">
                 <Image className="w-[100%]" priority src={Line} alt="line" />
               </div>
@@ -689,14 +735,16 @@ const Header = () => {
                 </span>
               </div>
               <div className="border-[1px] border-solid border-[#FFFFFF1A] my-[16px]"></div>
-              <div className="flex gap-[8px] items-center">
-                <span>
-                  <FaLock className="text-[#40E0D0] text-xs" />
-                </span>
-                <p className="pool_font text-[#40E0D0] font-medium text-xs tracking-[0.06px]">
-                  View Portfolio
-                </p>
-              </div>
+              <Link href="/portfolio">
+                <div className="flex gap-[8px] items-center">
+                  <span>
+                    <FaLock className="text-[#40E0D0] text-xs" />
+                  </span>
+                  <p className="pool_font text-[#40E0D0] font-medium text-xs tracking-[0.06px]">
+                    View Portfolio
+                  </p>
+                </div>
+              </Link>
             </div>
           </>
         )}
@@ -909,33 +957,84 @@ const Header = () => {
               </Link>
             </div>
             <div className="py-4">
-              <Link href="" className=" flex items-center gap-1">
-                More
-                <div className="relative">
+              <div className="relative" ref={dropdownRef}>
+                <div
+                  className="flex items-center gap-1"
+                  onClick={() => setTestnet(!testnet)}
+                >
+                  <Link
+                    href=""
+                    className={`nav_font text-[#fff] text-xs flex items-center gap-1 transition-all duration-300 ${
+                      activeTab === "More"
+                        ? "font-bold text-[#fff]  "
+                        : "text-[#fff] font-medium "
+                    }`}
+                    onClick={() => handleTabClick("More")}
+                  >
+                    More
+                  </Link>
                   <RiArrowDownSFill
-                    onClick={() => setshowLangDrop(!showLangDrop)}
-                    className="text-[#fff] text-base"
+                    className={` cursor-pointer ${
+                      testnet ? "transform rotate-180" : ""
+                    } w-4 h-4`}
+                    aria-hidden="true"
                   />
-
-                  {showLangDrop && (
-                    <div
-                      ref={dropdownRef}
-                      className="absolute bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px]  top-6 right-[-98px] min-w-[150px] px-2 w-full  text-left"
-                    >
+                </div>
+                <div
+                  className={`${
+                    testnet ? "block" : "hidden"
+                  } absolute  mt-4 w-full z-50  `}
+                >
+                  <div className="flex">
+                    <div className="bg-[#1B1B1B] min-w-[216px] max-[500px]:min-w-[160px] max-[343px]:min-w-[125px] py-4 px-[8px] rounded-l-[8px] border-[1px] border-solid border-[#25272A] ">
                       {innerLinks.map((link, index) => (
                         <Link key={index} href={link.href}>
                           <div
-                            onClick={() => setshowLangDrop(!showLangDrop)}
-                            className="nav_font text-[#fff] my-4 text-xs font-medium"
+                            onClick={() => setTestnet(!testnet)}
+                            className="pool_font text-[#fff] mb-1 text-xs font-normal tracking-[0.06px] hover:bg-[#25272A] rounded-[4px] px-2 py-2 active:bg-[#25272A]"
                           >
                             {link.text}
                           </div>
                         </Link>
                       ))}
                     </div>
-                  )}
+                    <div className="bg-[#161818] min-w-[160px] max-[343px]:min-w-[125px] py-4 px-[8px] rounded-r-[8px] border-t-[1px] border-b-[1px] border-r-[1px] border-solid border-[#25272A]">
+                      <div onClick={() => setTestnet(!testnet)} className="">
+                        <span className="pool_font text-[#6B7280] pl-2  mb-4 text-[10px] font-normal tracking-[0.05px]">
+                          Join Community
+                        </span>
+
+                        <Link href="#">
+                          <div
+                            onClick={() => setTestnet(!testnet)}
+                            className="flex items-center gap-[12px]  hover:bg-[#25272A] rounded-[4px] px-2 py-2 active:bg-[#25272A]"
+                          >
+                            <span>
+                              <FaDiscord className="text-xl text-[#fff]" />
+                            </span>
+                            <span className="pool_font text-[#fff] text-xs font-normal tracking-[0.06px]">
+                              Discord
+                            </span>
+                          </div>
+                        </Link>
+                        <Link href="">
+                          <div
+                            onClick={() => setTestnet(!testnet)}
+                            className="flex items-center gap-[12px] hover:bg-[#25272A] rounded-[4px] px-2 py-2 active:bg-[#25272A]"
+                          >
+                            <span>
+                              <FaXTwitter className="text-xl text-[#fff]" />
+                            </span>
+                            <span className="pool_font text-[#fff] text-xs font-normal tracking-[0.06px]">
+                              Twitter
+                            </span>
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </Link>
+              </div>
             </div>
             <div className="">
               <Link href="/stake">

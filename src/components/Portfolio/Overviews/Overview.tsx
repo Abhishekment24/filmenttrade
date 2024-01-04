@@ -63,8 +63,8 @@ const Overview = () => {
           0x63gws...3536
         </span>
       </div>
-      <div className="flex mt-[40px] items-start bg-[#1B1C1E] gap-6 justify-between  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] sm:px-[24px] px-5 w-full relative">
-        <div className="w-[30%] py-[24px]">
+      <div className="flex mt-[40px] items-start bg-[#1B1C1E] gap-6 justify-between max-[1023px]:flex-col pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] sm:px-[24px] px-5 w-full relative">
+        <div className="lg:w-[30%] w-full py-[24px]">
           <span className="pool_font text-[#939191] text-sm font-normal tracking-[0.06px]">
             Portfolio
           </span>
@@ -118,8 +118,8 @@ const Overview = () => {
             );
           })}
         </div>
-        <div className="border-l-[1px] border-[#262626] border-solid h-[327px]"></div>
-        <div className="w-[70%] py-[24px]">
+        <div className="lg:border-l-[1px] max-[1023px]:border-t-[1px] border-[#262626] border-solid max-[1023px]:w-full lg:h-[327px]"></div>
+        <div className="lg:w-[70%] w-full py-[24px]">
           <div className="flex justify-between flex-wrap gap-3 items-center w-full">
             <div className="flex items-center gap-[4px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  overflow-x-auto">
               {tabs.map((tab, index) => {
@@ -154,7 +154,7 @@ const Overview = () => {
           )}
         </div>
       </div>
-      <ul className="grid grid-cols-4 gap-[20px] my-4">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[20px] my-4">
         <li className="bg-[#1B1C1E] pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] p-[24px] ">
           <div className="flex items-center justify-between gap-[4px]">
             <p className="pool_font text-[#E8E8E8] text-xs font-normal tracking-[0.06px]">
@@ -191,7 +191,7 @@ const Overview = () => {
             $241,500.28
           </p>
         </li>
-        <li className="pool_right_box portfolio_box_shadow p-[24px] relative ">
+        <li className="pool_right_box portfolio_box_shadow p-[24px]  ">
           <p className="pool_font text-[#E8E8E8] text-xs font-normal tracking-[0.06px]">
             Rewards
           </p>

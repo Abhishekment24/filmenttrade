@@ -44,8 +44,8 @@ const Pool = () => {
   return (
     <>
       <section className="max-[1023px]:overflow-hidden relative">
-        <div className="pt-[95px] pb-[24px] pool_bg lg:sticky lg:top-0 z-10">
-          <div className="container mx-auto max-[1023px]:px-4">
+        <div className="pt-[108px] pb-[24px] pool_bg lg:sticky lg:top-0 z-10">
+          <div className="container mx-auto max-[1279px]:px-4">
             <div className="flex items-center gap-[16px]">
               <div>
                 <Image
@@ -66,7 +66,7 @@ const Pool = () => {
             </div>
           </div>
         </div>
-        <div className="container mx-auto max-[1023px]:px-4">
+        <div className="container mx-auto max-[1279px]:px-4">
           <div className="flex items-start gap-[30px] lg:flex-row flex-col w-full relative  pb-[80px]">
             <div className="lg:w-[65%] w-full lg:overflow-y-auto">
               <Leftcomponentside />

@@ -157,14 +157,16 @@ input[type="checkbox"]:checked {
 }
 .pool_right_box {
   border-radius: 8px;
-  border: 1px solid rgba(56, 216, 200, 0.4);
-
+  border-top: 1px solid rgba(56, 216, 200, 0.4);
   background: radial-gradient(
       95.76% 90.91% at 50% 0%,
       rgba(64, 224, 208, 0.2) 0%,
       rgba(64, 224, 208, 0) 100%
     ),
     #1b1c1e;
+  border-left: 1px solid rgba(56, 216, 200, 0.4);
+  border-right: 1px solid rgba(56, 216, 200, 0.4);
+  border-bottom: 1px solid #222427;
 }
 .pool_wallet_popup {
   border-radius: 8px;
@@ -298,25 +300,23 @@ input[type="checkbox"]:checked {
 }
 /*--------------------Portfolio page css----------------*/
 
-.portfolio_grids-width {
-  grid-template-columns: 18% 82%;
-}
 .portfolio_box_shadow {
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.16),
     0px 2px 1px 0px rgba(0, 0, 0, 0.12), 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
 }
-.bg_coin::after {
+.bg_coin {
+  position: relative;
+  overflow: hidden;
+}
+.bg_coin::before {
+  background: url("../../public/assest/coin2.png");
   content: "";
   position: absolute;
-  right: -12px;
-  width: 70px;
-  height: 70px;
-  bottom: -6px;
-  opacity: 0.4;
-  background: linear-gradient(0deg, #40e0d0 0%, #40e0d0 100%),
-    url("../../public/assest/coin2.png"), lightgray 50% / cover no-repeat;
-
-  background-blend-mode: hue, normal;
+  right: 0;
+  width: 228px;
+  height: 299px;
+  background-repeat: no-repeat;
+  bottom: -14%;
 }
 .nav_link:hover {
   background: #25272a;
@@ -346,6 +346,9 @@ input[type="checkbox"]:checked {
   }
   .grid-width {
     grid-template-columns: 78% 22%;
+  }
+  .portfolio_grids-width {
+    grid-template-columns: 18% 82%;
   }
 }
 @media (min-width: 1280px) {

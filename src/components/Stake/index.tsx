@@ -25,20 +25,19 @@ const Stakepage = () => {
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
-   const UnStakeOpenPopup = () => {
+  const UnStakeOpenPopup = () => {
     setIsUnStakeOpen(true);
-     setIsUnstakeDetailOpen(false);
-   };
-   const UnstakeOpen = () => {
-     setIsUnstakeDetailOpen(true);
-     setIsUnStakeOpen(false);
-   };
+    setIsUnstakeDetailOpen(false);
+  };
+  const UnstakeOpen = () => {
+    setIsUnstakeDetailOpen(true);
+    setIsUnStakeOpen(false);
+  };
 
-   const Unstakeclose = () => {
-     setIsUnstakeDetailOpen(false);
-     setIsUnStakeOpen(false);
-     
-   };
+  const Unstakeclose = () => {
+    setIsUnstakeDetailOpen(false);
+    setIsUnStakeOpen(false);
+  };
   const StakeOpenPopup = () => {
     setIsStakeOpen(true);
     setIsDetailOpen(false);
@@ -55,13 +54,13 @@ const Stakepage = () => {
   };
   return (
     <>
-      <section className="py-[100px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden">
-        <div className="container mx-auto max-[1023px]:px-4">
+      <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden">
+        <div className="container mx-auto max-[1279px]:px-4">
           <div className="">
             <p className="nav_font text-[#fff] text-2xl font-semibold">Stake</p>
           </div>
           {!showSecondPhase && (
-            <div className="w-full relative  bg-[#1B1C1E] mt-5  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] ">
+            <div className="w-full relative  bg-[#1B1C1E] mt-[32px]  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] ">
               <div className="p-[24px]">
                 <div className="flex items-center flex-wrap justify-between gap-3">
                   <div className="">
@@ -133,7 +132,7 @@ const Stakepage = () => {
             </div>
           )}
           {showSecondPhase && (
-            <div className="w-full relative  bg-[#1B1C1E] mt-5  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] ">
+            <div className="w-full relative  bg-[#1B1C1E] mt-[32px]  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] ">
               <div className="p-[24px]">
                 <div className="">
                   <p className="pool_font text-[#fff] text-[20px] tracking-[0.1px] font-semibold">
@@ -171,7 +170,7 @@ const Stakepage = () => {
 
                 <div className="flex items-start gap-[20px] mt-5 lg:flex-row flex-col w-full relative">
                   <div className="lg:w-[50%] w-full">
-                    <div className="rounded-[8px] border-[1px] border-solid border-[#25272A] p-[24px]">
+                    <div className="rounded-[8px] border-[1px] border-solid border-[#25272A] p-[24px] lg:h-[183px]">
                       <div className="flex items-center flex-wrap justify-between gap-3">
                         <div>
                           <p className="pool_font text-[#939191] text-sm font-semibold">
@@ -212,7 +211,7 @@ const Stakepage = () => {
                     </div>
                   </div>
                   <div className="lg:w-[50%] w-full relative">
-                    <div className="pool_right_box sm:px-[40px] px-4 py-[33px] pool_box_shadow ">
+                    <div className="pool_right_box sm:px-[40px] px-4 py-[33px] pool_box_shadow  lg:h-[183px]">
                       <div className="absolute top-[1px] right-[1px]  ">
                         <Image
                           className="w-[214px] overflow-hidden max-[300px]:w-[191px]"
@@ -264,14 +263,16 @@ const Stakepage = () => {
                 </div>
               </div>
               <div className="w-full relative  bg-[#242527]   pool_box_shadow border-t-[1px] border-solid border-[#25272A]  px-[24px] py-[16px]">
-                <div className="flex items-center justify-end gap-1">
-                  <span className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs">
-                    View earned rewards
-                  </span>
-                  <span>
-                    <RiShareBoxFill className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs" />
-                  </span>
-                </div>
+                <Link href="/portfolio?active=rewards">
+                  <div className="flex items-center justify-end gap-1">
+                    <span className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs">
+                      View earned rewards
+                    </span>
+                    <span>
+                      <RiShareBoxFill className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs" />
+                    </span>
+                  </div>
+                </Link>
                 {/*   <div className="rewards-blocks">
                   <div className="flex justify-between items-center gap-2 flex-wrap">
                     <div className="pool_font text-[#fff] text-sm max-[345px]:text-xs">
