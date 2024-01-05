@@ -11,7 +11,7 @@ const Market = () => {
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
 
-  const [sliderValue, setSliderValue] = useState(40);
+  const [sliderValue, setSliderValue] = useState(25);
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSliderValue(parseInt(event.target.value, 10));
   };
@@ -58,9 +58,9 @@ const Market = () => {
       <div className="mt-4">
         <input
           type="range"
-          min="11"
+          min="0"
           max="125"
-          step="6"
+          step="25"
           value={sliderValue}
           onChange={handleSliderChange}
           className="range-slider"
@@ -71,13 +71,13 @@ const Market = () => {
             0x
           </span>
           <span className="pool_font text-[#767676] text-[10px] uppercase font-semibold tracking-[0.4px]">
-            10x
-          </span>
-          <span className="pool_font text-[#767676] text-[10px] uppercase font-semibold tracking-[0.4px]">
             25x
           </span>
           <span className="pool_font text-[#767676] text-[10px] uppercase font-semibold tracking-[0.4px]">
             50x
+          </span>
+          <span className="pool_font text-[#767676] text-[10px] uppercase font-semibold tracking-[0.4px]">
+            75x
           </span>
           <span className="pool_font text-[#767676] text-[10px] uppercase font-semibold tracking-[0.4px]">
             100x

@@ -74,6 +74,7 @@ const Header = () => {
   const [chainId, setchainId] = useState<any>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const mobiledropdownRef = useRef<HTMLDivElement>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isWalletOpen, setIsWalletOpen] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
@@ -98,15 +99,28 @@ const Header = () => {
     setIsWalletOpen(false);
   };
 
+   useEffect(() => {
+     const handleClickOutside = (event: { target: any }) => {
+       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+         setTestnet(false);
+       
+       }
+     };
+     document.addEventListener("mousedown", handleClickOutside);
+     return () => document.removeEventListener("mousedown", handleClickOutside);
+   }, [dropdownRef]);
   useEffect(() => {
-    const handleClickOutside = (event: { target: any }) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setTestnet(false);
+    const handleClickOutsides = (event: { target: any }) => {
+      if (
+        mobiledropdownRef.current &&
+        !mobiledropdownRef.current.contains(event.target)
+      ) {
+        setShowLangDrop(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [dropdownRef]);
+    document.addEventListener("mousedown", handleClickOutsides);
+    return () => document.removeEventListener("mousedown", handleClickOutsides);
+  }, [mobiledropdownRef]);
   useEffect(() => {
     let isWagmiConnected = localStorage.getItem("wagmi.connected");
     if (isWagmiConnected) {
@@ -957,40 +971,30 @@ const Header = () => {
               </Link>
             </div>
             <div className="py-4">
-              <div className="relative" ref={dropdownRef}>
+              <div className="relative" ref={mobiledropdownRef}>
                 <div
                   className="flex items-center gap-1"
-                  onClick={() => setTestnet(!testnet)}
+                  onClick={() => setShowLangDrop(!showLangDrop)}
                 >
-                  <Link
-                    href=""
-                    className={`nav_font text-[#fff] text-xs flex items-center gap-1 transition-all duration-300 ${
-                      activeTab === "More"
-                        ? "font-bold text-[#fff]  "
-                        : "text-[#fff] font-medium "
-                    }`}
-                    onClick={() => handleTabClick("More")}
-                  >
-                    More
-                  </Link>
+                  <Link href="">More</Link>
                   <RiArrowDownSFill
                     className={` cursor-pointer ${
-                      testnet ? "transform rotate-180" : ""
+                      showLangDrop ? "transform rotate-180" : ""
                     } w-4 h-4`}
                     aria-hidden="true"
                   />
                 </div>
                 <div
                   className={`${
-                    testnet ? "block" : "hidden"
+                    showLangDrop ? "block" : "hidden"
                   } absolute  mt-4 w-full z-50  `}
                 >
                   <div className="flex">
                     <div className="bg-[#1B1B1B] min-w-[216px] max-[500px]:min-w-[160px] max-[343px]:min-w-[125px] py-4 px-[8px] rounded-l-[8px] border-[1px] border-solid border-[#25272A] ">
                       {innerLinks.map((link, index) => (
-                        <Link key={index} href={link.href}>
+                        <Link key={index} href={link.href} onClick={handleLink}>
                           <div
-                            onClick={() => setTestnet(!testnet)}
+                            onClick={() => setShowLangDrop(!showLangDrop)}
                             className="pool_font text-[#fff] mb-1 text-xs font-normal tracking-[0.06px] hover:bg-[#25272A] rounded-[4px] px-2 py-2 active:bg-[#25272A]"
                           >
                             {link.text}
@@ -999,14 +1003,17 @@ const Header = () => {
                       ))}
                     </div>
                     <div className="bg-[#161818] min-w-[160px] max-[343px]:min-w-[125px] py-4 px-[8px] rounded-r-[8px] border-t-[1px] border-b-[1px] border-r-[1px] border-solid border-[#25272A]">
-                      <div onClick={() => setTestnet(!testnet)} className="">
+                      <div
+                        onClick={() => setShowLangDrop(!showLangDrop)}
+                        className=""
+                      >
                         <span className="pool_font text-[#6B7280] pl-2  mb-4 text-[10px] font-normal tracking-[0.05px]">
                           Join Community
                         </span>
 
                         <Link href="#">
                           <div
-                            onClick={() => setTestnet(!testnet)}
+                            onClick={() => setShowLangDrop(!showLangDrop)}
                             className="flex items-center gap-[12px]  hover:bg-[#25272A] rounded-[4px] px-2 py-2 active:bg-[#25272A]"
                           >
                             <span>
@@ -1019,7 +1026,7 @@ const Header = () => {
                         </Link>
                         <Link href="">
                           <div
-                            onClick={() => setTestnet(!testnet)}
+                            onClick={() => setShowLangDrop(!showLangDrop)}
                             className="flex items-center gap-[12px] hover:bg-[#25272A] rounded-[4px] px-2 py-2 active:bg-[#25272A]"
                           >
                             <span>

@@ -160,10 +160,16 @@ const Table = () => {
 
                 <div className="wallet_connected_font  flex  text-[10px] font-normal text-[#939191]">
                   <div className="text-left py-3 px-3 max-[1699px]:min-w-[8rem] min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
+                    Date
+                  </div>
+                  <div className="text-left py-3 px-3 max-[1699px]:min-w-[8rem] min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
                     Token
                   </div>
                   <div className="text-left  py-3 px-3 max-[1699px]:min-w-[8rem] min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
                     Type
+                  </div>
+                  <div className="text-center  py-3 px-3 max-[1699px]:min-w-[8rem] min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
+                    Status
                   </div>
                   <div className=" text-center py-3 px-3 max-[1699px]:min-w-[8rem]  min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A]  ">
                     Position Size
@@ -200,6 +206,12 @@ const Table = () => {
                   return (
                     <div key={key} className="relative w-full ">
                       <div className="nav_font w-full  hover:bg-[#25272A] hover:w-fit text-xs flex font-light text-[#fff]  ">
+                        <div className="text-left py-3 px-3 flex flex-col max-[1699px]:min-w-[8rem] min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
+                          23 Sep 2023
+                          <span className="text-xs text-[#939191]">
+                            18:04:22
+                          </span>
+                        </div>
                         <div className="text-left py-3 px-3 flex font-normal flex-col max-[1699px]:min-w-[8rem]  min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
                           BTC-PERP
                           <span className="text-xs text-[#939191]">
@@ -208,6 +220,9 @@ const Table = () => {
                         </div>
                         <div className="text-left py-3 px-3 max-[1699px]:min-w-[8rem] min-[1700px]:min-w-[15%]  border-b-[1px] border-solid border-[#25272A] ">
                           Market
+                        </div>
+                        <div className="text-center py-3 px-3 max-[1699px]:min-w-[8rem] min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
+                          Partially Filled
                         </div>
                         <div className="text-center py-3 px-3 max-[1699px]:min-w-[8rem] min-[1700px]:min-w-[15%] border-b-[1px] border-solid border-[#25272A] ">
                           20.44 USDC

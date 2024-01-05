@@ -162,7 +162,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                   <div className="mt-3">
                     <input
                       type="range"
-                      min="10"
+                      min="0"
                       max="100"
                       step="5"
                       value={sliderValue}
