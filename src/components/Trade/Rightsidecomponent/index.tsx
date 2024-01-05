@@ -56,7 +56,7 @@ const Rightsidecomponent = () => {
           <div className="relative" ref={dropdownRef}>
             <div
               onClick={toggleMenu}
-              className="rounded-[4px] border-[1px] border-solid border-[#313131] bg-[#1B1C1E] w-[24px] h-[24px] flex items-center justify-center"
+              className="rounded-[4px] cursor-pointer border-[1px] border-solid border-[#313131] bg-[#1B1C1E] w-[24px] h-[24px] flex items-center justify-center"
             >
               <span>
                 <BsThreeDotsVertical className="text-[#fff] text-base" />
