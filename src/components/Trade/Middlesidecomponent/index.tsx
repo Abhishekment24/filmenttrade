@@ -24,7 +24,7 @@ const Middlesidecomponent = () => {
                   onClick={() => setSelectedTab(tab.key)}
                   className={`pool_font font-semibold text-xs  ${
                     tab.key == selectedTab
-                      ? "py-[9px] text-[#FFFFFF] border-b-[2px] border-[#FFFFFF] w-[101px] "
+                      ? "py-[11px] text-[#FFFFFF] border-b-[2px] border-[#FFFFFF] w-[101px] "
                       : "text-[#BABABA] w-[101px]"
                   }`}
                   key={index}
