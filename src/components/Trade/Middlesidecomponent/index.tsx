@@ -22,10 +22,10 @@ const Middlesidecomponent = () => {
               return (
                 <button
                   onClick={() => setSelectedTab(tab.key)}
-                  className={`pool_font font-medium text-sm  ${
+                  className={`pool_font font-semibold text-xs  ${
                     tab.key == selectedTab
-                      ? "py-[9px] text-[#40E0D0] border-b-[2px] border-[#40E0D0] w-[101px] "
-                      : "text-[#fff] w-[101px]"
+                      ? "py-[9px] text-[#FFFFFF] border-b-[2px] border-[#FFFFFF] w-[101px] "
+                      : "text-[#BABABA] w-[101px]"
                   }`}
                   key={index}
                 >
@@ -38,14 +38,14 @@ const Middlesidecomponent = () => {
         {selectedTab == "orderbook" && (
           <>
             <div className="flex justify-between items-center  pt-4 px-2">
-              <span className="wallet_connected_font text-[#939191] font-normal text-[10px] tracking-[0.2px]">
-                Price
-              </span>
+              <p className="pool_font text-[#9CA3AF] text-left font-medium text-[10px] tracking-[0.05px]">
+                Price <span className="font-normal text-[#6B7280]">USDC</span>
+              </p>
               <div className="flex items-center gap-[19px]">
-                <p className="wallet_connected_font text-[#939191] text-center font-normal text-[10px] tracking-[0.2px]">
-                  Size
+                <p className="pool_font text-[#9CA3AF] text-center  font-medium text-[10px] tracking-[0.05px]">
+                  Size <span className="font-normal text-[#6B7280]">BTC</span>
                 </p>
-                <p className="wallet_connected_font text-[#939191] w-[67px] text-right font-normal text-[10px] tracking-[0.2px]">
+                <p className="pool_font text-[#9CA3AF] text-right font-medium text-[10px] w-[68px] tracking-[0.05px]">
                   Total
                 </p>
               </div>
@@ -64,7 +64,7 @@ const Middlesidecomponent = () => {
                     <p className="cursor-pointer pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
                       {item.size}
                     </p>
-                    <p className="cursor-pointer pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
+                    <p className="cursor-pointer pool_font text-[#9CA3AF] w-[68px]  text-right font-normal text-xs tracking-[0.06px]">
                       {item.total}
                     </p>
                   </div>
@@ -89,7 +89,7 @@ const Middlesidecomponent = () => {
                     <p className="cursor-pointer pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
                       {item.size}
                     </p>
-                    <p className="cursor-pointer pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
+                    <p className="cursor-pointer pool_font text-[#9CA3AF] w-[68px]  text-right font-normal text-xs tracking-[0.06px]">
                       {item.total}
                     </p>
                   </div>
@@ -101,18 +101,19 @@ const Middlesidecomponent = () => {
         {selectedTab == "trades" && (
           <>
             <div className="flex justify-between items-center  pt-4 px-2">
-              <span className="wallet_connected_font text-[#939191] font-normal text-[10px] tracking-[0.2px]">
-                Price(USDC)
-              </span>
+              <p className="pool_font text-[#9CA3AF] text-left font-medium text-[10px] tracking-[0.05px]">
+                Price <span className="font-normal text-[#6B7280]">USDC</span>
+              </p>
               <div className="flex items-center gap-[19px]">
-                <p className="wallet_connected_font text-[#939191] text-center font-normal text-[10px] tracking-[0.2px]">
-                  Size(BTC)
+                <p className="pool_font text-[#9CA3AF] text-center  font-medium text-[10px] tracking-[0.05px]">
+                  Size <span className="font-normal text-[#6B7280]">BTC</span>
                 </p>
-                <p className="wallet_connected_font text-[#939191] w-[51px] text-right font-normal text-[10px] tracking-[0.2px]">
+                <p className="pool_font text-[#9CA3AF] text-right font-medium text-[10px] w-[68px] tracking-[0.05px]">
                   Time
                 </p>
               </div>
             </div>
+
             <div className="">
               {edata.map((item, index) => (
                 <div
@@ -126,7 +127,7 @@ const Middlesidecomponent = () => {
                     <p className="cursor-pointer pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
                       {item.size}
                     </p>
-                    <p className=" cursor-pointer pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
+                    <p className=" cursor-pointer pool_font text-[#9CA3AF] w-[68px]  text-right font-normal text-xs tracking-[0.06px]">
                       {item.time}
                     </p>
                   </div>
@@ -147,7 +148,7 @@ const Middlesidecomponent = () => {
                     <p className="cursor-pointer pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
                       {item.size}
                     </p>
-                    <p className="cursor-pointer pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
+                    <p className="cursor-pointer pool_font text-[#9CA3AF] w-[68px]  text-right font-normal text-xs tracking-[0.06px]">
                       {item.time}
                     </p>
                   </div>
@@ -167,7 +168,7 @@ const Middlesidecomponent = () => {
                     <p className="cursor-pointer pool_font text-[#fff]  text-center  font-normal text-xs tracking-[0.06px]">
                       {item.size}
                     </p>
-                    <p className="cursor-pointer pool_font text-[#BABABA] w-[67px]  text-right font-normal text-xs tracking-[0.06px]">
+                    <p className="cursor-pointer pool_font text-[#9CA3AF] w-[68px]  text-right font-normal text-xs tracking-[0.06px]">
                       {item.time}
                     </p>
                   </div>

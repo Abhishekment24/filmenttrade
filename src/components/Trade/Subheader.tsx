@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import Btc from "../../../public/assest/btc.png";
-
+import Btcicon from "../../../public/assest/btc.png";
+import Ethicon from "../../../public/assest/EthCoin.png";
+import Usdcicon from "../../../public/assest/USDCoin.png";
 import Link from "next/link";
 
 import Image from "next/image";
@@ -46,7 +47,12 @@ const Subheader = () => {
             <div className="flex items-center gap-[14px]">
               <div className="flex cursor-pointer justify-between items-center gap-[14px]">
                 <div className="flex items-center gap-[14px]">
-                  <Image className="w-[24px]" priority src={Btc} alt="Btc" />
+                  <Image
+                    className="w-[24px]"
+                    priority
+                    src={Btcicon}
+                    alt="Btcicon"
+                  />
                   <span className="text-[#fff] nav_font font-semibold text-base w-[138px]">
                     BTC-PERP
                   </span>
@@ -60,7 +66,7 @@ const Subheader = () => {
                   {showLangDrop && (
                     <div
                       ref={dropdownRef}
-                      className="absolute bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px]  top-8 left-[-191px] w-[440px] px-2   text-left"
+                      className="absolute three_dot   top-12 left-[-191px] w-[440px] px-2   text-left"
                     >
                       <Link href="">
                         <div
@@ -68,91 +74,93 @@ const Subheader = () => {
                           className="my-5"
                         >
                           <div className="flex justify-between items-center  pb-4">
-                            <span className="wallet_connected_font text-[#939191] font-normal text-[10px] tracking-[0.2px]">
+                            <span className="pool_font text-[#9CA3AF] font-medium text-xs tracking-[0.06px]">
                               Token Name
                             </span>
                             <div className="flex items-center gap-[20px]">
-                              <p className="wallet_connected_font text-[#939191] font-normal text-[10px] tracking-[0.2px]">
+                              <p className="pool_font text-[#9CA3AF] font-medium text-xs tracking-[0.06px]">
                                 Price
                               </p>
-                              <p className="wallet_connected_font text-[#939191] font-normal text-[10px] tracking-[0.2px]">
-                                Change (24h)
+                              <p className="pool_font text-[#9CA3AF] font-medium text-xs tracking-[0.06px]">
+                                Change{" "}
+                                <span className="text-[#4B5563]">24h</span>
                               </p>
-                              <p className="wallet_connected_font text-[#939191] font-normal text-[10px] tracking-[0.2px]">
-                                Volume (24h)
+                              <p className="pool_font text-[#9CA3AF] font-medium text-xs tracking-[0.06px]">
+                                Volume{" "}
+                                <span className="text-[#4B5563]">24h</span>
                               </p>
                             </div>
                           </div>
                           <div className="flex justify-between items-center  pb-4">
-                            <div className="flex items-center gap-[14px]">
+                            <div className="flex items-center gap-[8px]">
                               <Image
                                 className="w-[24px]"
                                 priority
-                                src={Btc}
-                                alt="Btc"
+                                src={Btcicon}
+                                alt="Btcicon"
                               />
-                              <span className="text-[#fff] nav_font font-medium text-xs">
+                              <span className="text-[#fff] pool_font font-medium text-xs tracking-[0.06px]">
                                 BTC-PERP
                               </span>
                             </div>
                             <div className="flex items-center gap-[20px]">
-                              <p className="pool_font text-[#fff]  text-left font-medium text-xs ">
+                              <p className="pool_font text-[#fff]  text-left font-medium text-xs tracking-[0.06px]">
                                 $2,2304.56
                               </p>
-                              <p className="pool_font text-[#00CC99] w-[88px] text-center font-medium text-xs ">
+                              <p className="pool_font text-[#00CC99] w-[88px] text-center font-medium text-xs tracking-[0.06px] ">
                                 +10.86%
                               </p>
-                              <p className="pool_font text-[#fff] font-medium text-xs">
+                              <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
                                 $100.01m
                               </p>
                             </div>
                           </div>
                           <div className=" header_bg"></div>
                           <div className="flex justify-between items-center  py-4">
-                            <div className="flex items-center gap-[14px]">
+                            <div className="flex items-center gap-[8px]">
                               <Image
                                 className="w-[24px]"
                                 priority
-                                src={Btc}
-                                alt="Btc"
+                                src={Ethicon}
+                                alt="Ethicon"
                               />
-                              <span className="text-[#fff] nav_font font-medium text-xs">
+                              <span className="text-[#fff] pool_font font-medium text-xs tracking-[0.06px]">
                                 ETH-PERP
                               </span>
                             </div>
                             <div className="flex items-center gap-[20px]">
-                              <p className="pool_font text-[#fff]  text-left font-medium text-xs ">
+                              <p className="pool_font text-[#fff]  text-left font-medium text-xs tracking-[0.06px]">
                                 $2,2304.56
                               </p>
-                              <p className="pool_font text-[#00CC99] w-[88px] text-center font-medium text-xs ">
+                              <p className="pool_font text-[#00CC99] w-[88px] text-center font-medium text-xs tracking-[0.06px]">
                                 +10.86%
                               </p>
-                              <p className="pool_font text-[#fff] font-medium text-xs">
+                              <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
                                 $100.01m
                               </p>
                             </div>
                           </div>
                           <div className=" header_bg"></div>
                           <div className="flex justify-between items-center  pt-4">
-                            <div className="flex items-center gap-[14px]">
+                            <div className="flex items-center gap-[8px]">
                               <Image
                                 className="w-[24px]"
                                 priority
-                                src={Btc}
-                                alt="Btc"
+                                src={Usdcicon}
+                                alt="Usdcicon"
                               />
-                              <span className="text-[#fff] nav_font font-medium text-xs">
-                                SOL-PERP
+                              <span className="text-[#fff] pool_font font-medium text-xs tracking-[0.06px]">
+                                USDC
                               </span>
                             </div>
                             <div className="flex items-center gap-[20px]">
-                              <p className="pool_font text-[#fff]  text-left font-medium text-xs ">
+                              <p className="pool_font text-[#fff]  text-left font-medium text-xs tracking-[0.06px]">
                                 $2,2304.56
                               </p>
-                              <p className="pool_font text-[#D65454] w-[88px] text-center font-medium text-xs ">
+                              <p className="pool_font text-[#D65454] w-[88px] text-center font-medium text-xs tracking-[0.06px]">
                                 -1.52%
                               </p>
-                              <p className="pool_font text-[#fff] font-medium text-xs">
+                              <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
                                 $100.01m
                               </p>
                             </div>
@@ -173,12 +181,12 @@ const Subheader = () => {
                   <p className="pool_font text-[#00CC99] font-medium text-[20px] tracking-[0.1px]">
                     $225.62
                   </p>
-                  <p className="pool_font text-[#939191] font-medium text-sm tracking-[0.07px]">
+                  <p className="pool_font text-[#9CA3AF] font-medium text-sm tracking-[0.07px]">
                     $224.89
                   </p>
                 </div>
                 <div className="">
-                  <span className="pool_font text-[#939191] font-light text-xs tracking-[0.06px]">
+                  <span className="pool_font text-[#9CA3AF] font-light text-xs tracking-[0.06px]">
                     24h change
                   </span>
                   <div className="flex items-center gap-[8px]">
@@ -191,7 +199,7 @@ const Subheader = () => {
                   </div>
                 </div>
                 <div className="">
-                  <span className="pool_font text-[#939191] font-light text-xs tracking-[0.06px]">
+                  <span className="pool_font text-[#9CA3AF] font-light text-xs tracking-[0.06px]">
                     24h volume
                   </span>
                   <p className="pool_font text-[#fff] font-medium text-sm tracking-[0.07px]">
@@ -199,7 +207,7 @@ const Subheader = () => {
                   </p>
                 </div>
                 <div className="">
-                  <span className="pool_font text-[#939191] font-light text-xs tracking-[0.06px]">
+                  <span className="pool_font text-[#9CA3AF] font-light text-xs tracking-[0.06px]">
                     Open Interest
                   </span>
                   <p className="pool_font text-[#fff] font-medium text-sm tracking-[0.07px]">
@@ -207,7 +215,7 @@ const Subheader = () => {
                   </p>
                 </div>
                 <div className="">
-                  <span className="pool_font text-[#939191] font-light text-xs tracking-[0.06px]">
+                  <span className="pool_font text-[#9CA3AF] font-light text-xs tracking-[0.06px]">
                     Market Cap
                   </span>
                   <p className="pool_font text-[#fff] font-medium text-sm tracking-[0.07px]">
@@ -216,7 +224,7 @@ const Subheader = () => {
                 </div>
                 <div className="w-[1px] h-[39px] bg-[#FFFFFF0D]"> </div>
                 <div className="">
-                  <span className="pool_font text-[#939191] font-light text-xs tracking-[0.06px]">
+                  <span className="pool_font text-[#9CA3AF] font-light text-xs tracking-[0.06px]">
                     Funding Rate
                   </span>
                   <p className="pool_font text-[#fff] font-medium text-sm tracking-[0.07px]">
@@ -224,7 +232,7 @@ const Subheader = () => {
                   </p>
                 </div>
                 <div className="">
-                  <span className="pool_font text-[#939191] font-light text-xs tracking-[0.06px]">
+                  <span className="pool_font text-[#9CA3AF] font-light text-xs tracking-[0.06px]">
                     Borrowing Rate
                   </span>
                   <p className="pool_font text-[#fff] font-medium text-sm tracking-[0.07px]">
@@ -233,11 +241,11 @@ const Subheader = () => {
                 </div>
               </div>
             </div>
-            <div className="rounded-[4px] border-[1px] border-solid border-[#313131] bg-[#1B1C1E] w-[32px] h-[32px] flex items-center justify-center">
+            {/* <div className="rounded-[4px] border-[1px] border-solid border-[#313131] bg-[#1B1C1E] w-[32px] h-[32px] flex items-center justify-center">
               <span>
                 <MdInfo className="text-[#fff] text-base" />
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
