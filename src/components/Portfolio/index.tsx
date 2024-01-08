@@ -52,13 +52,13 @@ const Portfolio = () => {
         <div className="max-[1023px]:container max-[1023px]:mx-auto max-[1023px]:px-4 ">
           <div className="portfolio_grids-width lg:grid relative  ">
             <div className="lg:w-[18%] w-full">
-              <div className=" border-r-[1px] border-solid bg-[#111113] border-[#25272A]  max-[1023px]:mb-[50px] lg:py-12 max-[1023px]:rounded-[8px] lg:h-[100vh] lg:w-[18%] lg:top-[2%] 2xl:top-[2%] lg:fixed lg:overflow-y-scroll">
+              <div className=" border-r-[1px] border-solid bg-[#111113] border-[#25272A]  max-[1023px]:mb-[50px] lg:py-12 max-[1023px]:rounded-[8px] lg:h-[100vh] lg:w-[18%] lg:top-[2%] 2xl:top-[2%] lg:fixed">
                 <div className="">
-                  <div className="flex  lg:flex-col  max-[1023px]:items-center max-[1023px]:gap-8  overflow-x-auto text-left w-full lg:px-6 lg:py-5 px-3">
+                  <div className="flex  lg:flex-col  max-[1023px]:items-center max-[1023px]:gap-8  max-[1023px]:overflow-x-auto text-left w-full lg:px-6 lg:py-5 px-3">
                     {tabs.map((tab, index) => {
                       return (
                         <>
-                          <Link  key={index} href={tab.href}>
+                          <Link key={index} href={tab.href}>
                             <button
                               onClick={() => handleTabClick(tab.key)}
                               className={`py-3 text-left  pool_font font-medium text-sm tracking-[0.07px]  ${
@@ -66,7 +66,6 @@ const Portfolio = () => {
                                   ? " text-[#40E0D0]  max-[1023px]:border-b-[2px]  max-[1023px]:border-[#40E0D0]  max-[639px]:w-[117px] "
                                   : "text-[#fff]   max-[639px]:w-[117px]"
                               }`}
-                             
                             >
                               {tab.title}
                             </button>
@@ -81,27 +80,37 @@ const Portfolio = () => {
             <div className="lg:w-[82%] w-full lg:mx-auto">
               {selectedTab == "overview" && (
                 <>
-                  <Overviews />
+                  <div className="pb-[70px]">
+                    <Overviews />
+                  </div>
                 </>
               )}
               {selectedTab == "perpetuals" && (
                 <>
-                  <Perpetuals />
+                  <div className="pb-[70px]">
+                    <Perpetuals />
+                  </div>
                 </>
               )}
               {selectedTab == "pools" && (
                 <>
-                  <Pools />
+                  <div className="pb-[70px]">
+                    <Pools />
+                  </div>
                 </>
               )}
               {selectedTab == "rewards" && (
                 <>
-                  <Rewards />
+                  <div className="pb-[70px]">
+                    <Rewards />
+                  </div>
                 </>
               )}
               {selectedTab == "history" && (
                 <>
-                  <Historys />
+                  <div className="pb-[70px]">
+                    <Historys />
+                  </div>
                 </>
               )}
             </div>

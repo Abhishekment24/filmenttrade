@@ -60,7 +60,7 @@ const Tablesection = () => {
 
           {selectedTab == "positions" && (
             <div className=" w-full relative flex">
-              <div className="flex flex-col relative xl:w-[92%] sm:w-[88%] max-[639px]:w-[88%]  overflow-x-scroll border-t-[1px] border-solid border-[#25272A]">
+              <div className="flex flex-col relative xl:w-[92%] sm:w-[88%] max-[639px]:w-[88%]  max-[1699px]:overflow-x-scroll border-t-[1px] border-solid border-[#25272A]">
                 {/* <div className="w-full "> */}
 
                 <div className="pool_font  flex  text-xs font-medium text-[#9CA3AF]">
@@ -165,7 +165,7 @@ const Tablesection = () => {
           {selectedTab == "openorders" && (
             <>
               <div className=" w-full relative flex">
-                <div className="flex flex-col relative xl:w-[92%] sm:w-[88%] max-[639px]:w-[88%]  overflow-x-scroll border-t-[1px] border-solid border-[#25272A]">
+                <div className="flex flex-col relative xl:w-[92%] sm:w-[88%] max-[639px]:w-[88%]   max-[1699px]:overflow-x-scroll border-t-[1px] border-solid border-[#25272A]">
                   {/* <div className="w-full "> */}
 
                   <div className="pool_font  flex  text-xs font-medium ">
@@ -287,7 +287,7 @@ const Tablesection = () => {
           {selectedTab == "history" && (
             <>
               <div className=" w-full relative flex">
-                <div className="flex flex-col relative w-full overflow-x-scroll border-t-[1px] border-solid border-[#25272A]">
+                <div className="flex flex-col relative w-full  max-[1699px]:overflow-x-scroll border-t-[1px] border-solid border-[#25272A]">
                   {/* <div className="w-full "> */}
 
                   <div className="pool_font  flex  text-xs font-medium text-[#9CA3AF]">
@@ -386,7 +386,7 @@ const Tablesection = () => {
           {selectedTab == "realisedPnL" && (
             <>
               <div className=" w-full relative flex">
-                <div className="flex flex-col relative w-full overflow-x-scroll border-t-[1px] border-solid border-[#25272A]">
+                <div className="flex flex-col relative w-full  max-[1699px]:overflow-x-scroll border-t-[1px] border-solid border-[#25272A]">
                   {/* <div className="w-full "> */}
 
                   <div className="pool_font  flex  text-xs font-medium text-[#9CA3AF]">
