@@ -1,18 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { CiCircleQuestion } from "react-icons/ci";
 import { cdata, edata, mdata } from "./data";
 import { MdCheck } from "react-icons/md";
+import { Switch } from "@headlessui/react";
 import { Tooltip } from "react-tooltip";
 import { MdOutlineArrowDownward } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 const Limit = () => {
+  const [enabled, setEnabled] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [sliderValue, setSliderValue] = useState(25);
-
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [formData, setFormData] = useState({
+    priceinput: "",
+    collateralinput: "",
+    profitinput: "",
+    stopinput: "",
+    limitinput: "",
+    sizeinput: "",
+    Slippageinput: "",
+  });
+  const handleInputChange = (event: any) => {
+    const { name, value } = event.target;
+    if (/^\d*$/.test(value) || value === "") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
+  };
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+  const handleSave = () => {
+    toggleMenu();
+  };
+  useEffect(() => {
+    const handleClickOutside = (event: { target: any }) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownRef]);
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
@@ -37,6 +73,25 @@ const Limit = () => {
         </span>
         <input
           type="text"
+          name="priceinput"
+          value={formData.priceinput}
+          onChange={handleInputChange}
+          className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+          placeholder="0"
+        />
+        <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+          BTC
+        </span>
+      </div>
+      <div className="input_field_bg flex items-center gap-3 mt-4 w-full px-4 h-[45px] ">
+        <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
+          Collateral
+        </span>
+        <input
+          type="text"
+          name="collateralinput"
+          value={formData.collateralinput}
+          onChange={handleInputChange}
           className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
           placeholder="25.56"
         />
@@ -44,18 +99,15 @@ const Limit = () => {
           USDC
         </span>
       </div>
-      <div className="input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ">
-        <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
-          Collateral
-        </span>
-        <input
-          type="text"
-          className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-          placeholder="25.56"
-        />
-        <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-          USDC
-        </span>
+      <div className="flex justify-between items-center gap-3 my-4">
+        <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
+          Available Collateral : <span className="text-[#fff]">$500.68</span>
+        </p>
+        <div className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[8px] max-border  bg-[#2B2B2B]">
+          <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
+            Max
+          </p>
+        </div>
       </div>
       <div className="input_field_bg flex items-center gap-3 w-full px-4  h-[45px] ">
         <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
@@ -115,129 +167,215 @@ const Limit = () => {
       </div>
       <div className="header_bg"></div>
       <div className="my-4">
-        <label className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            className=" text-[#fff] accent-[#40E0D0]   h-[16px] w-[16px] appearance-none border-2 border-solid rounded-[4px] bg-[#1A1A1A] border-[#374151]
+        <div className="flex items-start space-x-2">
+          <div className="mt-1">
+            <input
+              type="checkbox"
+              className="cursor-pointer text-[#fff] accent-[#40E0D0]   h-[16px] w-[16px] appearance-none border-2 border-solid rounded-[4px] bg-[#1A1A1A] border-[#374151]
              focus:ring-0 focus:ring-offset-0
              "
-            checked={isChecked1}
-            onChange={() => setIsChecked1(!isChecked1)}
-          />
+              checked={isChecked1}
+              onChange={() => setIsChecked1(!isChecked1)}
+            />
+          </div>
+          <div>
+            <span className="pool_font text-[#E5E7EB] text-[12px] font-semibold tracking-[0.06px]">
+              Take Profit
+            </span>
+            {isChecked1 && (
+              <>
+                <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                  <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                    Take Profit
+                  </span>
+                  <input
+                    type="text"
+                    name="profitinput"
+                    value={formData.profitinput}
+                    onChange={handleInputChange}
+                    className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                    placeholder="25.56"
+                  />
+                  <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
+                  <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                    %
+                  </span>
+                  <span>
+                    <IoIosArrowDown className="text-[#9CA3AF] text-[15px]" />
+                  </span>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="my-4">
+        <div className="flex items-start space-x-2">
+          <div className="mt-1">
+            <input
+              type="checkbox"
+              className="cursor-pointer text-[#fff] accent-[#40E0D0]   h-[16px] w-[16px] appearance-none border-2 border-solid rounded-[4px] bg-[#1A1A1A] border-[#374151]
+             focus:ring-0 focus:ring-offset-0
+             "
+              checked={isChecked2}
+              onChange={() => setIsChecked2(!isChecked2)}
+            />
+          </div>
 
-          <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
-            Take Profit / Stop Loss
-          </span>
-        </label>
+          <div>
+            <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
+              Stop Loss
+            </span>
+            <div>
+              {isChecked2 && (
+                <>
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
+                      Trailing Stop Loss
+                    </span>
+                    <div className="">
+                      <Switch
+                        checked={enabled}
+                        onChange={setEnabled}
+                        className={`${enabled ? "toggle_btn" : "bg-[#25272a]"}
+          relative inline-flex h-[25px] w-[50px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75`}
+                      >
+                        <span className="sr-only">Use setting</span>
+                        <span
+                          aria-hidden="true"
+                          className={`${
+                            enabled
+                              ? "translate-x-6 bg-teal-900"
+                              : "translate-x-0 bg-white"
+                          }
+            pointer-events-none inline-block h-[21px] w-[21px] transform rounded-full  shadow-lg ring-0 transition duration-200 ease-in-out`}
+                        />
+                      </Switch>
+                    </div>
+                  </div>
+                  <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                    <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                      Stop Loss
+                    </span>
+                    <input
+                      type="text"
+                      name="stopinput"
+                      value={formData.stopinput}
+                      onChange={handleInputChange}
+                      className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                      placeholder="0"
+                    />
 
-        {isChecked1 && (
-          <>
-            <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-              <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
-                Take Profit
-              </span>
-              <input
-                type="text"
-                className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                placeholder="25.56"
-              />
-              <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
-              <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                %
-              </span>
-              <span>
-                <MdOutlineArrowDownward className="text-[#9CA3AF] text-[15px]" />
-              </span>
+                    <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                      %
+                    </span>
+                  </div>
+                  {enabled && (
+                    <>
+                      <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                        <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                          Limit
+                        </span>
+                        <input
+                          type="text"
+                          name="limitinput"
+                          value={formData.limitinput}
+                          onChange={handleInputChange}
+                          className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                          placeholder="0"
+                        />
+                        <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
+                        <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                          %
+                        </span>
+                        <span>
+                          <IoIosArrowDown className="text-[#9CA3AF] text-[15px]" />
+                        </span>
+                      </div>
+                      <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                        <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                          Size
+                        </span>
+                        <input
+                          type="text"
+                          name="sizeinput"
+                          value={formData.sizeinput}
+                          onChange={handleInputChange}
+                          className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                          placeholder="0"
+                        />
+
+                        <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                          %
+                        </span>
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
             </div>
-            <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-              <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
-                Stop Loss
-              </span>
-              <input
-                type="text"
-                className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                placeholder="25.56"
-              />
-              <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
-              <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                %
-              </span>
-              <span>
-                <MdOutlineArrowDownward className="text-[#9CA3AF] text-[15px]" />
-              </span>
-            </div>
-          </>
-        )}
+          </div>
+          {/*}  <div>
+            <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
+              Trailing Stop Loss
+            </span>
+            {isChecked2 && (
+              <>
+                <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                  <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                    Callback Rate
+                  </span>
+                  <input
+                    type="text"
+                    className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                    placeholder="25.56"
+                  />
+
+                  <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                    %
+                  </span>
+                </div>
+                <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                  <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                    Activation Price
+                  </span>
+                  <input
+                    type="text"
+                    className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                    placeholder="25.5"
+                  />
+                  <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
+                  <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                    %
+                  </span>
+                  <span>
+                    <MdOutlineArrowDownward className="text-[#9CA3AF] text-[15px]" />
+                  </span>
+                </div>
+                <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                  <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                    Size
+                  </span>
+                  <input
+                    type="text"
+                    className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                    placeholder="25.56"
+                  />
+
+                  <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                    %
+                  </span>
+                </div>
+              </>
+            )}
+          </div>*/}
+        </div>
       </div>
       <div className="my-4">
         <label className="flex items-center space-x-2">
           <input
             type="checkbox"
-            className=" text-[#fff] accent-[#40E0D0]   h-[16px] w-[16px] appearance-none border-2 border-solid rounded-[4px] bg-[#1A1A1A] border-[#374151]
-             focus:ring-0 focus:ring-offset-0
-             "
-            checked={isChecked2}
-            onChange={() => setIsChecked2(!isChecked2)}
-          />
-          <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
-            Trailing Stop Loss
-          </span>
-        </label>
-        {isChecked2 && (
-          <>
-            <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-              <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
-                Callback Rate
-              </span>
-              <input
-                type="text"
-                className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                placeholder="25.56"
-              />
-
-              <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                %
-              </span>
-            </div>
-            <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-              <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
-                Activation Price
-              </span>
-              <input
-                type="text"
-                className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                placeholder="25.5"
-              />
-              <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
-              <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                %
-              </span>
-              <span>
-                <MdOutlineArrowDownward className="text-[#9CA3AF] text-[15px]" />
-              </span>
-            </div>
-            <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-              <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
-                Size
-              </span>
-              <input
-                type="text"
-                className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                placeholder="25.56"
-              />
-
-              <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                %
-              </span>
-            </div>
-          </>
-        )}
-      </div>
-      <div className="my-4">
-        <label className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            className=" text-[#fff] accent-[#40E0D0]   h-[16px] w-[16px] appearance-none border-2 border-solid rounded-[4px] bg-[#1A1A1A] border-[#374151]
+            className="cursor-pointer text-[#fff] accent-[#40E0D0]   h-[16px] w-[16px] appearance-none border-2 border-solid rounded-[4px] bg-[#1A1A1A] border-[#374151]
              focus:ring-0 focus:ring-offset-0
              "
             checked={isChecked3}
@@ -267,7 +405,7 @@ const Limit = () => {
               </p>
 
               <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                0.024 BTC
+                $2000
               </p>
             </div>
             <div className="flex justify-between items-center gap-3 my-[4px]">
@@ -292,7 +430,7 @@ const Limit = () => {
                 </span>
               </div>
               <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                10x
+                {`${sliderValue}x`}
               </p>
             </div>
             <div className="flex justify-between items-center gap-3 my-[4px]">
@@ -328,7 +466,7 @@ const Limit = () => {
                 </span>
               </div>
               <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                0.250 BTC
+                {formData.profitinput}%
               </p>
             </div>
             <div className="flex justify-between items-center gap-3 my-[4px]">
@@ -337,16 +475,69 @@ const Limit = () => {
               </p>
 
               <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                0.015 BTC
+                {formData.stopinput}%
               </p>
             </div>
             <div className="flex justify-between items-center gap-3 my-[4px]">
-              <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-                Slippage Tolerance
-              </p>
+              <div
+                className="relative flex items-center gap-1"
+                ref={dropdownRef}
+              >
+                <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
+                  Slippage Tolerance
+                </p>
+                <p
+                  onClick={toggleMenu}
+                  className="pool_font cursor-pointer text-[#40E0D0] text-xs font-normal tracking-[0.06px]"
+                >
+                  Adjust
+                </p>
+                <div
+                  className={`absolute top-[-135px] lg:z-[] pl-2  left-[-17px] ${
+                    isMenuOpen ? "block" : "hidden"
+                  }`}
+                >
+                  <div className=" icon-width three_dot p-4">
+                    <div>
+                      <div className="flex justify-between items-center gap-2 w-full">
+                        <span className="pool_font text-[#fff]  text-xs font-medium tracking-[0.06px]">
+                          Slippage Tolerance
+                        </span>
+                        <div className="input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ">
+                          <input
+                            type="text"
+                            name="Slippageinput"
+                            value={formData.Slippageinput}
+                            onChange={handleInputChange}
+                            className=" block w-[100%]  pool_font text-[#fff] text-[15px] font-medium text-left h-[38px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                            placeholder="1"
+                          />
 
+                          <div className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                            %
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-[4px] mt-[16px]">
+                      <button
+                        className="items-center pool_font text-[#FFFFFF] w-[100%] text-xs font-semibold   bg-[#2B2B2B] rounded-[4px] max-border py-[12px] px-[8px] tracking-[0.06px]"
+                        onClick={toggleMenu}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        className="items-center pool_font text-[#FFFFFF] w-[100%] text-xs font-semibold save_btn  py-[12px] px-[8px]  tracking-[0.06px]"
+                        onClick={handleSave}
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                0.015 BTC
+                {formData.Slippageinput}%
               </p>
             </div>
             <div className="flex justify-between items-center gap-3 my-[4px]">
@@ -355,7 +546,7 @@ const Limit = () => {
               </p>
 
               <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                0.015 BTC
+                $20
               </p>
             </div>
             <div className="flex justify-between items-center gap-3 my-[4px]">
@@ -382,7 +573,7 @@ const Limit = () => {
                 </span>
               </div>
               <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                0.015 BTC
+                $15
               </p>
             </div>
           </div>
@@ -394,7 +585,7 @@ const Limit = () => {
               </p>
 
               <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                100 USDC
+                $1700
               </p>
             </div>
             <div className="flex justify-between items-center gap-3 my-[4px]">
@@ -425,7 +616,7 @@ const Limit = () => {
               </div>
 
               <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                100 USDC
+                $1000
               </p>
             </div>
           </div>
@@ -446,7 +637,7 @@ const Limit = () => {
                 </div>
 
                 <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                  {item.description}
+                  ${item.description}
                 </p>
               </div>
             ))}

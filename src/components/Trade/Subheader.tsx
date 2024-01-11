@@ -3,15 +3,15 @@ import Btcicon from "../../../public/assest/btc.png";
 import Ethicon from "../../../public/assest/EthCoin.png";
 import Usdcicon from "../../../public/assest/USDCoin.png";
 import Link from "next/link";
-
+import { IoSettingsOutline } from "react-icons/io5";
 import Image from "next/image";
-import { RiArrowDownSFill } from "react-icons/ri";
+import { RiArrowDownSFill, RiShareBoxFill } from "react-icons/ri";
 
 import { MdOutlineArrowDropUp, MdInfo } from "react-icons/md";
 
 const Subheader = () => {
   const [showDropNav, setShowDropNav] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+   const [isMenuOpen, setMenuOpen] = useState(false);
   const [showLangDrop, setshowLangDrop] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -23,24 +23,28 @@ const Subheader = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownRef]);
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0); // Set isScrolled to true when scrolled
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+ 
   function handleLink() {
     setShowDropNav(false);
   }
+  const menusRef = useRef<HTMLDivElement>(null);
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+  useEffect(() => {
+    const handleClickOutside = (event: { target: any }) => {
+      if (menusRef.current && !menusRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menusRef]);
   return (
     <>
       <div
-        className={`navbartop fixed top-[62px] z-[300] bg-[#1B1C1E] max-[1179px]:hidden header_bg lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${
-          isScrolled ? "" : "bg-[#1B1C1E]"
-        }`}
+        className="navbartop fixed top-[62px] z-[300] bg-[#1B1C1E] max-[1179px]:hidden header_bg lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  
+        "
       >
         <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
           <div className="flex justify-between text-[#fff] items-center max-[1023px]:hidden gap-[14px]">
@@ -53,7 +57,7 @@ const Subheader = () => {
                     src={Btcicon}
                     alt="Btcicon"
                   />
-                  <span className="text-[#fff] nav_font font-semibold text-base w-[138px]">
+                  <span className="text-[#fff] pool_font font-semibold text-base xl:text-lg tracking-[0.09px] w-[138px]">
                     BTC-PERP
                   </span>
                 </div>
@@ -173,27 +177,25 @@ const Subheader = () => {
 
                 <div className="w-[1px] py-[30px] bg-[#FFFFFF0D]"> </div>
               </div>
-              <div className=" flex items-center lg:gap-[18px] xl:gap-[25px] min-[1380px]:gap-[43px]">
-                <div className="flex items-center gap-[8px]">
-                  <span>
-                    <MdOutlineArrowDropUp className="text-[#00CC99] text-base" />
-                  </span>
-                  <p className="pool_font text-[#00CC99] font-medium text-[20px] tracking-[0.1px]">
+              <div className=" flex items-center lg:gap-[18px] xl:gap-[25px] min-[1380px]:gap-[36px]">
+                <div className="flex items-center gap-[12px]">
+                  <p className="pool_font text-[#10B981] font-medium  text-base xl:text-lg tracking-[0.09px]">
                     $225.62
                   </p>
                   <p className="pool_font text-[#9CA3AF] font-medium text-sm tracking-[0.07px]">
                     $224.89
                   </p>
                 </div>
+                <div className="w-[1px] h-[39px] bg-[#FFFFFF0D]"> </div>
                 <div className="">
                   <span className="pool_font text-[#9CA3AF] font-light text-xs tracking-[0.06px]">
                     24h change
                   </span>
                   <div className="flex items-center gap-[8px]">
-                    <p className="wallet_connected_font text-[#00CC99] font-medium text-sm ">
+                    <p className="wallet_connected_font text-[#10B981] font-medium text-sm ">
                       +0.81%
                     </p>
-                    <p className="wallet_connected_font text-[#00CC99] font-medium text-sm ">
+                    <p className="wallet_connected_font text-[#10B981] font-medium text-sm ">
                       +1.65
                     </p>
                   </div>
@@ -241,11 +243,84 @@ const Subheader = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="rounded-[4px] border-[1px] border-solid border-[#313131] bg-[#1B1C1E] w-[32px] h-[32px] flex items-center justify-center">
-              <span>
-                <MdInfo className="text-[#fff] text-base" />
-              </span>
-            </div> */}
+            <div className="relative" ref={menusRef}>
+              <div
+                className="cursor-pointer rounded-[4px] border-[1px] border-solid border-[#25272A] bg-[#1B1B1B] w-[38px] h-[38px] flex items-center justify-center"
+                onClick={toggleMenu}
+                ref={dropdownRef}
+              >
+                <span>
+                  <IoSettingsOutline className="text-[#fff] text-base" />
+                </span>
+              </div>
+              <div
+                className={`absolute top-[50px] lg:z-[99] pl-2  right-0 ${
+                  isMenuOpen ? "block" : "hidden"
+                }`}
+              >
+                <div className=" icon-width three_dot p-[24px] icon-height">
+                  <span className="pool_font text-[#9CA3AF] mb-1 text-xs font-medium tracking-[0.06px]">
+                    Layout
+                  </span>
+                  <ul className="grid gap-4 grid-cols-2 my-3">
+                    <li className="bg-[#25272A] h-[120px] border-[1px] border-solid border-[#25272A] rounded-[4px]">
+                      <div className="bg-[#171717] flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center">
+                        <div className="w-[20px] h-[39px] bg-[#4B5563] rounded-[2px]"></div>
+                        <div className="w-[47px] h-[39px] bg-[#25272A] rounded-[2px]"></div>
+                      </div>
+                      <div className=" text-center">
+                        <span className="pool_font text-[#fff]  text-xs font-medium tracking-[0.06px]">
+                          Left Panel
+                        </span>
+                      </div>
+                    </li>
+                    <li className="right_bg h-[120px] border-[1px] border-solid border-[#40E0D0] rounded-[4px]">
+                      <div className="right_bg1 flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center">
+                        <div className="w-[47px] h-[39px] right_bg rounded-[2px]"></div>
+                        <div className="w-[20px] h-[39px] bg-[#40E0D0] rounded-[2px]"></div>
+                      </div>
+                      <div className=" text-center">
+                        <span className="pool_font text-[#40E0D0]  text-xs font-medium tracking-[0.06px]">
+                          Right Panel
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
+                  <div className="header_bg mt-6 mb-3"></div>
+                  <div>
+                    <div className="flex justify-between items-center gap-2 w-full my-2">
+                      <span className="pool_font text-[#fff]  text-xs font-medium tracking-[0.06px]">
+                        Slippage Tolerace
+                      </span>
+                      <div className="input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ">
+                        <input
+                          type="text"
+                          className=" block w-[100%]  pool_font text-[#fff] text-[15px] font-medium text-left h-[38px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                          placeholder="1"
+                        />
+
+                        <div className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                          %
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="header_bg mt-6 mb-4"></div>
+                  <div>
+                    <Link href="">
+                      <div className="flex items-center justify-start gap-1">
+                        <span className="text-[#40E0D0] pool_font  text-xs font-medium max-[345px]:text-xs tracking-[0.06px]">
+                          View on CoinGecko
+                        </span>
+                        <span>
+                          <RiShareBoxFill className="text-[#40E0D0] pool_font  text-xs font-medium max-[345px]:text-xs" />
+                        </span>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../../public/assest/Logo.png";
-import Buttonicons from "../../../public/assest/buttonicons.png";
+import Buttonicons from "../../../public/assest/Tether.png";
 import Metamaskicon from "../../../public/assest/metamaskicon.png";
 import Metamaskimg from "../../../public/assest/metamsakimgs.png";
 import Yellowimg from "../../../public/assest/yellowimg.png";
@@ -338,14 +338,14 @@ const Header = () => {
               <div>
                 <div className="flex items-center gap-[22px] w-full">
                   <Link href="/stake">
-                    <div className="flex items-start gap-[4px]  btn py-[10px] px-3 animated-bg">
+                    <div className="flex items-start gap-[8px]  btn py-[10px] px-3 animated-bg">
                       <Image
-                        className="w-[16px]"
+                        className="w-[14px]"
                         priority
                         src={Buttonicons}
                         alt="Buttonicons"
                       />
-                      <span className="nav_font text-[#40CABC] font-semibold text-xs ">
+                      <span className="pool_font text-[#40E0D0] font-semibold text-xs tracking-[0.06px]">
                         Earn 62% APR on USDC
                       </span>
                     </div>
@@ -354,7 +354,7 @@ const Header = () => {
                   {!isConnected ? (
                     <button
                       onClick={connectWallet}
-                      className="items-center nav_font text-[#0B2B28] text-xs font-semibold  btn_one  py-[10px] px-[16px]"
+                      className="items-center pool_font text-[#1F2937] text-xs font-semibold  btn_one  py-[10px] px-[16px] tracking-[0.06px]"
                     >
                       Connect Wallet
                     </button>

@@ -64,12 +64,12 @@ export const mdata = [
     id: 1,
 
     titles: "Trade Fees",
-    description: "0.01 USDC",
+    description: "0.01",
   },
   {
     id: 2,
 
     titles: "Borrow Fees",
-    description: "0.01 USDC",
+    description: "0.05",
   },
 ];

@@ -1,25 +1,73 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { CiCircleQuestion } from "react-icons/ci";
 import { cdata, edata, mdata } from "./data";
 import { MdCheck } from "react-icons/md";
+import DepositPupopup from "../../Commoncomponent/Despoitpopup";
+import { Switch } from "@headlessui/react";
+//import { IoIosArrowDown } from "react-icons/io";
 import { Tooltip } from "react-tooltip";
 import { MdOutlineArrowDownward } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-const Market = () => {
+interface MarketProps {
+  isConnected: boolean;
+  formData: any;
+  StakeOpenPopup: () => void;
+}
+const Market: React.FC<MarketProps> = ({
+  isConnected,
+  StakeOpenPopup,
+  formData,
+}) => {
+  //const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
+  const [enabled, setEnabled] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [formsData, setFormsData] = useState({
+    collateralinput: "",
+    profitinput: "",
+    stopinput: "",
+    limitinput: "",
+    sizeinput: "",
+    Slippageinput: "",
+  });
 
+  const handleInputChange = (event: any) => {
+    const { name, value } = event.target;
+    if (/^\d*$/.test(value) || value === "") {
+      setFormsData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
+  };
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+  const handleSave = () => {
+    toggleMenu();
+  };
+  useEffect(() => {
+    const handleClickOutside = (event: { target: any }) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownRef]);
   const [sliderValue, setSliderValue] = useState(25);
-   const toggleVisibility = () => {
-     setIsVisible(!isVisible);
-   };
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSliderValue(parseInt(event.target.value, 10));
   };
-  
+
   const calculateBgColor = (sliderValue: number) => {
     // Example: Change color based on the value
     const percentage = (sliderValue / 125) * 100;
@@ -30,416 +78,601 @@ const Market = () => {
     background: calculateBgColor(sliderValue),
   };
   return (
-    <div className="px-4 pb-[100px]">
-      <div className="input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ">
-        <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
-          Collateral
-        </span>
-        <input
-          type="text"
-          className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-          placeholder="25.56"
-        />
-        <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-          USDC
-        </span>
-      </div>
-      <div className="input_field_bg flex items-center gap-3 w-full px-4  h-[45px] ">
-        <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
-          Leverage
-        </span>
+    <>
+      <div className="px-4 pb-[100px]">
+        <div className="input_field_bg flex items-center justify-between gap-3 mt-4 w-full px-4 h-[45px] ">
+          <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
+            Collateral
+          </span>
+          <div className="flex items-center gap-1">
+            <span className="text-right">{formData.amount}</span>
+            <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+              USDC
+            </span>
+          </div>
+        </div>
 
-        <input
-          type="text"
-          value={sliderValue}
-          className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-          placeholder="50"
-        />
-        <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-          x
-        </span>
-      </div>
-      <div className="mt-4">
-        <input
-          type="range"
-          min="0"
-          max="125"
-          step="25"
-          value={sliderValue}
-          onChange={handleSliderChange}
-          className="range-slider"
-          style={sliderStyle}
-        />
-        <div className="flex mt-2 justify-between items-center gap-[18px]">
-          <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
-            0x
+        {isConnected ? (
+          <>
+            <div className="flex justify-between items-center  my-4 border-[1px] border-solid border-[#D65454] rounded-[4px] p-1">
+              <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
+                Available Collateral:{" "}
+                <span className="text-[#D65454]">${formData.amount}</span>
+              </p>
+              <div className="flex items-center gap-[4px]">
+                <div
+                  onClick={StakeOpenPopup}
+                  className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B]"
+                >
+                  <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
+                    75%
+                  </p>
+                </div>
+                <div className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B]">
+                  <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
+                    Deposit
+                  </p>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex justify-between items-center gap-3 my-4">
+              <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
+                Available Collateral :
+                <span className="text-[#fff]">$500.68</span>
+              </p>
+              <div className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[8px] max-border  bg-[#2B2B2B]">
+                <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
+                  Max
+                </p>
+              </div>
+            </div>
+          </>
+        )}
+
+        <div className="input_field_bg flex items-center gap-3 w-full px-4  h-[45px] ">
+          <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
+            Leverage
           </span>
-          <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
-            25x
-          </span>
-          <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
-            50x
-          </span>
-          <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
-            75x
-          </span>
-          <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
-            100x
-          </span>
-          <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
-            125x
+
+          <input
+            type="text"
+            value={sliderValue}
+            className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+            placeholder="50"
+          />
+          <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+            x
           </span>
         </div>
-      </div>
-      <div className="flex justify-between items-center gap-3 my-4">
-        <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-          Position Size
-        </p>
-
-        <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-          0.024 BTC
-        </p>
-      </div>
-      <div className="header_bg"></div>
-      <div className="my-4">
-        <label className="flex items-center space-x-2">
+        <div className="mt-4">
           <input
-            type="checkbox"
-            className=" text-[#fff] accent-[#40E0D0]   h-[16px] w-[16px] appearance-none border-2 border-solid rounded-[4px] bg-[#1A1A1A] border-[#374151]
+            type="range"
+            min="0"
+            max="125"
+            step="25"
+            value={sliderValue}
+            onChange={handleSliderChange}
+            className="range-slider"
+            style={sliderStyle}
+          />
+          <div className="flex mt-2 justify-between items-center gap-[18px]">
+            <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
+              0x
+            </span>
+            <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
+              25x
+            </span>
+            <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
+              50x
+            </span>
+            <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
+              75x
+            </span>
+            <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
+              100x
+            </span>
+            <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
+              125x
+            </span>
+          </div>
+        </div>
+        <div className="flex justify-between items-center gap-3 my-4">
+          <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
+            Position Size
+          </p>
+
+          <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
+            0.024 BTC
+          </p>
+        </div>
+        <div className="header_bg"></div>
+        <div className="my-4">
+          <div className="flex items-start space-x-2">
+            <div className="mt-1">
+              <input
+                type="checkbox"
+                className="cursor-pointer text-[#fff] accent-[#40E0D0]   h-[16px] w-[16px] appearance-none border-2 border-solid rounded-[4px] bg-[#1A1A1A] border-[#374151]
              focus:ring-0 focus:ring-offset-0
              "
-            checked={isChecked1}
-            onChange={() => setIsChecked1(!isChecked1)}
-          />
-          <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
-            Take Profit / Stop Loss
-          </span>
-        </label>
-
-        {isChecked1 && (
-          <>
-            <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-              <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                checked={isChecked1}
+                onChange={() => setIsChecked1(!isChecked1)}
+              />
+            </div>
+            <div>
+              <span className="pool_font text-[#E5E7EB] text-[12px] font-semibold tracking-[0.06px]">
                 Take Profit
               </span>
-              <input
-                type="text"
-                className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                placeholder="25.56"
-              />
-              <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
-              <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                %
-              </span>
-              <span>
-                <MdOutlineArrowDownward className="text-[#9CA3AF] text-[15px]" />
-              </span>
-            </div>
-            <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-              <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
-                Stop Loss
-              </span>
-              <input
-                type="text"
-                className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                placeholder="25.56"
-              />
-              <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
-              <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                %
-              </span>
-              <span>
-                <MdOutlineArrowDownward className="text-[#9CA3AF] text-[15px]" />
-              </span>
-            </div>
-          </>
-        )}
-      </div>
-      <div className="my-4">
-        <label className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            className=" text-[#fff] accent-[#40E0D0]   h-[16px] w-[16px] appearance-none border-2 border-solid rounded-[4px] bg-[#1A1A1A] border-[#374151]
-             focus:ring-0 focus:ring-offset-0
-             "
-            checked={isChecked2}
-            onChange={() => setIsChecked2(!isChecked2)}
-          />
-          <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
-            Trailing Stop Loss
-          </span>
-        </label>
-        {isChecked2 && (
-          <>
-            <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-              <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
-                Callback Rate
-              </span>
-              <input
-                type="text"
-                className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                placeholder="25.56"
-              />
-
-              <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                %
-              </span>
-            </div>
-            <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-              <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
-                Activation Price
-              </span>
-              <input
-                type="text"
-                className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                placeholder="25.5"
-              />
-              <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
-              <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                %
-              </span>
-              <span>
-                <MdOutlineArrowDownward className="text-[#9CA3AF] text-[15px]" />
-              </span>
-            </div>
-            <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-              <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
-                Size
-              </span>
-              <input
-                type="text"
-                className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                placeholder="25.56"
-              />
-
-              <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                %
-              </span>
-            </div>
-          </>
-        )}
-      </div>
-      <div className="my-4">
-        <label className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            className=" text-[#fff] accent-[#40E0D0]   h-[16px] w-[16px] appearance-none border-2 border-solid rounded-[4px] bg-[#1A1A1A] border-[#374151]
-             focus:ring-0 focus:ring-offset-0
-             "
-            checked={isChecked3}
-            onChange={() => setIsChecked3(!isChecked3)}
-          />
-          <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
-            Reduce Only
-          </span>
-        </label>
-      </div>
-      <div className="header_bg"></div>
-      <div
-        onClick={toggleVisibility}
-        className="flex justify-between items-center gap-3 py-3"
-      >
-        <p className="pool_font text-xs font-semibold">Summary</p>
-        <span className="text-[#fff] text-base">
-          {isVisible ? <IoIosArrowDown /> : <IoIosArrowUp />}
-        </span>
-      </div>
-      {isVisible && (
-        <div>
-          <div className="">
-            <div className="flex justify-between items-center gap-3 my-[4px]">
-              <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-                Position Size
-              </p>
-
-              <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                0.024 BTC
-              </p>
-            </div>
-            <div className="flex justify-between items-center gap-3 my-[4px]">
-              <div className="flex items-center gap-1">
-                <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-                  Leverage
-                </p>
-                <span data-tooltip-id="my-tooltip">
-                  <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base" />
-                  <Tooltip id="my-tooltip" className="tooltip_bg">
-                    <div className="w-[300px]">
-                      <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
-                        Leverage
-                      </h3>
-                      <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                        Leverage changes the multiplier on your gains or losses
-                        increasing your leverage increases how much you would
-                        gain/loose on a trade with the same price movement
-                      </p>
-                    </div>
-                  </Tooltip>
-                </span>
-              </div>
-              <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                10x
-              </p>
-            </div>
-            <div className="flex justify-between items-center gap-3 my-[4px]">
-              <div className="flex items-center gap-1">
-                <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-                  Take Profit
-                </p>
-                <span data-tooltip-id="my-tooltip1">
-                  <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base" />
-                  <Tooltip id="my-tooltip1" className="tooltip_bg">
-                    <div className="w-[300px]">
-                      <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
-                        Take Profit & Stop Loss
-                      </h3>
-                      <ul className="list-disc">
-                        <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                          TP/SL are reduce only, which means that they can only
-                          close an existing postion, which means that they can
-                          only close an existing position
-                        </li>
-                        <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px] my-2">
-                          TP/SL are fill-or-kill stop market orders where
-                          excution is not guaranteed. if the orders cannot be
-                          filled within the slippage limits, then the order will
-                          not execute.
-                        </li>
-                        <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                          1CT must be enabled to use TP/SL
-                        </li>
-                      </ul>
-                    </div>
-                  </Tooltip>
-                </span>
-              </div>
-              <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                0.250 BTC
-              </p>
-            </div>
-            <div className="flex justify-between items-center gap-3 my-[4px]">
-              <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-                Stop Loss
-              </p>
-
-              <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                0.015 BTC
-              </p>
-            </div>
-            <div className="flex justify-between items-center gap-3 my-[4px]">
-              <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-                Slippage Tolerance
-              </p>
-
-              <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                0.015 BTC
-              </p>
-            </div>
-            <div className="flex justify-between items-center gap-3 my-[4px]">
-              <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-                Price Impact
-              </p>
-
-              <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                0.015 BTC
-              </p>
-            </div>
-            <div className="flex justify-between items-center gap-3 my-[4px]">
-              <div className="flex items-center gap-1">
-                <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-                  Funding Rate
-                </p>
-                <span data-tooltip-id="my-tooltip2">
-                  <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base" />
-                  <Tooltip id="my-tooltip2" className="tooltip_bg">
-                    <div className="w-[300px]">
-                      <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
-                        Funding
-                      </h3>
-                      <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                        The total funding payments you have received(+) or
-                        paid(-) payments are made early in usdc.e the funding
-                        rate for the payments is calculated based on the
-                        difference between TWAP of filaments&apos;s large price
-                        and index price
-                      </p>
-                    </div>
-                  </Tooltip>
-                </span>
-              </div>
-              <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                0.015 BTC
-              </p>
+              {isChecked1 && (
+                <>
+                  <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                    <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                      Take Profit
+                    </span>
+                    <input
+                      type="text"
+                      name="profitinput"
+                      value={formsData.profitinput}
+                      onChange={handleInputChange}
+                      className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                      placeholder="25.56"
+                    />
+                    <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
+                    <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                      %
+                    </span>
+                    <span>
+                      <IoIosArrowDown className="text-[#9CA3AF] text-[15px]" />
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
           </div>
-          <div className="border-[1px] border-dashed border-[#FFFFFF1A]"></div>
-          <div className="">
-            <div className="flex justify-between items-center gap-3 my-[4px]">
-              <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-                Avg. Price
-              </p>
-
-              <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                100 USDC
-              </p>
+        </div>
+        <div className="my-4">
+          <div className="flex items-start space-x-2">
+            <div className="mt-1">
+              <input
+                type="checkbox"
+                className="cursor-pointer text-[#fff] accent-[#40E0D0]   h-[16px] w-[16px] appearance-none border-2 border-solid rounded-[4px] bg-[#1A1A1A] border-[#374151]
+             focus:ring-0 focus:ring-offset-0
+             "
+                checked={isChecked2}
+                onChange={() => setIsChecked2(!isChecked2)}
+              />
             </div>
-            <div className="flex justify-between items-center gap-3 my-[4px]">
-              <div className="flex items-center gap-1">
-                <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-                  Liquidation Price
-                </p>
-                <span data-tooltip-id="my-tooltip3">
-                  <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base " />
-                  <Tooltip id="my-tooltip3" className="tooltip_bg">
-                    <div className="w-[300px]">
-                      <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
-                        Est. Liq Price
-                      </h3>
-                      <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                        The estimated price at which a position would make a
-                        user eligible for liquidation
-                      </p>
-                      <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                        <span className="font-bold"> Please note -</span> this
-                        is this works for a move in a single underlying position
-                        for users with multiple positions risk should be
-                        valuated on a portfolio basis using alternative metrics
-                      </p>
+
+            <div>
+              <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
+                Stop Loss
+              </span>
+              <div>
+                {isChecked2 && (
+                  <>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
+                        Trailing Stop Loss
+                      </span>
+                      <div className="">
+                        <Switch
+                          checked={enabled}
+                          onChange={setEnabled}
+                          className={`${enabled ? "toggle_btn" : "bg-[#25272a]"}
+          relative inline-flex h-[25px] w-[50px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75`}
+                        >
+                          <span className="sr-only">Use setting</span>
+                          <span
+                            aria-hidden="true"
+                            className={`${
+                              enabled
+                                ? "translate-x-6 bg-teal-900"
+                                : "translate-x-0 bg-white"
+                            }
+            pointer-events-none inline-block h-[21px] w-[21px] transform rounded-full  shadow-lg ring-0 transition duration-200 ease-in-out`}
+                          />
+                        </Switch>
+                      </div>
                     </div>
-                  </Tooltip>
-                </span>
-              </div>
+                    <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                      <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                        Stop Loss
+                      </span>
+                      <input
+                        type="text"
+                        name="stopinput"
+                        value={formsData.stopinput}
+                        onChange={handleInputChange}
+                        className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                        placeholder="0"
+                      />
 
-              <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                100 USDC
-              </p>
+                      <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                        %
+                      </span>
+                    </div>
+                    {enabled && (
+                      <>
+                        <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                          <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                            Limit
+                          </span>
+                          <input
+                            type="text"
+                            name="limitinput"
+                            value={formsData.limitinput}
+                            onChange={handleInputChange}
+                            className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                            placeholder="0"
+                          />
+                          <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]">
+                            {" "}
+                          </div>
+                          <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                            %
+                          </span>
+                          <span>
+                            <IoIosArrowDown className="text-[#9CA3AF] text-[15px]" />
+                          </span>
+                        </div>
+                        <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                          <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                            Size
+                          </span>
+                          <input
+                            type="text"
+                            name="sizeinput"
+                            value={formsData.sizeinput}
+                            onChange={handleInputChange}
+                            className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                            placeholder="0"
+                          />
+
+                          <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                            %
+                          </span>
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
             </div>
+            {/*}  <div>
+            <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
+              Trailing Stop Loss
+            </span>
+            {isChecked2 && (
+              <>
+                <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                  <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                    Callback Rate
+                  </span>
+                  <input
+                    type="text"
+                    className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                    placeholder="25.56"
+                  />
+
+                  <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                    %
+                  </span>
+                </div>
+                <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                  <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                    Activation Price
+                  </span>
+                  <input
+                    type="text"
+                    className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                    placeholder="25.5"
+                  />
+                  <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
+                  <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                    %
+                  </span>
+                  <span>
+                    <MdOutlineArrowDownward className="text-[#9CA3AF] text-[15px]" />
+                  </span>
+                </div>
+                <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                  <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
+                    Size
+                  </span>
+                  <input
+                    type="text"
+                    className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                    placeholder="25.56"
+                  />
+
+                  <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                    %
+                  </span>
+                </div>
+              </>
+            )}
+          </div>*/}
           </div>
-          <div className="border-[1px] border-dashed border-[#FFFFFF1A]"></div>
-          <div className="">
-            {mdata.map((item, index) => (
-              <div
-                key={index}
-                className="flex justify-between items-center gap-3 my-[4px]"
-              >
+        </div>
+        <div className="my-4">
+          <label className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              className="cursor-pointer text-[#fff] accent-[#40E0D0]   h-[16px] w-[16px] appearance-none border-2 border-solid rounded-[4px] bg-[#1A1A1A] border-[#374151]
+             focus:ring-0 focus:ring-offset-0
+             "
+              checked={isChecked3}
+              onChange={() => setIsChecked3(!isChecked3)}
+            />
+            <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
+              Reduce Only
+            </span>
+          </label>
+        </div>
+        <div className="header_bg"></div>
+        <div
+          onClick={toggleVisibility}
+          className="flex justify-between items-center gap-3 py-3"
+        >
+          <p className="pool_font text-xs font-semibold">Summary</p>
+          <span className="text-[#fff] text-base">
+            {isVisible ? <IoIosArrowDown /> : <IoIosArrowUp />}
+          </span>
+        </div>
+        {isVisible && (
+          <div>
+            <div className="">
+              <div className="flex justify-between items-center gap-3 my-[4px]">
+                <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
+                  Position Size
+                </p>
+
+                <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
+                  $2000
+                </p>
+              </div>
+              <div className="flex justify-between items-center gap-3 my-[4px]">
                 <div className="flex items-center gap-1">
                   <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-                    {item.titles}
+                    Leverage
                   </p>
-                  <span>
+                  <span data-tooltip-id="my-tooltip">
                     <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base" />
+                    <Tooltip id="my-tooltip" className="tooltip_bg">
+                      <div className="w-[300px]">
+                        <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
+                          Leverage
+                        </h3>
+                        <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                          Leverage changes the multiplier on your gains or
+                          losses increasing your leverage increases how much you
+                          would gain/loose on a trade with the same price
+                          movement
+                        </p>
+                      </div>
+                    </Tooltip>
+                  </span>
+                </div>
+                <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
+                  {`${sliderValue}x`}
+                </p>
+              </div>
+              <div className="flex justify-between items-center gap-3 my-[4px]">
+                <div className="flex items-center gap-1">
+                  <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
+                    Take Profit
+                  </p>
+                  <span data-tooltip-id="my-tooltip1">
+                    <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base" />
+                    <Tooltip id="my-tooltip1" className="tooltip_bg">
+                      <div className="w-[300px]">
+                        <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
+                          Take Profit & Stop Loss
+                        </h3>
+                        <ul className="list-disc">
+                          <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                            TP/SL are reduce only, which means that they can
+                            only close an existing postion, which means that
+                            they can only close an existing position
+                          </li>
+                          <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px] my-2">
+                            TP/SL are fill-or-kill stop market orders where
+                            excution is not guaranteed. if the orders cannot be
+                            filled within the slippage limits, then the order
+                            will not execute.
+                          </li>
+                          <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                            1CT must be enabled to use TP/SL
+                          </li>
+                        </ul>
+                      </div>
+                    </Tooltip>
+                  </span>
+                </div>
+                <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
+                  {formsData.profitinput}%
+                </p>
+              </div>
+              <div className="flex justify-between items-center gap-3 my-[4px]">
+                <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
+                  Stop Loss
+                </p>
+
+                <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
+                  {formsData.stopinput}%
+                </p>
+              </div>
+              <div className="flex justify-between items-center gap-3 my-[4px]">
+                <div
+                  className="relative flex items-center gap-1"
+                  ref={dropdownRef}
+                >
+                  <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
+                    Slippage Tolerance
+                  </p>
+                  <p
+                    onClick={toggleMenu}
+                    className="pool_font cursor-pointer text-[#40E0D0] text-xs font-normal tracking-[0.06px]"
+                  >
+                    Adjust
+                  </p>
+                  <div
+                    className={`absolute top-[-135px] lg:z-[] pl-2  left-[-17px] ${
+                      isMenuOpen ? "block" : "hidden"
+                    }`}
+                  >
+                    <div className=" icon-width three_dot p-4">
+                      <div>
+                        <div className="flex justify-between items-center gap-2 w-full">
+                          <span className="pool_font text-[#fff]  text-xs font-medium tracking-[0.06px]">
+                            Slippage Tolerance
+                          </span>
+                          <div className="input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ">
+                            <input
+                              type="text"
+                              name="Slippageinput"
+                              value={formsData.Slippageinput}
+                              onChange={handleInputChange}
+                              className=" block w-[100%]  pool_font text-[#fff] text-[15px] font-medium text-left h-[38px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                              placeholder="1"
+                            />
+
+                            <div className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
+                              %
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-[4px] mt-[16px]">
+                        <button
+                          className="items-center pool_font text-[#FFFFFF] w-[100%] text-xs font-semibold   bg-[#2B2B2B] rounded-[4px] max-border py-[12px] px-[8px] tracking-[0.06px]"
+                          onClick={toggleMenu}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className="items-center pool_font text-[#FFFFFF] w-[100%] text-xs font-semibold save_btn  py-[12px] px-[8px]  tracking-[0.06px]"
+                          onClick={handleSave}
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
+                  {formsData.Slippageinput}%
+                </p>
+              </div>
+              <div className="flex justify-between items-center gap-3 my-[4px]">
+                <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
+                  Price Impact
+                </p>
+
+                <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
+                  $20
+                </p>
+              </div>
+              <div className="flex justify-between items-center gap-3 my-[4px]">
+                <div className="flex items-center gap-1">
+                  <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
+                    Funding Rate
+                  </p>
+                  <span data-tooltip-id="my-tooltip2">
+                    <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base" />
+                    <Tooltip id="my-tooltip2" className="tooltip_bg">
+                      <div className="w-[300px]">
+                        <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
+                          Funding
+                        </h3>
+                        <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                          The total funding payments you have received(+) or
+                          paid(-) payments are made early in usdc.e the funding
+                          rate for the payments is calculated based on the
+                          difference between TWAP of filaments&apos;s large
+                          price and index price
+                        </p>
+                      </div>
+                    </Tooltip>
+                  </span>
+                </div>
+                <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
+                  $15
+                </p>
+              </div>
+            </div>
+            <div className="border-[1px] border-dashed border-[#FFFFFF1A]"></div>
+            <div className="">
+              <div className="flex justify-between items-center gap-3 my-[4px]">
+                <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
+                  Avg. Price
+                </p>
+
+                <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
+                  $1700
+                </p>
+              </div>
+              <div className="flex justify-between items-center gap-3 my-[4px]">
+                <div className="flex items-center gap-1">
+                  <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
+                    Liquidation Price
+                  </p>
+                  <span data-tooltip-id="my-tooltip3">
+                    <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base " />
+                    <Tooltip id="my-tooltip3" className="tooltip_bg">
+                      <div className="w-[300px]">
+                        <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
+                          Est. Liq Price
+                        </h3>
+                        <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                          The estimated price at which a position would make a
+                          user eligible for liquidation
+                        </p>
+                        <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                          <span className="font-bold"> Please note -</span> this
+                          is this works for a move in a single underlying
+                          position for users with multiple positions risk should
+                          be valuated on a portfolio basis using alternative
+                          metrics
+                        </p>
+                      </div>
+                    </Tooltip>
                   </span>
                 </div>
 
                 <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                  {item.description}
+                  $1000
                 </p>
               </div>
-            ))}
+            </div>
+            <div className="border-[1px] border-dashed border-[#FFFFFF1A]"></div>
+            <div className="">
+              {mdata.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex justify-between items-center gap-3 my-[4px]"
+                >
+                  <div className="flex items-center gap-1">
+                    <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
+                      {item.titles}
+                    </p>
+                    <span>
+                      <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base" />
+                    </span>
+                  </div>
+
+                  <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
+                    ${item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 
