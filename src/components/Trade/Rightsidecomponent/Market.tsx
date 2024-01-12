@@ -94,7 +94,23 @@ const Market: React.FC<MarketProps> = ({
 
         {isConnected ? (
           <>
-            <div className="flex justify-between items-center  my-4 border-[1px] border-solid border-[#D65454] rounded-[4px] p-1">
+            <div className="flex justify-between items-center  my-4">
+              <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
+                Available Collateral:{" "}
+                <span className="text-[#fff]">${formData.amount}</span>
+              </p>
+              <div className="flex items-center gap-[4px]">
+                <div
+                  onClick={StakeOpenPopup}
+                  className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B]"
+                >
+                  <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
+                    Max
+                  </p>
+                </div>
+              </div>
+            </div>
+            {/*   <div className="flex justify-between items-center  my-4 border-[1px] border-solid border-[#D65454] rounded-[4px] p-1">
               <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
                 Available Collateral:{" "}
                 <span className="text-[#D65454]">${formData.amount}</span>
@@ -114,7 +130,7 @@ const Market: React.FC<MarketProps> = ({
                   </p>
                 </div>
               </div>
-            </div>
+            </div>*/}
           </>
         ) : (
           <>
@@ -340,60 +356,7 @@ const Market: React.FC<MarketProps> = ({
                 )}
               </div>
             </div>
-            {/*}  <div>
-            <span className="pool_font text-[#fff] text-[12px] font-medium tracking-[0.06px]">
-              Trailing Stop Loss
-            </span>
-            {isChecked2 && (
-              <>
-                <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-                  <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
-                    Callback Rate
-                  </span>
-                  <input
-                    type="text"
-                    className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                    placeholder="25.56"
-                  />
 
-                  <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                    %
-                  </span>
-                </div>
-                <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-                  <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
-                    Activation Price
-                  </span>
-                  <input
-                    type="text"
-                    className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                    placeholder="25.5"
-                  />
-                  <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
-                  <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                    %
-                  </span>
-                  <span>
-                    <MdOutlineArrowDownward className="text-[#9CA3AF] text-[15px]" />
-                  </span>
-                </div>
-                <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
-                  <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
-                    Size
-                  </span>
-                  <input
-                    type="text"
-                    className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                    placeholder="25.56"
-                  />
-
-                  <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                    %
-                  </span>
-                </div>
-              </>
-            )}
-          </div>*/}
           </div>
         </div>
         <div className="my-4">
@@ -545,7 +508,7 @@ const Market: React.FC<MarketProps> = ({
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-[4px] mt-[16px]">
+                      <div className="flex items-center gap-[12px] mt-[16px]">
                         <button
                           className="items-center pool_font text-[#FFFFFF] w-[100%] text-xs font-semibold   bg-[#2B2B2B] rounded-[4px] max-border py-[12px] px-[8px] tracking-[0.06px]"
                           onClick={toggleMenu}

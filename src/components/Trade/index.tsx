@@ -10,7 +10,7 @@ const Trade = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isStakeOpen, setIsStakeOpen] = useState(false);
   const [formData, setFormData] = useState({
-   amount: "",
+   amount: "100",
   });
 
   const handleInputChange = (event: any) => {

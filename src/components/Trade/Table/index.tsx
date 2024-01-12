@@ -44,10 +44,10 @@ const Tablesection = () => {
                 return (
                   <button
                     onClick={() => setSelectedTab(tab.key)}
-                    className={`py-3  pool_font font-semibold text-sm  ${
+                    className={`py-3  pool_font font-semibold text-xs tracking-[0.06px]  ${
                       tab.key == selectedTab
-                        ? "text-[#FFFFFF] border-b-[2px] border-[#FFFFFF] max-[639px]:min-w-[8rem] sm:w-[98px] "
-                        : "text-[#BABABA] max-[639px]:min-w-[8rem]  sm:w-[98px]"
+                        ? "text-[#FFFFFF] border-b-[2px] border-[#FFFFFF] max-[639px]:min-w-[8rem] sm:w-[80px] "
+                        : "text-[#BABABA] max-[639px]:min-w-[8rem]  sm:w-[80px]"
                     }`}
                     key={index}
                   >
@@ -73,11 +73,14 @@ const Tablesection = () => {
                   <div className=" text-center py-2 px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A]  ">
                     Position Size
                   </div>
-                  <div className="text-center py-2 px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A]  ">
+                  <div className="text-right py-2 px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A]  ">
                     Collateral
                   </div>
                   <div className="text-right py-2  px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A] ">
                     Leverage
+                  </div>
+                  <div className="text-right py-2  px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A] ">
+                    Quantity
                   </div>
                   <div className="text-right py-2  px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A] ">
                     Entry Price
@@ -102,39 +105,44 @@ const Tablesection = () => {
                   return (
                     <div key={key} className="relative w-full">
                       <div className="pool_font w-full hover:bg-[#25272A] max-[1699px]:hover:w-fit  min-[1700px]:hover:w-full text-xs flex font-medium text-[#E5E7EB]  ">
-                        <div className="text-left py-[6px] px-3 flex flex-col max-[1699px]:min-w-[8rem]  table_width border-b-[1px] border-solid border-[#25272A] ">
+                        <div className="text-left py-[6px] px-2 flex flex-col max-[1699px]:min-w-[8rem]  table_width border-b-[1px] border-solid border-[#25272A] ">
                           BTC/USDC{" "}
-                          <span className="text-xs text-[#939191]">BUY</span>
+                          <span className="text-[10px] text-[#14B8A6] bg-[#0596694D] w-[65px] px-[2px] rounded-[4px]">
+                            BUY / LONG
+                          </span>
                         </div>
-                        <div className="text-left  py-[8px] px-3 max-[1699px]:min-w-[8rem] table_width  border-b-[1px] border-solid border-[#25272A] ">
+                        <div className="text-left  py-[8px] px-2 max-[1699px]:min-w-[8rem] table_width  border-b-[1px] border-solid border-[#25272A] ">
                           Market
                         </div>
-                        <div className="text-center py-[8px] px-3 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A] ">
+                        <div className="text-center py-[8px] px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A] ">
                           20.44 USDC
                         </div>
-                        <div className="text-center py-[8px]  px-3 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A] ">
-                          10.2520 USDC
+                        <div className="text-right py-[8px]  px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A] ">
+                          20.44 USDC
                         </div>
-                        <div className="text-right py-[8px] px-3 max-[1699px]:min-w-[8rem] table_width border-b-[1px]  border-solid border-[#25272A]  ">
+                        <div className="text-right py-[8px] px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px]  border-solid border-[#25272A]  ">
                           25x
                         </div>
-                        <div className="text-right py-[8px] px-3 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid  border-[#25272A] ">
+                        <div className="text-right py-[8px] px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px]  border-solid border-[#25272A]  ">
+                          4.25
+                        </div>
+                        <div className="text-right py-[8px] px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid  border-[#25272A] ">
                           12.1252 USDC
                         </div>
-                        <div className="text-center py-[8px]  px-3 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid  border-[#25272A] ">
+                        <div className="text-center py-[8px]  px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid  border-[#25272A] ">
                           6.2525 USDC
                         </div>
 
-                        <div className="text-center py-[8px] px-3 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid  border-[#25272A] ">
+                        <div className="text-center py-[8px] px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid  border-[#25272A] ">
                           27.22535 USDC
                         </div>
-                        <div className="text-right py-[8px] flex flex-col text-[#00CC99]  px-3 max-[1699px]:min-w-[8rem] table_width border-b-[1px]  border-solid border-[#25272A] ">
+                        <div className="text-right py-[8px] flex flex-col text-[#00CC99]  px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px]  border-solid border-[#25272A] ">
                           4.0052 USDC <span className="text-[10px]">24.8%</span>
                         </div>
-                        <div className="text-center py-[8px]  px-3 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A]  ">
+                        <div className="text-center py-[8px]  px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A]  ">
                           2.53 USD
                         </div>
-                        <div className="text-right py-[8px] pl-3 pr-[60px] max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A]">
+                        <div className="text-right py-[8px] pl-2 pr-[60px] max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A]">
                           2.53 USD
                         </div>
                       </div>
