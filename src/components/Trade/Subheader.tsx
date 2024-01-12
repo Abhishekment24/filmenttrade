@@ -247,7 +247,7 @@ const Subheader = () => {
               <div
                 className="cursor-pointer rounded-[4px] border-[1px] border-solid border-[#25272A] bg-[#1B1B1B] w-[38px] h-[38px] flex items-center justify-center"
                 onClick={toggleMenu}
-                ref={dropdownRef}
+                
               >
                 <span>
                   <IoSettingsOutline className="text-[#fff] text-base" />

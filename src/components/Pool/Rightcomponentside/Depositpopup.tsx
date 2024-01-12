@@ -8,12 +8,14 @@ import Image from "next/image";
 import { ClipLoader } from "react-spinners";
 interface DespositPopupProps {
   isOpen: boolean;
-
+  formsData: any;
   onClose: () => void;
+  setAddValue: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const Despositpopup: React.FC<DespositPopupProps> = ({
   isOpen,
-
+  formsData,
+  setAddValue,
   onClose,
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -86,7 +88,8 @@ const Despositpopup: React.FC<DespositPopupProps> = ({
                 )}
               </div>
               <p className="text-[#fff] text-center text-[20px] font-medium nav_font my-3">
-                428.24<span className="text-[#939191]"> USDC</span>
+                {formsData.amount}
+                <span className="text-[#939191]"> USDC</span>
               </p>
 
               <div>

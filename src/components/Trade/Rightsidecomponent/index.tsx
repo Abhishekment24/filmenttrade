@@ -33,8 +33,7 @@ const Rightsidecomponent: React.FC<RightProps> = ({
   // };
   const { address, isConnected, isConnecting } = useAccount();
   const [selectedTab, setSelectedTab] = useState("market");
-  const [activeTab, setActiveTab] = useState("Buy");
-  const [testnet, setTestnet] = useState(false);
+ 
   const [isMenuOpen, setMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleMenu = () => {

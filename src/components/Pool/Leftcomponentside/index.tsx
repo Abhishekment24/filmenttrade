@@ -141,88 +141,52 @@ const Leftcomponentside = () => {
         </div>
 
         <div className="">
-          {isVisible && (
-            <>
-              <div className="border-t-[1px] border-solid border-[#25272A] my-5"></div>
-              <div className="">
-                {edata.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-between items-center gap-3 mb-4"
-                  >
-                    <p className="pool_font text-[#E8E8E8] text-sm font-normal">
-                      {item.titles}
-                    </p>
-                    <p className="pool_font text-[#fff] text-sm font-semibold tracking-[0.07px]">
-                      {item.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-          <button onClick={toggleVisibility}>
-            {isVisible ? (
-              <>
-                <div ref={dropdownRef} className="flex items-center gap-1">
-                  <span className="text-[#40E0D0] pool_font  text-[13px] font-medium">
-                    Hide other info
-                  </span>
-                  <span>
-                    <IoMdArrowDropup className="text-[#40E0D0] pool_font  text-[13px] font-medium" />
-                  </span>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="flex items-center gap-1">
-                  <span className="text-[#40E0D0] pool_font  text-[13px] font-medium">
-                    Show other info
-                  </span>
-                  <span>
-                    <IoMdArrowDropdown className="text-[#40E0D0] pool_font  text-[13px] font-medium" />
-                  </span>
-                </div>
-              </>
-            )}
-          </button>
+          <div className="border-t-[1px] border-solid border-[#25272A] my-5"></div>
+          <div className="flex justify-between items-center gap-3 my-4">
+            <p className="pool_font text-[#E8E8E8] text-sm font-normal">
+              Pool Address
+            </p>
+            <p className="pool_font text-[#fff] text-sm font-semibold tracking-[0.07px]">
+              0xc0ffee254729296........10F9d54979
+            </p>
+          </div>
         </div>
       </div>
       <div className=" bg-[#1B1C1E] my-5  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px]   w-full ">
         <div className="px-[24px] py-5">
-          <p className="nav_font text-[#fff] text-base font-semibold">
-            Liquidity Allocation
+          <p className="pool_font text-[#fff] text-base font-semibold tracking-[0.08px]">
+            Compartment Allocation
           </p>
         </div>
         <div className="flex w-full overflow-auto border-t-[1px] border-solid border-[#25272A]">
           <table className="w-full">
             <thead>
-              <tr className="wallet_connected_font text-[10px] border-b-[1px] border-solid border-[#25272A] font-normal text-[#939191]">
-                <th className="text-left px-[24px] py-3">Token</th>
-                <th className="text-center px-[24px] py-3">
-                  Percentage(Avl/Tot)
+              <tr className="pool_font text-xs border-b-[1px] border-solid border-[#25272A] font-medium text-[#9CA3AF]">
+                <th className="text-left pl-[24px] py-2">Token</th>
+                <th className="text-center px-2 py-2">
+                  Percentage <span className="text-[#4B5563]">(Avl/Tot)</span>
                 </th>
-                <th className="text-right px-[24px] py-3">Amount Utilised</th>
-                <th className="text-right px-[24px] py-3">Amount Available</th>
-                <th className="text-right px-[24px] py-3">Borrowing Rate</th>
+                <th className="text-right px-2 py-2">Amount Utilised</th>
+                <th className="text-right px-2 py-2">Amount Available</th>
+                <th className="text-right pr-[24px] py-2">Borrowing Rate</th>
               </tr>
             </thead>
             <tbody className="hover:bg-[#25272A]">
-              <tr className="pool_font text-sm font-medium text-[#fff] border-b-[1px] border-solid border-[#25272A]">
-                <td className="text-left px-[24px] py-3">USDC</td>
-                <td className="text-center px-[24px] py-3">223.11/223.11</td>
-                <td className="text-right px-[24px] py-3">223.11</td>
-                <td className="text-right px-[24px] py-3">223.11</td>
-                <td className="text-right px-[24px] py-3">223.11</td>
+              <tr className="pool_font text-sm font-medium text-[#E5E7EB] border-b-[1px] border-solid border-[#25272A] tracking-[0.07px]">
+                <td className="text-left pl-[24px] py-3">USDC</td>
+                <td className="text-center px-2 py-3">223.11/223.11</td>
+                <td className="text-right px-2 py-3">223.11</td>
+                <td className="text-right px-2 py-3">223.11</td>
+                <td className="text-right pr-[24px] py-3">223.11</td>
               </tr>
             </tbody>
             <tbody className="hover:bg-[#25272A]">
-              <tr className="pool_font text-sm font-medium text-[#fff] border-b-[1px] border-solid border-[#25272A]">
-                <td className="text-left px-[24px] py-3">FLP</td>
-                <td className="text-center px-[24px] py-3">223.11/223.11</td>
-                <td className="text-right px-[24px] py-3">223.11</td>
-                <td className="text-right px-[24px] py-3">223.11</td>
-                <td className="text-right px-[24px] py-3">223.11</td>
+              <tr className="pool_font text-sm font-medium text-[#E5E7EB] border-b-[1px] border-solid border-[#25272A] tracking-[0.07px]">
+                <td className="text-left pl-[24px]  py-3">USDC</td>
+                <td className="text-center px-2 py-3">223.11/223.11</td>
+                <td className="text-right px-2 py-3">223.11</td>
+                <td className="text-right px-2 py-3">223.11</td>
+                <td className="text-right pr-[24px] py-3">223.11</td>
               </tr>
             </tbody>
           </table>
