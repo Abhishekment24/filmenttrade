@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Overviews from "./Overviews/Overview";
 import Perpetuals from "./Perpetuals/Perpetuals";
 import Pools from "./Pools/Pools";
-import Rewards from "./Rewards/Rewards";
+import Rewards from "./Rewards";
 import Historys from "./Historys";
 import Link from "next/link";
 const tabs = [
@@ -23,8 +23,8 @@ const tabs = [
   },
   {
     title: "Rewards",
-    href: "/portfolio?active=rewards",
-    key: "rewards",
+    href: "/portfolio?active=reward",
+    key: "reward",
   },
   {
     title: "History",
@@ -99,7 +99,7 @@ const Portfolio = () => {
                   </div>
                 </>
               )}
-              {selectedTab == "rewards" && (
+              {selectedTab == "reward" && (
                 <>
                   <div className="pb-[70px]">
                     <Rewards />

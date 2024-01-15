@@ -1,11 +1,27 @@
 import React, { useState } from "react";
 
+import Positions from "./positions";
+import Openorders from "./openorders";
+
+import Pool from "./pool";
+import TradesTable from "./trades";
 import Stake from "./stake";
-import ReferralTbale from "./referral";
 const tabs = [
   {
-    title: "Referral",
-    key: "referral",
+    title: "Trades",
+    key: "trades",
+  },
+  {
+    title: "Positions",
+    key: "positions",
+  },
+  {
+    title: "Open Orders",
+    key: "openorders",
+  },
+  {
+    title: "Pools",
+    key: "pools",
   },
   {
     title: "Stake",
@@ -13,17 +29,10 @@ const tabs = [
   },
 ];
 const Table = () => {
-  const [selectedTab, setSelectedTab] = useState("referral");
+  const [selectedTab, setSelectedTab] = useState("positions");
   return (
     <>
       <div className=" bg-[#1B1C1E] my-5  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px]   w-full ">
-        <div className="">
-          <div className="overflow-x-auto gap-[20px] w-full border-b-[1px] border-[#272727]  px-2">
-            <button className="py-4 text-[#fff] pool_font font-semibold text-base ">
-              Reward History
-            </button>
-          </div>
-        </div>
         <div className="">
           <div className="flex items-center max-[500px]:px-2 overflow-x-auto gap-[20px] w-full border-b-[1px] border-[#272727]  px-2">
             {tabs.map((tab, index) => {
@@ -43,9 +52,24 @@ const Table = () => {
             })}
           </div>
         </div>
-        {selectedTab == "referral" && (
+        {selectedTab == "trades" && (
           <>
-            <ReferralTbale />
+            <TradesTable />
+          </>
+        )}
+        {selectedTab == "positions" && (
+          <>
+            <Positions />
+          </>
+        )}
+        {selectedTab == "openorders" && (
+          <>
+            <Openorders />
+          </>
+        )}
+        {selectedTab == "pools" && (
+          <>
+            <Pool />
           </>
         )}
         {selectedTab == "stake" && (

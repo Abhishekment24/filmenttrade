@@ -142,7 +142,7 @@ const Leftcomponentside = () => {
 
         <div className="">
           <div className="border-t-[1px] border-solid border-[#25272A] my-5"></div>
-          <div className="flex justify-between items-center gap-3 my-4">
+          <div className="flex justify-between items-center gap-3 ">
             <p className="pool_font text-[#E8E8E8] text-sm font-normal">
               Pool Address
             </p>

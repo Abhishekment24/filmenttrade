@@ -7,9 +7,14 @@ import { MdInfoOutline } from "react-icons/md";
 import Line from "../../../public/assest/Line.png";
 import Suppliedicon from "../../../public/assest/supplied.png";
 import Stakeicons from "../../../public/assest/stakeicons.png";
-
+import Stakeopen1 from "../../../public/assest/stake/stakeopen1.png";
 import Leftcomponentside from "./Leftcomponentside";
 import Withdrawpopup from "./Rightcomponentside/Withdrawpopup";
+import Stakepopup from "../Stake/Stakepopup";
+import { AiOutlineClose } from "react-icons/ai";
+interface PoolProps {
+  StakeOpenPopup: () => void;
+}
 const tabs = [
   {
     title: "Add",
@@ -20,10 +25,15 @@ const tabs = [
     key: "remove",
   },
 ];
-const Pool = () => {
+const Pool: React.FC<PoolProps> = () => {
   const [selectedTab, setSelectedTab] = useState("add");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const [showSecondPhase, setSecondPhase] = useState(false);
   const [addvalue, setAddValue] = useState(false);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [isStakeOpen, setIsStakeOpen] = useState(false);
+  const [removevalue, setRemoveValue] = useState(false);
   const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
   const [formsData, setFormsData] = useState({
     collateralinput: "0.3636",
@@ -56,6 +66,21 @@ const Pool = () => {
   };
   const withdrawopenPopup = () => {
     setIsWithdrawOpen(true);
+  };
+
+  const StakeOpenPopup = () => {
+    setIsStakeOpen(true);
+    setIsDetailOpen(false);
+  };
+  const handleDelete = () => {
+    setIsDetailOpen(true);
+    setIsStakeOpen(false);
+  };
+
+  const closeDelete = () => {
+    setIsDetailOpen(false);
+    setIsStakeOpen(false);
+    setSecondPhase(true);
   };
   return (
     <>
@@ -139,6 +164,7 @@ const Pool = () => {
                   </div>
                 </>
               )}
+
               {addvalue && (
                 <>
                   <div className="pool_right_box p-[24px] pool_box_shadow ">
@@ -158,6 +184,7 @@ const Pool = () => {
                         <span className="pool_font text-[#fff] text-sm font-normal">
                           Liquidity Added
                         </span>
+
                         <span className="pool_font text-[#fff] max-[320px]:text-base text-[20px] font-semibold">
                           {formsData.amount} USDC
                         </span>
@@ -186,7 +213,10 @@ const Pool = () => {
                           Bonding period ~ 21 days
                         </span>
                         <div className="mt-4">
-                          <button className="items-center pool_font text-[#0B2B28] w-[120px] font-semibold  btn_one py-[16px]">
+                          <button
+                            onClick={StakeOpenPopup}
+                            className="items-center pool_font text-[#0B2B28] w-[120px] font-semibold  btn_one py-[16px]"
+                          >
                             Stake
                           </button>
                         </div>
@@ -234,7 +264,7 @@ const Pool = () => {
                       </div>
                       <div className="flex justify-between items-center  my-4">
                         <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
-                          Available to add to pool:
+                          Available to add to pool:{" "}
                           <span className="text-[#fff]">
                             {formsData.amount} USDT
                           </span>
@@ -259,28 +289,49 @@ const Pool = () => {
                   )}
                   {selectedTab == "remove" && (
                     <>
-                      <div className="bg-[#222325] flex items-center gap-3 w-full px-4 rounded-[8px] h-[52px] border-[#25272A] border-solid border-[1px]">
+                      <div className="bg-[#2B2B2B] border-[1px] border-solid border-[#363A41] rounded-[8px] flex items-center gap-3 mt-4 w-full px-4 h-[45px] ">
                         <input
                           type="text"
-                          className=" block w-full nav_font text-[#fff] text-[20px] font-medium text-right h-[52px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                          placeholder="0.00"
+                          name="amount"
+                          value={formsData.amount}
+                          onChange={handleInputChange}
+                          className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                          placeholder="0.0"
                         />
-                        <span className="nav_font text-[#939191] text-[20px] font-medium">
-                          USDC
+                        <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.75px]">
+                          USD
                         </span>
                       </div>
-                      <div className="flex items-center gap-4 justify-between my-3">
-                        <span className="nav_font text-[#939191] text-xs font-normal">
-                          Supplied
+                      <div className="flex justify-between items-center  my-4">
+                        <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
+                          Available to remove to pool:{" "}
+                          <span className="text-[#fff]">
+                            {formsData.amount} USDT
+                          </span>
+                        </p>
+                        <div className="flex items-center gap-[4px]">
+                          <div className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B]">
+                            <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
+                              Max
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-[12px] px-4 py-2 rounded-[8px] border-[1px] border-solid border-[#FFFFFF1A] bg-[#FFFFFF0D] mb-4">
+                        <span>
+                          <MdInfoOutline className="text-[#FFFFFF99] text-base" />
                         </span>
-                        <span className="nav_font text-[#fff] text-xs font-medium">
-                          42.86 USDC
+                        <span className="text-[#9CA3AF] text-xs  font-normal pool_font tracking-[0.07px]">
+                          Your 60 USDT are staked & cannot be removed right now
+                          from the liquidity pool. You will be able to withdraw
+                          them after the staking period of 21 days is complete.
                         </span>
                       </div>
+
                       <div>
                         <button
                           onClick={withdrawopenPopup}
-                          className="items-center w-full nav_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
+                          className="items-center w-full pool_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
                         >
                           Withdraw
                         </button>
@@ -293,14 +344,94 @@ const Pool = () => {
           </div>
         </div>
       </section>
+      {isStakeOpen && (
+        <>
+          <div className="fixed inset-0 flex justify-center items-center z-[9999] bg-background/80 backdrop-blur-sm bg-black opacity-90"></div>
+          <div className="fixed inset-0 flex justify-center items-center z-[9999] top-[10%] max-[500px]:px-4">
+            <div className="pool_wallet_popup w-full max-w-[540px] transform p-5 text-left align-middle shadow-xl transition-all">
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-[#fff] text-[20px] font-semibold pool_font tracking-[0.1px]">
+                  Stake
+                </p>
+                <button
+                  className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[34px] h-[34px] flex items-center justify-center"
+                  onClick={StakeOpenPopup}
+                >
+                  <AiOutlineClose className="text-2xl text-white" />
+                </button>
+              </div>
+              <div className="my-5">
+                <div className="flex justify-center ">
+                  <div className="rounded-[50%] bg-[#27272A] w-[200px] h-[200px]  flex justify-center items-center">
+                    <Image
+                      className="w-[160px]"
+                      priority
+                      src={Stakeopen1}
+                      alt="Stakeopen1"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[#2B2B2B] border-[1px] border-solid border-[#363A41] rounded-[8px] flex items-center gap-3 mt-4 w-full px-4 h-[45px] ">
+                <input
+                  type="text"
+                  name="amount"
+                  value={formsData.amount}
+                  onChange={handleInputChange}
+                  className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                  placeholder="0.0"
+                />
+                <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.75px]">
+                  FLP_USDC
+                </span>
+              </div>
+              <div className="flex justify-between items-center  my-4">
+                <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
+                  Available to Stake:{" "}
+                  <span className="text-[#fff]">
+                    {formsData.amount} FLP_USDC
+                  </span>
+                </p>
+                <div className="flex items-center gap-[4px]">
+                  <div className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B]">
+                    <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
+                      Max
+                    </p>
+                  </div>
+                </div>
+              </div>
 
+              <div>
+                <button
+                  onClick={handleDelete}
+                  className="items-center w-full pool_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
+                >
+                  Stake
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
       <DepositPupopup
         setAddValue={setAddValue}
         formsData={formsData}
         isOpen={isPopupOpen}
         onClose={closePopup}
       />
-      <Withdrawpopup isOpen={isWithdrawOpen} onClose={withdrawclosePopup} />
+      <Withdrawpopup
+        setRemoveValue={setRemoveValue}
+        formsData={formsData}
+        isOpen={isWithdrawOpen}
+        onClose={withdrawclosePopup}
+      />
+      <Stakepopup
+        formsData={formsData}
+        //setIsStakeOpen={setIsStakeOpen}
+        setSecondPhase={setSecondPhase}
+        isOpen={isDetailOpen}
+        onClose={closeDelete}
+      />
     </>
   );
 };

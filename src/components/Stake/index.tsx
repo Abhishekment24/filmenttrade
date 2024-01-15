@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Stakeopen from "../../../public/assest/stake/stakeopen.png";
+import Stakeopen1 from "../../../public/assest/stake/stakeopen1.png";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import Lock from "../../../public/assest/Lock.png";
-import Coin from "../../../public/assest/Coin.png";
+import Coin from "../../../public/assest/Coin3.png";
 import Sparkles from "../../../public/assest/sparkles.png";
 import Timerbg from "../../../public/assest/timerbg.png";
 import Tick from "../../../public/assest/check.png";
@@ -17,11 +19,34 @@ import Unstakepopup from "./Unstakepopup";
 const Stakepage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [image, setImage] = useState("");
+
   const [showSecondPhase, setSecondPhase] = useState(false);
   const [isUnstakeDetailOpen, setIsUnstakeDetailOpen] = useState(false);
   const [isUnStakeOpen, setIsUnStakeOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isStakeOpen, setIsStakeOpen] = useState(false);
+  const [formsData, setFormsData] = useState({
+    amount: "100",
+  });
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const activeTab = urlParams.get("success");
+
+    if (activeTab) {
+      // setSelectedTab(activeTab);
+      setSecondPhase(true);
+    }
+  }, []);
+
+  const handleInputChange = (event: any) => {
+    const { name, value } = event.target;
+    if (/^\d*$/.test(value) || value === "") {
+      setFormsData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
+  };
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
@@ -57,7 +82,9 @@ const Stakepage = () => {
       <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden">
         <div className="container mx-auto max-[1279px]:px-4">
           <div className="">
-            <p className="nav_font text-[#fff] text-2xl font-semibold">Stake</p>
+            <p className="pool_font text-[#fff] text-2xl font-semibold">
+              Stake
+            </p>
           </div>
           {!showSecondPhase && (
             <div className="w-full relative  bg-[#1B1C1E] mt-[32px]  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] ">
@@ -77,7 +104,7 @@ const Stakepage = () => {
                             alt="Lock"
                           />
                         </div>
-                        <span className="nav_font text-[#FFFFFFCC] text-xs font-medium">
+                        <span className="pool_font text-[#FFFFFFCC] text-xs font-medium">
                           21 Days Staking Period
                         </span>
                       </div>
@@ -90,7 +117,7 @@ const Stakepage = () => {
                             alt="Lock"
                           />
                         </div>
-                        <span className="nav_font text-[#FFFFFFCC] text-xs font-medium">
+                        <span className="pool_font text-[#FFFFFFCC] text-xs font-medium">
                           Boost Rewards
                         </span>
                       </div>
@@ -99,11 +126,11 @@ const Stakepage = () => {
                   <div className="text-right">
                     <button
                       onClick={StakeOpenPopup}
-                      className="items-center mb-2 nav_font text-[#0B2B28] w-[140px]  max-[588px]:w-full text-sm font-semibold  btn_one  py-[12px] px-[16px]"
+                      className="items-center mb-2 pool_font text-[#0B2B28] w-[140px]  max-[588px]:w-full text-sm font-semibold  btn_one  py-[12px] px-[16px]"
                     >
                       Stake
                     </button>
-                    <p className="pool_font text-[#939191] text-xs font-medium tracking-[0.06px]">
+                    <p className="pool_font text-[#9CA3AF] text-xs font-medium tracking-[0.06px]">
                       Available to stake: 1,524.44 FLP
                     </p>
                   </div>
@@ -148,7 +175,7 @@ const Stakepage = () => {
                           alt="Lock"
                         />
                       </div>
-                      <span className="nav_font text-[#FFFFFFCC] text-xs font-medium">
+                      <span className="pool_font text-[#FFFFFFCC] text-xs font-medium">
                         21 Days Staking Period
                       </span>
                     </div>
@@ -161,7 +188,7 @@ const Stakepage = () => {
                           alt="Lock"
                         />
                       </div>
-                      <span className="nav_font text-[#FFFFFFCC] text-xs font-medium">
+                      <span className="pool_font text-[#FFFFFFCC] text-xs font-medium">
                         Boost Rewards
                       </span>
                     </div>
@@ -173,17 +200,17 @@ const Stakepage = () => {
                     <div className="rounded-[8px] border-[1px] border-solid border-[#25272A] p-[24px] lg:h-[183px]">
                       <div className="flex items-center flex-wrap justify-between gap-3">
                         <div>
-                          <p className="pool_font text-[#939191] text-sm font-semibold">
+                          <p className="pool_font text-[#9CA3AF] text-xs font-semibold">
                             Staked
                           </p>
-                          <p className="pool_font text-[#E8E8E8] text-base font-medium tracking-[0.08px]">
+                          <p className="pool_font text-[#FFFFFF] text-base font-medium tracking-[0.08px]">
                             1,500,500.65 FLP
                           </p>
                         </div>
                         <div className="">
                           <button
                             onClick={UnStakeOpenPopup}
-                            className="items-center nav_font text-[#40CABC] text-sm font-semibold   w-[140px] btn   py-[12px] px-[16px]"
+                            className="items-center pool_font text-[#40CABC] text-sm font-semibold   w-[140px] btn   py-[12px] px-[16px]"
                           >
                             Unstake
                           </button>
@@ -192,17 +219,17 @@ const Stakepage = () => {
                       <div className="border-t-[1px] border-solid border-[#25272A] my-5"></div>
                       <div className="flex items-center flex-wrap justify-between gap-3">
                         <div>
-                          <p className="pool_font text-[#939191] text-sm font-semibold">
+                          <p className="pool_font text-[#9CA3AF] text-xs font-semibold">
                             Available to Stake
                           </p>
-                          <p className="pool_font text-[#939191] text-base font-medium tracking-[0.08px]">
-                            0 USDC
+                          <p className="pool_font text-[#FFFFFF] text-base font-medium tracking-[0.08px]">
+                            2,525 FLP
                           </p>
                         </div>
                         <div className="">
                           <button
                             onClick={StakeOpenPopup}
-                            className="items-center nav_font text-[#40CABC] text-sm font-semibold  btn  w-[140px]  py-[12px] px-[16px]"
+                            className="items-center pool_font text-[#40CABC] text-sm font-semibold  btn  w-[140px]  py-[12px] px-[16px]"
                           >
                             Stake
                           </button>
@@ -407,7 +434,7 @@ const Stakepage = () => {
           <div className="fixed inset-0 flex justify-center items-center z-[9999] top-[10%] max-[500px]:px-4">
             <div className="pool_wallet_popup w-full max-w-[540px] transform p-5 text-left align-middle shadow-xl transition-all">
               <div className="flex items-center justify-between gap-2">
-                <p className="text-[#fff] text-2xl font-semibold nav_font">
+                <p className="text-[#fff] text-[20px] font-semibold pool_font tracking-[0.1px]">
                   Stake
                 </p>
                 <button
@@ -418,37 +445,50 @@ const Stakepage = () => {
                 </button>
               </div>
               <div className="my-5">
-                <input
-                  type="text"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                  placeholder="Placeholder for image"
-                  className="rounded-[4px] w-full bg-[#343434] block nav_font text-[#fff] text-sm font-medium text-center h-[120px]  border-solid outline-none focus:ring-0 placeholder:text-[#939191]"
-                />
+                <div className="flex justify-center ">
+                  <div className="rounded-[50%] bg-[#27272A] w-[200px] h-[200px]  flex justify-center items-center">
+                    <Image
+                      className="w-[160px]"
+                      priority
+                      src={Stakeopen1}
+                      alt="Stakeopen1"
+                    />
+                  </div>
+                </div>
               </div>
-
-              <div className="bg-[#222325] flex items-center gap-3 w-full px-4 rounded-[8px] h-[52px] border-[#25272A] border-solid border-[1px]">
+              <div className="bg-[#2B2B2B] border-[1px] border-solid border-[#363A41] rounded-[8px] flex items-center gap-3 mt-4 w-full px-4 h-[45px] ">
                 <input
                   type="text"
-                  className=" block w-full nav_font text-[#fff] text-[20px] font-medium text-right h-[52px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                  placeholder="0.00"
+                  name="amount"
+                  value={formsData.amount}
+                  onChange={handleInputChange}
+                  className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                  placeholder="0.0"
                 />
-                <span className="nav_font text-[#939191] text-[20px] font-medium">
+                <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.75px]">
                   FLP_USDC
                 </span>
               </div>
-              <div className="flex items-center gap-4 justify-between my-3">
-                <span className="nav_font text-[#939191] text-xs font-normal">
-                  Available to Stake
-                </span>
-                <span className="nav_font text-[#fff] text-xs font-medium">
-                  100 FLP_USDC
-                </span>
+              <div className="flex justify-between items-center  my-4">
+                <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
+                  Available to Stake:{" "}
+                  <span className="text-[#fff]">
+                    {formsData.amount} FLP_USDC
+                  </span>
+                </p>
+                <div className="flex items-center gap-[4px]">
+                  <div className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B]">
+                    <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
+                      Max
+                    </p>
+                  </div>
+                </div>
               </div>
+
               <div>
                 <button
                   onClick={handleDelete}
-                  className="items-center w-full nav_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
+                  className="items-center w-full pool_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
                 >
                   Stake
                 </button>
@@ -458,6 +498,7 @@ const Stakepage = () => {
         </>
       )}
       <Stakepopup
+        formsData={formsData}
         setSecondPhase={setSecondPhase}
         isOpen={isDetailOpen}
         onClose={closeDelete}
@@ -468,7 +509,7 @@ const Stakepage = () => {
           <div className="fixed inset-0 flex justify-center items-center z-[9999] top-[10%] max-[500px]:px-4">
             <div className="pool_wallet_popup w-full max-w-[540px] transform p-5 text-left align-middle shadow-xl transition-all">
               <div className="flex items-center justify-between gap-2">
-                <p className="text-[#fff] text-2xl font-semibold nav_font">
+                <p className="text-[#fff] text-[20px] font-semibold pool_font tracking-[0.1px]">
                   Unstake
                 </p>
                 <button
@@ -479,37 +520,50 @@ const Stakepage = () => {
                 </button>
               </div>
               <div className="my-5">
-                <input
-                  type="text"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                  placeholder="Placeholder for image"
-                  className="rounded-[4px] w-full bg-[#343434] block nav_font text-[#fff] text-sm font-medium text-center h-[120px]  border-solid outline-none focus:ring-0 placeholder:text-[#939191]"
-                />
+                <div className="flex justify-center ">
+                  <div className="rounded-[50%] bg-[#27272A] w-[200px] h-[200px]  flex justify-center items-center">
+                    <Image
+                      className="w-[160px]"
+                      priority
+                      src={Stakeopen}
+                      alt="Stakeopen"
+                    />
+                  </div>
+                </div>
               </div>
-
-              <div className="bg-[#222325] flex items-center gap-3 w-full px-4 rounded-[8px] h-[52px] border-[#25272A] border-solid border-[1px]">
+              <div className="bg-[#2B2B2B] border-[1px] border-solid border-[#363A41] rounded-[8px] flex items-center gap-3 mt-4 w-full px-4 h-[45px] ">
                 <input
                   type="text"
-                  className=" block w-full nav_font text-[#fff] text-[20px] font-medium text-right h-[52px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                  placeholder="0.00"
+                  name="amount"
+                  value={formsData.amount}
+                  onChange={handleInputChange}
+                  className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+                  placeholder="0.0"
                 />
-                <span className="nav_font text-[#939191] text-[20px] font-medium">
+                <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.75px]">
                   FLP_USDC
                 </span>
               </div>
-              <div className="flex items-center gap-4 justify-between my-3">
-                <span className="nav_font text-[#939191] text-xs font-normal">
-                  Available to Stake
-                </span>
-                <span className="nav_font text-[#fff] text-xs font-medium">
-                  100 FLP_USDC
-                </span>
+
+              <div className="flex justify-between items-center  my-4">
+                <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
+                  Available to Unstake:{" "}
+                  <span className="text-[#fff]">
+                    {formsData.amount} FLP_USDC
+                  </span>
+                </p>
+                <div className="flex items-center gap-[4px]">
+                  <div className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B]">
+                    <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
+                      Max
+                    </p>
+                  </div>
+                </div>
               </div>
               <div>
                 <button
                   onClick={UnstakeOpen}
-                  className="items-center w-full nav_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
+                  className="items-center w-full pool_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
                 >
                   Unstake
                 </button>
@@ -519,6 +573,7 @@ const Stakepage = () => {
         </>
       )}
       <Unstakepopup
+        formsData={formsData}
         // setSecondPhase={setSecondPhase}
         isOpen={isUnstakeDetailOpen}
         onClose={Unstakeclose}

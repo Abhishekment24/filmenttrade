@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdInfoOutline } from "react-icons/md";
 import Tick from "../../../../public/assest/check.png";
+import RedTick from "../../../../public/assest/stake/Icon.png";
+import Despoit1 from "../../../../public/assest/stake/despoit1.png";
+import Despoit2 from "../../../../public/assest/stake/despoit2.png";
+import Despoit3 from "../../../../public/assest/stake/despoit3.png";
 import Suppliedicon from "../../../../public/assest/supplied.png";
 import Stakeicons from "../../../../public/assest/stakeicons.png";
 import Image from "next/image";
@@ -19,7 +23,7 @@ const Despositpopup: React.FC<DespositPopupProps> = ({
   onClose,
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
-
+  const [error, setError] = useState(false); // this state handles the Error popup  (if true--> Error modal will be visible)
   const [image, setImage] = useState("");
   const [loading1, setLoading1] = useState(true);
   const [loading2, setLoading2] = useState(false);
@@ -29,6 +33,7 @@ const Despositpopup: React.FC<DespositPopupProps> = ({
     if (isOpen) {
       setLoading1(true);
       setIsProcessing(false);
+      setError(false);
 
       const timeout1 = setTimeout(() => {
         setLoading1(false);
@@ -54,8 +59,8 @@ const Despositpopup: React.FC<DespositPopupProps> = ({
           <div className="fixed inset-0 flex justify-center items-center z-[9999] top-[10%]  max-[500px]:px-4">
             <div className="pool_wallet_popup w-full max-w-[540px] transform p-5 text-left align-middle shadow-xl transition-all">
               <div className="flex items-center justify-between gap-2">
-                <p className="text-[#fff] text-2xl font-semibold nav_font">
-                  Deposit Liquidity
+                <p className="text-[#fff] text-[20px] font-semibold pool_font tracking-[0.1px]">
+                  Add Liquidity
                 </p>
                 <button
                   className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[34px] h-[34px] flex items-center justify-center"
@@ -65,44 +70,80 @@ const Despositpopup: React.FC<DespositPopupProps> = ({
                 </button>
               </div>
               <div className="my-5">
-                <input
+                <div className="flex justify-center ">
+                  <div className="rounded-[50%] bg-[#27272A] w-[200px] h-[200px]  flex justify-center items-center">
+                    {!error ? (
+                      <Image
+                        className="w-[160px]"
+                        priority
+                        src={Despoit2}
+                        alt="Despoit2"
+                      />
+                    ) : (
+                      <Image
+                        className="w-[160px]"
+                        priority
+                        src={Despoit3}
+                        alt="Despoit3"
+                      />
+                    )}
+                  </div>
+                </div>
+                {/* <input
                   type="text"
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
                   placeholder="Placeholder for image"
                   className="rounded-[4px] w-full bg-[#343434] block nav_font text-[#fff] text-sm font-medium text-center h-[120px]  border-solid outline-none focus:ring-0 placeholder:text-[#939191]"
-                />
+                /> */}
               </div>
 
               <div>
-                {isProcessing ? (
-                  <div>
-                    <p className="text-[#14B8A6] text-center text-sm font-medium nav_font">
-                      Deposit Liquidity Successful
-                    </p>
-                  </div>
+                {!error ? (
+                  <>
+                    {isProcessing ? (
+                      <div>
+                        <p className="text-[#10B981] text-center text-sm font-medium nav_font">
+                          Add Liquidity Successful
+                        </p>
+                      </div>
+                    ) : (
+                      <p className="text-[#939191] text-sm text-center font-medium nav_font">
+                        Adding Liquidity
+                      </p>
+                    )}
+                  </>
                 ) : (
-                  <p className="text-[#939191] text-sm text-center font-medium nav_font">
-                    Depositing Liquidity
-                  </p>
+                  <>
+                    <p className="text-[#939191] text-sm text-center font-medium nav_font">
+                      Add Liquidity
+                    </p>
+                  </>
                 )}
               </div>
-              <p className="text-[#fff] text-center text-[20px] font-medium nav_font my-3">
+              <p className="text-[#fff] text-center text-[20px] font-medium pool_font my-3">
                 {formsData.amount}
                 <span className="text-[#939191]"> USDC</span>
               </p>
 
               <div>
-                {isProcessing && (
-                  <div className="flex items-start gap-[16px] p-3 rounded-[12px] border-[1px] border-solid border-[#FFFFFF1A] bg-[#FFFFFF0D]">
-                    <span>
-                      <MdInfoOutline className="text-[#FFFFFF99] text-base" />
-                    </span>
-                    <span className="text-[#9CA3AF] text-sm text-center font-normal pool_font tracking-[0.07px]">
-                      You’ve received 12025.93 FLP_USDC tokens for your deposit
-                      to the pool. Stake these FLP_USDC tokens to earn ~25% APR!
-                    </span>
-                  </div>
+                {!error ? (
+                  <>
+                    {isProcessing && (
+                      <div className="flex items-start gap-[16px] p-3 rounded-[12px] border-[1px] border-solid border-[#FFFFFF1A] bg-[#FFFFFF0D]">
+                        <span>
+                          <MdInfoOutline className="text-[#FFFFFF99] text-base" />
+                        </span>
+                        <span className="text-[#9CA3AF] text-sm text-center font-normal pool_font tracking-[0.07px]">
+                          You’ve received 12025.93 FLP_USDC tokens for your
+                          deposit to the pool. Stake these FLP_USDC tokens to
+                          earn ~25% APR!
+                        </span>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <></>
                 )}
               </div>
 
@@ -114,7 +155,7 @@ const Despositpopup: React.FC<DespositPopupProps> = ({
                     <ClipLoader color="#3B82F6" loading={loading1} size={28} />
                   ) : (
                     <>
-                      <span className=" bg-[#34d5c4] w-[28px] h-[28] rounded-full p-1">
+                      <span className=" bg-[#34d5c4] w-[28px] h-[28px] rounded-full p-2">
                         <Image className="" priority src={Tick} alt="Tick" />
                       </span>
                     </>
@@ -132,28 +173,58 @@ const Despositpopup: React.FC<DespositPopupProps> = ({
                     <ClipLoader color="#3B82F6" loading={loading2} size={28} />
                   ) : loading1 ? (
                     <div className="rounded-[50%] w-[28px] h-[28px] bg-[#374151]"></div>
+                  ) : !error ? (
+                    <>
+                      <span className="bg-[#34d5c4] w-[28px] h-[28px] rounded-full p-2">
+                        <Image className="" priority src={Tick} alt="Tick" />
+                      </span>
+                    </>
                   ) : (
-                    <span className=" bg-[#34d5c4] w-[28px] h-[28] rounded-full p-1">
-                      <Image className="" priority src={Tick} alt="Tick" />
-                    </span>
+                    <>
+                      <span className="bg-[#D65454] w-[28px] h-[28px] items-center flex justify-center rounded-full p-2">
+                        <AiOutlineClose className=" text-[#fff]" />
+                      </span>
+                    </>
                   )}
-                  <span className="text-[#fff] text-center text-base font-semibold pool_font">
-                    Deposit Liquidity
-                  </span>
+                  {!error ? (
+                    <>
+                      <span className="text-[#fff] text-center text-base font-semibold pool_font">
+                        Deposit Liquidity
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <div className=" flex flex-col gap-1">
+                        <p className="text-[#fff]  text-base font-semibold pool_font">
+                          Add Liquidity
+                        </p>
+                        <span className="text-[#9CA3AF] text-sm font-normal pool_font tracking-[0.07px]">
+                          There was an error while adding liquidity. Retry below
+                          & if the issue persists, contact us
+                        </span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
 
               <div className="mt-3">
-                {isProcessing ? (
+                {error ? (
+                  <div>
+                    <button className="items-center w-full pool_font text-[#1F2937] text-sm font-semibold btn_one py-[16px] px-[16px] mt-2">
+                      Retry
+                    </button>
+                  </div>
+                ) : isProcessing ? (
                   <button
                     onClick={onClose}
-                    className="items-center w-full nav_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
+                    className="items-center w-full pool_font text-[#1F2937] text-sm font-semibold btn_one py-[16px] px-[16px]"
                   >
                     Done
                   </button>
                 ) : (
                   <button
-                    className="items-center w-full nav_font text-[#FFFFFF33] text-sm font-semibold rounded-[8px]  bg-[#1A6059]  py-[16px] px-[16px]"
+                    className="items-center w-full pool_font text-[#FFFFFF33] text-sm font-semibold rounded-[8px] bg-[#1A6059] py-[16px] px-[16px]"
                     disabled
                   >
                     Processing...
