@@ -22,6 +22,6 @@
     "**/*.ts",
     "**/*.tsx",
     "src/components/Pool/Leftcomponentside/Charts/index.tsx"
-, "src/components/Trade/Leftsidecomponent/Charts.jsx"  ],
+, "src/components/Trade/Leftsidecomponent/Charts.jsx", "src/components/Portfolio/Overviews/Table"  ],
   "exclude": ["node_modules"]
 }

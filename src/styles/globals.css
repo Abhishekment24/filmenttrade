@@ -132,7 +132,7 @@ input[type="checkbox"]:checked {
   width: 100px;
   height: 40px;
   background-size: 200% 100%;
-  background-color: #115e599d; /* Green background color */
+  background-color: #abfffa9e; /* Green background color */
   animation: slideBg 1s linear infinite; /* Adjust the duration as needed */
 }
 
@@ -271,8 +271,8 @@ input[type="checkbox"]:checked {
   appearance: none;
 
   display: flex;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   background-image: url("../../public/assest/Knob.png");
   background-position: center;
   background-repeat: no-repeat;
@@ -286,11 +286,11 @@ input[type="checkbox"]:checked {
 }
 
 .range-slider::-moz-range-thumb {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
 
   display: flex;
-  width: 28px;
+  width: 40px;
 
   padding: 6px 11px 6px 8px;
 
@@ -303,10 +303,10 @@ input[type="checkbox"]:checked {
   cursor: pointer;
 }
 .tooltip_bg {
-  border-radius: 8px;
+  border-radius: 6px;
 
-  border: 1px solid #272727;
-  background: rgba(28, 28, 28, 0.9);
+  border: 1px solid #25272a;
+  background: #111113;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(2px);
 }

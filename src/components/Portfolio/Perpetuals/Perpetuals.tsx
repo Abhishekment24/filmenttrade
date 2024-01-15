@@ -41,7 +41,7 @@ const Perpetuals = () => {
       </div>
       <div className="flex mt-[40px] items-start bg-[#1B1C1E] max-[1023px]:flex-col gap-6 justify-between  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] sm:px-[24px] px-5 w-full relative">
         <div className="lg:w-[30%] w-full py-[24px]">
-          <span className="pool_font text-[#939191] text-sm font-normal tracking-[0.06px]">
+          <span className="pool_font text-[#BABABA] text-xs font-normal tracking-[0.06px]">
             Perpetuals Value
           </span>
           <p className="pool_font text-[#fff] text-2xl font-medium tracking-[0.12px]">

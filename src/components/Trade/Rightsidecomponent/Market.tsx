@@ -60,7 +60,7 @@ const Market: React.FC<MarketProps> = ({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownRef]);
-  const [sliderValue, setSliderValue] = useState(25);
+  const [sliderValue, setSliderValue] = useState(20);
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
@@ -70,7 +70,7 @@ const Market: React.FC<MarketProps> = ({
 
   const calculateBgColor = (sliderValue: number) => {
     // Example: Change color based on the value
-    const percentage = (sliderValue / 125) * 100;
+    const percentage = (sliderValue / 100) * 100;
     return `linear-gradient(to right, #40E0D0 ${percentage}%, rgba(64, 224, 208, 0.1) ${percentage}%, rgba(64, 224, 208, 0.1) 100%), #1a1a1a`;
   };
 
@@ -167,8 +167,8 @@ const Market: React.FC<MarketProps> = ({
           <input
             type="range"
             min="0"
-            max="125"
-            step="25"
+            max="100"
+            step="20"
             value={sliderValue}
             onChange={handleSliderChange}
             className="range-slider"
@@ -179,19 +179,19 @@ const Market: React.FC<MarketProps> = ({
               0x
             </span>
             <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
-              25x
+              20x
             </span>
             <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
-              50x
+              40x
             </span>
             <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
-              75x
+              60x
+            </span>
+            <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
+              80x
             </span>
             <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
               100x
-            </span>
-            <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
-              125x
             </span>
           </div>
         </div>
@@ -356,7 +356,6 @@ const Market: React.FC<MarketProps> = ({
                 )}
               </div>
             </div>
-
           </div>
         </div>
         <div className="my-4">
@@ -459,9 +458,49 @@ const Market: React.FC<MarketProps> = ({
                 </p>
               </div>
               <div className="flex justify-between items-center gap-3 my-[4px]">
-                <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
-                  Stop Loss
-                </p>
+                <div className="flex items-center gap-1">
+                  <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
+                    Stop Loss
+                  </p>
+                  <span data-tooltip-id="my-tooltip7">
+                    <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base" />
+                    <Tooltip id="my-tooltip7" className="tooltip_bg">
+                      <div className="w-[300px]">
+                        <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
+                          Stop Market Order
+                        </h3>
+                        <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                          A Stop Market Order lets you set a trigger price that,
+                          once reached, will execute a Market Order for the
+                          direction and size of your order.
+                        </p>
+                        <ul className="list-disc">
+                          <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                            Stop orders are NOT conditional / linked to a
+                            position
+                          </li>
+                          <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px] my-2">
+                            The trigger is executed on the oracle price
+                          </li>
+                          <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                            Stop orders are always executed in the direction
+                            that the price is moving
+                          </li>
+                          <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px] my-2">
+                            Stop Market is Fill-or-Kill(Fok), meaning that is
+                            the order: does not fill entirely, it will be
+                            killed(no partial fills)
+                          </li>
+                          <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                            Stop market orders use the same slippage as market
+                            orders, which is configurable in the order placement
+                            console
+                          </li>
+                        </ul>
+                      </div>
+                    </Tooltip>
+                  </span>
+                </div>
 
                 <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
                   {formsData.stopinput}%

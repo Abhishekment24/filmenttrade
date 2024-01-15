@@ -135,3 +135,27 @@ export const tablebalanceData = [
     totalvalue: "$12.1252",
   },
 ];
+export const tablepoolData = [
+  {
+    pool: "USDC",
+    liquidityProvided: "$3,636",
+
+    apr: "16.64%",
+    unrealisedPnL: "$3,600",
+  },
+];
+
+export const tablerwardData = [
+  {
+    date: "1 Jan 2023",
+    rewardtype: "Monthly Referral Reward",
+     type: "",
+    rewardvalue: "0.2525 FLP",
+  },
+  {
+    date: "28 Dec 2023",
+    rewardtype: "One-time Referral Reward",
+   type: "Referred 3536...36dgd",
+    rewardvalue: "0.2525 FLP",
+  },
+];

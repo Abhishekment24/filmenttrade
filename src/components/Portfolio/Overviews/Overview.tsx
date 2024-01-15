@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
 import { IoMdTrendingUp } from "react-icons/io";
-import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
+import { LuArrowDownRightSquare, LuArrowUpRightSquare } from "react-icons/lu";
 import Charts from "../../Pool/Leftcomponentside/Charts";
 import Table from "./Table";
 import Dropdown from "@/components/Commoncomponent/Dropdown";
@@ -55,17 +55,37 @@ const Overview = () => {
   const [selectedTab, setSelectedTab] = useState("portfolio");
   return (
     <>
-      <div className="flex flex-col gap-[4px]">
-        <span className="pool_font text-[#fff] text-2xl font-semibold">
-          My Portfolio
-        </span>
-        <span className="pool_font text-[#939191] text-sm font-normal">
-          0x63gws...3536
-        </span>
+      <div className="flex justify-between items-center gap-[4px]">
+        <div>
+          <p className="pool_font text-[#fff] text-2xl font-semibold tracking-[0.12px]">
+            My Portfolio
+          </p>
+          <span className="pool_font text-[#939191] text-xs font-normal tracking-[0.06px]">
+            0x63gws...3536
+          </span>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="cursor-pointer flex items-center justify-center gap-2 bg-[#2B2B2B] rounded-[4px] max-border py-[12px] px-[8px] w-[154px]">
+            <span>
+              <LuArrowDownRightSquare className="text-sm  text-[#FFFFFF]" />
+            </span>
+            <button className=" pool_font text-[#FFFFFF]  text-xs font-semibold     tracking-[0.06px]">
+              Deposit
+            </button>
+          </div>
+          <div className="cursor-pointer flex items-center justify-center gap-2 bg-[#2B2B2B] rounded-[4px] max-border py-[12px] px-[8px] w-[154px]">
+            <span>
+              <LuArrowUpRightSquare className="text-sm  text-[#FFFFFF]" />
+            </span>
+            <button className="pool_font text-[#FFFFFF]  text-xs font-semibold     tracking-[0.06px]">
+              Withdraw
+            </button>
+          </div>
+        </div>
       </div>
       <div className="flex mt-[40px] items-start bg-[#1B1C1E] gap-6 justify-between max-[1023px]:flex-col pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] sm:px-[24px] px-5 w-full relative">
         <div className="lg:w-[30%] w-full py-[24px]">
-          <span className="pool_font text-[#939191] text-sm font-normal tracking-[0.06px]">
+          <span className="pool_font text-[#BABABA] text-xs font-normal tracking-[0.06px]">
             Portfolio
           </span>
           <p className="pool_font text-[#fff] text-2xl font-medium tracking-[0.12px]">
@@ -161,15 +181,15 @@ const Overview = () => {
               Perps PnL
             </p>
             <div className="flex items-center gap-[4px]">
-              <span className="text-[#00CC99] text-xs">
+              <span className="text-[#10B981] text-xs">
                 <IoMdTrendingUp />
               </span>
-              <p className="pool_font text-[#00CC99] text-xs font-semibold tracking-[0.06px]">
+              <p className="pool_font text-[#10B981] text-xs font-semibold tracking-[0.06px]">
                 10.7%
               </p>
             </div>
           </div>
-          <p className="pool_font text-[#00CC99] mt-[8px] text-[20px] font-semibold tracking-[0.1px]">
+          <p className="pool_font text-[#10B981] mt-[8px] text-[20px] font-semibold tracking-[0.1px]">
             $241,500.28
           </p>
         </li>
