@@ -12,9 +12,9 @@ import Leftcomponentside from "./Leftcomponentside";
 import Withdrawpopup from "./Rightcomponentside/Withdrawpopup";
 import Stakepopup from "../Stake/Stakepopup";
 import { AiOutlineClose } from "react-icons/ai";
-interface PoolProps {
-  StakeOpenPopup: () => void;
-}
+// interface PoolProps {
+//   StakeOpenPopup: () => void;
+// }
 const tabs = [
   {
     title: "Add",
@@ -25,7 +25,7 @@ const tabs = [
     key: "remove",
   },
 ];
-const Pool: React.FC<PoolProps> = () => {
+const Pool = () => {
   const [selectedTab, setSelectedTab] = useState("add");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 

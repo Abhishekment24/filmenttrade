@@ -1,10 +1,8 @@
-import Pool from '@/components/Pool'
-import React from 'react'
+import Pool from "@/components/Pool";
+import React from "react";
 
 const index = () => {
-  return (
-      <Pool />
-  )
-}
+  return <Pool />;
+};
 
-export default index
+export default index;

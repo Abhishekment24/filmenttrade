@@ -6,11 +6,12 @@ import Rightsidecomponent from "./Rightsidecomponent";
 import Tablesection from "./Table";
 import DepositPupopup from "../Commoncomponent/Despoitpopup";
 import { AiOutlineClose } from "react-icons/ai";
+
 const Trade = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [isStakeOpen, setIsStakeOpen] = useState(false);
+  const [isStakeOpen, setIsStakeOpen] = useState(false);
   const [formData, setFormData] = useState({
-   amount: "100",
+    amount: "100",
   });
 
   const handleInputChange = (event: any) => {
@@ -24,20 +25,19 @@ const Trade = () => {
   };
   const closePopup = () => {
     setIsPopupOpen(false);
-     setIsStakeOpen(false);
-   
+    setIsStakeOpen(false);
   };
   const openPopup = () => {
     setIsPopupOpen(true);
   };
-   const handleDelete = () => {
-   setIsPopupOpen(true);
-     setIsStakeOpen(false);
-   };
-   const StakeOpenPopup = () => {
-     setIsStakeOpen(true);
-     setIsPopupOpen(false);
-   };
+  const handleDelete = () => {
+    setIsPopupOpen(true);
+    setIsStakeOpen(false);
+  };
+  const StakeOpenPopup = () => {
+    setIsStakeOpen(true);
+    setIsPopupOpen(false);
+  };
   return (
     <>
       <div className="">
@@ -57,7 +57,12 @@ const Trade = () => {
             </div>
           </div>
           <div className="">
-            <Rightsidecomponent  formData={formData} StakeOpenPopup={StakeOpenPopup} />
+            <Rightsidecomponent
+            //  connectWallet={connectWallet}
+              formData={formData}
+              StakeOpenPopup={StakeOpenPopup}
+             // isConnected={isConnected}
+            />
           </div>
         </div>
       </div>

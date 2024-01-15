@@ -10,8 +10,8 @@ import { InjectedConnector } from "wagmi/connectors/injected";
 interface RightProps {
   StakeOpenPopup: () => void;
   formData: any;
-  connectWallet: () => void;
-  isConnected: boolean;
+  //connectWallet: () => void;
+  //isConnected: boolean;
 }
 const tabs = [
   {
@@ -25,7 +25,7 @@ const tabs = [
 ];
 const Rightsidecomponent: React.FC<RightProps> = ({
   StakeOpenPopup,
-  connectWallet,
+  // connectWallet,
   formData,
 }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -94,41 +94,30 @@ const Rightsidecomponent: React.FC<RightProps> = ({
           )}
         </div>
         <div className="lg:fixed lg:bg-[#1B1C1E] lg:bottom-[1%] px-4 py-4 border-t-[1px] lg:h-[90px] border-[#272727] border-solid lg:w-[30%] xl:w-[25%] min-[1700px]:w-[400px]">
-          {isConnected ? (
-            <>
-              <div className="flex items-center gap-[8px] w-full">
-                <div data-tooltip-id="my-tooltip5" className="w-[50%]">
-                  <button className=" items-center pool_font text-[#fff] w-[100%]  text-[15px] font-semibold btn_border  bg-[#059669] rounded-[6px]  py-[10px] px-[16px] tracking-[0.075px]">
-                    Buy / Long
-                  </button>
-                  <Tooltip id="my-tooltip5" className="tooltip_bg">
-                    <div className="w-[150px]">
-                      <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
-                        Deposit funds
-                      </h3>
-                      <p className="text-xs font-normal text-[#fff] pool_font tracking-[0.05px]">
-                        Deposit funds to start trading
-                      </p>
-                    </div>
-                  </Tooltip>
-                </div>
-                <div className="w-[50%]">
-                  <button className="items-center pool_font text-[#fff] w-[100%] text-[15px] font-semibold  bg-[#C33F3F] btn_border rounded-[6px]  py-[10px] px-[16px] tracking-[0.075px]">
-                    Sell / Short
-                  </button>
-                </div>
+          <>
+            <div className="flex items-center gap-[8px] w-full">
+              <div data-tooltip-id="my-tooltip5" className="w-[50%]">
+                <button className=" items-center pool_font text-[#fff] w-[100%]  text-[15px] font-semibold btn_border  bg-[#059669] rounded-[6px]  py-[10px] px-[16px] tracking-[0.075px]">
+                  Buy / Long
+                </button>
+                <Tooltip id="my-tooltip5" className="tooltip_bg">
+                  <div className="w-[150px]">
+                    <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
+                      Deposit funds
+                    </h3>
+                    <p className="text-xs font-normal text-[#fff] pool_font tracking-[0.05px]">
+                      Deposit funds to start trading
+                    </p>
+                  </div>
+                </Tooltip>
               </div>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={connectWallet}
-                className="items-center pool_font text-[#1F2937] text-xs font-semibold  w-full btn_one  py-[10px] px-[16px] tracking-[0.06px]"
-              >
-                Connect Wallet
-              </button>
-            </>
-          )}
+              <div className="w-[50%]">
+                <button className="items-center pool_font text-[#fff] w-[100%] text-[15px] font-semibold  bg-[#C33F3F] btn_border rounded-[6px]  py-[10px] px-[16px] tracking-[0.075px]">
+                  Sell / Short
+                </button>
+              </div>
+            </div>
+          </>
         </div>
       </div>
     </>
