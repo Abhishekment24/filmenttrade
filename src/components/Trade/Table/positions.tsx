@@ -38,7 +38,7 @@ const Positions = () => {
       <div>
         <div className="flex w-full">
           <div className="lg:w-[92%] sm:w-[88%] max-[639px]:w-[84%] max-[380px]:w-[78%]">
-            <div className="flex w-full overflow-auto border-t-[1px] border-solid border-[#25272A]">
+            <div className="flex w-full overflow-auto  border-solid border-[#25272A]">
               <table className="w-full">
                 <thead>
                   <tr className="pool_font text-xs font-medium border-b-[1px] border-solid border-[#25272A]  text-[#9CA3AF]">
@@ -198,12 +198,12 @@ const Positions = () => {
           </div>
 
           {tablepositionData.length > 0 && (
-            <div className="xl:w-[8%] sm:w-[12%] max-[639px]:w-[16%] max-[380px]:w-[22%] mt-[2rem]">
+            <div className="xl:w-[8%] sm:w-[12%] max-[639px]:w-[16%] max-[380px]:w-[22%] mt-[32px]">
               {tablepositionData.map((item, key) => (
                 <div
                   key={key}
                   onClick={handleDelete}
-                  className="h-[57.7px] cursor-pointer table_right_side flex items-center justify-center"
+                  className="h-[57px] cursor-pointer table_right_side flex items-center justify-center"
                 >
                   <div className="rounded-[4px] border-[1px] border-solid border-[#313131] bg-[#2B2B2B] p-1 flex items-center justify-center">
                     <span className="pool_font text-xs font-semibold text-[#FFFFFF] tracking-[0.06px]">

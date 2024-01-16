@@ -42,13 +42,13 @@ const Trade = () => {
     <>
       <div className="">
         <Subheader />
-        <div className="lg:py-[123px] py-[100px] lg:grid grids-width relative max-[1023px]:container max-[1023px]:mx-auto max-[1023px]:px-4">
+        <div className="lg:pt-[123px]  lg:pb-5 py-[100px] lg:grid grids-width relative max-[1023px]:container max-[1023px]:mx-auto max-[1023px]:px-4">
           <div className="flex flex-col w-full">
-            <div className="flex w-full max-[1023px]:flex-col items-center">
-              <div className="lg:w-[70%] xl:w-[78%] w-full">
+            <div className="lg:grid grid-width">
+              <div className="">
                 <Leftsidecomponent />
               </div>
-              <div className="lg:w-[30%] xl:w-[22%] w-full">
+              <div className="">
                 <Middlesidecomponent />
               </div>
             </div>
@@ -58,10 +58,10 @@ const Trade = () => {
           </div>
           <div className="">
             <Rightsidecomponent
-            //  connectWallet={connectWallet}
+              //  connectWallet={connectWallet}
               formData={formData}
               StakeOpenPopup={StakeOpenPopup}
-             // isConnected={isConnected}
+              // isConnected={isConnected}
             />
           </div>
         </div>

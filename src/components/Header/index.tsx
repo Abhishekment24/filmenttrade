@@ -32,6 +32,9 @@ import {
   useSwitchNetwork,
 } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
+import Agreepopup from "./Walletpopup/Agreepopup";
+import Connectpopup from "./Walletpopup/Connectpopup";
+import Afterconnectpopup from "./Walletpopup/Afterconnectpopup";
 
 const innerLinks = [
   { text: "Help Center", href: "#" },
@@ -79,10 +82,12 @@ const Header = () => {
   const [isWalletOpen, setIsWalletOpen] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [testnet, setTestnet] = useState(false);
+  const [isAgreeOpen, setIsAgreeOpen] = useState(false);
   const handleWalletConnect = () => {
     if (window.ethereum) {
       connect();
       setIsWalletOpen(true);
+      setIsAgreeOpen(false);
       setIsPopupOpen(false);
     } else {
       alert("Install metamask");
@@ -92,23 +97,24 @@ const Header = () => {
   const connectWallet = () => {
     setIsPopupOpen(true);
     setIsWalletOpen(false);
+    setIsAgreeOpen(false);
   };
 
   const closePopup = () => {
     setIsPopupOpen(false);
     setIsWalletOpen(false);
+    setIsAgreeOpen(false);
   };
 
-   useEffect(() => {
-     const handleClickOutside = (event: { target: any }) => {
-       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-         setTestnet(false);
-       
-       }
-     };
-     document.addEventListener("mousedown", handleClickOutside);
-     return () => document.removeEventListener("mousedown", handleClickOutside);
-   }, [dropdownRef]);
+  useEffect(() => {
+    const handleClickOutside = (event: { target: any }) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setTestnet(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownRef]);
   useEffect(() => {
     const handleClickOutsides = (event: { target: any }) => {
       if (
@@ -166,6 +172,13 @@ const Header = () => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    if (isConnected) {
+      setTimeout(() => {
+        setIsAgreeOpen(true);
+      }, 2000);
+    }
+  }, [isConnected]);
 
   return (
     <div>
@@ -179,8 +192,8 @@ const Header = () => {
             <div className="flex justify-between text-[#fff] items-center max-[1179px]:hidden">
               <div className="flex items-center xl:gap-10 lg:gap-6">
                 <Link href="/" className="flex items-center gap-[8px]">
-                  <Image className="w-[16px]" priority src={Logo} alt="logo" />
-                  <span className="text-[#40E0D0] logo_font font-medium text-xs tracking-{0.96px}">
+                  <Image className="w-[20px]" priority src={Logo} alt="logo" />
+                  <span className="text-[#40E0D0] logo_font font-medium text-[15px] tracking-{1.2px}">
                     FILAMENT
                   </span>
                 </Link>
@@ -201,7 +214,7 @@ const Header = () => {
                 )}
                 <Link
                   href="/trade"
-                  className={`nav_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
                     activeTab === "trade"
                       ? "font-bold text-[#fff]  "
                       : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
@@ -212,7 +225,7 @@ const Header = () => {
                 </Link>
                 <Link
                   href="/pool"
-                  className={`nav_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
                     activeTab === "pool"
                       ? "font-bold text-[#fff]  "
                       : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
@@ -223,7 +236,7 @@ const Header = () => {
                 </Link>
                 <Link
                   href="/stake"
-                  className={`nav_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
                     activeTab === "stake"
                       ? "font-bold text-[#fff]  "
                       : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
@@ -234,7 +247,7 @@ const Header = () => {
                 </Link>
                 <Link
                   href="/referral"
-                  className={`nav_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
                     activeTab === "referral"
                       ? "font-bold text-[#fff]  "
                       : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
@@ -246,7 +259,7 @@ const Header = () => {
                 <div className="w-[1px] h-[12px] bg-[#2A2A2A]"> </div>
                 <Link
                   href="/portfolio"
-                  className={`nav_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
                     activeTab === "portfolio"
                       ? "font-bold text-[#fff]  "
                       : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
@@ -262,7 +275,7 @@ const Header = () => {
                   >
                     <Link
                       href=""
-                      className={`nav_font text-[#fff] text-xs flex items-center gap-1 transition-all duration-300 ${
+                      className={`pool_font text-[#fff] text-xs flex items-center gap-1 transition-all duration-300 ${
                         activeTab === "More"
                           ? "font-bold text-[#fff]  "
                           : "text-[#fff] font-medium "
@@ -360,7 +373,10 @@ const Header = () => {
                     </button>
                   ) : chainId == InjectedChainId ? (
                     <>
-                      <div className="flex items-center gap-[8px] wallet_coonected  px-[12px] h-[38px]">
+                      <div
+                        onClick={() => setWalletSideNav(!showWalletSideNav)}
+                        className="cursor-pointer flex items-center gap-[8px] wallet_coonected  px-[12px] h-[38px]"
+                      >
                         <div className="flex flex-col text-right justify-end ">
                           <span className="text-[#939191] wallet_connected_font font-medium text-[10px] tracking-{0.2px} ">
                             Portfolio Value
@@ -381,25 +397,9 @@ const Header = () => {
                             </span>
                           </div>
 
-                          {!showWalletSideNav ? (
-                            <div
-                              className="cursor-pointer"
-                              onClick={() =>
-                                setWalletSideNav(!showWalletSideNav)
-                              }
-                            >
-                              <RiArrowDownSFill />
-                            </div>
-                          ) : (
-                            <div
-                              className="cursor-pointer"
-                              onClick={() =>
-                                setWalletSideNav(!showWalletSideNav)
-                              }
-                            >
-                              <RiArrowDownSFill />
-                            </div>
-                          )}
+                          <div className="cursor-pointer">
+                            <RiArrowDownSFill />
+                          </div>
                         </div>
                       </div>
                       <div className="wallet_coonected w-[34px] h-[34px] flex items-center justify-center">
@@ -463,8 +463,8 @@ const Header = () => {
             </div>
             <div className="flex justify-between items-center gap-3 nav_moblie_bar">
               <Link href="/" className="flex items-center gap-[8px]">
-                <Image className="w-[16px]" priority src={Logo} alt="logo" />
-                <span className="text-[#40E0D0] logo_font font-medium text-base tracking-{0.96px}">
+                <Image className="w-[20px]" priority src={Logo} alt="logo" />
+                <span className="text-[#40E0D0] logo_font font-medium text-base tracking-{1.2px}">
                   FILAMENT
                 </span>
               </Link>
@@ -763,179 +763,27 @@ const Header = () => {
           </>
         )}
         {/*wallet popup  */}
-        {isPopupOpen && (
-          <>
-            <div className="fixed inset-0 flex justify-center items-center z-[9999] bg-background/80 backdrop-blur-sm  bg-black opacity-90"></div>
-            <div className="fixed inset-0  flex justify-center items-center z-[9999]  top-[10%] ">
-              <div className="  wallet_popup w-full max-w-[480px] transform  p-5 text-left align-middle shadow-xl transition-all ">
-                <div className="flex items-center justify-between gap-2 ">
-                  <p className="text-[#fff] text-2xl font-semibold nav_font ">
-                    Connect Wallet
-                  </p>
-                  <button
-                    className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[34px] h-[34px] flex items-center justify-center"
-                    onClick={closePopup}
-                  >
-                    <AiOutlineClose className="text-2xl text-white" />
-                  </button>
-                </div>
+        <Connectpopup
+          isOpen={isPopupOpen}
+          onClose={closePopup}
+          handleWalletConnect={handleWalletConnect}
+        />
 
-                <div className="py-7">
-                  <Link
-                    href={""}
-                    onClick={handleWalletConnect}
-                    className="flex items-center gap-3 box_wallet"
-                  >
-                    <Image
-                      className="w-[24px]"
-                      src={Metamaskicon}
-                      priority
-                      alt="Metamaskicon"
-                    />
-                    <span className="text-base text-[#fff] font-medium nav_font">
-                      MetaMask
-                    </span>
-                  </Link>
-                  <Link
-                    href={""}
-                    className="flex items-center gap-3 box_wallet my-3 "
-                  >
-                    <Image
-                      className="w-[24px]"
-                      src={Wallecticons}
-                      priority
-                      alt="Wallecticons"
-                    />
-                    <span className="text-base text-[#fff] font-medium nav_font">
-                      WalletConnect
-                    </span>
-                  </Link>
-                  {/*  <Link
-                    href={""}
-                    className="flex items-center gap-3 box_wallet"
-                  >
-                    <Image
-                      className="w-[24px]"
-                      src={Coinicons}
-                      priority
-                      alt="coinicons"
-                    />
-                    <span className="text-base text-[#fff] font-medium nav_font">
-                      Coinbase Wallet
-                    </span>
-                  </Link> */}
-                </div>
-                <p className="text-[#939191] text-xs font-medium nav_font ">
-                  Can’t connect your wallet?{""}
-                  <span className="text-[#40E0D0]"> Get Help</span>
-                </p>
-                <div className="border-[1px] border-dashed border-[#FFFFFF1A] my-[24px]"></div>
-                <p className="text-[#939191]  text-xs font-medium nav_font ">
-                  By continuing, you agree to Filament’s Terms of Service &
-                  Privacy Policy
-                </p>
-              </div>
-            </div>
-          </>
-        )}
         {/*wallet popup  */}
-        {isWalletOpen && (
-          <>
-            <div className="fixed inset-0 flex justify-center items-center z-[9999] bg-background/80 backdrop-blur-sm  bg-black opacity-90"></div>
-            <div className="fixed inset-0  flex justify-center items-center z-[9999]  top-[10%] ">
-              <div className="  wallet_popup w-full max-w-md transform  p-5 text-left align-middle shadow-xl transition-all ">
-                <div className="flex items-center justify-between gap-2 ">
-                  <p className="text-[#fff] text-2xl font-semibold nav_font ">
-                    Connect Wallet
-                  </p>
-                  <button
-                    className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[34px] h-[34px] flex items-center justify-center"
-                    onClick={closePopup}
-                  >
-                    <AiOutlineClose className="text-2xl text-white" />
-                  </button>
-                </div>
 
-                <div className="py-7">
-                  <div className="flex justify-center">
-                    {isConnecting ||
-                    (isConnected && chainId == InjectedChainId) ? (
-                      <Image
-                        className="w-[317px]"
-                        src={Metamaskimg} // green metamask
-                        priority
-                        alt="Metamaskimg"
-                      />
-                    ) : (
-                      <Image
-                        className="w-[317px]"
-                        src={Yellowimg}
-                        priority
-                        alt="Yellowimg"
-                      />
-                    )}
-                  </div>
-                  <Link href={""} className=" ">
-                    <div className="flex items-center gap-[8px] justify-center">
-                      <span>
-                        {isConnected && (
-                          <FaRegCheckCircle className="text-[#00CC99] text-[20px]" />
-                        )}
-                      </span>
-                      <p className="text-[20px]  text-[#fff] font-semibold nav_font">
-                        {isConnected
-                          ? "Connected to metamask"
-                          : "Connecting to MetaMask"}
-                      </p>
-                    </div>
-                  </Link>
-                  {/* Switch to injected Network  */}
-                  {isConnected && chainId != InjectedChainId ? (
-                    <>
-                      <div className="wallet_card_bg py-[12px] px-[16px] my-6">
-                        <div className="flex items-start gap-[12px]">
-                          <span>
-                            <IoMdWarning className="text-[#D57501] text-2xl" />
-                          </span>
-                          <div>
-                            <p className="text-[#D57501] pool_font text-base font-bold">
-                              Switch to Injective network
-                            </p>
-                            <p className="text-[#939191] pool_font text-base font-light">
-                              You need to be on Injective network to open &
-                              execute orders
-                            </p>
-                          </div>
-                        </div>
-                        <div className="my-3 justify-center flex">
-                          <button
-                            // disabled={!switchNetwork || x.id === chain?.id}
-                            className="items-center nav_font w-[384px] text-[#0B2B28] text-sm font-semibold  btn_one  py-[10px] px-[16px]"
-                            onClick={handleNetworkChange}
-                          >
-                            Switch to injective
-                          </button>
-                        </div>
-                      </div>
-                      <div
-                        onClick={disconnectMetamask}
-                        className="text-[#939191] cursor-pointer text-center nav_font text-xs font-medium"
-                      >
-                        Disconnect Wallet
-                      </div>
-                    </>
-                  ) : (
-                    <div
-                      onClick={disconnectMetamask}
-                      className=" text-center cursor-pointer justify-center flex  text-[#ffffff] text-xs font-semibold "
-                    ></div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-        {/*   Popup after connected */}
+        <Afterconnectpopup
+          isOpen={isWalletOpen}
+          isConnecting={isConnecting}
+          InjectedChainId={InjectedChainId}
+          chainId={chainId}
+          isConnected={isConnected}
+          onClose={closePopup}
+          handleNetworkChange={handleNetworkChange}
+          disconnectMetamask={disconnectMetamask}
+        />
+
+        {/*  Agree Popup after connected */}
+        <Agreepopup isOpen={isAgreeOpen} onClose={closePopup} />
 
         {/*mobile viwe side menu  */}
         <div
@@ -1172,7 +1020,5 @@ const Header = () => {
     </div>
   );
 };
-
-
 
 export default Header;

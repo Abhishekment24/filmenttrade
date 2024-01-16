@@ -16,6 +16,8 @@ const Limit = () => {
   const [sliderValue, setSliderValue] = useState(20);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [error, setError] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [formData, setFormData] = useState({
     priceinput: "",
     collateralinput: "",
@@ -25,15 +27,21 @@ const Limit = () => {
     sizeinput: "",
     Slippageinput: "",
   });
-  const handleInputChange = (event: any) => {
-    const { name, value } = event.target;
-    if (/^\d*$/.test(value) || value === "") {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value,
-      }));
-    }
-  };
+ const handleInputChange = (event: { target: { name: any; value: any; }; }) => {
+   const { name, value } = event.target;
+
+   if (isDisabled) {
+     return; // Skip input change if the component is disabled
+   }
+
+   // Check if the input value is valid (numeric)
+   if (/^\d*$/.test(value) || value === "") {
+     setFormData((prevFormData) => ({
+       ...prevFormData,
+       [name]: value,
+     }));
+   }
+ };
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
@@ -67,7 +75,15 @@ const Limit = () => {
   };
   return (
     <div className="px-4 pb-[100px]">
-      <div className="input_field_bg flex items-center gap-3 my-4 w-full px-4  h-[45px] ">
+      <div
+        className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
+          error
+            ? "focus-within:border-[#D65454] border-[#D65454]"
+            : isDisabled
+            ? "border-[#40E0D0]"
+            : "focus-within:border-[#40E0D0] border-gray-gray4"
+        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+      >
         <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
           Price
         </span>
@@ -76,14 +92,23 @@ const Limit = () => {
           name="priceinput"
           value={formData.priceinput}
           onChange={handleInputChange}
-          className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+          className=" block w-full pool_font  text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
           placeholder="0"
+          disabled={isDisabled}
         />
         <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
           BTC
         </span>
       </div>
-      <div className="input_field_bg flex items-center gap-3 mt-4 w-full px-4 h-[45px] ">
+      <div
+        className={`input_field_bg flex items-center gap-3 mt-4 w-full px-4 h-[45px] ${
+          error
+            ? "focus-within:border-[#D65454] border-[#D65454]"
+            : isDisabled
+            ? "border-[#40E0D0]"
+            : "focus-within:border-[#40E0D0] border-gray-gray4"
+        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+      >
         <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
           Collateral
         </span>
@@ -94,6 +119,7 @@ const Limit = () => {
           onChange={handleInputChange}
           className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
           placeholder="25.56"
+          disabled={isDisabled}
         />
         <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
           USDC
@@ -109,7 +135,15 @@ const Limit = () => {
           </p>
         </div>
       </div>
-      <div className="input_field_bg flex items-center gap-3 w-full px-4  h-[45px] ">
+      <div
+        className={`input_field_bg flex items-center gap-3  w-full px-4 h-[45px] ${
+          error
+            ? "focus-within:border-[#D65454] border-[#D65454]"
+            : isDisabled
+            ? "border-[#40E0D0]"
+            : "focus-within:border-[#40E0D0] border-gray-gray4"
+        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+      >
         <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
           Leverage
         </span>
@@ -119,6 +153,7 @@ const Limit = () => {
           value={sliderValue}
           className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
           placeholder="50"
+          disabled={isDisabled}
         />
         <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
           x
@@ -184,7 +219,15 @@ const Limit = () => {
             </span>
             {isChecked1 && (
               <>
-                <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                <div
+                  className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
+                    error
+                      ? "focus-within:border-[#D65454] border-[#D65454]"
+                      : isDisabled
+                      ? "border-[#40E0D0]"
+                      : "focus-within:border-[#40E0D0] border-gray-gray4"
+                  } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                >
                   <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
                     Take Profit
                   </span>
@@ -195,6 +238,7 @@ const Limit = () => {
                     onChange={handleInputChange}
                     className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                     placeholder="25.56"
+                    disabled={isDisabled}
                   />
                   <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
                   <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
@@ -253,7 +297,15 @@ const Limit = () => {
                       </Switch>
                     </div>
                   </div>
-                  <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                  <div
+                    className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
+                      error
+                        ? "focus-within:border-[#D65454] border-[#D65454]"
+                        : isDisabled
+                        ? "border-[#40E0D0]"
+                        : "focus-within:border-[#40E0D0] border-gray-gray4"
+                    } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                  >
                     <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
                       Stop Loss
                     </span>
@@ -264,6 +316,7 @@ const Limit = () => {
                       onChange={handleInputChange}
                       className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                       placeholder="0"
+                      disabled={isDisabled}
                     />
 
                     <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
@@ -272,7 +325,15 @@ const Limit = () => {
                   </div>
                   {enabled && (
                     <>
-                      <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                      <div
+                        className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
+                            ? "border-[#40E0D0]"
+                            : "focus-within:border-[#40E0D0] border-gray-gray4"
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                      >
                         <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
                           Limit
                         </span>
@@ -283,6 +344,7 @@ const Limit = () => {
                           onChange={handleInputChange}
                           className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                           placeholder="0"
+                          disabled={isDisabled}
                         />
                         <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
                         <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
@@ -292,7 +354,15 @@ const Limit = () => {
                           <IoIosArrowDown className="text-[#9CA3AF] text-[15px]" />
                         </span>
                       </div>
-                      <div className="input_field_bg flex  items-center gap-3 my-4 w-[100%] px-4  h-[45px] ">
+                      <div
+                        className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
+                            ? "border-[#40E0D0]"
+                            : "focus-within:border-[#40E0D0] border-gray-gray4"
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                      >
                         <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
                           Size
                         </span>
@@ -303,6 +373,7 @@ const Limit = () => {
                           onChange={handleInputChange}
                           className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                           placeholder="0"
+                          disabled={isDisabled}
                         />
 
                         <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
@@ -488,7 +559,17 @@ const Limit = () => {
                         <span className="pool_font text-[#fff]  text-xs font-medium tracking-[0.06px]">
                           Slippage Tolerance
                         </span>
-                        <div className="input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ">
+                        <div
+                          className={`input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ${
+                            error
+                              ? "focus-within:border-[#D65454] border-[#D65454]"
+                              : isDisabled
+                              ? "border-[#40E0D0]"
+                              : "focus-within:border-[#40E0D0] border-gray-gray4"
+                          } ${
+                            isDisabled ? "opacity-50 cursor-not-allowed" : ""
+                          }`}
+                        >
                           <input
                             type="text"
                             name="Slippageinput"
@@ -496,6 +577,7 @@ const Limit = () => {
                             onChange={handleInputChange}
                             className=" block w-[100%]  pool_font text-[#fff] text-[15px] font-medium text-left h-[38px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                             placeholder="1"
+                            disabled={isDisabled}
                           />
 
                           <div className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">

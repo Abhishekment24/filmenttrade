@@ -20,14 +20,19 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
 }) => {
   const [editPopupVisible, setEditPopupVisible] = useState(false);
   const [closePopupVisible, setClosePopupVisible] = useState(false);
+  const [error, setError] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [formsData, setFormsData] = useState({
-    collateralinput: "0.3636",
-    profitinput: "0.250",
-    stopinput: "0.015",
+    collateralinput: "2",
+    profitinput: "2",
+    stopinput: "3",
     amount: "100",
   });
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
+    if (isDisabled) {
+      return; // Skip input change if the component is disabled
+    }
     if (/^\d*$/.test(value) || value === "") {
       setFormsData((prevFormData) => ({
         ...prevFormData,
@@ -96,7 +101,15 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
 
                   {!editPopupVisible ? (
                     <>
-                      <div className="bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px]">
+                      <div
+                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
+                            ? "border-[#40E0D0]"
+                            : "focus-within:border-[#40E0D0] border-gray-gray4"
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                      >
                         <span className="pool_font w-[100%] text-[#fff] text-xs font-medium ">
                           Collateral
                         </span>
@@ -107,6 +120,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           onChange={handleInputChange}
                           className=" block w-[100%] pool_font text-[#fff] text-xs font-medium text-right h-[40px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                           placeholder="42.2042 USDC"
+                          disabled={isDisabled}
                         />
                         <div className="w-[1px] h-[16px] bg-[#25272A]"> </div>
 
@@ -114,7 +128,15 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           <MdEdit className="text-[#fff] text-[16px]" />
                         </span>
                       </div>
-                      <div className="bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px]">
+                      <div
+                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
+                            ? "border-[#40E0D0]"
+                            : "focus-within:border-[#40E0D0] border-gray-gray4"
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                      >
                         <span className="pool_font w-[100%] text-[#fff] text-xs font-medium ">
                           Leverage
                         </span>
@@ -124,6 +146,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           onChange={handleSliderChange}
                           className=" block w-[100%] pool_font text-[#fff] text-xs font-medium text-right h-[40px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                           placeholder="10x"
+                          disabled={isDisabled}
                         />
                         <div className="w-[1px] h-[16px] bg-[#25272A]"> </div>
 
@@ -135,7 +158,15 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         </span>
                       </div>
 
-                      <div className="bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px]">
+                      <div
+                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
+                            ? "border-[#40E0D0]"
+                            : "focus-within:border-[#40E0D0] border-gray-gray4"
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                      >
                         <span className="pool_font w-[100%] text-[#fff] text-xs font-medium ">
                           Take Profit
                         </span>
@@ -146,6 +177,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           onChange={handleInputChange}
                           className=" block w-[100%] pool_font text-[#fff] text-xs font-medium text-right h-[40px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                           placeholder="-"
+                          disabled={isDisabled}
                         />
                         <div className="w-[1px] h-[16px] bg-[#25272A]"> </div>
 
@@ -153,7 +185,15 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           <MdEdit className="text-[#fff] text-[16px]" />
                         </span>
                       </div>
-                      <div className="bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px]">
+                      <div
+                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
+                            ? "border-[#40E0D0]"
+                            : "focus-within:border-[#40E0D0] border-gray-gray4"
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                      >
                         <span className="pool_font w-[100%] text-[#fff] text-xs font-medium ">
                           Stop Loss
                         </span>
@@ -164,6 +204,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           onChange={handleInputChange}
                           className=" block w-[100%] pool_font text-[#fff] text-xs font-medium text-right h-[40px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                           placeholder="42.2042 USDC"
+                          disabled={isDisabled}
                         />
                         <div className="w-[1px] h-[16px] bg-[#25272A]"> </div>
 
@@ -173,11 +214,19 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                       </div>
                     </>
                   ) : (
-                    <div className="bg-[#1F2023] my-4  p-3 rounded-[8px]  border-[#363A41] border-solid border-[1px]">
+                    <div className="bg-[#1F2023] my-4  px-4 rounded-[8px] h-[46px] border-[#363A41] border-solid border-[1px]">
                       <span className="text-[#FFFFFF] pool_font text-xs font-medium tracking-[0.06px]">
                         Update Leverage
                       </span>
-                      <div className="bg-[#25272A] mt-[16px] flex items-center gap-3 w-full px-4 rounded-[8px] h-[46px] border-[#2E3034] border-solid border-[1px]">
+                      <div
+                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
+                            ? "border-[#40E0D0]"
+                            : "focus-within:border-[#40E0D0] border-gray-gray4"
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                      >
                         <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.06px]">
                           Leverage
                         </span>
@@ -186,6 +235,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           value={sliderValue}
                           className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                           placeholder="50"
+                          disabled={isDisabled}
                         />
                         <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
                           x
@@ -469,7 +519,16 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                       <AiOutlineClose className="text-2xl text-white" />
                     </button>
                   </div>
-                  <div className="bg-[#2B2B2B] border-[1px] border-solid border-[#363A41] rounded-[8px] flex items-center gap-3 mt-4 w-full px-4 h-[45px] ">
+                  <div
+                    className={`bg-[#2B2B2B] border-[1px] border-solid border-[#363A41] rounded-[8px] flex items-center gap-3 mt-4 w-full px-4 h-[45px] ${
+                      error
+                        ? "focus-within:border-[#D65454] border-[#D65454]"
+                        : isDisabled
+                        ? "border-[#40E0D0]"
+                        : "focus-within:border-[#40E0D0] border-gray-gray4"
+                    } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                  >
+                 
                     <span className="pool_font text-[#9CA3AF] text-xs font-medium tracking-[0.06px]">
                       Amount
                     </span>
@@ -480,6 +539,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                       onChange={handleInputChange}
                       className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                       placeholder="0.0"
+                      disabled={isDisabled}
                     />
                     <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.75px]">
                       USD

@@ -49,7 +49,10 @@ const Subheader = () => {
         <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
           <div className="flex justify-between text-[#fff] items-center max-[1023px]:hidden gap-[14px]">
             <div className="flex items-center gap-[14px]">
-              <div className="flex cursor-pointer justify-between items-center gap-[14px]">
+              <div
+                onClick={() => setshowLangDrop(!showLangDrop)}
+                 className="flex cursor-pointer justify-between items-center gap-[14px]"
+              >
                 <div className="flex items-center gap-[14px]">
                   <Image
                     className="w-[24px]"
@@ -62,10 +65,7 @@ const Subheader = () => {
                   </span>
                 </div>
                 <div className="relative ">
-                  <RiArrowDownSFill
-                    onClick={() => setshowLangDrop(!showLangDrop)}
-                    className="text-[#fff] text-base"
-                  />
+                  <RiArrowDownSFill className="text-[#fff] text-base" />
 
                   {showLangDrop && (
                     <div
@@ -247,7 +247,6 @@ const Subheader = () => {
               <div
                 className="cursor-pointer rounded-[4px] border-[1px] border-solid border-[#25272A] bg-[#1B1B1B] w-[38px] h-[38px] flex items-center justify-center"
                 onClick={toggleMenu}
-                
               >
                 <span>
                   <IoSettingsOutline className="text-[#fff] text-base" />

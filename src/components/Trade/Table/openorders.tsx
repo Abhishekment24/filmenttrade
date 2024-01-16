@@ -173,7 +173,7 @@ const Openorders = () => {
                 <div
                   key={key}
                   onClick={handleDelete}
-                  className="h-[57.7px] cursor-pointer table_right_side flex items-center justify-center"
+                  className="h-[57px] cursor-pointer table_right_side flex items-center justify-center"
                 >
                   <div className="rounded-[4px] border-[1px] border-solid border-[#313131] bg-[#2B2B2B] p-1 flex items-center justify-center">
                     <span className="pool_font text-xs font-semibold text-[#FFFFFF] tracking-[0.06px]">

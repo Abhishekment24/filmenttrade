@@ -97,10 +97,10 @@ const Pool = () => {
                 />
               </div>
               <div className="flex flex-col gap-[4px]">
-                <span className="nav_font text-[#fff] text-[20px] font-semibold">
+                <span className="pool_font text-[#fff] text-[20px] font-semibold">
                   USDC
                 </span>
-                <span className="nav_font text-[#939191] text-xs font-normal">
+                <span className="pool_font text-[#939191] text-xs font-normal">
                   Liquidity Pool
                 </span>
               </div>
