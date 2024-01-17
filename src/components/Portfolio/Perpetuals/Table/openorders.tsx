@@ -39,44 +39,44 @@ const Openorders = () => {
               <table className="w-full">
                 <thead>
                   <tr className="pool_font text-xs font-medium border-b-[1px] border-solid border-[#25272A]  text-[#9CA3AF]">
-                    <th className="text-left font-medium  max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-2 py-2">
+                    <th className="text-left font-medium  positins-width max-[1699px]:px-2 px-2 py-2">
                       Date
                     </th>
-                    <th className="text-left font-medium  max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                    <th className="text-left font-medium  positins-width max-[1699px]:px-2 px-1 py-2">
                       Token
                     </th>
-                    <th className="text-left font-medium  max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                    <th className="text-left font-medium  positins-width max-[1699px]:px-2 px-1 py-2">
                       Type
                     </th>
-                    <th className="text-center font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                    <th className="text-center font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                       Status
                     </th>
-                    <th className="text-center font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                    <th className="text-center font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                       Position Size
                     </th>
-                    <th className="text-right  font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                    <th className="text-right  font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                       Collateral
                     </th>
-                    <th className="text-right font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                    <th className="text-right font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                       Leverage
                     </th>
 
-                    <th className="text-right font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                    <th className="text-right font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                       Entry Price
                     </th>
-                    <th className="text-center font-medium  max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                    <th className="text-center font-medium  positins-width max-[1699px]:px-2 px-1 py-2">
                       Take Profit
                     </th>
-                    <th className="text-center font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                    <th className="text-center font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                       Stop Loss
                     </th>
-                    <th className="text-right font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                    <th className="text-right font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                       PnL
                     </th>
-                    <th className="text-center font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                    <th className="text-center font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                       Liquidation Price
                     </th>
-                    <th className="text-right font-medium max-[1699px]:min-w-[8rem] max-[1699px]:pl-2 pl-1 pr-[25px]  py-2">
+                    <th className="text-right font-medium positins-width max-[1699px]:pl-2 pl-1 pr-[25px]  py-2">
                       Fees
                     </th>
                   </tr>
@@ -99,7 +99,7 @@ const Openorders = () => {
                             key={index}
                             className="pool_font hover:bg-[#25272A] text-sm  text-[#E5E7EB] border-b-[1px] border-solid border-[#25272A] tracking-[0.07px]"
                           >
-                            <td className="text-left font-medium  max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                            <td className="text-left font-medium  positins-width max-[1699px]:px-2 px-1 py-2">
                               <div className="flex flex-col">
                                 <span> {data.date}</span>
                                 <span className="text-xs text-[#6B7280] font-normal">
@@ -108,7 +108,7 @@ const Openorders = () => {
                               </div>
                             </td>
 
-                            <td className="text-left font-medium flex flex-col max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-2 py-2">
+                            <td className="text-left font-medium flex flex-col positins-width max-[1699px]:px-2 px-2 py-2">
                               {data.token}
                               <span
                                 className={`text-[10px] text-center   px-[2px] rounded-[4px] ${
@@ -120,39 +120,39 @@ const Openorders = () => {
                                 {data.tokenpart}
                               </span>
                             </td>
-                            <td className="text-left font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                            <td className="text-left font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                               {data.type}
                             </td>
-                            <td className="text-center font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                            <td className="text-center font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                               {data.status}
                             </td>
-                            <td className="text-center font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                            <td className="text-center font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                               {data.positionSize}
                             </td>
-                            <td className="text-right  font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                            <td className="text-right  font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                               {data.collateral}
                             </td>
-                            <td className="text-right font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                            <td className="text-right font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                               {data.leverage}
                             </td>
 
-                            <td className="text-right font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                            <td className="text-right font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                               {data.entryprice}
                             </td>
-                            <td className="text-center font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                            <td className="text-center font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                               {data.takeprofit}
                             </td>
-                            <td className="text-center font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                            <td className="text-center font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                               {data.stoploss}
                             </td>
-                            <td className="text-right font-medium  text-[#00CC99] flex flex-col max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                            <td className="text-right font-medium  text-[#00CC99] flex flex-col positins-width max-[1699px]:px-2 px-1 py-2">
                               {data.pnL}
                               <span className="text-[10px]">{data.pnlper}</span>
                             </td>
-                            <td className="text-center font-medium max-[1699px]:min-w-[8rem] max-[1699px]:px-2 px-1 py-2">
+                            <td className="text-center font-medium positins-width max-[1699px]:px-2 px-1 py-2">
                               {data.liquidationprice}
                             </td>
-                            <td className="  font-medium max-[1699px]:min-w-[8rem] max-[1699px]:pl-2 pl-1 pr-[25px] py-2">
+                            <td className="  font-medium positins-width max-[1699px]:pl-2 pl-1 pr-[25px] py-2">
                               <div className="justify-end flex">
                                 <div> {data.fees}</div>
                               </div>

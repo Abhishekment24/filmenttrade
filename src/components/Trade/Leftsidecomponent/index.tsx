@@ -1,10 +1,14 @@
 import React from "react";
 import Charts from "./Charts";
 
-const Leftsidecomponent = () => {
+interface leftInterface {
+  currencyState: String;
+}
+
+const Leftsidecomponent: React.FC<leftInterface> = ({ currencyState }) => {
   return (
     <div className="lg:h-[632px] h-[400px]">
-      <Charts />
+      <Charts currencyState={currencyState} />
     </div>
   );
 };

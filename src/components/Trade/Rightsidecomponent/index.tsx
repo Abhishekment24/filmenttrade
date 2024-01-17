@@ -9,7 +9,7 @@ import { useAccount, useConnect } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 interface RightProps {
   StakeOpenPopup: () => void;
-  formData: any;
+  //formData: any;
   //connectWallet: () => void;
   //isConnected: boolean;
 }
@@ -26,7 +26,7 @@ const tabs = [
 const Rightsidecomponent: React.FC<RightProps> = ({
   StakeOpenPopup,
   // connectWallet,
-  formData,
+ // formData,
 }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const closePopup = () => {
@@ -54,8 +54,8 @@ const Rightsidecomponent: React.FC<RightProps> = ({
   }, [dropdownRef]);
   return (
     <>
-      <div className="border-[1px] border-solid bg-[#1B1C1E] border-[#FFFFFF0D] max-[1023px]:mt-5 lg:h-[90vh] lg:w-[30%] xl:w-[25%] min-[1700px]:w-[400px] lg:fixed lg:overflow-y-scroll">
-        <div className="lg:bg-[#1B1C1E] lg:fixed lg:w-[30%] xl:w-[25%] min-[1700px]:w-[400px]">
+      <div className="border-[1px] border-solid bg-[#1B1C1E]   border-[#FFFFFF0D] max-[1023px]:mt-5 lg:h-[90vh] lg:w-[30%] xl:w-[25%] min-[1700px]:w-[400px] lg:fixed lg:overflow-y-scroll">
+        <div className="lg:bg-[#1B1C1E] lg:fixed  z-[300] lg:w-[30%] xl:w-[25%] min-[1700px]:w-[400px]">
           <div className="px-4"></div>
           <div className="flex justify-between flex-wrap items-center gap-[10px] w-full border-b-[1px] border-[#272727] px-4">
             <div className="flex items-center  justify-between  gap-[19px]  border-b-[1px] border-[#272727] w-full">
@@ -81,7 +81,7 @@ const Rightsidecomponent: React.FC<RightProps> = ({
           {selectedTab == "market" && (
             <>
               <Market
-                formData={formData}
+                //formData={formData}
                 StakeOpenPopup={StakeOpenPopup}
                 isConnected={isConnected}
               />
@@ -93,7 +93,7 @@ const Rightsidecomponent: React.FC<RightProps> = ({
             </>
           )}
         </div>
-        <div className="lg:fixed lg:bg-[#1B1C1E] lg:bottom-[1%] px-4 py-4 border-t-[1px] lg:h-[90px] border-[#272727] border-solid lg:w-[30%] xl:w-[25%] min-[1700px]:w-[400px]">
+        <div className="lg:fixed lg:bg-[#1B1C1E]  z-[300] lg:bottom-[1%] px-4 py-4 border-t-[1px] lg:h-[90px] border-[#272727] border-solid lg:w-[30%] xl:w-[25%] min-[1700px]:w-[400px]">
           <>
             <div className="flex items-center gap-[8px] w-full">
               <div data-tooltip-id="my-tooltip5" className="w-[50%]">

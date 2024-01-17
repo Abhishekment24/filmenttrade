@@ -55,7 +55,7 @@ const Overview = () => {
   const [selectedTab, setSelectedTab] = useState("portfolio");
   return (
     <>
-      <div className="flex justify-between items-center gap-[4px]">
+      <div className="">
         <div>
           <p className="pool_font text-[#fff] text-2xl font-semibold tracking-[0.12px]">
             My Portfolio
@@ -64,24 +64,7 @@ const Overview = () => {
             0x63gws...3536
           </span>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="cursor-pointer flex items-center justify-center gap-2 bg-[#2B2B2B] rounded-[4px] max-border py-[12px] px-[8px] w-[154px]">
-            <span>
-              <LuArrowDownRightSquare className="text-sm  text-[#FFFFFF]" />
-            </span>
-            <button className=" pool_font text-[#FFFFFF]  text-xs font-semibold     tracking-[0.06px]">
-              Deposit
-            </button>
-          </div>
-          <div className="cursor-pointer flex items-center justify-center gap-2 bg-[#2B2B2B] rounded-[4px] max-border py-[12px] px-[8px] w-[154px]">
-            <span>
-              <LuArrowUpRightSquare className="text-sm  text-[#FFFFFF]" />
-            </span>
-            <button className="pool_font text-[#FFFFFF]  text-xs font-semibold     tracking-[0.06px]">
-              Withdraw
-            </button>
-          </div>
-        </div>
+      
       </div>
       <div className="flex mt-[40px] items-start bg-[#1B1C1E] gap-6 justify-between max-[1023px]:flex-col pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] sm:px-[24px] px-5 w-full relative">
         <div className="lg:w-[30%] w-full py-[24px]">

@@ -22,11 +22,18 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
   const [closePopupVisible, setClosePopupVisible] = useState(false);
   const [error, setError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  //const [result, setResult] = useState<number | null>(null);
+  const [isPlaceholderHidden, setIsPlaceholderHidden] = useState({
+    collateralinput: false,
+    profitinput: false,
+    stopinput: false,
+    amount: false,
+  });
   const [formsData, setFormsData] = useState({
     collateralinput: "2",
     profitinput: "2",
     stopinput: "3",
-    amount: "100",
+    amount: "",
   });
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -37,6 +44,34 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
       setFormsData((prevFormData) => ({
         ...prevFormData,
         [name]: value,
+      }));
+    }
+  };
+  const calculatePercentage = (percentage: number) => {
+    const { amount } = formsData;
+    const parsedAmount = parseFloat(amount);
+    if (!isNaN(parsedAmount)) {
+      const calculatedValue = (parsedAmount * percentage) / 100;
+      setFormsData((prevFormData) => ({
+        ...prevFormData,
+        amount: calculatedValue.toFixed(2),
+      }));
+    }
+  };
+  const handleInputFocus = (field: string) => {
+    // Hide placeholder when input is focused
+    setIsPlaceholderHidden((prevPlaceholders) => ({
+      ...prevPlaceholders,
+      [field]: true,
+    }));
+  };
+
+  const handleInputBlur = (field: string) => {
+    // Show placeholder when input loses focus and is empty
+    if (formsData[field as keyof typeof formsData] === "") {
+      setIsPlaceholderHidden((prevPlaceholders) => ({
+        ...prevPlaceholders,
+        [field]: false,
       }));
     }
   };
@@ -118,8 +153,12 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           name="collateralinput"
                           value={formsData.collateralinput}
                           onChange={handleInputChange}
+                          onFocus={() => handleInputFocus("collateralinput")}
+                          onBlur={() => handleInputBlur("collateralinput")}
                           className=" block w-[100%] pool_font text-[#fff] text-xs font-medium text-right h-[40px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                          placeholder="42.2042 USDC"
+                          placeholder={
+                            isPlaceholderHidden.collateralinput ? "" : "42 USDC"
+                          }
                           disabled={isDisabled}
                         />
                         <div className="w-[1px] h-[16px] bg-[#25272A]"> </div>
@@ -143,9 +182,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         <input
                           type="text"
                           value={`${sliderValue}x`}
-                          onChange={handleSliderChange}
                           className=" block w-[100%] pool_font text-[#fff] text-xs font-medium text-right h-[40px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                          placeholder="10x"
                           disabled={isDisabled}
                         />
                         <div className="w-[1px] h-[16px] bg-[#25272A]"> </div>
@@ -175,8 +212,12 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           name="profitinput"
                           value={formsData.profitinput}
                           onChange={handleInputChange}
+                          onFocus={() => handleInputFocus("profitinput")}
+                          onBlur={() => handleInputBlur("profitinput")}
                           className=" block w-[100%] pool_font text-[#fff] text-xs font-medium text-right h-[40px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                          placeholder="-"
+                          placeholder={
+                            isPlaceholderHidden.profitinput ? "" : "10"
+                          }
                           disabled={isDisabled}
                         />
                         <div className="w-[1px] h-[16px] bg-[#25272A]"> </div>
@@ -202,8 +243,12 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           name="stopinput"
                           value={formsData.stopinput}
                           onChange={handleInputChange}
+                          onFocus={() => handleInputFocus("stopinput")}
+                          onBlur={() => handleInputBlur("stopinput")}
                           className=" block w-[100%] pool_font text-[#fff] text-xs font-medium text-right h-[40px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                          placeholder="42.2042 USDC"
+                          placeholder={
+                            isPlaceholderHidden.stopinput ? "" : "42.2042"
+                          }
                           disabled={isDisabled}
                         />
                         <div className="w-[1px] h-[16px] bg-[#25272A]"> </div>
@@ -214,7 +259,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                       </div>
                     </>
                   ) : (
-                    <div className="bg-[#1F2023] my-4  px-4 rounded-[8px] h-[46px] border-[#363A41] border-solid border-[1px]">
+                    <div className="bg-[#1F2023] my-4  py-4 px-3 rounded-[4px]  border-[#25272A] border-solid border-[1px]">
                       <span className="text-[#FFFFFF] pool_font text-xs font-medium tracking-[0.06px]">
                         Update Leverage
                       </span>
@@ -234,7 +279,6 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           type="text"
                           value={sliderValue}
                           className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                          placeholder="50"
                           disabled={isDisabled}
                         />
                         <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
@@ -528,7 +572,6 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         : "focus-within:border-[#40E0D0] border-gray-gray4"
                     } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                   >
-                 
                     <span className="pool_font text-[#9CA3AF] text-xs font-medium tracking-[0.06px]">
                       Amount
                     </span>
@@ -537,8 +580,10 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                       name="amount"
                       value={formsData.amount}
                       onChange={handleInputChange}
+                      onFocus={() => handleInputFocus("amount")}
+                      onBlur={() => handleInputBlur("amount")}
                       className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                      placeholder="0.0"
+                      placeholder={isPlaceholderHidden.amount ? "" : "0.0"}
                       disabled={isDisabled}
                     />
                     <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.75px]">
@@ -546,22 +591,34 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                     </span>
                   </div>
                   <div className="flex items-center gap-[8px] justify-between w-full my-4">
-                    <div className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B] w-[25%]">
+                    <div
+                      onClick={() => calculatePercentage(25)}
+                      className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B] w-[25%]"
+                    >
                       <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
                         25%
                       </p>
                     </div>
-                    <div className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B] w-[25%]">
+                    <div
+                      onClick={() => calculatePercentage(50)}
+                      className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B] w-[25%]"
+                    >
                       <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
                         50%
                       </p>
                     </div>
-                    <div className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B] w-[25%]">
+                    <div
+                      onClick={() => calculatePercentage(75)}
+                      className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B] w-[25%]"
+                    >
                       <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
                         75%
                       </p>
                     </div>
-                    <div className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B] w-[25%]">
+                    <div
+                      onClick={() => calculatePercentage(100)}
+                      className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B] w-[25%]"
+                    >
                       <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
                         100%
                       </p>

@@ -1,14 +1,9 @@
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 //import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 
-const people = [
-  { name: "1 Day" },
-  { name: "1 Week" },
-  { name: "6 Months" },
-  { name: "1 Year" },
-];
+const people = [{ name: "$" }, { name: "$" }];
 
 const Dropdown = () => {
   const [selected, setSelected] = useState(people[0]);
@@ -17,20 +12,15 @@ const Dropdown = () => {
     <div className="">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative">
-          <Listbox.Button className="relative w-full cursor-default py-[6px] px-[12px] gap-[20px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+          <Listbox.Button className="relative w-full cursor-pointer py-[6px] px-[12px] gap-[20px]      pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <span className="block truncate  pool_font text-[#BABABA] text-base font-normal">
               {selected.name}
             </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <div className="">
-                <IoMdArrowDropup
+                <IoIosArrowDown
                   aria-hidden="true"
-                  className="text-[#BABABA] text-base"
-                />
-
-                <IoMdArrowDropdown
-                  aria-hidden="true"
-                  className="text-[#BABABA] text-base mt-[-10px]"
+                  className="text-[#9CA3AF] text-[15px]"
                 />
               </div>
             </span>

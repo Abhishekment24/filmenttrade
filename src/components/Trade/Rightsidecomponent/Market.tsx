@@ -9,15 +9,19 @@ import { Switch } from "@headlessui/react";
 import { Tooltip } from "react-tooltip";
 import { MdOutlineArrowDownward } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import Dropdown from "./Dropdown";
+
 interface MarketProps {
   isConnected: boolean;
-  formData: any;
+ // formData: any;
+
   StakeOpenPopup: () => void;
 }
 const Market: React.FC<MarketProps> = ({
   isConnected,
   StakeOpenPopup,
-  formData,
+
+ // formData,
 }) => {
   //const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
@@ -25,8 +29,16 @@ const Market: React.FC<MarketProps> = ({
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-   const [error, setError] = useState(false);
-   const [isDisabled, setIsDisabled] = useState(false);
+  const [error, setError] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isPlaceholderHidden, setIsPlaceholderHidden] = useState({
+    collateralinput: false,
+    profitinput: false,
+    stopinput: false,
+    limitinput: false,
+    sizeinput: false,
+    Slippageinput: false,
+  });
   const [formsData, setFormsData] = useState({
     collateralinput: "",
     profitinput: "",
@@ -51,6 +63,24 @@ const Market: React.FC<MarketProps> = ({
       }));
     }
   };
+  const handleInputFocus = (field: string) => {
+    // Hide placeholder when input is focused
+    setIsPlaceholderHidden((prevPlaceholders) => ({
+      ...prevPlaceholders,
+      [field]: true,
+    }));
+  };
+
+  const handleInputBlur = (field: string) => {
+    // Show placeholder when input loses focus and is empty
+    if (formsData[field as keyof typeof formsData] === "") {
+      setIsPlaceholderHidden((prevPlaceholders) => ({
+        ...prevPlaceholders,
+        [field]: false,
+      }));
+    }
+  };
+
   const [isMenuOpen, setMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleMenu = () => {
@@ -105,8 +135,11 @@ const Market: React.FC<MarketProps> = ({
             name="collateralinput"
             value={formsData.collateralinput}
             onChange={handleInputChange}
+            placeholder={isPlaceholderHidden.collateralinput ? "" : "25.46"}
+            onFocus={() => handleInputFocus("collateralinput")}
+            onBlur={() => handleInputBlur("collateralinput")}
             className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-            placeholder="25.56"
+            // placeholder={isPlaceholderHidden ? "" : "25.46"}
             disabled={isDisabled}
           />
           <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
@@ -130,11 +163,11 @@ const Market: React.FC<MarketProps> = ({
             <div className="flex justify-between items-center  my-4">
               <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
                 Available Collateral:{" "}
-                <span className="text-[#fff]">${formData.amount}</span>
+                <span className="text-[#fff]">$500</span>
               </p>
               <div className="flex items-center gap-[4px]">
                 <div
-                  onClick={StakeOpenPopup}
+                  //  onClick={StakeOpenPopup}
                   className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B]"
                 >
                   <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
@@ -198,7 +231,6 @@ const Market: React.FC<MarketProps> = ({
             type="text"
             value={sliderValue}
             className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-            placeholder="50"
             disabled={isDisabled}
           />
           <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
@@ -282,8 +314,10 @@ const Market: React.FC<MarketProps> = ({
                       name="profitinput"
                       value={formsData.profitinput}
                       onChange={handleInputChange}
+                      onFocus={() => handleInputFocus("profitinput")}
+                      onBlur={() => handleInputBlur("profitinput")}
                       className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                      placeholder="25.56"
+                      placeholder={isPlaceholderHidden.profitinput ? "" : "10"}
                       disabled={isDisabled}
                     />
                     <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
@@ -291,7 +325,7 @@ const Market: React.FC<MarketProps> = ({
                       %
                     </span>
                     <span>
-                      <IoIosArrowDown className="text-[#9CA3AF] text-[15px]" />
+                      <Dropdown />
                     </span>
                   </div>
                 </>
@@ -358,10 +392,12 @@ const Market: React.FC<MarketProps> = ({
                       <input
                         type="text"
                         name="stopinput"
-                        value={formData.stopinput}
+                        value={formsData.stopinput}
                         onChange={handleInputChange}
+                        onFocus={() => handleInputFocus("stopinput")}
+                        onBlur={() => handleInputBlur("stopinput")}
                         className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                        placeholder="0"
+                        placeholder={isPlaceholderHidden.stopinput ? "" : "0"}
                         disabled={isDisabled}
                       />
 
@@ -390,8 +426,12 @@ const Market: React.FC<MarketProps> = ({
                             name="limitinput"
                             value={formsData.limitinput}
                             onChange={handleInputChange}
+                            onFocus={() => handleInputFocus("limitinput")}
+                            onBlur={() => handleInputBlur("limitinput")}
                             className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                            placeholder="0"
+                            placeholder={
+                              isPlaceholderHidden.limitinput ? "" : "0"
+                            }
                             disabled={isDisabled}
                           />
                           <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]">
@@ -401,7 +441,7 @@ const Market: React.FC<MarketProps> = ({
                             %
                           </span>
                           <span>
-                            <IoIosArrowDown className="text-[#9CA3AF] text-[15px]" />
+                            <Dropdown />
                           </span>
                         </div>
                         <div
@@ -423,8 +463,12 @@ const Market: React.FC<MarketProps> = ({
                             name="sizeinput"
                             value={formsData.sizeinput}
                             onChange={handleInputChange}
+                            onFocus={() => handleInputFocus("sizeinput")}
+                            onBlur={() => handleInputBlur("sizeinput")}
                             className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                            placeholder="0"
+                            placeholder={
+                              isPlaceholderHidden.sizeinput ? "" : "0"
+                            }
                             disabled={isDisabled}
                           />
 
@@ -629,8 +673,12 @@ const Market: React.FC<MarketProps> = ({
                               name="Slippageinput"
                               value={formsData.Slippageinput}
                               onChange={handleInputChange}
+                              onFocus={() => handleInputFocus("Slippageinput")}
+                              onBlur={() => handleInputBlur("Slippageinput")}
                               className=" block w-[100%]  pool_font text-[#fff] text-[15px] font-medium text-left h-[38px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                              placeholder="1"
+                              placeholder={
+                                isPlaceholderHidden.Slippageinput ? "" : "1"
+                              }
                               disabled={isDisabled}
                             />
 

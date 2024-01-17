@@ -7,6 +7,7 @@ import { Switch } from "@headlessui/react";
 import { Tooltip } from "react-tooltip";
 import { MdOutlineArrowDownward } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import Dropdown from "./Dropdown";
 const Limit = () => {
   const [enabled, setEnabled] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
@@ -18,6 +19,15 @@ const Limit = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [error, setError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isPlaceholderHidden, setIsPlaceholderHidden] = useState({
+    priceinput: false,
+    collateralinput: false,
+    profitinput: false,
+    stopinput: false,
+    limitinput: false,
+    sizeinput: false,
+    Slippageinput: false,
+  });
   const [formData, setFormData] = useState({
     priceinput: "",
     collateralinput: "",
@@ -27,21 +37,39 @@ const Limit = () => {
     sizeinput: "",
     Slippageinput: "",
   });
- const handleInputChange = (event: { target: { name: any; value: any; }; }) => {
-   const { name, value } = event.target;
+  const handleInputChange = (event: { target: { name: any; value: any } }) => {
+    const { name, value } = event.target;
 
-   if (isDisabled) {
-     return; // Skip input change if the component is disabled
-   }
+    if (isDisabled) {
+      return; // Skip input change if the component is disabled
+    }
 
-   // Check if the input value is valid (numeric)
-   if (/^\d*$/.test(value) || value === "") {
-     setFormData((prevFormData) => ({
-       ...prevFormData,
-       [name]: value,
-     }));
-   }
- };
+    // Check if the input value is valid (numeric)
+    if (/^\d*$/.test(value) || value === "") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
+  };
+  const handleInputFocus = (field: string) => {
+    // Hide placeholder when input is focused
+    setIsPlaceholderHidden((prevPlaceholders) => ({
+      ...prevPlaceholders,
+      [field]: true,
+    }));
+  };
+
+  const handleInputBlur = (field: string) => {
+    // Show placeholder when input loses focus and is empty
+  if (formData[field as keyof typeof formData] === "") {
+    setIsPlaceholderHidden((prevPlaceholders) => ({
+      ...prevPlaceholders,
+      [field]: false,
+    }));
+  }
+  };
+
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
@@ -92,10 +120,14 @@ const Limit = () => {
           name="priceinput"
           value={formData.priceinput}
           onChange={handleInputChange}
-          className=" block w-full pool_font  text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-          placeholder="0"
+          placeholder={isPlaceholderHidden.priceinput ? "" : "25.46"}
+          onFocus={() => handleInputFocus("priceinput")}
+          onBlur={() => handleInputBlur("priceinput")}
+          className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+          // placeholder={isPlaceholderHidden ? "" : "25.46"}
           disabled={isDisabled}
         />
+
         <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
           BTC
         </span>
@@ -117,8 +149,11 @@ const Limit = () => {
           name="collateralinput"
           value={formData.collateralinput}
           onChange={handleInputChange}
+          placeholder={isPlaceholderHidden.collateralinput ? "" : "25.46"}
+          onFocus={() => handleInputFocus("collateralinput")}
+          onBlur={() => handleInputBlur("collateralinput")}
           className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-          placeholder="25.56"
+          // placeholder={isPlaceholderHidden ? "" : "25.46"}
           disabled={isDisabled}
         />
         <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
@@ -236,8 +271,10 @@ const Limit = () => {
                     name="profitinput"
                     value={formData.profitinput}
                     onChange={handleInputChange}
+                    onFocus={() => handleInputFocus("profitinput")}
+                    onBlur={() => handleInputBlur("profitinput")}
                     className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                    placeholder="25.56"
+                    placeholder={isPlaceholderHidden.profitinput ? "" : "10"}
                     disabled={isDisabled}
                   />
                   <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
@@ -245,7 +282,7 @@ const Limit = () => {
                     %
                   </span>
                   <span>
-                    <IoIosArrowDown className="text-[#9CA3AF] text-[15px]" />
+                    <Dropdown />
                   </span>
                 </div>
               </>
@@ -314,8 +351,10 @@ const Limit = () => {
                       name="stopinput"
                       value={formData.stopinput}
                       onChange={handleInputChange}
+                      onFocus={() => handleInputFocus("stopinput")}
+                      onBlur={() => handleInputBlur("stopinput")}
                       className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                      placeholder="0"
+                      placeholder={isPlaceholderHidden.stopinput ? "" : "0"}
                       disabled={isDisabled}
                     />
 
@@ -342,8 +381,12 @@ const Limit = () => {
                           name="limitinput"
                           value={formData.limitinput}
                           onChange={handleInputChange}
+                          onFocus={() => handleInputFocus("limitinput")}
+                          onBlur={() => handleInputBlur("limitinput")}
                           className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                          placeholder="0"
+                          placeholder={
+                            isPlaceholderHidden.limitinput ? "" : "0"
+                          }
                           disabled={isDisabled}
                         />
                         <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
@@ -351,7 +394,7 @@ const Limit = () => {
                           %
                         </span>
                         <span>
-                          <IoIosArrowDown className="text-[#9CA3AF] text-[15px]" />
+                          <Dropdown />
                         </span>
                       </div>
                       <div
@@ -371,8 +414,10 @@ const Limit = () => {
                           name="sizeinput"
                           value={formData.sizeinput}
                           onChange={handleInputChange}
+                          onFocus={() => handleInputFocus("sizeinput")}
+                          onBlur={() => handleInputBlur("sizeinput")}
                           className=" block w-[100%] pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                          placeholder="0"
+                          placeholder={isPlaceholderHidden.sizeinput ? "" : "0"}
                           disabled={isDisabled}
                         />
 
@@ -575,8 +620,12 @@ const Limit = () => {
                             name="Slippageinput"
                             value={formData.Slippageinput}
                             onChange={handleInputChange}
+                            onFocus={() => handleInputFocus("Slippageinput")}
+                            onBlur={() => handleInputBlur("Slippageinput")}
                             className=" block w-[100%]  pool_font text-[#fff] text-[15px] font-medium text-left h-[38px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                            placeholder="1"
+                            placeholder={
+                              isPlaceholderHidden.Slippageinput ? "" : "1"
+                            }
                             disabled={isDisabled}
                           />
 

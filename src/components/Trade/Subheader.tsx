@@ -8,10 +8,36 @@ import Image from "next/image";
 import { RiArrowDownSFill, RiShareBoxFill } from "react-icons/ri";
 
 import { MdOutlineArrowDropUp, MdInfo } from "react-icons/md";
-
-const Subheader = () => {
+interface headerInterFace {
+  currencyState: String;
+  setcurrencyState: any;
+}
+const Subheader: React.FC<headerInterFace> = ({
+  currencyState,
+  setcurrencyState,
+}) => {
+  const Graph = [
+    {
+      image: Btcicon,
+      name: " BTC-PERP",
+      currency: "BINANCE:BTCUSDT",
+      price: "$2,2304.56",
+    },
+    {
+      image: Ethicon,
+      name: "ETH-PERP",
+      currency: "BINANCE:ETHUSDT",
+      price: "$2,2304.56",
+    },
+    {
+      image: Usdcicon,
+      name: "USDC",
+      currency: "BITTREX:TEAUSDT",
+      price: "$2,2304.56",
+    },
+  ];
   const [showDropNav, setShowDropNav] = useState(false);
-   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
   const [showLangDrop, setshowLangDrop] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -23,7 +49,7 @@ const Subheader = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownRef]);
- 
+
   function handleLink() {
     setShowDropNav(false);
   }
@@ -40,6 +66,44 @@ const Subheader = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [menusRef]);
+  const [error, setError] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isPlaceholderHidden, setIsPlaceholderHidden] = useState(false);
+  const [selectedTab, setselectedTab] = useState({
+    image: Btcicon,
+    name: " BTC-PERP",
+  });
+
+  const [formData, setFormData] = useState({
+    Slippageinput: "",
+  });
+  const handleInputChange = (event: { target: { name: any; value: any } }) => {
+    const { name, value } = event.target;
+
+    if (isDisabled) {
+      return; // Skip input change if the component is disabled
+    }
+
+    // Check if the input value is valid (numeric)
+    if (/^\d*$/.test(value) || value === "") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
+    setIsPlaceholderHidden(true);
+  };
+  const handleInputFocus = () => {
+    // Hide placeholder when input is focused
+    setIsPlaceholderHidden(true);
+  };
+
+  const handleInputBlur = () => {
+    // Show placeholder when input loses focus and is empty
+    if (formData.Slippageinput === "") {
+      setIsPlaceholderHidden(false);
+    }
+  };
   return (
     <>
       <div
@@ -51,17 +115,17 @@ const Subheader = () => {
             <div className="flex items-center gap-[14px]">
               <div
                 onClick={() => setshowLangDrop(!showLangDrop)}
-                 className="flex cursor-pointer justify-between items-center gap-[14px]"
+                className="flex cursor-pointer justify-between items-center gap-[14px]"
               >
                 <div className="flex items-center gap-[14px]">
                   <Image
                     className="w-[24px]"
                     priority
-                    src={Btcicon}
-                    alt="Btcicon"
+                    src={selectedTab.image}
+                    alt=""
                   />
                   <span className="text-[#fff] pool_font font-semibold text-base xl:text-lg tracking-[0.09px] w-[138px]">
-                    BTC-PERP
+                    {selectedTab.name}
                   </span>
                 </div>
                 <div className="relative ">
@@ -95,7 +159,51 @@ const Subheader = () => {
                               </p>
                             </div>
                           </div>
-                          <div className="flex justify-between items-center  pb-4">
+                          {Graph.map((item, key) => {
+                            return (
+                              <>
+                              <div
+                                key={key}
+                                onClick={() => {
+                                  setcurrencyState(item.currency);
+                                  setselectedTab(item);
+                                }}
+                                className="flex justify-between items-center  py-4"
+                              >
+                                <div className="flex items-center gap-[8px]">
+                                  <Image
+                                    className="w-[24px]"
+                                    priority
+                                    src={item.image}
+                                    alt=""
+                                  />
+                                  <span className="text-[#fff] pool_font font-medium text-xs tracking-[0.06px]">
+                                    {item.name}
+                                  </span>
+                                </div>
+                                <div className="flex items-center gap-[20px]">
+                                  <p className="pool_font text-[#fff]  text-left font-medium text-xs tracking-[0.06px]">
+                                    ${item.price}
+                                  </p>
+                                  <p
+                                    className={`pool_font ${
+                                      key == 1
+                                        ? "text-[#D65454]"
+                                        : "text-[#00CC99]"
+                                    }  w-[88px] text-center font-medium text-xs tracking-[0.06px] `}
+                                  >
+                                    +10.86%
+                                  </p>
+                                  <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
+                                    $100.01m
+                                  </p>
+                                </div>
+                              </div>
+                               <div className=" header_bg"></div>
+                               </>
+                            );
+                          })}
+                          {/* <div className="flex justify-between items-center  pb-4">
                             <div className="flex items-center gap-[8px]">
                               <Image
                                 className="w-[24px]"
@@ -168,7 +276,7 @@ const Subheader = () => {
                                 $100.01m
                               </p>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </Link>
                     </div>
@@ -291,11 +399,25 @@ const Subheader = () => {
                       <span className="pool_font text-[#fff]  text-xs font-medium tracking-[0.06px]">
                         Slippage Tolerace
                       </span>
-                      <div className="input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ">
+                      <div
+                        className={`input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
+                            ? "border-[#40E0D0]"
+                            : "focus-within:border-[#40E0D0] border-gray-gray4"
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                      >
                         <input
                           type="text"
+                          name="Slippageinput"
+                          value={formData.Slippageinput}
+                          onChange={handleInputChange}
+                          onFocus={handleInputFocus}
+                          onBlur={handleInputBlur}
                           className=" block w-[100%]  pool_font text-[#fff] text-[15px] font-medium text-left h-[38px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
-                          placeholder="1"
+                          placeholder={isPlaceholderHidden ? "" : "1"}
+                          disabled={isDisabled}
                         />
 
                         <div className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">

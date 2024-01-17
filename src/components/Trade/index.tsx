@@ -10,6 +10,8 @@ import { AiOutlineClose } from "react-icons/ai";
 const Trade = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isStakeOpen, setIsStakeOpen] = useState(false);
+  const [currencyState, setcurrencyState] = useState("BINANCE:ETHUSDT");
+
   const [formData, setFormData] = useState({
     amount: "100",
   });
@@ -41,12 +43,15 @@ const Trade = () => {
   return (
     <>
       <div className="">
-        <Subheader />
+        <Subheader
+          currencyState={currencyState}
+          setcurrencyState={setcurrencyState}
+        />
         <div className="lg:pt-[123px]  lg:pb-5 py-[100px] lg:grid grids-width relative max-[1023px]:container max-[1023px]:mx-auto max-[1023px]:px-4">
           <div className="flex flex-col w-full">
             <div className="lg:grid grid-width">
               <div className="">
-                <Leftsidecomponent />
+                <Leftsidecomponent currencyState={currencyState} />
               </div>
               <div className="">
                 <Middlesidecomponent />
@@ -59,7 +64,7 @@ const Trade = () => {
           <div className="">
             <Rightsidecomponent
               //  connectWallet={connectWallet}
-              formData={formData}
+              //  formData={formData}
               StakeOpenPopup={StakeOpenPopup}
               // isConnected={isConnected}
             />

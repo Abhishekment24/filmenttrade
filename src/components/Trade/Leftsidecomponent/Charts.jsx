@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const GraphSection = () => {
+const GraphSection = ({ currencyState }) => {
   let tvScriptLoadingPromise;
   const onLoadScriptRef = useRef();
 
@@ -33,13 +33,15 @@ const GraphSection = () => {
         new window.TradingView.widget({
           width: "100%",
           height: "100%",
-          symbol: "BITSTAMP:BTCUSD",
-          interval: "W",
+          // symbol: "BITSTAMP:BTCUSD",
+          symbol: currencyState,
+          interval: "D",
           timezone: "Etc/UTC",
           theme: "dark",
           style: "1",
           locale: "in",
           toolbar_bg: "#1B1C1E",
+          hide_legend: true,
           backgroundColor: "#1B1C1E",
           enable_publishing: false,
           hide_side_toolbar: false,
@@ -48,7 +50,7 @@ const GraphSection = () => {
         });
       }
     }
-  }, []);
+  }, [currencyState]);
   return (
     <div className="tradingview-widget-container">
       <div id="tradingview_0396b" />

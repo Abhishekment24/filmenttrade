@@ -3,21 +3,21 @@ import { Listbox, Transition } from "@headlessui/react";
 //import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 
-const people = [
-  { name: "1 Day" },
-  { name: "1 Week" },
-  { name: "6 Months" },
-  { name: "1 Year" },
+const Dropdowndata = [
+  { name: "24H" },
+  { name: "1W" },
+  { name: "1M" },
+  { name: "1Y" },
 ];
 
 const Dropdown = () => {
-  const [selected, setSelected] = useState(people[0]);
+  const [selected, setSelected] = useState(Dropdowndata[0]);
 
   return (
     <div className="">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative">
-          <Listbox.Button className="relative w-full cursor-default py-[6px] px-[12px] gap-[20px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+          <Listbox.Button className="relative w-full lg:w-[139px] cursor-default py-[6px] px-[12px] gap-[20px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <span className="block truncate  pool_font text-[#BABABA] text-base font-normal">
               {selected.name}
             </span>
@@ -42,24 +42,24 @@ const Dropdown = () => {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute mt-1 max-h-60 w-full z-[10] overflow-auto bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px] py-1 text-base  ring-1 ring-black/5 focus:outline-none sm:text-sm">
-              {people.map((person, personIdx) => (
+              {Dropdowndata.map((item, index) => (
                 <Listbox.Option
-                  key={personIdx}
+                  key={index}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 px-4 ${
                       active ? "bg-[#34363C] text-[#fff]" : "text-[#fff]"
                     }`
                   }
-                  value={person}
+                  value={item}
                 >
                   {({ selected }) => (
                     <>
                       <span
-                        className={`block truncate ${
-                          selected ? "font-medium" : "font-normal"
+                        className={`block truncate text-base pool_font ${
+                          selected ? "font-medium " : "font-normal"
                         }`}
                       >
-                        {person.name}
+                        {item.name}
                       </span>
                       {selected ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600"></span>

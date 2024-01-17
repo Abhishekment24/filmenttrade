@@ -15,7 +15,7 @@ const Middlesidecomponent = () => {
   const [selectedTab, setSelectedTab] = useState("orderbook");
   return (
     <>
-      <div className="border-[1px] bg-[#1B1C1E] border-solid border-[#FFFFFF0D] max-[1023px]:my-5 h-[632px] overflow-y-scroll">
+      <div className="border-[1px] bg-[#1B1C1E] border-solid border-[#FFFFFF0D] max-[1023px]:my-5 h-[632px]">
         <div className="">
           <div className="flex px-2  items-center justify-between gap-[18px]  border-b-[1px] border-[#272727] ">
             {tabs.map((tab, index) => {
@@ -53,7 +53,7 @@ const Middlesidecomponent = () => {
             <div className="">
               {cdata.map((item, index) => (
                 <div
-                  className="flex justify-between items-center py-[4px] px-2"
+                  className="flex justify-between items-center py-[4px] px-2 order ransition-all duration-300"
                   key={index}
                 >
                   <span className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">
@@ -71,7 +71,7 @@ const Middlesidecomponent = () => {
                 </div>
               ))}
             </div>
-            <div className="flex justify-between items-center  py-4 px-2 border-t-[1px] border-b-[1px] border-solid border-[#25272A] bg-[#1B1C1E]">
+            <div className="flex justify-between items-center  py-4 px-2 border-t-[1px] border-b-[1px] border-solid border-[#25272A] bg-[#1B1C1E] order ransition-all duration-300">
               <span className="cursor-pointer nav_font text-[#00CC99] font-medium text-base">
                 43,998.5
               </span>
@@ -79,10 +79,10 @@ const Middlesidecomponent = () => {
             <div className="">
               {cdata.map((item, index) => (
                 <div
-                  className="flex justify-between items-center py-[4px] px-2"
+                  className="flex justify-between items-center py-[4px] px-2 order ransition-all duration-300"
                   key={index}
                 >
-                  <span className="cursor-pointer pool_font text-[#00CC99] font-normal text-xs tracking-[0.06px]">
+                  <span className="cursor-pointer pool_font text-[#00CC99] font-normal text-xs tracking-[0.06px] ">
                     {item.price}
                   </span>
                   <div className="flex items-center gap-[19px]">
@@ -117,7 +117,7 @@ const Middlesidecomponent = () => {
             <div className="">
               {edata.map((item, index) => (
                 <div
-                  className="flex justify-between items-center py-[4px] px-2"
+                  className="flex justify-between items-center py-[4px] px-2 order ransition-all duration-300"
                   key={index}
                 >
                   <span className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">
@@ -138,7 +138,7 @@ const Middlesidecomponent = () => {
             <div className="">
               {edata.map((item, index) => (
                 <div
-                  className="flex justify-between items-center py-[4px] px-2"
+                  className="flex justify-between items-center py-[4px] px-2 order ransition-all duration-300"
                   key={index}
                 >
                   <span className="cursor-pointer pool_font text-[#00CC99] font-normal text-xs tracking-[0.06px]">
@@ -158,7 +158,7 @@ const Middlesidecomponent = () => {
             <div className="">
               {edata.map((item, index) => (
                 <div
-                  className="flex justify-between items-center py-[4px] px-2"
+                  className="flex justify-between items-center py-[4px] px-2 order ransition-all duration-300"
                   key={index}
                 >
                   <span className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">

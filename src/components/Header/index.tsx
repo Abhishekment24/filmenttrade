@@ -256,6 +256,17 @@ const Header = () => {
                 >
                   Referral
                 </Link>
+                <Link
+                  href="/leaderboard"
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "leaderboard"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
+                  onClick={() => handleTabClick("leaderboard")}
+                >
+                  Leaderboard
+                </Link>
                 <div className="w-[1px] h-[12px] bg-[#2A2A2A]"> </div>
                 <Link
                   href="/portfolio"

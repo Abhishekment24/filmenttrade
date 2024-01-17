@@ -84,13 +84,14 @@ const Charts = () => {
           <CartesianGrid stroke="#313131" strokeDasharray="3 3" />
           <XAxis dataKey="name" padding={{ right: 2 }} />
           <YAxis tickFormatter={(value) => `$${value}m`} />
-          <Tooltip />
+          {/* <Tooltip />*/}
 
           <Line
             type="monotone"
             dataKey="pv"
             stroke="#40E0D0"
-            activeDot={{ r: 8 }}
+            strokeWidth={1}
+            dot={false}
           />
         </LineChart>
       </ResponsiveContainer>
