@@ -52,7 +52,7 @@ const History = () => {
           {tablehistoryData.length === 0 ? (
             <div className="relative w-full">
               <div className="text-center text-[#9CA3AF] text-sm font-medium px-2 py-2">
-                No Realised PnL
+                No History
               </div>
             </div>
           ) : (
@@ -104,9 +104,11 @@ const History = () => {
                       <div className="text-center py-[8px] px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid  border-[#25272A] ">
                         {data.stoploss}
                       </div>
-                      <div className="text-right py-[8px] flex flex-col text-[#00CC99]  px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px]  border-solid border-[#25272A] ">
-                        {data.pnL}
-                        <span className="text-[10px]">{data.pnlper}</span>
+                      <div className="text-right py-[8px]  text-[#00CC99]  px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px]  border-solid border-[#25272A] ">
+                        <div className="flex flex-col">
+                          <span>{data.pnL}</span>
+                          <span className="text-[10px]">{data.pnlper}</span>
+                        </div>
                       </div>
                       <div className="text-center py-[8px]  px-2 max-[1699px]:min-w-[8rem] table_width border-b-[1px] border-solid border-[#25272A]  ">
                         {data.liquidationprice}

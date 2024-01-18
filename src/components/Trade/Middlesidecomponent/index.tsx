@@ -50,10 +50,10 @@ const Middlesidecomponent = () => {
                 </p>
               </div>
             </div>
-            <div className="">
+            <div className="relative ">
               {cdata.map((item, index) => (
                 <div
-                  className="flex justify-between items-center py-[4px] px-2 order ransition-all duration-300"
+                  className="flex justify-between bg_charts items-center py-[4px] px-2 order ransition-all duration-300"
                   key={index}
                 >
                   <span className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">

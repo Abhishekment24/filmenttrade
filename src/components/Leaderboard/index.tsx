@@ -5,12 +5,20 @@ import Image from "next/image";
 import { BiSearch } from "react-icons/bi";
 import Dropdown from "./Dropdown";
 import { tableleaderData } from "./data";
+import Orderplace from "../Commoncomponent/Alertpopup/Orderplace";
+import Postionpopup from "../Commoncomponent/Alertpopup/Positioncreatedpopup";
+import Failedorder from "../Commoncomponent/Alertpopup/Failedorder";
 const Leaderboard = () => {
   const [error, setError] = useState(false);
-
+  const [openpopup, setOpenpopup] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const closePopup = () => {
+    setOpenpopup(false);
+  };
+  const Opens = () => {
+    setOpenpopup(true);
+  };
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
@@ -22,7 +30,7 @@ const Leaderboard = () => {
     <>
       <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden ">
         <div className="container mx-auto max-[1279px]:px-4">
-          <div className="">
+          <div onClick={Opens} className="">
             <p className="pool_font text-[#fff] text-2xl font-semibold">
               Leaderboard
             </p>
@@ -117,6 +125,11 @@ const Leaderboard = () => {
           </div>
         </div>
       </section>
+      <Failedorder
+        isOpen={openpopup}
+        onClose={closePopup}
+        failStatus="placed"
+      />
     </>
   );
 };
