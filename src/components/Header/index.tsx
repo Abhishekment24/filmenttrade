@@ -12,6 +12,7 @@ import Line from "../../../public/assest/Line.png";
 import COMMON_FUNCTIONS from "@/components/CommonFunctions/CommonFunctions";
 import Link from "next/link";
 import { Tooltip } from "react-tooltip";
+
 import { IoMdWarning } from "react-icons/io";
 import {
   MdNotifications,
@@ -76,6 +77,8 @@ const Header = () => {
   const [showLangDrop, setShowLangDrop] = useState(false);
   const [chainId, setchainId] = useState<any>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const [walletlogout, setWalletlogout] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobiledropdownRef = useRef<HTMLDivElement>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -93,7 +96,12 @@ const Header = () => {
       alert("Install metamask");
     }
   };
-
+  const handleWalletlogout = () => {
+    setWalletlogout(true);
+  };
+  const closeWalletlogout = () => {
+    setWalletlogout(false);
+  };
   const connectWallet = () => {
     setIsPopupOpen(true);
     setIsWalletOpen(false);
@@ -189,8 +197,8 @@ const Header = () => {
           }`}
         >
           <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
-            <div className="flex justify-between text-[#fff] items-center max-[1179px]:hidden">
-              <div className="flex items-center xl:gap-10 lg:gap-6">
+            <div className="flex justify-between text-[rgb(255,255,255)] items-center max-[1179px]:hidden">
+              <div className="flex items-center min-[1360px]:gap-10  lg:gap-4">
                 <Link href="/" className="flex items-center gap-[8px]">
                   <Image className="w-[20px]" priority src={Logo} alt="logo" />
                   <span className="text-[#40E0D0] logo_font font-medium text-[15px] tracking-{1.2px}">
@@ -498,6 +506,7 @@ const Header = () => {
           </div>
         </div>
         {/**-----------------after wallet connected sidebar */}
+
         {showWalletSideNav && (
           <>
             <div
@@ -506,7 +515,7 @@ const Header = () => {
             ></div>
             <div
               className={`
-          sidebar_wallet_menu moblie-nav  px-3  max-[991px]:z-[400] z-[400] fixed lg:w-[360px]  w-full h-[100vh]  top-0 overflow-y-auto overflow-x-hidden  bottom-0 py-5
+          sidebar_wallet_menu moblie-nav  px-3  max-[991px]:z-[400] z-[400] fixed lg:w-[360px]  w-full h-[100vh]  top-0 overflow-y-auto overflow-x-hidden  bottom-0 py-5 transition-all
         duration-500 ${showWalletSideNav ? "right-0" : "right-[-100%]"}
         `}
             >
@@ -550,7 +559,7 @@ const Header = () => {
                     </span>
                     <span>
                       <MdOutlineLogout
-                        onClick={disconnectMetamask}
+                        onClick={handleWalletlogout}
                         className="text-[#fff] cursor-pointer text-base border-none focus:outline-none"
                         data-tooltip-id="my-tooltip-inline"
                         data-tooltip-html="Disconnect Wallet"
@@ -770,6 +779,51 @@ const Header = () => {
                   </p>
                 </div>
               </Link>
+            </div>
+          </>
+        )}
+        {/*disconnect wallet popup */}
+        {walletlogout && (
+          <>
+            <div className="fixed inset-0 flex justify-center items-center z-[9999] bg-background/80 backdrop-blur-sm  bg-black opacity-90"></div>
+            <div className="fixed inset-0  flex justify-center items-center z-[9999]  top-[10%] ">
+              <div className="  wallet_popup w-full max-w-md transform  p-5 text-left align-middle shadow-xl transition-all ">
+                <div className="flex items-center justify-between gap-2 ">
+                  <p className="text-[#fff] text-[20px] font-semibold pool_font ">
+                    Disconnect
+                  </p>
+                  <button
+                    className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[34px] h-[34px] flex items-center justify-center"
+                    onClick={closeWalletlogout}
+                  >
+                    <AiOutlineClose className="text-2xl text-white" />
+                  </button>
+                </div>
+                <p className="text-sm pool_font text-[#FFFFFF] text-normal tracking-[0.07px] my-6">
+                  Are you sure you want to disconnect your account?
+                </p>
+                <div className="flex items-center gap-4 w-full">
+                  <div className="w-[50%]">
+                    <button
+                      onClick={() => {
+                        disconnectMetamask();
+                        closeWalletlogout();
+                      }}
+                      className=" items-center pool_font text-[#fff] w-[100%]  text-sm font-semibold max-border  bg-[#D65454] rounded-[6px]  py-[10px] px-[16px] tracking-[0.075px]"
+                    >
+                      Disconnect
+                    </button>
+                  </div>
+                  <div className="w-[50%]">
+                    <button
+                      onClick={closeWalletlogout}
+                      className="items-center pool_font text-[#fff] w-[100%] text-sm font-semibold  bg-[#2B2B2B] max-border rounded-[6px]  py-[10px] px-[16px] tracking-[0.075px]"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </>
         )}

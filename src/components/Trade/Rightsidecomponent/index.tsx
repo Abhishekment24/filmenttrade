@@ -54,7 +54,7 @@ const Rightsidecomponent: React.FC<RightProps> = ({
   }, [dropdownRef]);
   return (
     <>
-      <div className="border-[1px] border-solid bg-[#1B1C1E]   border-[#FFFFFF0D] max-[1023px]:mt-5 lg:h-[90vh] lg:w-[30%] xl:w-[25%] min-[1700px]:w-[400px] lg:fixed lg:overflow-y-scroll  no-scrollbar">
+      <div className="border-[1px] border-solid bg-[#1B1C1E]   border-[#FFFFFF0D] max-[1023px]:mt-5 lg:h-[100vh] lg:w-[30%] xl:w-[25%] min-[1700px]:w-[400px] lg:fixed lg:overflow-y-scroll  no-scrollbar">
         <div className="lg:bg-[#1B1C1E] lg:fixed  z-[300] lg:w-[30%] xl:w-[25%] min-[1700px]:w-[400px]">
           <div className="px-4"></div>
           <div className="flex justify-between flex-wrap items-center gap-[10px] w-full border-b-[1px] border-[#272727] px-4">

@@ -440,9 +440,8 @@ input[type="checkbox"]:checked {
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0) 0%,
-    rgba(64, 224, 208, 0.31) 100%
+    rgba(64, 224, 208, 0.2) 100%
   );
-  opacity: 0.6;
 }
 /*--------------------Portfolio page css----------------*/
 
@@ -451,18 +450,17 @@ input[type="checkbox"]:checked {
     0px 2px 1px 0px rgba(0, 0, 0, 0.12), 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
 }
 .bg_coin {
-  position: relative;
   overflow: hidden;
 }
 .bg_coin::before {
-  background: url("../../public/assest/coin2.png");
+  background: url("../../public/assest/leaderboardimg/Coin.png");
   content: "";
   position: absolute;
   right: 0;
-  width: 228px;
-  height: 299px;
+  width: 70px;
+  height: 70px;
   background-repeat: no-repeat;
-  bottom: -14%;
+  bottom: -2%;
 }
 .nav_link:hover {
   background: #25272a;
