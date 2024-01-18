@@ -48,7 +48,7 @@ const Portfolio = () => {
   }, []);
   return (
     <>
-      <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden">
+      <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden no-scrollbar">
         <div className="max-[1023px]:container max-[1023px]:mx-auto max-[1023px]:px-4 ">
           <div className="portfolio_grids-width lg:grid relative  ">
             <div className="lg:w-[18%] w-full">

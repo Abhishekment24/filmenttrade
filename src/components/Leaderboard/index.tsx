@@ -20,7 +20,7 @@ const Leaderboard = () => {
   );
   return (
     <>
-      <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden">
+      <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden no-scrollbar">
         <div className="container mx-auto max-[1279px]:px-4">
           <div className="">
             <p className="pool_font text-[#fff] text-2xl font-semibold">
@@ -57,7 +57,7 @@ const Leaderboard = () => {
               </div>
             </div>
             <div className="py-[24px]">
-              <div className="flex w-full overflow-auto border-[1px] border-solid border-[#25272A]">
+              <div className="flex w-full overflow-auto no-scrollbar border-[1px] border-solid border-[#25272A]">
                 <table className="w-full">
                   <thead>
                     <tr className="pool_font text-xs font-medium border-b-[1px] border-solid border-[#25272A]  text-[#9CA3AF]">

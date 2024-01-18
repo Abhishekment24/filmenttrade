@@ -8,7 +8,7 @@ import Leftcomponentside from "./Leftcomponentside";
 const Referral = () => {
   return (
     <>
-      <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden ">
+      <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden no-scrollbar ">
         <div className="referal-bg">
           <Image className="" priority src={RefferralBg} alt="Lock" />
         </div>
@@ -26,7 +26,7 @@ const Referral = () => {
         </div>
         <div className="container mx-auto max-[1279px]:px-4">
           <div className="flex my-[40px] items-start gap-[30px] lg:flex-row flex-col w-full relative ">
-            <div className="lg:w-[65%] w-full overflow-y-auto">
+            <div className="lg:w-[65%] w-full overflow-y-auto no-scrollbar">
               <Leftcomponentside />
             </div>
             <div className="lg:w-[35%] w-full lg:sticky lg:top-44 ">

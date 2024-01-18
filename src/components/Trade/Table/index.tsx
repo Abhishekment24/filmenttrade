@@ -36,7 +36,7 @@ const Tablesection = () => {
       <div>
         <div className=" bg-[#1B1C1E] pool_box_shadow border-t-[1px] border-solid border-[#25272A]    w-full ">
           <div className="">
-            <div className="flex items-center max-[500px]:px-2 overflow-x-auto gap-[18px] w-full border-b-[1px] border-[#272727] ">
+            <div className="flex items-center max-[500px]:px-2 overflow-x-auto no-scrollbar gap-[18px] w-full border-b-[1px] border-[#272727] ">
               {tabs.map((tab, index) => {
                 return (
                   <button

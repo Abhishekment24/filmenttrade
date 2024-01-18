@@ -79,7 +79,7 @@ const Stakepage = () => {
   };
   return (
     <>
-      <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden">
+      <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden no-scrollbar">
         <div className="container mx-auto max-[1279px]:px-4">
           <div className="">
             <p className="pool_font text-[#fff] text-2xl font-semibold">

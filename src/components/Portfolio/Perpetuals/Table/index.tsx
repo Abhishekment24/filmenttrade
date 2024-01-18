@@ -25,7 +25,7 @@ const Table = () => {
     <>
       <div className=" bg-[#1B1C1E] my-5  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px]   w-full ">
         <div className="">
-          <div className="flex items-center max-[500px]:px-2 overflow-x-auto gap-[20px] w-full border-b-[1px] border-[#272727]  px-2">
+          <div className="flex items-center max-[500px]:px-2 overflow-x-auto no-scrollbar gap-[20px] w-full border-b-[1px] border-[#272727]  px-2">
             {tabs.map((tab, index) => {
               return (
                 <button

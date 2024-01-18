@@ -15,7 +15,7 @@ const Middlesidecomponent = () => {
   const [selectedTab, setSelectedTab] = useState("orderbook");
   return (
     <>
-      <div className="border-[1px] bg-[#1B1C1E] border-solid border-[#FFFFFF0D] max-[1023px]:my-5 h-[632px]">
+      <div className="border-[1px] bg-[#1B1C1E] border-solid border-[#FFFFFF0D] max-[1023px]:my-5 h-[632px] overflow-y-scroll no-scrollbar">
         <div className="">
           <div className="flex px-2  items-center justify-between gap-[18px]  border-b-[1px] border-[#272727] ">
             {tabs.map((tab, index) => {

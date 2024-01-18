@@ -64,7 +64,6 @@ const Overview = () => {
             0x63gws...3536
           </span>
         </div>
-      
       </div>
       <div className="flex mt-[40px] items-start bg-[#1B1C1E] gap-6 justify-between max-[1023px]:flex-col pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] sm:px-[24px] px-5 w-full relative">
         <div className="lg:w-[30%] w-full py-[24px]">
@@ -124,7 +123,7 @@ const Overview = () => {
         <div className="lg:border-l-[1px] max-[1023px]:border-t-[1px] border-[#262626] border-solid max-[1023px]:w-full lg:h-[327px]"></div>
         <div className="lg:w-[70%] w-full py-[24px]">
           <div className="flex justify-between flex-wrap gap-3 items-center w-full">
-            <div className="flex items-center gap-[4px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  overflow-x-auto">
+            <div className="flex items-center gap-[4px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  overflow-x-auto no-scrollbar">
               {tabs.map((tab, index) => {
                 return (
                   <button

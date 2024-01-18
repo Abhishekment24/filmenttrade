@@ -79,7 +79,7 @@ const Perpetuals = () => {
         <div className="lg:border-l-[1px] max-[1023px]:border-t-[1px] border-[#262626] border-solid max-[1023px]:w-full lg:h-[327px]"></div>
         <div className="lg:w-[70%] w-full py-[24px]">
           <div className="flex justify-between flex-wrap gap-3 items-center w-full">
-            <div className="flex items-center gap-[4px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  overflow-x-auto">
+            <div className="flex items-center gap-[4px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  overflow-x-auto no-scrollbar ">
               {tabs.map((tab, index) => {
                 return (
                   <button

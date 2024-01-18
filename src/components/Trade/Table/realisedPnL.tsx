@@ -4,7 +4,7 @@ const RealisedPnL = () => {
   return (
     <div>
       <div className=" w-full relative flex">
-        <div className="flex flex-col relative w-full  max-[1699px]:overflow-x-scroll border-t-[1px] border-solid border-[#25272A]">
+        <div className="flex flex-col relative w-full  max-[1699px]:overflow-x-scroll no-scrollbar border-t-[1px] border-solid border-[#25272A]">
           {/* <div className="w-full "> */}
 
           <div className="pool_font  flex  text-xs font-medium text-[#9CA3AF]">

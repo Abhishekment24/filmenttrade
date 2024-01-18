@@ -109,7 +109,7 @@ const Pool = () => {
         </div>
         <div className="container mx-auto max-[1279px]:px-4">
           <div className="flex items-start gap-[30px] lg:flex-row flex-col w-full relative  pb-[80px]">
-            <div className="lg:w-[65%] w-full lg:overflow-y-auto">
+            <div className="lg:w-[65%] w-full lg:overflow-y-auto no-scrollbar">
               <Leftcomponentside />
             </div>
             <div className="lg:w-[35%] w-full mb-5  lg:sticky lg:top-[12rem]">

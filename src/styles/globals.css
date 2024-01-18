@@ -15,6 +15,18 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
 .nav_font {
   font-family: "Onest", sans-serif !important;
 }
@@ -97,6 +109,16 @@ h6 {
 body {
   color: #fff;
   background: #111113;
+}
+/* Hide scrollbar for WebKit browsers like Chrome and Safari */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 #tradingview_0396b #widget-container {

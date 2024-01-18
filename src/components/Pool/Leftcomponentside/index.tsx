@@ -81,7 +81,7 @@ const Leftcomponentside = () => {
       </div>
       <div className=" bg-[#1B1C1E] my-5  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] sm:p-[24px] p-5 w-full ">
         <div className="flex justify-between flex-wrap gap-3 items-center w-full">
-          <div className="flex items-center gap-[20px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  overflow-x-auto">
+          <div className="flex items-center gap-[20px] bg-[#26282C] border-[#34363C] pool_charts_box border-[1px] border-solid rounded-[8px]  overflow-x-auto no-scrollbar">
             {tabs.map((tab, index) => {
               return (
                 <button
@@ -146,7 +146,7 @@ const Leftcomponentside = () => {
             <p className="pool_font text-[#E8E8E8] text-sm font-normal">
               Pool Address
             </p>
-            <p className="pool_font text-[#fff] text-sm font-semibold tracking-[0.07px]">
+            <p className="pool_font text-[#fff] text-sm font-semibold tracking-[0.07px] truncate">
               0xc0ffee254729296........10F9d54979
             </p>
           </div>
@@ -158,7 +158,7 @@ const Leftcomponentside = () => {
             Compartment Allocation
           </p>
         </div>
-        <div className="flex w-full overflow-auto border-t-[1px] border-solid border-[#25272A]">
+        <div className="flex w-full overflow-auto no-scrollbar border-t-[1px] border-solid border-[#25272A]">
           <table className="w-full">
             <thead>
               <tr className="pool_font text-xs border-b-[1px] border-solid border-[#25272A] font-medium text-[#9CA3AF]">

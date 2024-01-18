@@ -14,7 +14,7 @@ const Table = () => {
           </div>
         </div>
 
-        <div className="flex w-full overflow-auto border-t-[1px] border-solid border-[#25272A]">
+        <div className="flex w-full overflow-auto no-scrollbar border-t-[1px] border-solid border-[#25272A]">
           <table className="w-full">
             <thead>
               <tr className="pool_font text-xs font-medium border-b-[1px] border-solid border-[#25272A]  text-[#9CA3AF]">
@@ -54,7 +54,6 @@ const Table = () => {
                       <td className="text-right  font-medium  px-3 py-2">
                         {data.unrealisedPnL}
                       </td>
-                      
                     </tr>
                   ))}
                 </>

@@ -35,7 +35,7 @@ const Openorders = () => {
       <div>
         <div className="flex w-full">
           <div className="lg:w-[92%] sm:w-[88%] max-[639px]:w-[84%] max-[380px]:w-[78%]">
-            <div className="flex w-full overflow-auto border-t-[1px] border-solid border-[#25272A]">
+            <div className="flex w-full overflow-auto no-scrollbar border-t-[1px] border-solid border-[#25272A]">
               <table className="w-full">
                 <thead>
                   <tr className="pool_font text-xs font-medium border-b-[1px] border-solid border-[#25272A]  text-[#9CA3AF]">

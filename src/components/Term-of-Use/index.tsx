@@ -5,7 +5,7 @@ import RefferralBg from "../../../public/assest/referral-bg.png";
 const Term = () => {
   return (
     <>
-      <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden ">
+      <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden no-scrollbar">
         <div className="referal-bg">
           <Image className="" priority src={RefferralBg} alt="Lock" />
         </div>
