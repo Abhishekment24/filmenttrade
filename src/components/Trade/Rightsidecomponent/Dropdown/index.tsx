@@ -1,16 +1,21 @@
-import { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 //import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { IoIosArrowDown } from "react-icons/io";
 
-const people = [{ name: "$" }, { name: "$" }];
-
-const Dropdown = () => {
+const people = [{ name: "$" }, { name: "%" }];
+interface DropDownInterface {
+  setCurrency: React.Dispatch<React.SetStateAction<string>>;
+}
+const Dropdown: React.FC<DropDownInterface> = ({ setCurrency }) => {
   const [selected, setSelected] = useState(people[0]);
 
   return (
     <div className="">
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={selected} onChange={(e: any) => {
+        setCurrency(e.name)
+        setSelected(e)
+      }}>
         <div className="relative">
           <Listbox.Button className="relative w-full cursor-pointer py-[6px] px-[12px] gap-[20px]      pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <span className="block truncate  pool_font text-[#BABABA] text-base font-normal">
@@ -36,8 +41,7 @@ const Dropdown = () => {
                 <Listbox.Option
                   key={personIdx}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 px-4 ${
-                      active ? "bg-[#34363C] text-[#fff]" : "text-[#fff]"
+                    `relative cursor-default select-none py-2 px-4 ${active ? "bg-[#34363C] text-[#fff]" : "text-[#fff]"
                     }`
                   }
                   value={person}
@@ -45,9 +49,8 @@ const Dropdown = () => {
                   {({ selected }) => (
                     <>
                       <span
-                        className={`block truncate ${
-                          selected ? "font-medium" : "font-normal"
-                        }`}
+                        className={`block truncate ${selected ? "font-medium" : "font-normal"
+                          }`}
                       >
                         {person.name}
                       </span>
@@ -62,7 +65,7 @@ const Dropdown = () => {
           </Transition>
         </div>
       </Listbox>
-    </div>
+    </div >
   );
 };
 export default Dropdown;

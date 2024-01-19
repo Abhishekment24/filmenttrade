@@ -508,10 +508,19 @@ input[type="checkbox"]:checked {
   .portfolio_grids-width {
     grid-template-columns: 18% 82%;
   }
+  .grids-width2 {
+    grid-template-columns: 30% 70%;
+  }
+  
+
+
 }
 @media (min-width: 1280px) {
   .grids-width {
     grid-template-columns: 75% 25%;
+  }
+  .grids-width2 {
+    grid-template-columns: 25% 75%;
   }
   .grid-width {
     grid-template-columns: 78% 22%;
@@ -520,6 +529,9 @@ input[type="checkbox"]:checked {
 @media (min-width: 1700px) {
   .grids-width {
     grid-template-columns: 1fr 400px;
+  }
+  .grids-width2 {
+    grid-template-columns:  400px 1fr;
   }
   .grid-width {
     grid-template-columns: 1fr 230px;

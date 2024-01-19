@@ -13,7 +13,7 @@ import Dropdown from "./Dropdown";
 
 interface MarketProps {
   isConnected: boolean;
- // formData: any;
+  // formData: any;
 
   StakeOpenPopup: () => void;
 }
@@ -21,16 +21,23 @@ const Market: React.FC<MarketProps> = ({
   isConnected,
   StakeOpenPopup,
 
- // formData,
+  // formData,
 }) => {
   //const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const minimumCollateral = 5
   const [isChecked1, setIsChecked1] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
+  const [positionSize, setpositionSize] = useState(0.024)
+  const [maximumCollateral, setmaximumCollateral] = useState(500)
+
   const [isVisible, setIsVisible] = useState(true);
+  const [limitCurrency, setLimitCurrency] = useState("$")
+  const [profitCurrency, setprofitCurrency] = useState("$")
   const [error, setError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+
   const [isPlaceholderHidden, setIsPlaceholderHidden] = useState({
     collateralinput: false,
     profitinput: false,
@@ -48,15 +55,17 @@ const Market: React.FC<MarketProps> = ({
     Slippageinput: "",
   });
 
+
+
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
 
     if (isDisabled) {
       return; // Skip input change if the component is disabled
     }
-
+    const regex = /^[0-9.]+$/
     // Check if the input value is valid (numeric)
-    if (/^\d*$/.test(value) || value === "") {
+    if (regex.test(value) || value === "") {
       setFormsData((prevFormData) => ({
         ...prevFormData,
         [name]: value,
@@ -103,12 +112,16 @@ const Market: React.FC<MarketProps> = ({
     setIsVisible(!isVisible);
   };
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSliderValue(parseInt(event.target.value, 10));
+    let { value } = event.target
+    if (value == "") setSliderValue(parseInt("0", 10));
+    else if (+value > 100) setSliderValue(parseInt("100", 10));
+    else setSliderValue(parseInt(value, 10));
   };
 
   const calculateBgColor = (sliderValue: number) => {
     // Example: Change color based on the value
-    const percentage = (sliderValue / 100) * 100;
+    console.log(sliderValue, "<<<<< sliderValue")
+    const percentage = sliderValue
     return `linear-gradient(to right, #40E0D0 ${percentage}%, rgba(64, 224, 208, 0.1) ${percentage}%, rgba(64, 224, 208, 0.1) 100%), #1a1a1a`;
   };
 
@@ -119,13 +132,12 @@ const Market: React.FC<MarketProps> = ({
     <>
       <div className="px-4 pb-[100px]">
         <div
-          className={`input_field_bg flex items-center gap-3 mt-4 w-full px-4 h-[45px] ${
-            error
-              ? "focus-within:border-[#D65454] border-[#D65454]"
-              : isDisabled
+          className={`input_field_bg flex items-center gap-3 mt-4  w-full px-4 h-[45px] ${+minimumCollateral > +formsData.collateralinput || error || +formsData.collateralinput > +maximumCollateral
+            ? "focus-within:border-[#D65454] border-[#D65454]"
+            : isDisabled
               ? "border-[#40E0D0]"
               : "focus-within:border-[#40E0D0] border-gray-gray4"
-          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+            } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
             Collateral
@@ -134,11 +146,16 @@ const Market: React.FC<MarketProps> = ({
             type="text"
             name="collateralinput"
             value={formsData.collateralinput}
-            onChange={handleInputChange}
+
+            onChange={e => {
+
+              handleInputChange(e)
+              // if (regex.test(value)) handleInputChange(e)
+            }}
             placeholder={isPlaceholderHidden.collateralinput ? "" : "25.46"}
             onFocus={() => handleInputFocus("collateralinput")}
             onBlur={() => handleInputBlur("collateralinput")}
-            className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
+            className={` block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white`}
             // placeholder={isPlaceholderHidden ? "" : "25.46"}
             disabled={isDisabled}
           />
@@ -163,14 +180,18 @@ const Market: React.FC<MarketProps> = ({
             <div className="flex justify-between items-center  my-4">
               <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
                 Available Collateral:{" "}
-                <span className="text-[#fff]">$500</span>
+                <span className="text-[#fff]">${maximumCollateral}</span>
               </p>
               <div className="flex items-center gap-[4px]">
                 <div
                   //  onClick={StakeOpenPopup}
                   className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B]"
                 >
-                  <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
+                  <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]"
+                    onClick={() => {
+                      setFormsData({ ...formsData, collateralinput: `${maximumCollateral}` })
+                    }}
+                  >
                     Max
                   </p>
                 </div>
@@ -215,13 +236,12 @@ const Market: React.FC<MarketProps> = ({
         )}
 
         <div
-          className={`input_field_bg flex items-center gap-3  w-full px-4 h-[45px] ${
-            error
-              ? "focus-within:border-[#D65454] border-[#D65454]"
-              : isDisabled
+          className={`input_field_bg flex items-center gap-3  w-full px-4 h-[45px] ${error
+            ? "focus-within:border-[#D65454] border-[#D65454]"
+            : isDisabled
               ? "border-[#40E0D0]"
               : "focus-within:border-[#40E0D0] border-gray-gray4"
-          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+            } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
             Leverage
@@ -230,6 +250,7 @@ const Market: React.FC<MarketProps> = ({
           <input
             type="text"
             value={sliderValue}
+            onChange={handleSliderChange}
             className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
             disabled={isDisabled}
           />
@@ -242,7 +263,7 @@ const Market: React.FC<MarketProps> = ({
             type="range"
             min="0"
             max="100"
-            step="20"
+            step="1"
             value={sliderValue}
             onChange={handleSliderChange}
             className="range-slider"
@@ -298,13 +319,12 @@ const Market: React.FC<MarketProps> = ({
               {isChecked1 && (
                 <>
                   <div
-                    className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
-                      error
-                        ? "focus-within:border-[#D65454] border-[#D65454]"
-                        : isDisabled
+                    className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${error
+                      ? "focus-within:border-[#D65454] border-[#D65454]"
+                      : isDisabled
                         ? "border-[#40E0D0]"
                         : "focus-within:border-[#40E0D0] border-gray-gray4"
-                    } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                      } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                   >
                     <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
                       Take Profit
@@ -321,11 +341,9 @@ const Market: React.FC<MarketProps> = ({
                       disabled={isDisabled}
                     />
                     <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]"> </div>
-                    <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                      %
-                    </span>
+
                     <span>
-                      <Dropdown />
+                      <Dropdown setCurrency={setprofitCurrency} />
                     </span>
                   </div>
                 </>
@@ -367,24 +385,22 @@ const Market: React.FC<MarketProps> = ({
                           <span className="sr-only">Use setting</span>
                           <span
                             aria-hidden="true"
-                            className={`${
-                              enabled
-                                ? "translate-x-6 bg-teal-900"
-                                : "translate-x-0 bg-white"
-                            }
+                            className={`${enabled
+                              ? "translate-x-6 bg-teal-900"
+                              : "translate-x-0 bg-white"
+                              }
             pointer-events-none inline-block h-[21px] w-[21px] transform rounded-full  shadow-lg ring-0 transition duration-200 ease-in-out`}
                           />
                         </Switch>
                       </div>
                     </div>
                     <div
-                      className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
-                        error
-                          ? "focus-within:border-[#D65454] border-[#D65454]"
-                          : isDisabled
+                      className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${error
+                        ? "focus-within:border-[#D65454] border-[#D65454]"
+                        : isDisabled
                           ? "border-[#40E0D0]"
                           : "focus-within:border-[#40E0D0] border-gray-gray4"
-                      } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
                         Stop Loss
@@ -408,15 +424,13 @@ const Market: React.FC<MarketProps> = ({
                     {enabled && (
                       <>
                         <div
-                          className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
-                            error
-                              ? "focus-within:border-[#D65454] border-[#D65454]"
-                              : isDisabled
+                          className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
                               ? "border-[#40E0D0]"
                               : "focus-within:border-[#40E0D0] border-gray-gray4"
-                          } ${
-                            isDisabled ? "opacity-50 cursor-not-allowed" : ""
-                          }`}
+                            } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""
+                            }`}
                         >
                           <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
                             Limit
@@ -434,26 +448,24 @@ const Market: React.FC<MarketProps> = ({
                             }
                             disabled={isDisabled}
                           />
-                          <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]">
+                          {/* <div className="w-[1px] h-[45px] bg-[#FFFFFF0D]">
                             {" "}
                           </div>
                           <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
                             %
-                          </span>
+                          </span> */}
                           <span>
-                            <Dropdown />
+                            <Dropdown setCurrency={setLimitCurrency} />
                           </span>
                         </div>
                         <div
-                          className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
-                            error
-                              ? "focus-within:border-[#D65454] border-[#D65454]"
-                              : isDisabled
+                          className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
                               ? "border-[#40E0D0]"
                               : "focus-within:border-[#40E0D0] border-gray-gray4"
-                          } ${
-                            isDisabled ? "opacity-50 cursor-not-allowed" : ""
-                          }`}
+                            } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""
+                            }`}
                         >
                           <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
                             Size
@@ -647,9 +659,8 @@ const Market: React.FC<MarketProps> = ({
                     Adjust
                   </p>
                   <div
-                    className={`absolute top-[-135px] lg:z-[] pl-2  left-[-17px] ${
-                      isMenuOpen ? "block" : "hidden"
-                    }`}
+                    className={`absolute top-[-135px] lg:z-[] pl-2  left-[-17px] ${isMenuOpen ? "block" : "hidden"
+                      }`}
                   >
                     <div className=" icon-width three_dot p-4">
                       <div>
@@ -658,15 +669,13 @@ const Market: React.FC<MarketProps> = ({
                             Slippage Tolerance
                           </span>
                           <div
-                            className={`input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ${
-                              error
-                                ? "focus-within:border-[#D65454] border-[#D65454]"
-                                : isDisabled
+                            className={`input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ${error
+                              ? "focus-within:border-[#D65454] border-[#D65454]"
+                              : isDisabled
                                 ? "border-[#40E0D0]"
                                 : "focus-within:border-[#40E0D0] border-gray-gray4"
-                            } ${
-                              isDisabled ? "opacity-50 cursor-not-allowed" : ""
-                            }`}
+                              } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""
+                              }`}
                           >
                             <input
                               type="text"

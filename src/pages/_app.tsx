@@ -3,6 +3,8 @@ import "@/styles/globals.css";
 import { WagmiConfig, createConfig, mainnet } from 'wagmi'
 import { createPublicClient, http } from 'viem'
 import type { AppProps } from "next/app";
+import { Provider } from 'react-redux';
+import store from "../../redux/store";
 import React from "react";
 import Head from "next/head";
 const config = createConfig({
@@ -15,7 +17,9 @@ const config = createConfig({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <Provider store={store}>
+
+
       <Head>
         <title>Filament</title>
         <meta name="description" content="" />
@@ -45,6 +49,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </Sites>
       </WagmiConfig>
-    </>
+    </Provider>
   );
 }

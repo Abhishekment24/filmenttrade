@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import Subheader from "./Subheader";
 import Leftsidecomponent from "./Leftsidecomponent";
 import Middlesidecomponent from "./Middlesidecomponent";
 import Rightsidecomponent from "./Rightsidecomponent";
+import { useDispatch } from 'react-redux';
 import Tablesection from "./Table";
 import DepositPupopup from "../Commoncomponent/Despoitpopup";
 import { AiOutlineClose } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import { LAYOUT_REDUCER_ACTIONS } from "../../../redux/reducers/layoutReducer";
 interface Tradesprops {
- //handlePriceClick: any;
+  //handlePriceClick: any;
 }
 const Trade: React.FC<Tradesprops> = () => {
+  const dispatch = useDispatch()
+  const TRADE_LAYOUT = useSelector((state: any) => state.TRADE_LAYOUT)
+
+  const toggleLayout = (value: boolean) => {
+    dispatch(LAYOUT_REDUCER_ACTIONS.changeLayout(value))
+  }
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isStakeOpen, setIsStakeOpen] = useState(false);
   const [currencyState, setcurrencyState] = useState("BINANCE:ETHUSDT");
@@ -17,11 +26,11 @@ const Trade: React.FC<Tradesprops> = () => {
   const [formData, setFormData] = useState({
     amount: "100",
   });
- const [selectedPrice, setSelectedPrice] = useState<string>("");
+  const [selectedPrice, setSelectedPrice] = useState<string>("");
 
- const handlePriceClick = (price: string) => {
-   setSelectedPrice(price);
- };
+  const handlePriceClick = (price: string) => {
+    setSelectedPrice(price);
+  };
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
     if (/^\d*$/.test(value) || value === "") {
@@ -51,31 +60,65 @@ const Trade: React.FC<Tradesprops> = () => {
     <>
       <div className="">
         <Subheader
+          toggleLayout={toggleLayout}
+          TRADE_LAYOUT={TRADE_LAYOUT}
           currencyState={currencyState}
           setcurrencyState={setcurrencyState}
         />
-        <div className="lg:pt-[123px]  lg:pb-5 py-[100px] lg:grid grids-width relative max-[1023px]:container max-[1023px]:mx-auto max-[1023px]:px-4">
-          <div className="flex flex-col w-full">
-            <div className="lg:grid grid-width">
-              <div className="">
-                <Leftsidecomponent currencyState={currencyState} />
+        <div className={`lg:pt-[123px]  lg:pb-5 py-[100px] lg:grid ${TRADE_LAYOUT ? "grids-width" : "grids-width2"} relative max-[1023px]:container max-[1023px]:mx-auto max-[1023px]:px-4`}>
+          {TRADE_LAYOUT ? <>
+            <div className="flex flex-col w-full">
+              <div className="lg:grid grid-width">
+                <div className="">
+                  <Leftsidecomponent currencyState={currencyState} />
+                </div>
+                <div className="">
+                  <Middlesidecomponent onPriceClick={handlePriceClick} />
+                </div>
               </div>
-              <div className="">
-                <Middlesidecomponent onPriceClick={handlePriceClick} />
+              <div>
+                <Tablesection />
               </div>
             </div>
-            <div>
-              <Tablesection />
+            <div className="">
+              <Rightsidecomponent
+                //  connectWallet={connectWallet}
+                //  formData={formData}
+                StakeOpenPopup={StakeOpenPopup}
+                selectedPrice={selectedPrice} // isConnected={isConnected}
+              />
             </div>
-          </div>
-          <div className="">
-            <Rightsidecomponent
-              //  connectWallet={connectWallet}
-              //  formData={formData}
-              StakeOpenPopup={StakeOpenPopup}
-              selectedPrice={selectedPrice} // isConnected={isConnected}
-            />
-          </div>
+          </>
+            :
+            <>
+              {/* market-limit */}
+              <div className="">
+                <Rightsidecomponent
+                  //  connectWallet={connectWallet}
+                  //  formData={formData}
+                  StakeOpenPopup={StakeOpenPopup}
+                  selectedPrice={selectedPrice} // isConnected={isConnected}
+                />
+              </div>
+              {/* Chart */}
+              <div className="flex flex-col w-full">
+                <div className="lg:grid grid-width">
+                  <div className="">
+                    <Leftsidecomponent currencyState={currencyState} />
+                  </div>
+                  <div className="">
+                    <Middlesidecomponent onPriceClick={handlePriceClick} />
+                  </div>
+                </div>
+                <div>
+                  <Tablesection />
+                </div>
+              </div>
+            </>
+          }
+
+
+
         </div>
       </div>
       {isStakeOpen && (
