@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cdata, edata } from "./data";
 import React, { useState } from "react";
-interface ChildComponentProps {
+interface MiddlesProps {
   onPriceClick: (price: string) => void;
 }
 
@@ -15,9 +15,7 @@ const tabs = [
     key: "trades",
   },
 ];
-const Middlesidecomponent: React.FC<ChildComponentProps> = ({
-  onPriceClick,
-}) => {
+const Middlesidecomponent: React.FC<MiddlesProps> = ({ onPriceClick }) => {
   const [selectedTab, setSelectedTab] = useState("orderbook");
   return (
     <>
