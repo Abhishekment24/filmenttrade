@@ -8,7 +8,10 @@ import { Tooltip } from "react-tooltip";
 import { MdOutlineArrowDownward } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import Dropdown from "./Dropdown";
-const Limit = () => {
+interface Limitprops {
+  selectedPrice: any;
+}
+const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
   const [enabled, setEnabled] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
@@ -62,12 +65,12 @@ const Limit = () => {
 
   const handleInputBlur = (field: string) => {
     // Show placeholder when input loses focus and is empty
-  if (formData[field as keyof typeof formData] === "") {
-    setIsPlaceholderHidden((prevPlaceholders) => ({
-      ...prevPlaceholders,
-      [field]: false,
-    }));
-  }
+    if (formData[field as keyof typeof formData] === "") {
+      setIsPlaceholderHidden((prevPlaceholders) => ({
+        ...prevPlaceholders,
+        [field]: false,
+      }));
+    }
   };
 
   const toggleMenu = () => {
@@ -118,8 +121,9 @@ const Limit = () => {
         <input
           type="text"
           name="priceinput"
-          value={formData.priceinput}
-          onChange={handleInputChange}
+          value={selectedPrice}
+          readOnly
+          // onChange={handleInputChange}
           placeholder={isPlaceholderHidden.priceinput ? "" : "25.46"}
           onFocus={() => handleInputFocus("priceinput")}
           onBlur={() => handleInputBlur("priceinput")}

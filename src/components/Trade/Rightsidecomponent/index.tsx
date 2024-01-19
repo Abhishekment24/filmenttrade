@@ -10,6 +10,7 @@ import { InjectedConnector } from "wagmi/connectors/injected";
 interface RightProps {
   StakeOpenPopup: () => void;
   //formData: any;
+  selectedPrice: any;
   //connectWallet: () => void;
   //isConnected: boolean;
 }
@@ -26,7 +27,8 @@ const tabs = [
 const Rightsidecomponent: React.FC<RightProps> = ({
   StakeOpenPopup,
   // connectWallet,
- // formData,
+  selectedPrice,
+  // formData,
 }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const closePopup = () => {
@@ -89,7 +91,7 @@ const Rightsidecomponent: React.FC<RightProps> = ({
           )}
           {selectedTab == "limit" && (
             <>
-              <Limit />
+              <Limit selectedPrice={selectedPrice} />
             </>
           )}
         </div>

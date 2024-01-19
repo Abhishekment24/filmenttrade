@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { cdata, edata } from "./data";
 import React, { useState } from "react";
+interface ChildComponentProps {
+  onPriceClick: (price: string) => void;
+}
+
 const tabs = [
   {
     title: "Order Book",
@@ -11,7 +15,9 @@ const tabs = [
     key: "trades",
   },
 ];
-const Middlesidecomponent = () => {
+const Middlesidecomponent: React.FC<ChildComponentProps> = ({
+  onPriceClick,
+}) => {
   const [selectedTab, setSelectedTab] = useState("orderbook");
   return (
     <>
@@ -56,7 +62,10 @@ const Middlesidecomponent = () => {
                   className="flex justify-between bg_charts items-center py-[4px] px-2 order ransition-all duration-300"
                   key={index}
                 >
-                  <span className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">
+                  <span
+                    onClick={() => onPriceClick(item.price)}
+                    className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]"
+                  >
                     {item.price}
                   </span>
 
@@ -82,7 +91,10 @@ const Middlesidecomponent = () => {
                   className="flex justify-between items-center py-[4px] px-2 order ransition-all duration-300"
                   key={index}
                 >
-                  <span className="cursor-pointer pool_font text-[#00CC99] font-normal text-xs tracking-[0.06px] ">
+                  <span
+                    onClick={() => onPriceClick(item.price)}
+                    className="cursor-pointer pool_font text-[#00CC99] font-normal text-xs tracking-[0.06px] "
+                  >
                     {item.price}
                   </span>
                   <div className="flex items-center gap-[19px]">
@@ -120,7 +132,10 @@ const Middlesidecomponent = () => {
                   className="flex justify-between items-center py-[4px] px-2 order ransition-all duration-300"
                   key={index}
                 >
-                  <span className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">
+                  <span
+                    onClick={() => onPriceClick(item.price)}
+                    className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]"
+                  >
                     {item.price}
                   </span>
                   <div className="flex items-center gap-[19px]">
@@ -141,7 +156,10 @@ const Middlesidecomponent = () => {
                   className="flex justify-between items-center py-[4px] px-2 order ransition-all duration-300"
                   key={index}
                 >
-                  <span className="cursor-pointer pool_font text-[#00CC99] font-normal text-xs tracking-[0.06px]">
+                  <span
+                    onClick={() => onPriceClick(item.price)}
+                    className="cursor-pointer pool_font text-[#00CC99] font-normal text-xs tracking-[0.06px]"
+                  >
                     {item.price}
                   </span>
                   <div className="flex items-center gap-[19px]">
@@ -161,7 +179,10 @@ const Middlesidecomponent = () => {
                   className="flex justify-between items-center py-[4px] px-2 order ransition-all duration-300"
                   key={index}
                 >
-                  <span className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]">
+                  <span
+                    onClick={() => onPriceClick(item.price)}
+                    className="cursor-pointer pool_font text-[#D65454] font-normal text-xs tracking-[0.06px]"
+                  >
                     {item.price}
                   </span>
                   <div className="flex items-center gap-[19px]">

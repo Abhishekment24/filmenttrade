@@ -6,8 +6,10 @@ import Rightsidecomponent from "./Rightsidecomponent";
 import Tablesection from "./Table";
 import DepositPupopup from "../Commoncomponent/Despoitpopup";
 import { AiOutlineClose } from "react-icons/ai";
-
-const Trade = () => {
+interface Tradesprops {
+ //handlePriceClick: any;
+}
+const Trade: React.FC<Tradesprops> = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isStakeOpen, setIsStakeOpen] = useState(false);
   const [currencyState, setcurrencyState] = useState("BINANCE:ETHUSDT");
@@ -15,7 +17,11 @@ const Trade = () => {
   const [formData, setFormData] = useState({
     amount: "100",
   });
+ const [selectedPrice, setSelectedPrice] = useState<string>("");
 
+ const handlePriceClick = (price: string) => {
+   setSelectedPrice(price);
+ };
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
     if (/^\d*$/.test(value) || value === "") {
@@ -40,6 +46,7 @@ const Trade = () => {
     setIsStakeOpen(true);
     setIsPopupOpen(false);
   };
+
   return (
     <>
       <div className="">
@@ -54,7 +61,7 @@ const Trade = () => {
                 <Leftsidecomponent currencyState={currencyState} />
               </div>
               <div className="">
-                <Middlesidecomponent />
+                <Middlesidecomponent onPriceClick={handlePriceClick} />
               </div>
             </div>
             <div>
@@ -66,7 +73,7 @@ const Trade = () => {
               //  connectWallet={connectWallet}
               //  formData={formData}
               StakeOpenPopup={StakeOpenPopup}
-              // isConnected={isConnected}
+              selectedPrice={selectedPrice} // isConnected={isConnected}
             />
           </div>
         </div>
