@@ -144,6 +144,22 @@ export const tablepoolData = [
     unrealisedPnL: "$3,600",
   },
 ];
+export const tablallocationData = [
+  {
+    token: "USDC",
+    percentage: "223.11/223.11",
+    amountutilised: "223.11",
+    amountavailable: "223.11",
+    borrowingrate: "223.11",
+  },
+  {
+    token: "USDC",
+    percentage: "223.11/223.11",
+    amountutilised: "223.11",
+    amountavailable: "223.11",
+    borrowingrate: "223.11",
+  },
+];
 
 export const tablerwardData = [
   {

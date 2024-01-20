@@ -6,6 +6,7 @@ import Openorders from "./openorders";
 import History from "./history";
 import RealisedPnL from "./realisedPnL";
 import Balance from "./balance";
+import Errormsg from "@/components/Commoncomponent/Errormsg";
 const tabs = [
   {
     title: "Positions",
@@ -30,6 +31,7 @@ const tabs = [
 ];
 const Tablesection = () => {
   const [selectedTab, setSelectedTab] = useState("positions");
+  const [error, setError] = useState(false);
 
   return (
     <>
@@ -55,29 +57,37 @@ const Tablesection = () => {
             </div>
           </div>
 
-          {selectedTab == "positions" && (
+          {error ? (
+            <div className="text-center font-medium px-2 py-2">
+              <Errormsg />
+            </div>
+          ) : (
             <>
-              <Positions />
-            </>
-          )}
-          {selectedTab == "openorders" && (
-            <>
-              <Openorders />
-            </>
-          )}
-          {selectedTab == "history" && (
-            <>
-              <History />
-            </>
-          )}
-          {selectedTab == "realisedPnL" && (
-            <>
-              <RealisedPnL />
-            </>
-          )}
-          {selectedTab == "balance" && (
-            <>
-              <Balance />
+              {selectedTab === "positions" && (
+                <>
+                  <Positions />
+                </>
+              )}
+              {selectedTab === "openorders" && (
+                <>
+                  <Openorders />
+                </>
+              )}
+              {selectedTab === "history" && (
+                <>
+                  <History />
+                </>
+              )}
+              {selectedTab === "realisedPnL" && (
+                <>
+                  <RealisedPnL />
+                </>
+              )}
+              {selectedTab === "balance" && (
+                <>
+                  <Balance />
+                </>
+              )}
             </>
           )}
         </div>

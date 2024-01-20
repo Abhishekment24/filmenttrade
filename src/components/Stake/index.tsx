@@ -16,10 +16,11 @@ import { IoMdArrowDropleft } from "react-icons/io";
 import Stakepopup from "./Stakepopup";
 import { AiOutlineClose } from "react-icons/ai";
 import Unstakepopup from "./Unstakepopup";
+import Errormsg from "../Commoncomponent/Errormsg";
 const Stakepage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [image, setImage] = useState("");
-
+  const [error, setError] = useState(false);
   const [showSecondPhase, setSecondPhase] = useState(false);
   const [isUnstakeDetailOpen, setIsUnstakeDetailOpen] = useState(false);
   const [isUnStakeOpen, setIsUnStakeOpen] = useState(false);
@@ -79,228 +80,258 @@ const Stakepage = () => {
   };
   return (
     <>
-      <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden no-scrollbar">
-        <div className="container mx-auto max-[1279px]:px-4">
-          <div className="">
-            <p className="pool_font text-[#fff] text-2xl font-semibold">
-              Stake
-            </p>
-          </div>
-          {!showSecondPhase && (
-            <div className="w-full relative  bg-[#1B1C1E] mt-[32px]  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] ">
-              <div className="p-[24px]">
-                <div className="flex items-center flex-wrap justify-between gap-3">
-                  <div className="">
-                    <p className="pool_font text-[#fff] text-[20px] tracking-[0.1px] font-semibold">
-                      FLP_USDC
-                    </p>
-                    <div className="flex flex-wrap items-center gap-[12px] mt-3">
-                      <div className="flex items-center gap-[8px] rounded-[4px] stake_box py-[6px] px-[8px]">
-                        <div>
-                          <Image
-                            className="w-[16px]"
-                            priority
-                            src={Lock}
-                            alt="Lock"
-                          />
-                        </div>
-                        <span className="pool_font text-[#FFFFFFCC] text-xs font-medium">
-                          21 Days Staking Period
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-[8px] rounded-[4px] stake_box py-[6px] px-[8px]">
-                        <div>
-                          <Image
-                            className="w-[16px]"
-                            priority
-                            src={Lock}
-                            alt="Lock"
-                          />
-                        </div>
-                        <span className="pool_font text-[#FFFFFFCC] text-xs font-medium">
-                          Boost Rewards
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <button
-                      onClick={StakeOpenPopup}
-                      className="items-center mb-2 pool_font text-[#0B2B28] w-[140px]  max-[588px]:w-full text-sm font-semibold  btn_one  py-[12px] px-[16px]"
-                    >
-                      Stake
-                    </button>
-                    <p className="pool_font text-[#9CA3AF] text-xs font-medium tracking-[0.06px]">
-                      Available to stake: 1,524.44 FLP
-                    </p>
-                  </div>
-                </div>
-                <div className="pool_right_box sm:px-[40px] px-4 py-[16px] pool_box_shadow  mt-5">
-                  <div className="flex  max-[550px]:flex-col items-center gap-3 sm:gap-[36px] ">
-                    <div className="max-[550px]:flex  max-[550px]:justify-center">
-                      <Image
-                        className="w-[88px]"
-                        priority
-                        src={Coin}
-                        alt="Coin"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-[4px] max-[550px]:justify-center">
-                      <span className="pool_font text-[#fff] text-[20px] max-[400px]:text-base max-[550px]:text-center font-semibold tracking-[0.1px]">
-                        Stake to start earning reward
-                      </span>
-                      <span className="pool_font text-[#939191] text-xs max-[550px]:text-center font-medium tracking-[0.07px]">
-                        Get higher fees 2x
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      {error ? (
+        <div className=" flex justify-center items-center py-[120px] min-h-screen">
+          <Errormsg />
+        </div>
+      ) : (
+        <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden no-scrollbar">
+          <div className="container mx-auto max-[1279px]:px-4">
+            <div className="">
+              <p className="pool_font text-[#fff] text-2xl font-semibold">
+                Stake
+              </p>
             </div>
-          )}
-          {showSecondPhase && (
-            <div className="w-full relative  bg-[#1B1C1E] mt-[32px]  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] ">
-              <div className="p-[24px]">
-                <div className="">
-                  <p className="pool_font text-[#fff] text-[20px] tracking-[0.1px] font-semibold">
-                    FLP_USDC
-                  </p>
-                  <div className="flex flex-wrap items-center gap-[12px] mt-3">
-                    <div className="flex items-center gap-[8px] rounded-[4px] stake_box py-[6px] px-[8px]">
-                      <div>
-                        <Image
-                          className="w-[16px]"
-                          priority
-                          src={Lock}
-                          alt="Lock"
-                        />
+            {!showSecondPhase && (
+              <div className="w-full relative  bg-[#1B1C1E] mt-[32px]  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] ">
+                <div className="p-[24px]">
+                  {error ? (
+                    <div>
+                      <p className="pool_font text-[#fff] text-[20px] tracking-[0.1px] font-semibold">
+                        FLP_USDC
+                      </p>
+                      <div className="text-center font-medium px-2 py-2">
+                        <Errormsg />
                       </div>
-                      <span className="pool_font text-[#FFFFFFCC] text-xs font-medium">
-                        21 Days Staking Period
-                      </span>
                     </div>
-                    <div className="flex items-center gap-[8px] rounded-[4px] stake_box py-[6px] px-[8px]">
-                      <div>
-                        <Image
-                          className="w-[16px]"
-                          priority
-                          src={Lock}
-                          alt="Lock"
-                        />
-                      </div>
-                      <span className="pool_font text-[#FFFFFFCC] text-xs font-medium">
-                        Boost Rewards
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                  ) : (
+                    <>
+                      <div className="flex items-center flex-wrap justify-between gap-3">
+                        <div className="">
+                          <p className="pool_font text-[#fff] text-[20px] tracking-[0.1px] font-semibold">
+                            FLP_USDC
+                          </p>
 
-                <div className="flex items-start gap-[20px] mt-5 lg:flex-row flex-col w-full relative">
-                  <div className="lg:w-[50%] w-full">
-                    <div className="rounded-[8px] border-[1px] border-solid border-[#25272A] p-[24px] lg:h-[183px]">
-                      <div className="flex items-center flex-wrap justify-between gap-3">
-                        <div>
-                          <p className="pool_font text-[#9CA3AF] text-xs font-semibold">
-                            Staked
-                          </p>
-                          <p className="pool_font text-[#FFFFFF] text-base font-medium tracking-[0.08px]">
-                            1,500,500.65 FLP
-                          </p>
+                          <div className="flex flex-wrap items-center gap-[12px] mt-3">
+                            <div className="flex items-center gap-[8px] rounded-[4px] stake_box py-[6px] px-[8px]">
+                              <div>
+                                <Image
+                                  className="w-[16px]"
+                                  priority
+                                  src={Lock}
+                                  alt="Lock"
+                                />
+                              </div>
+                              <span className="pool_font text-[#FFFFFFCC] text-xs font-medium">
+                                21 Days Staking Period
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-[8px] rounded-[4px] stake_box py-[6px] px-[8px]">
+                              <div>
+                                <Image
+                                  className="w-[16px]"
+                                  priority
+                                  src={Lock}
+                                  alt="Lock"
+                                />
+                              </div>
+                              <span className="pool_font text-[#FFFFFFCC] text-xs font-medium">
+                                Boost Rewards
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                        <div className="">
-                          <button
-                            onClick={UnStakeOpenPopup}
-                            className="items-center pool_font text-[#40CABC] text-sm font-semibold   w-[140px] btn   py-[12px] px-[16px]"
-                          >
-                            Unstake
-                          </button>
-                        </div>
-                      </div>
-                      <div className="border-t-[1px] border-solid border-[#25272A] my-5"></div>
-                      <div className="flex items-center flex-wrap justify-between gap-3">
-                        <div>
-                          <p className="pool_font text-[#9CA3AF] text-xs font-semibold">
-                            Available to Stake
-                          </p>
-                          <p className="pool_font text-[#FFFFFF] text-base font-medium tracking-[0.08px]">
-                            2,525 FLP
-                          </p>
-                        </div>
-                        <div className="">
+                        <div className="text-right">
                           <button
                             onClick={StakeOpenPopup}
-                            className="items-center pool_font text-[#40CABC] text-sm font-semibold  btn  w-[140px]  py-[12px] px-[16px]"
+                            className="items-center mb-2 pool_font text-[#0B2B28] w-[140px]  max-[588px]:w-full text-sm font-semibold  btn_one  py-[12px] px-[16px]"
                           >
                             Stake
                           </button>
+                          <p className="pool_font text-[#9CA3AF] text-xs font-medium tracking-[0.06px]">
+                            Available to stake: 1,524.44 FLP
+                          </p>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="lg:w-[50%] w-full relative">
-                    <div className="pool_right_box sm:px-[40px] px-4 py-[33px] pool_box_shadow  lg:h-[183px]">
-                      <div className="absolute top-[1px] right-[1px]  ">
-                        <Image
-                          className="w-[214px] overflow-hidden max-[300px]:w-[191px]"
-                          priority
-                          src={Timerbg}
-                          alt="Timerbg"
-                        />
-                        <div className="absolute top-[8px] right-[14px]">
-                          <div className="flex items-center gap-1">
-                            <div className="">
-                              <Image
-                                className="w-[16px]"
-                                priority
-                                src={Sparkles}
-                                alt="Sparkles"
-                              />
-                            </div>
-                            <span className="pool_font text-[#939191] max-[300px]:text-[10px] text-xs font-medium tracking-[0.06px]">
-                              More rewards coming soon
+                      <div className="pool_right_box sm:px-[40px] px-4 py-[16px] pool_box_shadow  mt-5">
+                        <div className="flex  max-[550px]:flex-col items-center gap-3 sm:gap-[36px] ">
+                          <div className="max-[550px]:flex  max-[550px]:justify-center">
+                            <Image
+                              className="w-[88px]"
+                              priority
+                              src={Coin}
+                              alt="Coin"
+                            />
+                          </div>
+                          <div className="flex flex-col gap-[4px] max-[550px]:justify-center">
+                            <span className="pool_font text-[#fff] text-[20px] max-[400px]:text-base max-[550px]:text-center font-semibold tracking-[0.1px]">
+                              Stake to start earning reward
+                            </span>
+                            <span className="pool_font text-[#939191] text-xs max-[550px]:text-center font-medium tracking-[0.07px]">
+                              Get higher fees 2x
                             </span>
                           </div>
                         </div>
                       </div>
-                      <div className="flex  max-[550px]:flex-col items-center gap-3 sm:gap-[36px] max-[550px]:mt-5">
-                        <div className="max-[550px]:flex  max-[550px]:justify-center">
-                          <Image
-                            className="w-[88px]"
-                            priority
-                            src={Coin}
-                            alt="Coin"
-                          />
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+            {showSecondPhase && (
+              <div className="w-full relative  bg-[#1B1C1E] mt-[32px]  pool_box_shadow border-[1px] border-solid border-[#25272A] rounded-[8px] ">
+                {error ? (
+                  <div className="p-[24px]">
+                    <p className="pool_font text-[#fff] text-[20px] tracking-[0.1px] font-semibold">
+                      FLP_USDC
+                    </p>
+                    <div className="text-center font-medium px-2 py-2">
+                      <Errormsg />
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="p-[24px]">
+                      <div className="">
+                        <p className="pool_font text-[#fff] text-[20px] tracking-[0.1px] font-semibold">
+                          FLP_USDC
+                        </p>
+                        <div className="flex flex-wrap items-center gap-[12px] mt-3">
+                          <div className="flex items-center gap-[8px] rounded-[4px] stake_box py-[6px] px-[8px]">
+                            <div>
+                              <Image
+                                className="w-[16px]"
+                                priority
+                                src={Lock}
+                                alt="Lock"
+                              />
+                            </div>
+                            <span className="pool_font text-[#FFFFFFCC] text-xs font-medium">
+                              21 Days Staking Period
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-[8px] rounded-[4px] stake_box py-[6px] px-[8px]">
+                            <div>
+                              <Image
+                                className="w-[16px]"
+                                priority
+                                src={Lock}
+                                alt="Lock"
+                              />
+                            </div>
+                            <span className="pool_font text-[#FFFFFFCC] text-xs font-medium">
+                              Boost Rewards
+                            </span>
+                          </div>
                         </div>
-                        <div className="flex flex-col gap-[4px] max-[550px]:justify-center">
-                          <span className="pool_font text-[#fff] text-xs max-[550px]:text-center font-semibold tracking-[0.06px]">
-                            Your Reward
-                          </span>
-                          <span className="pool_font text-[#fff] text-[20px] max-[400px]:text-base max-[550px]:text-center font-semibold tracking-[0.1px]">
-                            ~25% APR
-                          </span>
-                          {/* <div className="mt-3 max-[550px]:text-center">
+                      </div>
+
+                      <div className="flex items-start gap-[20px] mt-5 lg:flex-row flex-col w-full relative">
+                        <div className="lg:w-[50%] w-full">
+                          <div className="rounded-[8px] border-[1px] border-solid border-[#25272A] p-[24px] lg:h-[183px]">
+                            <div className="flex items-center flex-wrap justify-between gap-3">
+                              <div>
+                                <p className="pool_font text-[#9CA3AF] text-xs font-semibold">
+                                  Staked
+                                </p>
+                                <p className="pool_font text-[#FFFFFF] text-base font-medium tracking-[0.08px]">
+                                  1,500,500.65 FLP
+                                </p>
+                              </div>
+                              <div className="">
+                                <button
+                                  onClick={UnStakeOpenPopup}
+                                  className="items-center pool_font text-[#40CABC] text-sm font-semibold   w-[140px] btn   py-[12px] px-[16px]"
+                                >
+                                  Unstake
+                                </button>
+                              </div>
+                            </div>
+                            <div className="border-t-[1px] border-solid border-[#25272A] my-5"></div>
+                            <div className="flex items-center flex-wrap justify-between gap-3">
+                              <div>
+                                <p className="pool_font text-[#9CA3AF] text-xs font-semibold">
+                                  Available to Stake
+                                </p>
+                                <p className="pool_font text-[#FFFFFF] text-base font-medium tracking-[0.08px]">
+                                  2,525 FLP
+                                </p>
+                              </div>
+                              <div className="">
+                                <button
+                                  onClick={StakeOpenPopup}
+                                  className="items-center pool_font text-[#40CABC] text-sm font-semibold  btn  w-[140px]  py-[12px] px-[16px]"
+                                >
+                                  Stake
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="lg:w-[50%] w-full relative">
+                          <div className="pool_right_box sm:px-[40px] px-4 py-[33px] pool_box_shadow  lg:h-[183px]">
+                            <div className="absolute top-[1px] right-[1px]  ">
+                              <Image
+                                className="w-[214px] overflow-hidden max-[300px]:w-[191px]"
+                                priority
+                                src={Timerbg}
+                                alt="Timerbg"
+                              />
+                              <div className="absolute top-[8px] right-[14px]">
+                                <div className="flex items-center gap-1">
+                                  <div className="">
+                                    <Image
+                                      className="w-[16px]"
+                                      priority
+                                      src={Sparkles}
+                                      alt="Sparkles"
+                                    />
+                                  </div>
+                                  <span className="pool_font text-[#939191] max-[300px]:text-[10px] text-xs font-medium tracking-[0.06px]">
+                                    More rewards coming soon
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex  max-[550px]:flex-col items-center gap-3 sm:gap-[36px] max-[550px]:mt-5">
+                              <div className="max-[550px]:flex  max-[550px]:justify-center">
+                                <Image
+                                  className="w-[88px]"
+                                  priority
+                                  src={Coin}
+                                  alt="Coin"
+                                />
+                              </div>
+                              <div className="flex flex-col gap-[4px] max-[550px]:justify-center">
+                                <span className="pool_font text-[#fff] text-xs max-[550px]:text-center font-semibold tracking-[0.06px]">
+                                  Your Reward
+                                </span>
+                                <span className="pool_font text-[#fff] text-[20px] max-[400px]:text-base max-[550px]:text-center font-semibold tracking-[0.1px]">
+                                  ~25% APR
+                                </span>
+                                {/* <div className="mt-3 max-[550px]:text-center">
                             <button className="items-center w-[140px] nav_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[12px] px-[16px]">
                               Claim
                             </button>
                           </div> */}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full relative  bg-[#242527]   pool_box_shadow border-t-[1px] border-solid border-[#25272A]  px-[24px] py-[16px]">
-                <Link href="/portfolio?active=rewards">
-                  <div className="flex items-center justify-end gap-1">
-                    <span className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs">
-                      View earned rewards
-                    </span>
-                    <span>
-                      <RiShareBoxFill className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs" />
-                    </span>
-                  </div>
-                </Link>
-                {/*   <div className="rewards-blocks">
+                    <div className="w-full relative  bg-[#242527]   pool_box_shadow border-t-[1px] border-solid border-[#25272A]  px-[24px] py-[16px]">
+                      <Link href="/portfolio?active=rewards">
+                        <div className="flex items-center justify-end gap-1">
+                          <span className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs">
+                            View earned rewards
+                          </span>
+                          <span>
+                            <RiShareBoxFill className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs" />
+                          </span>
+                        </div>
+                      </Link>
+                      {/*   <div className="rewards-blocks">
                   <div className="flex justify-between items-center gap-2 flex-wrap">
                     <div className="pool_font text-[#fff] text-sm max-[345px]:text-xs">
                       Reward History
@@ -423,11 +454,14 @@ const Stakepage = () => {
                     </>
                   )}
                 </div> */}
+                    </div>
+                  </>
+                )}
               </div>
-            </div>
-          )}
-        </div>
-      </section>
+            )}
+          </div>
+        </section>
+      )}
       {isStakeOpen && (
         <>
           <div className="fixed inset-0 flex justify-center items-center z-[9999] bg-background/80 backdrop-blur-sm bg-black opacity-90"></div>

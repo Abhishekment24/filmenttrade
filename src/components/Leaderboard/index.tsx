@@ -8,6 +8,7 @@ import { tableleaderData } from "./data";
 import Orderplace from "../Commoncomponent/Alertpopup/Orderplace";
 import Postionpopup from "../Commoncomponent/Alertpopup/Positioncreatedpopup";
 import Failedorder from "../Commoncomponent/Alertpopup/Failedorder";
+import Errormsg from "../Commoncomponent/Errormsg";
 const Leaderboard = () => {
   const [error, setError] = useState(false);
   const [openpopup, setOpenpopup] = useState(false);
@@ -30,7 +31,7 @@ const Leaderboard = () => {
     <>
       <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden ">
         <div className="container mx-auto max-[1279px]:px-4">
-          <div onClick={Opens} className="">
+          <div className="">
             <p className="pool_font text-[#fff] text-2xl font-semibold">
               Leaderboard
             </p>
@@ -65,71 +66,80 @@ const Leaderboard = () => {
               </div>
             </div>
             <div className="py-[24px]">
-              <div className="flex w-full overflow-auto no-scrollbar border-[1px] border-solid border-[#25272A]">
-                <table className="w-full">
-                  <thead>
-                    <tr className="pool_font text-xs font-medium border-b-[1px] border-solid border-[#25272A]  text-[#9CA3AF]">
-                      <th className="text-left font-medium  px-3 py-2">Rank</th>
-                      <th className="text-left font-medium  px-3 py-2">
-                        Account
-                      </th>
-                      <th className="text-right font-medium px-3 py-2">
-                        Profit/ Loss(%)
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="">
-                    {filteredData.length === 0 ? (
-                      <div className="relative w-full">
-                        <div className="text-center text-[#9CA3AF] text-sm font-medium px-2 py-2">
-                          No Leaderboard
-                        </div>
-                      </div>
-                    ) : (
-                      <>
-                        {filteredData.slice(0, 10).map((data, index) => (
-                          <tr
-                            key={index}
-                            className={`pool_font text-sm ${
-                              index === 2 ? "table_body" : ""
-                            } text-[#E5E7EB] border-b-[1px] border-solid border-[#25272A] tracking-[0.07px]`}
-                          >
-                            <td className="text-left  font-medium px-3 py-2">
-                              <div className="flex items-center gap-[10px]">
-                                <Image
-                                  className="w-[18px]"
-                                  priority
-                                  src={data.rankimg}
-                                  alt=""
-                                />
-                                <div>{data.rank}</div>
-                              </div>
-                            </td>
-                            <td className="text-left  font-medium px-3 py-2">
-                              {data.account}
-                            </td>
-                            <td className="text-right text-[#10B981] flex flex-col gap-1 font-medium px-3 py-2">
-                              {data.profitloss}
-                              <span className="text-[#E5E7EB] text-base font-normal">
-                                {data.profitprice}
-                              </span>
-                            </td>
-                          </tr>
-                        ))}
-                      </>
-                    )}
-                  </tbody>
-                </table>
-              </div>
+              {error ? (
+                <tbody className="text-center justify-center flex font-medium px-2 py-2">
+                  <Errormsg />
+                </tbody>
+              ) : (
+                <div className="flex w-full overflow-auto no-scrollbar border-[1px] border-solid border-[#25272A]">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="pool_font text-xs font-medium border-b-[1px] border-solid border-[#25272A]  text-[#9CA3AF]">
+                        <th className="text-left font-medium  px-3 py-2">
+                          Rank
+                        </th>
+                        <th className="text-left font-medium  px-3 py-2">
+                          Account
+                        </th>
+                        <th className="text-right font-medium px-3 py-2">
+                          Profit/ Loss(%)
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody className="">
+                      {filteredData.length === 0 ? (
+                        <tr className="relative w-full">
+                          <td className="text-center text-[#9CA3AF] text-sm font-medium px-2 py-2">
+                            No Leaderboard
+                          </td>
+                        </tr>
+                      ) : (
+                        <>
+                          {filteredData.slice(0, 10).map((data, index) => (
+                            <tr
+                              key={index}
+                              className={`pool_font text-sm ${
+                                index === 2 ? "table_body" : ""
+                              } text-[#E5E7EB] border-b-[1px] border-solid border-[#25272A] tracking-[0.07px]`}
+                            >
+                              <td className="text-left  font-medium px-3 py-2">
+                                <div className="flex items-center gap-[10px]">
+                                  <Image
+                                    className="w-[18px]"
+                                    priority
+                                    src={data.rankimg}
+                                    alt=""
+                                  />
+                                  <div>{data.rank}</div>
+                                </div>
+                              </td>
+                              <td className="text-left  font-medium px-3 py-2">
+                                {data.account}
+                              </td>
+                              <td className="text-right text-[#10B981] flex flex-col gap-1 font-medium px-3 py-2">
+                                {data.profitloss}
+                                <span className="text-[#E5E7EB] text-base font-normal">
+                                  {data.profitprice}
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </section>
-      <Failedorder
+      {/* <Failedorder
         isOpen={openpopup}
         onClose={closePopup}
         failStatus="placed"
-      />
+      />*/}
     </>
   );
 };
