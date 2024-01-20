@@ -5,6 +5,7 @@ import Wallecticons from "../../../../public/assest/wallecticons.png";
 import Link from "next/link";
 import Metamaskicon from "../../../../public/assest/metamaskicon.png";
 import Metamaskimg from "../../../../public/assest/metamsakimgs.png";
+import ConnectingAnimation from "../../../../public/assest/metamaskanimation.gif";
 import Yellowimg from "../../../../public/assest/yellowimg.png";
 import Image from "next/image";
 import Line from "../../../../public/assest/Line.png";
@@ -26,7 +27,7 @@ const Afterconnectpopup: React.FC<DetailsPopupProps> = ({
   onClose,
   isConnecting,
   chainId,
-   InjectedChainId,
+  InjectedChainId,
   isConnected,
   handleNetworkChange,
   disconnectMetamask,
@@ -52,11 +53,13 @@ const Afterconnectpopup: React.FC<DetailsPopupProps> = ({
 
               <div className="py-7">
                 <div className="flex justify-center">
+
                   {isConnecting ||
-                  (isConnected && chainId == InjectedChainId) ? (
+                    (isConnected && chainId == InjectedChainId) ? (
                     <Image
                       className="w-[317px]"
-                      src={Metamaskimg} // green metamask
+                      // src={Metamaskimg} // green metamask
+                      src={isConnecting ? ConnectingAnimation : Metamaskimg} // green metamask
                       priority
                       alt="Metamaskimg"
                     />
@@ -79,7 +82,7 @@ const Afterconnectpopup: React.FC<DetailsPopupProps> = ({
                     <p className="text-[20px]  text-[#fff] font-semibold pool_font">
                       {isConnected
                         ? "Connected to metamask"
-                        : "Connecting to MetaMask"}
+                        : isConnecting ? "Connecting to MetaMask" : <span className="text-red-400"> Request denied</span>}
                     </p>
                   </div>
                 </Link>

@@ -85,9 +85,8 @@ const Trade: React.FC<Tradesprops> = ({
             setcurrencyState={setcurrencyState}
           />
           <div
-            className={`lg:pt-[123px]  lg:pb-5 py-[100px] lg:grid ${
-              TRADE_LAYOUT ? "grids-width" : "grids-width2"
-            } relative max-[1023px]:container max-[1023px]:mx-auto max-[1023px]:px-4`}
+            className={`lg:pt-[123px]  lg:pb-5 py-[100px] lg:grid ${TRADE_LAYOUT ? "grids-width" : "grids-width2"
+              } relative max-[1023px]:container max-[1023px]:mx-auto max-[1023px]:px-4`}
           >
             {TRADE_LAYOUT ? (
               <>

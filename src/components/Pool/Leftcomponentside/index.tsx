@@ -88,11 +88,10 @@ const Leftcomponentside = () => {
               return (
                 <button
                   onClick={() => setSelectedTab(tab.key)}
-                  className={`py-[6px] px-[12px] pool_font rounded-[8px] font-normal text-base  ${
-                    tab.key == selectedTab
-                      ? " bg-[#1A1A1A] text-[#E8E8E8] "
-                      : "text-[#BABABA] "
-                  }`}
+                  className={`py-[6px] px-[12px] pool_font rounded-[8px] font-normal text-base  ${tab.key == selectedTab
+                    ? " bg-[#1A1A1A] text-[#E8E8E8] "
+                    : "text-[#BABABA] "
+                    }`}
                   key={index}
                 >
                   {tab.title}
@@ -111,6 +110,7 @@ const Leftcomponentside = () => {
         ) : (
           <>
             {selectedTab == "liquidity" && (
+              // <div className="w-full h-[200px] mt-5">
               <div className="w-full h-[200px] mt-5">
                 <Charts />
               </div>
