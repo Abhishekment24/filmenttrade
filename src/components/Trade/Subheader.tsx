@@ -112,29 +112,29 @@ const Subheader: React.FC<headerInterFace> = ({
   return (
     <>
       <div
-        className="navbartop fixed top-[62px] z-[300] bg-[#1B1C1E] max-[1179px]:hidden header_bg lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  
+        className="navbartop fixed top-[62px] z-[300] bg-[#1B1C1E]  header_bg lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  
         "
       >
         <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
-          <div className="flex justify-between text-[#fff] items-center max-[1023px]:hidden gap-[14px]">
-            <div className="flex items-center gap-[14px]">
+          <div className="flex justify-between text-[#fff] items-center max-[1023px]:hidden xl:gap-[14px] lg:gap-2">
+            <div className="flex items-center xl:gap-[14px] lg:gap-2">
               <div
                 onClick={() => setshowLangDrop(!showLangDrop)}
-                className="flex cursor-pointer justify-between items-center gap-[14px]"
+                className="flex cursor-pointer justify-between items-center xl:gap-[14px] lg:gap-2"
               >
-                <div className="flex items-center gap-[14px]">
+                <div className="flex items-center xl:gap-[14px] lg:gap-2">
                   <Image
                     className="w-[24px]"
                     priority
                     src={selectedTab.image}
                     alt=""
                   />
-                  <span className="text-[#fff] pool_font font-semibold text-base xl:text-lg tracking-[0.09px] w-[138px]">
+                  <span className="text-[#fff] pool_font font-semibold lg:text-sm xl:text-base min-[1360px]:text-lg tracking-[0.09px] xl:w-[138px] lg:w-[80px]">
                     {selectedTab.name}
                   </span>
                 </div>
                 <div className="relative ">
-                  <RiArrowDownSFill className="text-[#fff] text-base" />
+                  <RiArrowDownSFill className="text-[#fff] lg:text-sm xl:text-base" />
 
                   {showLangDrop && (
                     <div
@@ -191,10 +191,11 @@ const Subheader: React.FC<headerInterFace> = ({
                                       ${item.price}
                                     </p>
                                     <p
-                                      className={`pool_font ${key == 1
-                                        ? "text-[#D65454]"
-                                        : "text-[#00CC99]"
-                                        }  w-[88px] text-center font-medium text-xs tracking-[0.06px] `}
+                                      className={`pool_font ${
+                                        key == 1
+                                          ? "text-[#D65454]"
+                                          : "text-[#00CC99]"
+                                      }  w-[88px] text-center font-medium text-xs tracking-[0.06px] `}
                                     >
                                       +10.86%
                                     </p>
@@ -207,80 +208,6 @@ const Subheader: React.FC<headerInterFace> = ({
                               </>
                             );
                           })}
-                          {/* <div className="flex justify-between items-center  pb-4">
-                            <div className="flex items-center gap-[8px]">
-                              <Image
-                                className="w-[24px]"
-                                priority
-                                src={Btcicon}
-                                alt="Btcicon"
-                              />
-                              <span className="text-[#fff] pool_font font-medium text-xs tracking-[0.06px]">
-                                BTC-PERP
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-[20px]">
-                              <p className="pool_font text-[#fff]  text-left font-medium text-xs tracking-[0.06px]">
-                                $2,2304.56
-                              </p>
-                              <p className="pool_font text-[#00CC99] w-[88px] text-center font-medium text-xs tracking-[0.06px] ">
-                                +10.86%
-                              </p>
-                              <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-                                $100.01m
-                              </p>
-                            </div>
-                          </div>
-                          <div className=" header_bg"></div>
-                          <div className="flex justify-between items-center  py-4">
-                            <div className="flex items-center gap-[8px]">
-                              <Image
-                                className="w-[24px]"
-                                priority
-                                src={Ethicon}
-                                alt="Ethicon"
-                              />
-                              <span className="text-[#fff] pool_font font-medium text-xs tracking-[0.06px]">
-                                ETH-PERP
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-[20px]">
-                              <p className="pool_font text-[#fff]  text-left font-medium text-xs tracking-[0.06px]">
-                                $2,2304.56
-                              </p>
-                              <p className="pool_font text-[#00CC99] w-[88px] text-center font-medium text-xs tracking-[0.06px]">
-                                +10.86%
-                              </p>
-                              <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-                                $100.01m
-                              </p>
-                            </div>
-                          </div>
-                          <div className=" header_bg"></div>
-                          <div className="flex justify-between items-center  pt-4">
-                            <div className="flex items-center gap-[8px]">
-                              <Image
-                                className="w-[24px]"
-                                priority
-                                src={Usdcicon}
-                                alt="Usdcicon"
-                              />
-                              <span className="text-[#fff] pool_font font-medium text-xs tracking-[0.06px]">
-                                USDC
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-[20px]">
-                              <p className="pool_font text-[#fff]  text-left font-medium text-xs tracking-[0.06px]">
-                                $2,2304.56
-                              </p>
-                              <p className="pool_font text-[#D65454] w-[88px] text-center font-medium text-xs tracking-[0.06px]">
-                                -1.52%
-                              </p>
-                              <p className="pool_font text-[#fff] font-medium text-xs tracking-[0.06px]">
-                                $100.01m
-                              </p>
-                            </div>
-                          </div> */}
                         </div>
                       </Link>
                     </div>
@@ -289,9 +216,9 @@ const Subheader: React.FC<headerInterFace> = ({
 
                 <div className="w-[1px] py-[30px] bg-[#FFFFFF0D]"> </div>
               </div>
-              <div className=" flex items-center lg:gap-[18px] xl:gap-[25px] min-[1380px]:gap-[36px]">
+              <div className=" flex items-center lg:gap-[14px] xl:gap-[25px] min-[1380px]:gap-[36px]">
                 <div className="flex items-center gap-[12px]">
-                  <p className="pool_font text-[#10B981] font-medium  text-base xl:text-lg tracking-[0.09px]">
+                  <p className="pool_font text-[#10B981] font-medium  lg:text-sm xl:text-base min-[1360px]:text-lg tracking-[0.09px]">
                     $225.62
                   </p>
                   <p className="pool_font text-[#9CA3AF] font-medium text-sm tracking-[0.07px]">
@@ -365,8 +292,9 @@ const Subheader: React.FC<headerInterFace> = ({
                 </span>
               </div>
               <div
-                className={`absolute top-[50px] lg:z-[99] pl-2  right-0 ${isMenuOpen ? "block" : "hidden"
-                  }`}
+                className={`absolute top-[50px] lg:z-[99] pl-2  right-0 ${
+                  isMenuOpen ? "block" : "hidden"
+                }`}
               >
                 <div className=" icon-width three_dot p-[24px] icon-height">
                   <span className="pool_font text-[#9CA3AF] mb-1 text-xs font-medium tracking-[0.06px]">
@@ -375,26 +303,68 @@ const Subheader: React.FC<headerInterFace> = ({
                   <ul className="grid gap-4 grid-cols-2 my-3">
                     <li
                       onClick={() => toggleLayout(false)}
-                      className={`cursor-pointer ${!TRADE_LAYOUT ? "right_bg" : "bg-[#171717]"} h-[120px] border-[1px] border-solid ${!TRADE_LAYOUT ? "border-[#40E0D0]" : "border-[#25272A]"}  rounded-[4px]`}>
-                      <div className={`${!TRADE_LAYOUT ? " right_bg1" : "bg-[#171717]"} flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center`}>
-                        <div className={`w-[20px] h-[39px] ${!TRADE_LAYOUT ? "bg-[#40E0D0]" : "bg-[#4B5563]"}  rounded-[2px]`}></div>
-                        <div className={`w-[47px] h-[39px] ${!TRADE_LAYOUT ? "right_bg" : "bg-[#25272A]"}  rounded-[2px]`}></div>
+                      className={`cursor-pointer ${
+                        !TRADE_LAYOUT ? "right_bg" : "bg-[#171717]"
+                      } h-[120px] border-[1px] border-solid ${
+                        !TRADE_LAYOUT ? "border-[#40E0D0]" : "border-[#25272A]"
+                      }  rounded-[4px]`}
+                    >
+                      <div
+                        className={`${
+                          !TRADE_LAYOUT ? " right_bg1" : "bg-[#171717]"
+                        } flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center`}
+                      >
+                        <div
+                          className={`w-[20px] h-[39px] ${
+                            !TRADE_LAYOUT ? "bg-[#40E0D0]" : "bg-[#4B5563]"
+                          }  rounded-[2px]`}
+                        ></div>
+                        <div
+                          className={`w-[47px] h-[39px] ${
+                            !TRADE_LAYOUT ? "right_bg" : "bg-[#25272A]"
+                          }  rounded-[2px]`}
+                        ></div>
                       </div>
                       <div className=" text-center">
-                        <span className={`pool_font ${!TRADE_LAYOUT ? "text-[#40E0D0]" : "text-white"}  text-xs font-medium tracking-[0.06px]`}>
+                        <span
+                          className={`pool_font ${
+                            !TRADE_LAYOUT ? "text-[#40E0D0]" : "text-white"
+                          }  text-xs font-medium tracking-[0.06px]`}
+                        >
                           Left Panel
                         </span>
                       </div>
                     </li>
                     <li
                       onClick={() => toggleLayout(true)}
-                      className={`${TRADE_LAYOUT ? "right_bg" : "bg-[#171717]"} h-[120px] border-[1px] border-solid  ${TRADE_LAYOUT ? "border-[#40E0D0]" : "border-[#25272A]"}  rounded-[4px]`}>
-                      <div className={`${TRADE_LAYOUT ? "right_bg1" : "bg-[#171717]"}  flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center`}>
-                        <div className={`w-[47px] h-[39px] ${TRADE_LAYOUT ? "right_bg" : "bg-[#25272A]"}  rounded-[2px]`}></div>
-                        <div className={`w-[20px] h-[39px] ${TRADE_LAYOUT ? "bg-[#40E0D0]" : "bg-[#4B5563]"}  rounded-[2px]`}></div>
+                      className={`${
+                        TRADE_LAYOUT ? "right_bg" : "bg-[#171717]"
+                      } h-[120px] border-[1px] border-solid  ${
+                        TRADE_LAYOUT ? "border-[#40E0D0]" : "border-[#25272A]"
+                      }  rounded-[4px]`}
+                    >
+                      <div
+                        className={`${
+                          TRADE_LAYOUT ? "right_bg1" : "bg-[#171717]"
+                        }  flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center`}
+                      >
+                        <div
+                          className={`w-[47px] h-[39px] ${
+                            TRADE_LAYOUT ? "right_bg" : "bg-[#25272A]"
+                          }  rounded-[2px]`}
+                        ></div>
+                        <div
+                          className={`w-[20px] h-[39px] ${
+                            TRADE_LAYOUT ? "bg-[#40E0D0]" : "bg-[#4B5563]"
+                          }  rounded-[2px]`}
+                        ></div>
                       </div>
                       <div className=" text-center">
-                        <span className={`pool_font ${TRADE_LAYOUT ? "text-[#40E0D0]" : "text-white"}  text-xs font-medium tracking-[0.06px]`}>
+                        <span
+                          className={`pool_font ${
+                            TRADE_LAYOUT ? "text-[#40E0D0]" : "text-white"
+                          }  text-xs font-medium tracking-[0.06px]`}
+                        >
                           Right Panel
                         </span>
                       </div>
@@ -407,12 +377,13 @@ const Subheader: React.FC<headerInterFace> = ({
                         Slippage Tolerace
                       </span>
                       <div
-                        className={`input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ${error
-                          ? "focus-within:border-[#D65454] border-[#D65454]"
-                          : isDisabled
+                        className={`input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <input
                           type="text"

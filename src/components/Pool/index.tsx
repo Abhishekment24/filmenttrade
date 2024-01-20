@@ -13,9 +13,21 @@ import Withdrawpopup from "./Rightcomponentside/Withdrawpopup";
 import Stakepopup from "../Stake/Stakepopup";
 import { AiOutlineClose } from "react-icons/ai";
 import Errormsg from "../Commoncomponent/Errormsg";
-// interface PoolProps {
-//   StakeOpenPopup: () => void;
-// }
+import { useAccount, useConnect, useDisconnect, useSwitchNetwork } from "wagmi";
+import { InjectedConnector } from "wagmi/connectors/injected";
+import Connectpopup from "../Header/Walletpopup/Connectpopup";
+import Afterconnectpopup from "../Header/Walletpopup/Afterconnectpopup";
+import Agreepopup from "../Header/Walletpopup/Agreepopup";
+interface PoolProps {
+  //   StakeOpenPopup: () => void;
+  InjectedChainId: number;
+  chainId: number;
+
+  connectWallet: () => void;
+  handleWalletConnect: () => void;
+  handleNetworkChange: () => void;
+  disconnectMetamask: () => void;
+}
 const tabs = [
   {
     title: "Add",
@@ -26,10 +38,28 @@ const tabs = [
     key: "remove",
   },
 ];
-const Pool = () => {
+const Pool: React.FC<PoolProps> = ({
+  InjectedChainId,
+  handleNetworkChange,
+  disconnectMetamask,
+}) => {
+  const { chains, isLoading, pendingChainId, switchNetwork } =
+    useSwitchNetwork();
+
+  const walletDetails = useAccount();
+  console.log(chains, "<<<<thesearechains");
+
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+  const { disconnect } = useDisconnect();
+  const [chainId, setchainId] = useState<any>(null);
+  const { address, isConnected, isConnecting } = useAccount();
   const [selectedTab, setSelectedTab] = useState("add");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
+  const [isWalletOpen, setIsWalletOpen] = useState(false);
+  const [isAgreeOpen, setIsAgreeOpen] = useState(false);
+  const [isConnectOpen, setIsConnectOpen] = useState(false);
   const [showSecondPhase, setSecondPhase] = useState(false);
   const [addvalue, setAddValue] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
@@ -51,6 +81,27 @@ const Pool = () => {
         [name]: value,
       }));
     }
+  };
+  const handleWalletConnect = () => {
+    if (window.ethereum) {
+      connect();
+      setIsWalletOpen(true);
+      setIsAgreeOpen(false);
+      setIsConnectOpen(false);
+    } else {
+      alert("Install metamask");
+    }
+  };
+  const handleOpen = () => {
+    setIsConnectOpen(true);
+    setIsWalletOpen(false);
+    setIsAgreeOpen(false);
+  };
+
+  const handleClose = () => {
+    setIsConnectOpen(false);
+    setIsWalletOpen(false);
+    setIsAgreeOpen(false);
   };
   const closePopup = () => {
     setIsPopupOpen(false);
@@ -301,12 +352,21 @@ const Pool = () => {
                           </div>
                         </div>
                         <div>
-                          <button
-                            onClick={openPopup}
-                            className="items-center w-full pool_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
-                          >
-                            Deposit
-                          </button>
+                          {!isConnected ? (
+                            <button
+                              onClick={handleOpen}
+                              className="items-center w-full pool_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
+                            >
+                              Connect Wallet
+                            </button>
+                          ) : (
+                            <button
+                              onClick={openPopup}
+                              className="items-center w-full pool_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
+                            >
+                              Deposit
+                            </button>
+                          )}
                         </div>
                       </>
                     )}
@@ -353,12 +413,21 @@ const Pool = () => {
                         </div>
 
                         <div>
-                          <button
-                            onClick={withdrawopenPopup}
-                            className="items-center w-full pool_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
-                          >
-                            Withdraw
-                          </button>
+                          {!isConnected ? (
+                            <button
+                              onClick={handleOpen}
+                              className="items-center w-full pool_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
+                            >
+                              Connect Wallet
+                            </button>
+                          ) : (
+                            <button
+                              onClick={withdrawopenPopup}
+                              className="items-center w-full pool_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
+                            >
+                              Withdraw
+                            </button>
+                          )}
                         </div>
                       </>
                     )}
@@ -457,6 +526,26 @@ const Pool = () => {
         isOpen={isDetailOpen}
         onClose={closeDelete}
       />
+      <Connectpopup
+        isOpen={isConnectOpen}
+        onClose={handleClose}
+        handleWalletConnect={handleWalletConnect}
+      />
+      {/*wallet popup  */}
+
+      <Afterconnectpopup
+        isOpen={isWalletOpen}
+        isConnecting={isConnecting}
+        InjectedChainId={InjectedChainId}
+        chainId={chainId}
+        isConnected={isConnected}
+        onClose={handleClose}
+        handleNetworkChange={handleNetworkChange}
+        disconnectMetamask={disconnectMetamask}
+      />
+
+      {/*  Agree Popup after connected */}
+      <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />
     </>
   );
 };

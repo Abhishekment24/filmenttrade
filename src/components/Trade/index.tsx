@@ -12,8 +12,21 @@ import { LAYOUT_REDUCER_ACTIONS } from "../../../redux/reducers/layoutReducer";
 import Errormsg from "../Commoncomponent/Errormsg";
 interface Tradesprops {
   //handlePriceClick: any;
+  connectWallet: () => void;
+  InjectedChainId: number;
+  chainId: number;
+  handleWalletConnect: () => void;
+  handleNetworkChange: () => void;
+  disconnectMetamask: () => void;
 }
-const Trade: React.FC<Tradesprops> = () => {
+const Trade: React.FC<Tradesprops> = ({
+  connectWallet,
+  chainId,
+  InjectedChainId,
+  handleWalletConnect,
+  handleNetworkChange,
+  disconnectMetamask,
+}) => {
   const dispatch = useDispatch();
   const TRADE_LAYOUT = useSelector((state: any) => state.TRADE_LAYOUT);
 
@@ -88,15 +101,28 @@ const Trade: React.FC<Tradesprops> = () => {
                     </div>
                   </div>
                   <div>
-                    <Tablesection />
+                    <Tablesection
+                      handleWalletConnect={handleWalletConnect}
+                      InjectedChainId={InjectedChainId}
+                      chainId={chainId}
+                      handleNetworkChange={handleNetworkChange}
+                      disconnectMetamask={disconnectMetamask}
+                      // isConnected={isConnected}
+                      connectWallet={connectWallet}
+                    />
                   </div>
                 </div>
                 <div className="">
                   <Rightsidecomponent
-                    //  connectWallet={connectWallet}
                     //  formData={formData}
+                    handleWalletConnect={handleWalletConnect}
                     StakeOpenPopup={StakeOpenPopup}
+                    InjectedChainId={InjectedChainId}
+                    chainId={chainId}
+                    handleNetworkChange={handleNetworkChange}
+                    disconnectMetamask={disconnectMetamask}
                     selectedPrice={selectedPrice} // isConnected={isConnected}
+                    connectWallet={connectWallet}
                   />
                 </div>
               </>
@@ -105,8 +131,13 @@ const Trade: React.FC<Tradesprops> = () => {
                 {/* market-limit */}
                 <div className="">
                   <Rightsidecomponent
-                    //  connectWallet={connectWallet}
+                    connectWallet={connectWallet}
+                    InjectedChainId={InjectedChainId}
+                    chainId={chainId}
                     //  formData={formData}
+                    handleNetworkChange={handleNetworkChange}
+                    disconnectMetamask={disconnectMetamask}
+                    handleWalletConnect={handleWalletConnect}
                     StakeOpenPopup={StakeOpenPopup}
                     selectedPrice={selectedPrice} // isConnected={isConnected}
                   />
@@ -122,7 +153,15 @@ const Trade: React.FC<Tradesprops> = () => {
                     </div>
                   </div>
                   <div>
-                    <Tablesection />
+                    <Tablesection
+                      handleWalletConnect={handleWalletConnect}
+                      InjectedChainId={InjectedChainId}
+                      chainId={chainId}
+                      handleNetworkChange={handleNetworkChange}
+                      disconnectMetamask={disconnectMetamask}
+                      // isConnected={isConnected}
+                      connectWallet={connectWallet}
+                    />
                   </div>
                 </div>
               </>

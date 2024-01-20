@@ -17,7 +17,37 @@ import Stakepopup from "./Stakepopup";
 import { AiOutlineClose } from "react-icons/ai";
 import Unstakepopup from "./Unstakepopup";
 import Errormsg from "../Commoncomponent/Errormsg";
-const Stakepage = () => {
+import { useAccount, useConnect, useDisconnect, useSwitchNetwork } from "wagmi";
+import { InjectedConnector } from "wagmi/connectors/injected";
+import Connectpopup from "../Header/Walletpopup/Connectpopup";
+import Afterconnectpopup from "../Header/Walletpopup/Afterconnectpopup";
+import Agreepopup from "../Header/Walletpopup/Agreepopup";
+interface StakeProps {
+  InjectedChainId: number;
+  chainId: number;
+
+  connectWallet: () => void;
+  handleWalletConnect: () => void;
+  handleNetworkChange: () => void;
+  disconnectMetamask: () => void;
+}
+const Stakepage: React.FC<StakeProps> = ({
+  InjectedChainId,
+  handleNetworkChange,
+  disconnectMetamask,
+}) => {
+   const { chains, isLoading, pendingChainId, switchNetwork } =
+     useSwitchNetwork();
+
+   const walletDetails = useAccount();
+   console.log(chains, "<<<<thesearechains");
+
+   const { connect } = useConnect({
+     connector: new InjectedConnector(),
+   });
+   const { disconnect } = useDisconnect();
+   const [chainId, setchainId] = useState<any>(null);
+   const { address, isConnected, isConnecting } = useAccount();
   const [isVisible, setIsVisible] = useState(false);
   const [image, setImage] = useState("");
   const [error, setError] = useState(false);
@@ -26,9 +56,33 @@ const Stakepage = () => {
   const [isUnStakeOpen, setIsUnStakeOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isStakeOpen, setIsStakeOpen] = useState(false);
+   const [isWalletOpen, setIsWalletOpen] = useState(false);
+   const [isAgreeOpen, setIsAgreeOpen] = useState(false);
+   const [isConnectOpen, setIsConnectOpen] = useState(false);
   const [formsData, setFormsData] = useState({
     amount: "100",
   });
+    const handleWalletConnect = () => {
+      if (window.ethereum) {
+        connect();
+        setIsWalletOpen(true);
+        setIsAgreeOpen(false);
+        setIsConnectOpen(false);
+      } else {
+        alert("Install metamask");
+      }
+    };
+    const handleOpen = () => {
+      setIsConnectOpen(true);
+      setIsWalletOpen(false);
+      setIsAgreeOpen(false);
+    };
+
+    const handleClose = () => {
+      setIsConnectOpen(false);
+      setIsWalletOpen(false);
+      setIsAgreeOpen(false);
+    };
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const activeTab = urlParams.get("success");
@@ -142,12 +196,21 @@ const Stakepage = () => {
                           </div>
                         </div>
                         <div className="text-right">
-                          <button
-                            onClick={StakeOpenPopup}
-                            className="items-center mb-2 pool_font text-[#0B2B28] w-[140px]  max-[588px]:w-full text-sm font-semibold  btn_one  py-[12px] px-[16px]"
-                          >
-                            Stake
-                          </button>
+                          {!isConnected ? (
+                            <button
+                              onClick={handleOpen}
+                              className="items-center mb-2 pool_font text-[#0B2B28] w-[140px]  max-[588px]:w-full text-sm font-semibold  btn_one  py-[12px] px-[16px]"
+                            >
+                              Connect Wallet
+                            </button>
+                          ) : (
+                            <button
+                              onClick={StakeOpenPopup}
+                              className="items-center mb-2 pool_font text-[#0B2B28] w-[140px]  max-[588px]:w-full text-sm font-semibold  btn_one  py-[12px] px-[16px]"
+                            >
+                              Stake
+                            </button>
+                          )}
                           <p className="pool_font text-[#9CA3AF] text-xs font-medium tracking-[0.06px]">
                             Available to stake: 1,524.44 FLP
                           </p>
@@ -331,129 +394,6 @@ const Stakepage = () => {
                           </span>
                         </div>
                       </Link>
-                      {/*   <div className="rewards-blocks">
-                  <div className="flex justify-between items-center gap-2 flex-wrap">
-                    <div className="pool_font text-[#fff] text-sm max-[345px]:text-xs">
-                      Reward History
-                    </div>
-                    <button onClick={toggleVisibility} className="">
-                      {isVisible ? (
-                        <>
-                          <div className="flex items-center gap-1">
-                            <span className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs">
-                              Hide reward history
-                            </span>
-                            <span>
-                              <IoMdArrowDropup className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs" />
-                            </span>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="flex items-center gap-1">
-                            <span className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs">
-                              Show reward history
-                            </span>
-                            <span>
-                              <IoMdArrowDropdown className="text-[#40E0D0] pool_font  text-sm font-medium max-[345px]:text-xs" />
-                            </span>
-                          </div>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                  {isVisible && (
-                    <>
-                      <div className="flex align-center md:flex-row flex-col mt-8">
-                        <button className="bg-[#3c3d40] px-[9px] py-[8px] text-center rounded-[4px] max-[767px]:w-[36px]">
-                          <IoMdArrowDropleft />
-                        </button>
-                        <ul className="flex justify-between md:flex-row flex-col items-center stakereward-ul">
-                          <li className="border_list max-[767px]:my-3 flex flex-col justify-center text-center px-8 max-[767px]:py-3">
-                            <span className="m-auto bg-[#34d5c4] w-[27px] h-[27] rounded-full p-1 ">
-                              <Image
-                                className=""
-                                priority
-                                src={Tick}
-                                alt="Tick"
-                              />
-                            </span>
-                            <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8] ">
-                              0.1563 Filament Token
-                            </h3>
-                            <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">
-                              15 Dec
-                            </p>
-                          </li>
-                          <li className="border_list flex flex-col justify-center text-center px-8 max-[767px]:py-3">
-                            <span className="m-auto bg-[#34d5c4] w-[27px] h-[27] rounded-full p-1">
-                              <Image
-                                className=""
-                                priority
-                                src={Tick}
-                                alt="Tick"
-                              />
-                            </span>
-                            <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">
-                              0.1563 Filament Token
-                            </h3>
-                            <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">
-                              16 Dec
-                            </p>
-                          </li>
-                          <li className="border_list max-[767px]:my-3 flex flex-col justify-center text-center px-8 max-[767px]:py-3">
-                            <span className="m-auto bg-[#34d5c4] w-[27px] h-[27] rounded-full p-1">
-                              <Image
-                                className=""
-                                priority
-                                src={Tick}
-                                alt="Tick"
-                              />
-                            </span>
-                            <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">
-                              0.1563 Filament Token
-                            </h3>
-                            <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">
-                              17 Dec
-                            </p>
-                          </li>
-                          <li className=" border_list flex flex-col justify-center text-center px-8 max-[767px]:py-3">
-                            <span className="m-auto bg-[#C35200] w-[27px] h-[27] rounded-full p-1 text-center">
-                              <Image
-                                className=""
-                                priority
-                                src={Cross}
-                                alt="Cross"
-                              />
-                            </span>
-                            <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">
-                              0.1563 Filament Token
-                            </h3>
-                            <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">
-                              18 Dec
-                            </p>
-                          </li>
-                          <li className="border_list max-[767px]:my-3 flex flex-col justify-center text-center px-8 max-[767px]:py-3">
-                            <span className="m-auto bg-[#3B82F6] w-[27px] h-[27] rounded-full p-1 text-center">
-                              <Image
-                                className=""
-                                priority
-                                src={Clock}
-                                alt="Clock"
-                              />
-                            </span>
-                            <h3 className="text-[16px] mt-[8px] pool_font font-semibold text-[#E8E8E8]">
-                              0.1563 Filament Token
-                            </h3>
-                            <p className="font-medium pool_font text-[14px] text-[#9CA3AF]">
-                              19 Dec
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </>
-                  )}
-                </div> */}
                     </div>
                   </>
                 )}
@@ -612,6 +552,26 @@ const Stakepage = () => {
         isOpen={isUnstakeDetailOpen}
         onClose={Unstakeclose}
       />
+      <Connectpopup
+        isOpen={isConnectOpen}
+        onClose={handleClose}
+        handleWalletConnect={handleWalletConnect}
+      />
+      {/*wallet popup  */}
+
+      <Afterconnectpopup
+        isOpen={isWalletOpen}
+        isConnecting={isConnecting}
+        InjectedChainId={InjectedChainId}
+        chainId={chainId}
+        isConnected={isConnected}
+        onClose={handleClose}
+        handleNetworkChange={handleNetworkChange}
+        disconnectMetamask={disconnectMetamask}
+      />
+
+      {/*  Agree Popup after connected */}
+      <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />
     </>
   );
 };

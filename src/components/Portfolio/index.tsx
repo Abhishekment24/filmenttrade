@@ -5,6 +5,15 @@ import Pools from "./Pools/Pools";
 import Rewards from "./Rewards";
 import Historys from "./Historys";
 import Link from "next/link";
+interface Portfolioprops {
+  //handlePriceClick: any;
+  connectWallet: () => void;
+  InjectedChainId: number;
+  chainId: number;
+  handleWalletConnect: () => void;
+  handleNetworkChange: () => void;
+  disconnectMetamask: () => void;
+}
 const tabs = [
   {
     title: "Overview",
@@ -33,7 +42,14 @@ const tabs = [
   },
 ];
 
-const Portfolio = () => {
+const Portfolio: React.FC<Portfolioprops> = ({
+  connectWallet,
+  chainId,
+  InjectedChainId,
+  handleWalletConnect,
+  handleNetworkChange,
+  disconnectMetamask,
+}) => {
   const [selectedTab, setSelectedTab] = useState("overview");
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);
@@ -81,35 +97,75 @@ const Portfolio = () => {
               {selectedTab == "overview" && (
                 <>
                   <div className="pb-[70px]">
-                    <Overviews />
+                    <Overviews
+                      handleWalletConnect={handleWalletConnect}
+                      InjectedChainId={InjectedChainId}
+                      chainId={chainId}
+                      handleNetworkChange={handleNetworkChange}
+                      disconnectMetamask={disconnectMetamask}
+                      // isConnected={isConnected}
+                      connectWallet={connectWallet}
+                    />
                   </div>
                 </>
               )}
               {selectedTab == "perpetuals" && (
                 <>
                   <div className="pb-[70px]">
-                    <Perpetuals />
+                    <Perpetuals
+                      handleWalletConnect={handleWalletConnect}
+                      InjectedChainId={InjectedChainId}
+                      chainId={chainId}
+                      handleNetworkChange={handleNetworkChange}
+                      disconnectMetamask={disconnectMetamask}
+                      // isConnected={isConnected}
+                      connectWallet={connectWallet}
+                    />
                   </div>
                 </>
               )}
               {selectedTab == "pools" && (
                 <>
                   <div className="pb-[70px]">
-                    <Pools />
+                    <Pools
+                      handleWalletConnect={handleWalletConnect}
+                      InjectedChainId={InjectedChainId}
+                      chainId={chainId}
+                      handleNetworkChange={handleNetworkChange}
+                      disconnectMetamask={disconnectMetamask}
+                      // isConnected={isConnected}
+                      connectWallet={connectWallet}
+                    />
                   </div>
                 </>
               )}
               {selectedTab == "reward" && (
                 <>
                   <div className="pb-[70px]">
-                    <Rewards />
+                    <Rewards
+                      handleWalletConnect={handleWalletConnect}
+                      InjectedChainId={InjectedChainId}
+                      chainId={chainId}
+                      handleNetworkChange={handleNetworkChange}
+                      disconnectMetamask={disconnectMetamask}
+                      // isConnected={isConnected}
+                      connectWallet={connectWallet}
+                    />
                   </div>
                 </>
               )}
               {selectedTab == "history" && (
                 <>
                   <div className="pb-[70px]">
-                    <Historys />
+                    <Historys
+                      handleWalletConnect={handleWalletConnect}
+                      InjectedChainId={InjectedChainId}
+                      chainId={chainId}
+                      handleNetworkChange={handleNetworkChange}
+                      disconnectMetamask={disconnectMetamask}
+                      // isConnected={isConnected}
+                      connectWallet={connectWallet}
+                    />
                   </div>
                 </>
               )}

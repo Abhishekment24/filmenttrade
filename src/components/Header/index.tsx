@@ -77,7 +77,7 @@ const Header = () => {
   const [showLangDrop, setShowLangDrop] = useState(false);
   const [chainId, setchainId] = useState<any>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showAnimationOnEarn, setshowAnimationOnEarn] = useState(true)
+  const [showAnimationOnEarn, setshowAnimationOnEarn] = useState(true);
   const [walletlogout, setWalletlogout] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobiledropdownRef = useRef<HTMLDivElement>(null);
@@ -116,7 +116,7 @@ const Header = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setshowAnimationOnEarn(false)
+      setshowAnimationOnEarn(false);
     }, 3000);
     const handleClickOutside = (event: { target: any }) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -195,12 +195,13 @@ const Header = () => {
     <div>
       <>
         <div
-          className={`navbartop fixed top-0 bg-1 z-[400] header_bg py-[12px] lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${isScrolled ? "bg-1" : ""
-            }`}
+          className={`navbartop fixed top-0 bg-1 z-[400] header_bg max-[1179px]:py-[16px] py-[12px] lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${
+            isScrolled ? "bg-1" : ""
+          }`}
         >
           <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
             <div className="flex justify-between text-[rgb(255,255,255)] items-center max-[1179px]:hidden">
-              <div className="flex items-center min-[1360px]:gap-10  lg:gap-4">
+              <div className="flex items-center min-[1360px]:gap-8  lg:gap-2">
                 <Link href="/" className="flex items-center gap-[8px]">
                   <Image className="w-[20px]" priority src={Logo} alt="logo" />
                   <span className="text-[#40E0D0] logo_font font-medium text-[15px] tracking-{1.2px}">
@@ -224,50 +225,55 @@ const Header = () => {
                 )}
                 <Link
                   href="/trade"
-                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "trade"
-                    ? "font-bold text-[#fff]  "
-                    : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
-                    }`}
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "trade"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
                   onClick={() => handleTabClick("trade")}
                 >
                   Trade
                 </Link>
                 <Link
                   href="/pool"
-                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "pool"
-                    ? "font-bold text-[#fff]  "
-                    : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
-                    }`}
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "pool"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
                   onClick={() => handleTabClick("pool")}
                 >
                   Pool
                 </Link>
                 <Link
                   href="/stake"
-                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "stake"
-                    ? "font-bold text-[#fff]  "
-                    : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
-                    }`}
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "stake"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
                   onClick={() => handleTabClick("stake")}
                 >
                   Stake
                 </Link>
                 <Link
                   href="/referral"
-                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "referral"
-                    ? "font-bold text-[#fff]  "
-                    : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
-                    }`}
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "referral"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
                   onClick={() => handleTabClick("referral")}
                 >
                   Referral
                 </Link>
                 <Link
                   href="/leaderboard"
-                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "leaderboard"
-                    ? "font-bold text-[#fff]  "
-                    : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
-                    }`}
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "leaderboard"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
                   onClick={() => handleTabClick("leaderboard")}
                 >
                   Leaderboard
@@ -275,10 +281,11 @@ const Header = () => {
                 <div className="w-[1px] h-[12px] bg-[#2A2A2A]"> </div>
                 <Link
                   href="/portfolio"
-                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "portfolio"
-                    ? "font-bold text-[#fff]  "
-                    : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
-                    }`}
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "portfolio"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
                   onClick={() => handleTabClick("portfolio")}
                 >
                   Portfolio
@@ -290,23 +297,26 @@ const Header = () => {
                   >
                     <Link
                       href=""
-                      className={`pool_font text-[#fff] text-xs flex items-center gap-1 transition-all duration-300 ${activeTab === "More"
-                        ? "font-bold text-[#fff]  "
-                        : "text-[#fff] font-medium "
-                        }`}
+                      className={`pool_font text-[#fff] text-xs flex items-center gap-1 transition-all duration-300 ${
+                        activeTab === "More"
+                          ? "font-bold text-[#fff]  "
+                          : "text-[#fff] font-medium "
+                      }`}
                       onClick={() => handleTabClick("More")}
                     >
                       More
                     </Link>
                     <RiArrowDownSFill
-                      className={` cursor-pointer ${testnet ? "transform rotate-180" : ""
-                        } w-4 h-4`}
+                      className={` cursor-pointer ${
+                        testnet ? "transform rotate-180" : ""
+                      } w-4 h-4`}
                       aria-hidden="true"
                     />
                   </div>
                   <div
-                    className={`${testnet ? "block" : "hidden"
-                      } absolute  mt-4 w-full  min-w-[376px] left-[-36px]`}
+                    className={`${
+                      testnet ? "block" : "hidden"
+                    } absolute  mt-4 w-full  min-w-[376px] left-[-36px]`}
                   >
                     <div className="flex">
                       <div className="bg-[#1B1B1B] min-w-[216px] py-4 px-[8px] rounded-l-[8px] border-[1px] border-solid border-[#25272A] ">
@@ -363,7 +373,11 @@ const Header = () => {
               <div>
                 <div className="flex items-center gap-[22px] w-full">
                   <Link href="/stake">
-                    <div className={`flex items-start gap-[8px]  btn py-[10px] px-3 ${showAnimationOnEarn ? "animated-bg" : ""}`}>
+                    <div
+                      className={`flex items-start gap-[8px]  btn py-[10px] px-3 ${
+                        showAnimationOnEarn ? "animated-bg" : ""
+                      }`}
+                    >
                       <Image
                         className="w-[14px]"
                         priority
@@ -884,14 +898,16 @@ const Header = () => {
                 >
                   <Link href="">More</Link>
                   <RiArrowDownSFill
-                    className={` cursor-pointer ${showLangDrop ? "transform rotate-180" : ""
-                      } w-4 h-4`}
+                    className={` cursor-pointer ${
+                      showLangDrop ? "transform rotate-180" : ""
+                    } w-4 h-4`}
                     aria-hidden="true"
                   />
                 </div>
                 <div
-                  className={`${showLangDrop ? "block" : "hidden"
-                    } absolute  mt-4 w-full z-50  `}
+                  className={`${
+                    showLangDrop ? "block" : "hidden"
+                  } absolute  mt-4 w-full z-50  `}
                 >
                   <div className="flex">
                     <div className="bg-[#1B1B1B] min-w-[216px] max-[500px]:min-w-[160px] max-[343px]:min-w-[125px] py-4 px-[8px] rounded-l-[8px] border-[1px] border-solid border-[#25272A] ">
