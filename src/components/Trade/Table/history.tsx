@@ -60,7 +60,7 @@ const History = () => {
               {tablehistoryData.map((data, index) => (
                 <>
                   <div key={index} className="relative w-full">
-                    <div className="pool_font w-full hover:bg-[#25272A] font-medium max-[1699px]:hover:w-fit  min-[1700px]:hover:w-full text-sm flex  text-[#E5E7EB] tracking-[0.07px] ">
+                    <div className="pool_font table_font   w-full hover:bg-[#25272A] font-medium max-[1699px]:hover:w-fit  min-[1700px]:hover:w-full text-sm flex  text-[#E5E7EB] tracking-[0.07px] ">
                       <div className="text-left font-medium py-[8px] px-2 flex flex-col max-[1699px]:min-w-[8rem]   table_width border-b-[1px] border-solid border-[#25272A] ">
                         {data.date}
                         <span className="text-xs text-[#6B7280] font-normal">

@@ -511,9 +511,6 @@ input[type="checkbox"]:checked {
   .grids-width2 {
     grid-template-columns: 30% 70%;
   }
-  
-
-
 }
 @media (min-width: 1280px) {
   .grids-width {
@@ -531,7 +528,7 @@ input[type="checkbox"]:checked {
     grid-template-columns: 1fr 400px;
   }
   .grids-width2 {
-    grid-template-columns:  400px 1fr;
+    grid-template-columns: 400px 1fr;
   }
   .grid-width {
     grid-template-columns: 1fr 230px;
@@ -540,8 +537,51 @@ input[type="checkbox"]:checked {
     width: -webkit-fill-available;
   }
 }
+@media (min-width: 1921px) {
+  .tables_width {
+    width: -webkit-fill-available;
+  }
+}
+@media (min-width: 1700px) and (max-width: 1920px) {
+  .position-width {
+    min-width: fit-content;
+    font-size: 13px !important;
+  }
+  .positins-width {
+    min-width: 8rem;
+    min-width: fit-content;
+    font-size: 13px !important;
+  }
+  .table_font {
+    font-size: 13px !important;
+  }
+}
+@media (min-width: 1700px) and (max-width: 2400px) {
+  .hover-width {
+    width: fit-content;
+  }
+  .table:hover {
+    width: fit-content;
+  }
+}
+@media (min-width: 2400px) {
+ 
+  .table:hover {
+    width: 100%;
+  }
+}
+@media (min-width: 1921px) and (max-width: 2400px) {
+  .positins-width {
+    min-width: 8rem;
+  }
+}
 @media (max-width: 1920px) {
   .positins-width {
+    min-width: 8rem;
+  }
+}
+@media (max-width: 1699px) {
+  .position-width {
     min-width: 8rem;
   }
 }

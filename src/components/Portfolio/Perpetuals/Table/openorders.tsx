@@ -33,7 +33,145 @@ const Openorders = () => {
   return (
     <>
       <div>
-        <div className="flex w-full">
+        <div className=" w-full relative flex">
+          <div className="flex flex-col relative lg:w-[92%] sm:w-[88%] max-[639px]:w-[84%] max-[380px]:w-[78%] overflow-auto  no-scrollbar border-t-[1px] border-solid border-[#25272A]">
+            <div className="pool_font text-xs font-medium flex  text-[#9CA3AF]">
+              <div className="text-left px-2 py-2  positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                Date
+              </div>
+              <div className="text-left px-2 py-2  positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                Token
+              </div>
+              <div className="text-left  px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                Type
+              </div>
+              <div className=" text-center px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A]  ">
+                Status
+              </div>
+              <div className=" text-center px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A]  ">
+                Position Size
+              </div>
+              <div className="text-right px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A]  ">
+                Collateral
+              </div>
+              <div className="text-right px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                Leverage
+              </div>
+
+              <div className="text-right px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                Entry Price
+              </div>
+              <div className="text-center px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                Take Profit
+              </div>
+              <div className="text-center px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                Stop Loss
+              </div>
+              <div className="text-right px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                PnL
+              </div>
+              <div className="text-center px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                Liquidation Price
+              </div>
+              <div className="text-right pl-2 pr-[25px]  py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                Fees
+              </div>
+            </div>
+            {tableopenordersData.length === 0 ? (
+              <div className="relative w-full">
+                <div className="text-center text-[#9CA3AF] text-sm font-medium px-2 py-2">
+                  No Open Orders
+                </div>
+              </div>
+            ) : (
+              <>
+                {tableopenordersData.map((data, index) => {
+                  return (
+                    <div key={index} className="relative w-full">
+                      <div className=" w-full  max-[1699px]:hover:w-fit hover-width table:hover  flex pool_font hover:bg-[#25272A] text-sm  text-[#E5E7EB] border-b-[1px] border-solid border-[#25272A] tracking-[0.07px]">
+                        <div className="text-left px-2 py-2 flex flex-col positins-width table_width   border-b-[1px] border-solid border-[#25272A] ">
+                          <span> {data.date}</span>
+                          <span className="text-xs text-[#6B7280] font-normal">
+                            {data.hours}
+                          </span>
+                        </div>
+                        <div className="text-left px-2 py-2 flex flex-col positins-width table_width   border-b-[1px] border-solid border-[#25272A] ">
+                          {data.token}
+                          <span
+                            className={`text-[10px] text-center   px-[2px] rounded-[4px] ${
+                              data.tokenpart === "SELL/SHORT"
+                                ? "text-[#D65454] bg-[#991B1B4D] w-[70px]"
+                                : "text-[#14B8A6] bg-[#0596694D] w-[65px]"
+                            }`}
+                          >
+                            {data.tokenpart}
+                          </span>
+                        </div>
+                        <div className="text-left px-2 py-2 positins-width table_width  border-b-[1px] border-solid border-[#25272A] ">
+                          {data.type}
+                        </div>
+                        <div className="text-center px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                          {data.status}
+                        </div>
+                        <div className="text-center px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                          {data.positionSize}
+                        </div>
+                        <div className="text-right px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                          {data.collateral}
+                        </div>
+                        <div className="text-right px-2 py-2 positins-width table_width border-b-[1px]  border-solid border-[#25272A]  ">
+                          {data.leverage}
+                        </div>
+
+                        <div className="text-right px-2 py-2 positins-width table_width border-b-[1px] border-solid  border-[#25272A] ">
+                          {data.entryprice}
+                        </div>
+
+                        <div className="text-center px-2 py-2 positins-width table_width border-b-[1px] border-solid  border-[#25272A] ">
+                          {data.takeprofit}
+                        </div>
+                        <div className="text-center px-2 py-2 positins-width table_width border-b-[1px] border-solid  border-[#25272A] ">
+                          {data.stoploss}
+                        </div>
+                        <div className="text-right flex flex-col text-[#00CC99] px-2 py-2 positins-width table_width border-b-[1px]  border-solid border-[#25272A] ">
+                          {data.pnL}
+                          <span className="text-[10px]">{data.pnlper}</span>
+                        </div>
+                        <div className="text-center px-2 py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A]  ">
+                          {data.liquidationprice}
+                        </div>
+                        <div className="text-right pl-2 pr-[25px] py-2 positins-width table_width border-b-[1px] border-solid border-[#25272A]">
+                          <div className="justify-end flex ">
+                            <div> {data.fees}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </div>
+
+          {tableopenordersData.length > 0 && (
+            <div className="xl:w-[8%] sm:w-[12%] max-[639px]:w-[16%] max-[380px]:w-[22%] mt-[32px]">
+              {tableopenordersData.map((item, key) => (
+                <div
+                  key={key}
+                  onClick={handleDelete}
+                  className="h-[57px] cursor-pointer table_right_side flex items-center justify-center"
+                >
+                  <div className="rounded-[4px] border-[1px] border-solid border-[#313131] bg-[#2B2B2B] p-1 flex items-center justify-center">
+                    <span className="pool_font text-xs font-semibold text-[#FFFFFF] tracking-[0.06px]">
+                      Manage
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        {/*<div className="flex w-full">
           <div className="lg:w-[92%] sm:w-[88%] max-[639px]:w-[84%] max-[380px]:w-[78%]">
             <div className="flex w-full overflow-auto no-scrollbar border-t-[1px] border-solid border-[#25272A]">
               <table className="w-full">
@@ -184,7 +322,7 @@ const Openorders = () => {
               ))}
             </div>
           )}
-        </div>
+        </div> */}
       </div>
       <Positiondetailspopup isOpen={isDetailOpen} onClose={closeDelete} />
     </>
