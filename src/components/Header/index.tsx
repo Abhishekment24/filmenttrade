@@ -877,7 +877,7 @@ const Header = () => {
         {/*mobile viwe side menu  */}
         <div
           className={`
-          bg-[#0D0D0D] moblie-nav z-[50] fixed w-full top-0 overflow-y-auto overflow-x-hidden  bottom-0 py-24 
+          bg-[#0D0D0D] moblie-nav z-[350] fixed w-full top-0 overflow-y-auto overflow-x-hidden  bottom-0 py-24 
         duration-500 ${showDropNav ? "right-0" : "right-[-100%]"}
         `}
         >
