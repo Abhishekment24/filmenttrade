@@ -8,15 +8,19 @@ import Image from "next/image";
 import { RiArrowDownSFill, RiShareBoxFill } from "react-icons/ri";
 
 import { MdOutlineArrowDropUp, MdInfo } from "react-icons/md";
+import Skeleton from "react-loading-skeleton";
+import { SingleSkeleton } from "../Commoncomponent/SkeletonLoader";
 interface headerInterFace {
   currencyState: String;
   TRADE_LAYOUT: Boolean,
+  isPageLoading: Boolean,
   toggleLayout: (value: boolean) => void,
   setcurrencyState: any;
 }
 const Subheader: React.FC<headerInterFace> = ({
   currencyState,
   toggleLayout,
+  isPageLoading,
   TRADE_LAYOUT,
   setcurrencyState,
 }) => {
@@ -109,7 +113,52 @@ const Subheader: React.FC<headerInterFace> = ({
     }
   };
   console.log(TRADE_LAYOUT, "<<<<thisisTRADE_LAYOUT")
-  return (
+
+  const ShowSkeletonLoader = (
+
+    <div
+      className="navbartop fixed top-[62px] z-[300] bg-[#1B1C1E] flex  header_bg lg:px-[24px] px-4 w-full  items-center text-white mx-auto  
+        "
+    >
+
+      <div className="w-[2%]  h-full ">
+        <Skeleton highlightColor="#444" baseColor="#26282B" height={20} width={20} circle={true} containerClassName="mt-10" borderRadius={5} />
+      </div>
+      <div className="w-[18%] box-border h-full px-4 ">
+        <SingleSkeleton containerClassName="ml-2" width={"70%"} borderRadius={5} height={23} />
+      </div>
+      <div className="w-[20%]  box-border px-5 ">
+        <SingleSkeleton width={"70%"} borderRadius={5} height={23} />
+      </div>
+      <div className="w-[10%]  box-border px-5 ">
+
+        <SingleSkeleton height={10} width={"70%"} borderRadius={5} />
+        <SingleSkeleton height={13} width={"40%"} borderRadius={5} />
+      </div>
+      <div className="w-[10%]  box-border px-5 ">
+
+        <SingleSkeleton height={10} width={"80%"} borderRadius={5} />
+        <SingleSkeleton height={13} width={"60%"} borderRadius={5} />
+      </div>
+      <div className="w-[10%]  box-border px-5 ">
+
+        <SingleSkeleton height={10} width={"60%"} borderRadius={5} />
+        <SingleSkeleton height={13} width={"50%"} borderRadius={5} />
+      </div>
+      <div className="w-[10%]  box-border px-5 border-r border-[#ffffff1c]">
+
+        <SingleSkeleton height={10} width={"60%"} borderRadius={5} />
+        <SingleSkeleton height={13} width={"50%"} borderRadius={5} />
+      </div>
+      <div className="w-[30%]  box-border px-5">
+        <SingleSkeleton width={"50%"} borderRadius={5} height={23} />
+      </div>
+
+
+
+    </div>
+  )
+  return isPageLoading ? ShowSkeletonLoader : (
     <>
       <div
         className="navbartop fixed top-[62px] z-[300] bg-[#1B1C1E]  header_bg lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  
@@ -171,7 +220,7 @@ const Subheader: React.FC<headerInterFace> = ({
                                   key={key}
                                   onClick={() => {
                                     setcurrencyState(item.currency);
-                                    setselectedTab(item);
+                                    setselectedTab(item)
                                   }}
                                   className="flex justify-between items-center  py-4"
                                 >
@@ -191,11 +240,10 @@ const Subheader: React.FC<headerInterFace> = ({
                                       ${item.price}
                                     </p>
                                     <p
-                                      className={`pool_font ${
-                                        key == 1
-                                          ? "text-[#D65454]"
-                                          : "text-[#00CC99]"
-                                      }  w-[88px] text-center font-medium text-xs tracking-[0.06px] `}
+                                      className={`pool_font ${key == 1
+                                        ? "text-[#D65454]"
+                                        : "text-[#00CC99]"
+                                        }  w-[88px] text-center font-medium text-xs tracking-[0.06px] `}
                                     >
                                       +10.86%
                                     </p>
@@ -292,9 +340,8 @@ const Subheader: React.FC<headerInterFace> = ({
                 </span>
               </div>
               <div
-                className={`absolute top-[50px] lg:z-[99] pl-2  right-0 ${
-                  isMenuOpen ? "block" : "hidden"
-                }`}
+                className={`absolute top-[50px] lg:z-[99] pl-2  right-0 ${isMenuOpen ? "block" : "hidden"
+                  }`}
               >
                 <div className=" icon-width three_dot p-[24px] icon-height">
                   <span className="pool_font text-[#9CA3AF] mb-1 text-xs font-medium tracking-[0.06px]">
@@ -303,33 +350,27 @@ const Subheader: React.FC<headerInterFace> = ({
                   <ul className="grid gap-4 grid-cols-2 my-3">
                     <li
                       onClick={() => toggleLayout(false)}
-                      className={`cursor-pointer ${
-                        !TRADE_LAYOUT ? "right_bg" : "bg-[#171717]"
-                      } h-[120px] border-[1px] border-solid ${
-                        !TRADE_LAYOUT ? "border-[#40E0D0]" : "border-[#25272A]"
-                      }  rounded-[4px]`}
+                      className={`cursor-pointer ${!TRADE_LAYOUT ? "right_bg" : "bg-[#171717]"
+                        } h-[120px] border-[1px] border-solid ${!TRADE_LAYOUT ? "border-[#40E0D0]" : "border-[#25272A]"
+                        }  rounded-[4px]`}
                     >
                       <div
-                        className={`${
-                          !TRADE_LAYOUT ? " right_bg1" : "bg-[#171717]"
-                        } flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center`}
+                        className={`${!TRADE_LAYOUT ? " right_bg1" : "bg-[#171717]"
+                          } flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center`}
                       >
                         <div
-                          className={`w-[20px] h-[39px] ${
-                            !TRADE_LAYOUT ? "bg-[#40E0D0]" : "bg-[#4B5563]"
-                          }  rounded-[2px]`}
+                          className={`w-[20px] h-[39px] ${!TRADE_LAYOUT ? "bg-[#40E0D0]" : "bg-[#4B5563]"
+                            }  rounded-[2px]`}
                         ></div>
                         <div
-                          className={`w-[47px] h-[39px] ${
-                            !TRADE_LAYOUT ? "right_bg" : "bg-[#25272A]"
-                          }  rounded-[2px]`}
+                          className={`w-[47px] h-[39px] ${!TRADE_LAYOUT ? "right_bg" : "bg-[#25272A]"
+                            }  rounded-[2px]`}
                         ></div>
                       </div>
                       <div className=" text-center">
                         <span
-                          className={`pool_font ${
-                            !TRADE_LAYOUT ? "text-[#40E0D0]" : "text-white"
-                          }  text-xs font-medium tracking-[0.06px]`}
+                          className={`pool_font ${!TRADE_LAYOUT ? "text-[#40E0D0]" : "text-white"
+                            }  text-xs font-medium tracking-[0.06px]`}
                         >
                           Left Panel
                         </span>
@@ -337,33 +378,27 @@ const Subheader: React.FC<headerInterFace> = ({
                     </li>
                     <li
                       onClick={() => toggleLayout(true)}
-                      className={`${
-                        TRADE_LAYOUT ? "right_bg" : "bg-[#171717]"
-                      } h-[120px] border-[1px] border-solid  ${
-                        TRADE_LAYOUT ? "border-[#40E0D0]" : "border-[#25272A]"
-                      }  rounded-[4px]`}
+                      className={`${TRADE_LAYOUT ? "right_bg" : "bg-[#171717]"
+                        } h-[120px] border-[1px] border-solid  ${TRADE_LAYOUT ? "border-[#40E0D0]" : "border-[#25272A]"
+                        }  rounded-[4px]`}
                     >
                       <div
-                        className={`${
-                          TRADE_LAYOUT ? "right_bg1" : "bg-[#171717]"
-                        }  flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center`}
+                        className={`${TRADE_LAYOUT ? "right_bg1" : "bg-[#171717]"
+                          }  flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center`}
                       >
                         <div
-                          className={`w-[47px] h-[39px] ${
-                            TRADE_LAYOUT ? "right_bg" : "bg-[#25272A]"
-                          }  rounded-[2px]`}
+                          className={`w-[47px] h-[39px] ${TRADE_LAYOUT ? "right_bg" : "bg-[#25272A]"
+                            }  rounded-[2px]`}
                         ></div>
                         <div
-                          className={`w-[20px] h-[39px] ${
-                            TRADE_LAYOUT ? "bg-[#40E0D0]" : "bg-[#4B5563]"
-                          }  rounded-[2px]`}
+                          className={`w-[20px] h-[39px] ${TRADE_LAYOUT ? "bg-[#40E0D0]" : "bg-[#4B5563]"
+                            }  rounded-[2px]`}
                         ></div>
                       </div>
                       <div className=" text-center">
                         <span
-                          className={`pool_font ${
-                            TRADE_LAYOUT ? "text-[#40E0D0]" : "text-white"
-                          }  text-xs font-medium tracking-[0.06px]`}
+                          className={`pool_font ${TRADE_LAYOUT ? "text-[#40E0D0]" : "text-white"
+                            }  text-xs font-medium tracking-[0.06px]`}
                         >
                           Right Panel
                         </span>
@@ -377,13 +412,12 @@ const Subheader: React.FC<headerInterFace> = ({
                         Slippage Tolerace
                       </span>
                       <div
-                        className={`input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ${
-                          error
-                            ? "focus-within:border-[#D65454] border-[#D65454]"
-                            : isDisabled
+                        className={`input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ${error
+                          ? "focus-within:border-[#D65454] border-[#D65454]"
+                          : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <input
                           type="text"
@@ -425,5 +459,6 @@ const Subheader: React.FC<headerInterFace> = ({
     </>
   );
 };
+
 
 export default Subheader;

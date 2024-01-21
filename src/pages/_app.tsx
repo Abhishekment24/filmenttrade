@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import store from "../../redux/store";
 import React from "react";
 import Head from "next/head";
+import 'react-loading-skeleton/dist/skeleton.css'
+
 const config = createConfig({
   autoConnect: true,
   publicClient: createPublicClient({

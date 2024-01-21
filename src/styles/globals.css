@@ -27,6 +27,9 @@
   }
 }
 
+.cus-skeleton{
+  background-color: red;
+}
 .nav_font {
   font-family: "Onest", sans-serif !important;
 }
