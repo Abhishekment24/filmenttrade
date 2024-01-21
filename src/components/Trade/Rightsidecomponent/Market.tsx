@@ -1,19 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { CiCircleQuestion } from "react-icons/ci";
 import { cdata, edata, mdata } from "./data";
-import { MdCheck } from "react-icons/md";
-import DepositPupopup from "../../Commoncomponent/Despoitpopup";
+
 import { Switch } from "@headlessui/react";
 //import { IoIosArrowDown } from "react-icons/io";
 import { Tooltip } from "react-tooltip";
-import { MdOutlineArrowDownward } from "react-icons/md";
+
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import Dropdown from "./Dropdown";
 
 interface MarketProps {
   isConnected: boolean;
   // formData: any;
+  isPageLoading: boolean,
 
   StakeOpenPopup: () => void;
 }
@@ -128,9 +127,15 @@ const Market: React.FC<MarketProps> = ({
   const sliderStyle = {
     background: calculateBgColor(sliderValue),
   };
+
+
+
+
   return (
     <>
       <div className="px-4 pb-[100px]">
+
+
         <div
           className={`input_field_bg flex items-center gap-3 mt-4  w-full px-4 h-[45px] ${+minimumCollateral > +formsData.collateralinput || error || +formsData.collateralinput > +maximumCollateral
             ? "focus-within:border-[#D65454] border-[#D65454]"
@@ -823,7 +828,7 @@ const Market: React.FC<MarketProps> = ({
             </div>
           </div>
         )}
-      </div>
+      </div >
     </>
   );
 };

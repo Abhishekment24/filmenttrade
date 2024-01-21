@@ -216,9 +216,9 @@ const Positions = () => {
             </div>
           )}
         </div>*/}
-       <div className=" w-full relative flex">
+        <div className=" w-full relative flex">
           <div className="flex flex-col relative lg:w-[92%] sm:w-[88%] max-[639px]:w-[84%] max-[380px]:w-[78%] overflow-auto  no-scrollbar border-t-[1px] border-solid border-[#25272A]">
-          
+
 
             <div className="pool_font text-xs font-medium flex  text-[#9CA3AF]">
               <div className="text-left px-2 py-2  position-width table_width border-b-[1px] border-solid border-[#25272A] ">
@@ -273,11 +273,10 @@ const Positions = () => {
                         <div className="text-left px-2 py-2 flex flex-col position-width table_width   border-b-[1px] border-solid border-[#25272A] ">
                           {data.token}
                           <span
-                            className={`text-[10px] text-center   px-[2px] rounded-[4px] ${
-                              data.tokenpart === "SELL/SHORT"
+                            className={`text-[10px] text-center   px-[2px] rounded-[4px] ${data.tokenpart === "SELL/SHORT"
                                 ? "text-[#D65454] bg-[#991B1B4D] w-[70px]"
                                 : "text-[#14B8A6] bg-[#0596694D] w-[65px]"
-                            }`}
+                              }`}
                           >
                             {data.tokenpart}
                           </span>
@@ -325,11 +324,10 @@ const Positions = () => {
                                 <AiOutlineQuestionCircle />
                               </span>
                               <div
-                                className={`absolute top-[20px] lg:z-[99] pl-2  right-0 ${
-                                  visiblePopupIndex === index
+                                className={`absolute top-[20px] lg:z-[99] pl-2  right-0 ${visiblePopupIndex === index
                                     ? "block"
                                     : "hidden"
-                                }`}
+                                  }`}
                               >
                                 <div className="w-[256px] three_dot px-4">
                                   <div className="">
@@ -383,7 +381,7 @@ const Positions = () => {
               ))}
             </div>
           )}
-        </div> 
+        </div>
       </div>
       <Positiondetailspopup isOpen={isDetailOpen} onClose={closeDelete} />
     </>

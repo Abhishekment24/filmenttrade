@@ -12,9 +12,10 @@ import Connectpopup from "@/components/Header/Walletpopup/Connectpopup";
 import Agreepopup from "@/components/Header/Walletpopup/Agreepopup";
 import { useAccount, useConnect, useDisconnect, useSwitchNetwork } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
+import { SingleSkeleton } from "@/components/Commoncomponent/SkeletonLoader";
 interface TablesProps {
   //formData: any;
-
+  isPageLoading: boolean,
   InjectedChainId: number;
   chainId: number;
 
@@ -48,6 +49,7 @@ const tabs = [
 ];
 const Tablesection: React.FC<TablesProps> = ({
   InjectedChainId,
+  isPageLoading,
   handleNetworkChange,
   disconnectMetamask,
 }) => {
@@ -101,11 +103,10 @@ const Tablesection: React.FC<TablesProps> = ({
                 return (
                   <button
                     onClick={() => setSelectedTab(tab.key)}
-                    className={`py-3  pool_font font-semibold text-xs tracking-[0.06px]  ${
-                      tab.key == selectedTab
-                        ? "text-[#FFFFFF] border-b-[2px] border-[#FFFFFF] max-[639px]:min-w-[8rem] sm:w-[80px] "
-                        : "text-[#BABABA] max-[639px]:min-w-[8rem]  sm:w-[80px]"
-                    }`}
+                    className={`py-3  pool_font font-semibold text-xs tracking-[0.06px]  ${tab.key == selectedTab
+                      ? "text-[#FFFFFF] border-b-[2px] border-[#FFFFFF] max-[639px]:min-w-[8rem] sm:w-[80px] "
+                      : "text-[#BABABA] max-[639px]:min-w-[8rem]  sm:w-[80px]"
+                      }`}
                     key={index}
                   >
                     {tab.title}
@@ -121,12 +122,12 @@ const Tablesection: React.FC<TablesProps> = ({
                 {selectedTab === "positions"
                   ? "positions"
                   : selectedTab === "openorders"
-                  ? "open orders"
-                  : selectedTab === "history"
-                  ? "history"
-                  : selectedTab === "realisedPnL"
-                  ? "realised PnL"
-                  : "balance"}
+                    ? "open orders"
+                    : selectedTab === "history"
+                      ? "history"
+                      : selectedTab === "realisedPnL"
+                        ? "realised PnL"
+                        : "balance"}
               </p>
               <div className="flex justify-center mt-3">
                 <button
@@ -147,7 +148,7 @@ const Tablesection: React.FC<TablesProps> = ({
                 <>
                   {selectedTab === "positions" && (
                     <>
-                      <Positions />
+                      {isPageLoading ? <TableSkeleton /> : <Positions />}
                     </>
                   )}
                   {selectedTab === "openorders" && (
@@ -199,5 +200,61 @@ const Tablesection: React.FC<TablesProps> = ({
     </>
   );
 };
+const TableSkeleton = () => {
+  const fieldsArray = [
+    "Token",
+    "Type",
+    "Position Size",
+    "Collateral",
+    "Leverage",
+    "Quantity",
+    "Entry Price",
+    "Take Profit",
+    "Stop Loss",
+    "PnL",
+    "Liquidation Price",
+    "Fees"
+  ];
+
+  return <>
+    <div className=" w-full relative flex">
+      <div className="flex flex-col relative lg:w-[100%] sm:w-[100%] max-[639px]:w-[100%] max-[380px]:w-[78%] overflow-auto  no-scrollbar border-t-[1px] border-solid border-[#25272A]">
+
+        <div className="pool_font text-xs font-medium flex  text-[#9CA3AF]">
+          {fieldsArray.map(item => {
+            return <div key={item} className="text-left px-2 py-2  position-width table_width border-b-[1px] border-solid border-[#25272A] ">
+              {item}
+            </div>
+          })}
+        </div>
+        {[1, 2, 3].map((row, rowKey) => {
+          return <div key={rowKey} className="pool_font text-xs font-medium flex  text-[#9CA3AF]">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, key) => {
+              if (key == 0) {
+                return <div key={key} className="text-left px-2 py-2  position-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                  <SingleSkeleton height={10} width={"60%"} borderRadius={5} />
+                  <SingleSkeleton height={13} width={"50%"} borderRadius={5} />
+                </div>
+              } else {
+                return <div key={key} className="text-left px-2 py-2  position-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                  <SingleSkeleton height={10} width={key == 2 || key == 6 ? "70%" : key == 3 || key == 7 ? "50" : "40%"} borderRadius={5} />
+                </div>
+              }
+
+            })}
+          </div>
+        })}
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+  </>
+}
 
 export default Tablesection;

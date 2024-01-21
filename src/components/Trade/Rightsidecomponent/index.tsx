@@ -13,9 +13,12 @@ import Agreepopup from "@/components/Header/Walletpopup/Agreepopup";
 import Orderplace from "@/components/Commoncomponent/Alertpopup/Orderplace";
 import Postionpopup from "@/components/Commoncomponent/Alertpopup/Positioncreatedpopup";
 import Failedorder from "@/components/Commoncomponent/Alertpopup/Failedorder";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import SkeletonLoader, { SingleSkeleton, SkeletonDefaultProps } from "@/components/Commoncomponent/SkeletonLoader";
 interface RightProps {
   StakeOpenPopup: () => void;
   //formData: any;
+  isPageLoading: boolean,
   selectedPrice: any;
   InjectedChainId: number;
   chainId: number;
@@ -39,10 +42,11 @@ const tabs = [
 const Rightsidecomponent: React.FC<RightProps> = ({
   StakeOpenPopup,
   connectWallet,
+  isPageLoading,
   selectedPrice,
- // handleWalletConnect,
+  // handleWalletConnect,
   // formData,
- 
+
   InjectedChainId,
   handleNetworkChange,
   disconnectMetamask,
@@ -83,16 +87,16 @@ const Rightsidecomponent: React.FC<RightProps> = ({
   const Opens = () => {
     setOpenpopup(true);
   };
- const handleWalletConnect = () => {
-   if (window.ethereum) {
-     connect();
-     setIsWalletOpen(true);
-     setIsAgreeOpen(false);
-     setIsPopupOpen(false);
-   } else {
-     alert("Install metamask");
-   }
- };
+  const handleWalletConnect = () => {
+    if (window.ethereum) {
+      connect();
+      setIsWalletOpen(true);
+      setIsAgreeOpen(false);
+      setIsPopupOpen(false);
+    } else {
+      alert("Install metamask");
+    }
+  };
   const handleDelete = () => {
     setIsDetailOpen(true);
     setIsWalletOpen(false);
@@ -125,11 +129,10 @@ const Rightsidecomponent: React.FC<RightProps> = ({
                 return (
                   <button
                     onClick={() => setSelectedTab(tab.key)}
-                    className={`pool_font font-semibold text-sm  ${
-                      tab.key == selectedTab
-                        ? "py-[8.5px] text-[#FFFFFF] border-b-[2px] border-[#FFFFFF] w-[50%]"
-                        : "text-[#BABABA] w-[50%] "
-                    }`}
+                    className={`pool_font font-semibold text-sm  ${tab.key == selectedTab
+                      ? "py-[8.5px] text-[#FFFFFF] border-b-[2px] border-[#FFFFFF] w-[50%]"
+                      : "text-[#BABABA] w-[50%] "
+                      }`}
                     key={index}
                   >
                     {tab.title}
@@ -142,21 +145,25 @@ const Rightsidecomponent: React.FC<RightProps> = ({
         <div className="pt-10 pb-20">
           {selectedTab == "market" && (
             <>
-              <Market
-                //formData={formData}
-                StakeOpenPopup={StakeOpenPopup}
-                isConnected={isConnected}
-              />
+              {isPageLoading ? ShowMarketSkeleton :
+                <Market
+                  //formData={formData}
+                  isPageLoading={isPageLoading}
+                  StakeOpenPopup={StakeOpenPopup}
+                  isConnected={isConnected}
+                />}
+
             </>
           )}
           {selectedTab == "limit" && (
             <>
-              <Limit selectedPrice={selectedPrice} />
+              {isPageLoading ? ShowMarketSkeleton : <Limit selectedPrice={selectedPrice} />}
             </>
           )}
         </div>
+
         <div className="lg:fixed lg:bg-[#1B1C1E]  z-[300] lg:bottom-[1%] px-4 py-4 border-t-[1px] lg:h-[90px] border-[#272727] border-solid lg:w-[30%] xl:w-[25%] min-[1700px]:w-[400px]">
-          <>
+          {isPageLoading ? ShowBuySellSkeleton : <>
             {!isConnected ? (
               <button
                 onClick={handleDelete}
@@ -168,7 +175,7 @@ const Rightsidecomponent: React.FC<RightProps> = ({
               <div className="flex items-center gap-[8px] w-full">
                 <div
                   onClick={Opens}
-                   data-tooltip-id="my-tooltip5"
+                  data-tooltip-id="my-tooltip5"
                   className="w-[50%]"
                 >
                   <button className=" items-center pool_font text-[#fff] w-[100%]  text-[15px] font-semibold btn_border  bg-[#059669] rounded-[6px]  py-[10px] px-[16px] tracking-[0.075px]">
@@ -192,9 +199,12 @@ const Rightsidecomponent: React.FC<RightProps> = ({
                 </div>
               </div>
             )}
-          </>
+          </>}
         </div>
+
+
       </div>
+
       <Connectpopup
         isOpen={isDetailOpen}
         onClose={closeDelete}
@@ -228,5 +238,70 @@ const Rightsidecomponent: React.FC<RightProps> = ({
     </>
   );
 };
+const ShowMarketSkeleton = (
+  <>
+    <div className="px-4 py-2 pb-[100px] z-0">
 
+      <SkeletonLoader height={40} />
+      <div className="mt-2"></div>
+      <SkeletonLoader height={15} width="30%" />
+      <div className="mt-5"></div>
+      <SkeletonLoader height={40} />
+      <SingleSkeleton containerClassName="flex mt-2 justify-between" height={15} inline={true} count={2} width="30%" />
+      <div className="my-6 border-t border-[#26282B]" ></div>
+      {["60", "70", "90"].map((item, key) => {
+        return (
+          <div key={key} className="my-3">
+
+            <SkeletonTheme  {...SkeletonDefaultProps({ width: "100%" })}  >
+              <Skeleton width="5%" borderRadius={0} />
+              <Skeleton width="5%" containerClassName="opacity-0" />
+              <Skeleton width={item + "%"} />
+              <Skeleton width={100 - +item - 10 + "%"} containerClassName="opacity-0" />
+            </SkeletonTheme>
+          </div>
+        )
+      })}
+      <div className="my-6 border-t border-[#26282B]" ></div>
+      <SingleSkeleton width="15%" height={12} />
+      {["40", "30", "35", "30", "40", "45"].map((item, key) => {
+        return (
+          <div key={key} className="my-2">
+
+            <SkeletonTheme  {...SkeletonDefaultProps({ width: "100%" })}  >
+              <Skeleton width={(80 - +item) + "%"} />
+              <Skeleton width={item + "%"} containerClassName="opacity-0" />
+              <Skeleton width="20%" />
+            </SkeletonTheme>
+          </div>
+        )
+      })}
+      <div className="my-6 border-t border-[#26282B]" ></div>
+      {["40", "30",].map((item, key) => {
+        return (
+          <div key={key} className="my-2">
+
+            <SkeletonTheme  {...SkeletonDefaultProps({ width: "100%" })}  >
+              <Skeleton width={(80 - +item) + "%"} />
+              <Skeleton width={item + "%"} containerClassName="opacity-0" />
+              <Skeleton width="20%" />
+            </SkeletonTheme>
+          </div>
+        )
+      })}
+      <div className="my-6 border-t border-[#26282B]" ></div>
+
+
+
+    </div>
+  </>
+)
+const ShowBuySellSkeleton = (
+  <SkeletonTheme  {...SkeletonDefaultProps({ width: "100%", height: "50" })}  >
+    <Skeleton width="48%" height={45} />
+
+    <Skeleton width="4%" height={45} containerClassName="opacity-0" />
+    <Skeleton width="48%" height={45} />
+  </SkeletonTheme>
+)
 export default Rightsidecomponent;

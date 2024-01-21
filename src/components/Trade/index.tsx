@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import Subheader from "./Subheader";
 import Leftsidecomponent from "./Leftsidecomponent";
 import Middlesidecomponent from "./Middlesidecomponent";
@@ -27,6 +27,15 @@ const Trade: React.FC<Tradesprops> = ({
   handleNetworkChange,
   disconnectMetamask,
 }) => {
+  const [isPageLoading, setisPageLoading] = useState(true)
+  useEffect(() => {
+
+    setTimeout(() => {
+      setisPageLoading(false)
+    }, 2000);
+  }, [])
+
+
   const dispatch = useDispatch();
   const TRADE_LAYOUT = useSelector((state: any) => state.TRADE_LAYOUT);
 
@@ -79,6 +88,7 @@ const Trade: React.FC<Tradesprops> = ({
       ) : (
         <div className="">
           <Subheader
+            isPageLoading={isPageLoading}
             toggleLayout={toggleLayout}
             TRADE_LAYOUT={TRADE_LAYOUT}
             currencyState={currencyState}
@@ -93,14 +103,15 @@ const Trade: React.FC<Tradesprops> = ({
                 <div className="flex flex-col w-full">
                   <div className="lg:grid grid-width">
                     <div className="">
-                      <Leftsidecomponent currencyState={currencyState} />
+                      <Leftsidecomponent isPageLoading={isPageLoading} currencyState={currencyState} />
                     </div>
                     <div className="">
-                      <Middlesidecomponent onPriceClick={handlePriceClick} />
+                      <Middlesidecomponent isPageLoading={isPageLoading} onPriceClick={handlePriceClick} />
                     </div>
                   </div>
                   <div>
                     <Tablesection
+                      isPageLoading={isPageLoading}
                       handleWalletConnect={handleWalletConnect}
                       InjectedChainId={InjectedChainId}
                       chainId={chainId}
@@ -113,6 +124,7 @@ const Trade: React.FC<Tradesprops> = ({
                 </div>
                 <div className="">
                   <Rightsidecomponent
+                    isPageLoading={isPageLoading}
                     //  formData={formData}
                     handleWalletConnect={handleWalletConnect}
                     StakeOpenPopup={StakeOpenPopup}
@@ -130,6 +142,7 @@ const Trade: React.FC<Tradesprops> = ({
                 {/* market-limit */}
                 <div className="">
                   <Rightsidecomponent
+                    isPageLoading={isPageLoading}
                     connectWallet={connectWallet}
                     InjectedChainId={InjectedChainId}
                     chainId={chainId}
@@ -145,16 +158,17 @@ const Trade: React.FC<Tradesprops> = ({
                 <div className="flex flex-col w-full">
                   <div className="lg:grid grid-width">
                     <div className="">
-                      <Leftsidecomponent currencyState={currencyState} />
+                      <Leftsidecomponent isPageLoading={isPageLoading} currencyState={currencyState} />
                     </div>
                     <div className="">
-                      <Middlesidecomponent onPriceClick={handlePriceClick} />
+                      <Middlesidecomponent isPageLoading={isPageLoading} onPriceClick={handlePriceClick} />
                     </div>
                   </div>
                   <div>
                     <Tablesection
                       handleWalletConnect={handleWalletConnect}
                       InjectedChainId={InjectedChainId}
+                      isPageLoading={isPageLoading}
                       chainId={chainId}
                       handleNetworkChange={handleNetworkChange}
                       disconnectMetamask={disconnectMetamask}

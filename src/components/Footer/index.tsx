@@ -3,7 +3,7 @@ import { MdKeyboardDoubleArrowUp } from "react-icons/md";
 import { RxDotFilled } from "react-icons/rx";
 const Footer = () => {
   return (
-    <section className="bg-[#1B1C1E] border-t-[1px] border-solid border-[#25272A] py-[4px] pl-[10px] pr-[16px] fixed bottom-0 w-full">
+    <section className="bg-[#1B1C1E] z-10 border-t-[1px] border-solid border-[#25272A] py-[4px] pl-[10px] pr-[16px] fixed bottom-0 w-full">
       <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
         <div className="flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-[16px] hover:bg-[#25272A] px-2 py-[2px] rounded-[4px] active:bg-[#25272A]">
