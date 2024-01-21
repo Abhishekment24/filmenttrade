@@ -63,7 +63,7 @@ const Middlesidecomponent: React.FC<MiddlesProps> = ({ onPriceClick, isPageLoadi
 
               {cdata.map((item, index) => (
                 <div
-                  className="flex justify-between bg_charts items-center py-[4px] px-2 order ransition-all duration-300"
+                  className={`flex justify-between bg_charts items-center py-[4px] px-2 order ransition-all duration-300  ${(index == 1 || index == 4 || index == 8) && "bg-[#282022]"}`}
                   key={index}
                 >
                   <span
@@ -92,7 +92,7 @@ const Middlesidecomponent: React.FC<MiddlesProps> = ({ onPriceClick, isPageLoadi
             <div className="">
               {cdata.map((item, index) => (
                 <div
-                  className="flex justify-between items-center py-[4px] px-2 order ransition-all duration-300"
+                  className={`flex justify-between items-center py-[4px] px-2 order ransition-all duration-300 ${(index == 1 || index == 4 || index == 7) && "bg-[#182928]"}`}
                   key={index}
                 >
                   <span
