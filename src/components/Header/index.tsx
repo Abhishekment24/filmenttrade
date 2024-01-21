@@ -74,7 +74,7 @@ const Header = () => {
   //  ---
   const [showDropNav, setShowDropNav] = useState(false);
   const [showWalletSideNav, setWalletSideNav] = useState(false);
-  const [ethToUsd, setEthToUsd] = useState<string | number>("")
+  const [ethToUsd, setEthToUsd] = useState<string | number>("");
   const [showLangDrop, setShowLangDrop] = useState(false);
   const [chainId, setchainId] = useState<any>(null);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -95,14 +95,12 @@ const Header = () => {
         setIsAgreeOpen(false);
         setIsPopupOpen(false);
         // setIsAgreeOpen(true)
-
       } else {
         alert("Metamask no installed");
       }
     } catch (error) {
-      console.log(error, "<< Error at handleWalletConnect")
+      console.log(error, "<< Error at handleWalletConnect");
     }
-
   };
   const handleWalletlogout = () => {
     setWalletlogout(true);
@@ -194,37 +192,39 @@ const Header = () => {
   useEffect(() => {
     if (isConnected) {
       setTimeout(() => {
-        setIsWalletOpen(false)
+        setIsWalletOpen(false);
       }, 2000);
-      let isOpenPopup = sessionStorage.getItem("FIRST_VISIT")
+      let isOpenPopup = sessionStorage.getItem("FIRST_VISIT");
       if (!isOpenPopup)
         setTimeout(() => {
-          setIsAgreeOpen(true)
-          sessionStorage.setItem("FIRST_VISIT", "true")
+          setIsAgreeOpen(true);
+          sessionStorage.setItem("FIRST_VISIT", "true");
         }, 2000);
     }
   }, [isConnected]);
   useEffect(() => {
     try {
       if (walletBalance?.data?.formatted) {
-        fetch("https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD").then(res => {
-          return res.json()
-        }).then(res => {
-          setEthToUsd(+res.USD * +walletBalance?.data?.formatted)
-        })
+        fetch("https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD")
+          .then((res) => {
+            return res.json();
+          })
+          .then((res) => {
+            setEthToUsd(+res.USD * +walletBalance?.data?.formatted);
+          });
       }
     } catch (error) {
-      console.log(error, "Error at ethToUsd")
+      console.log(error, "Error at ethToUsd");
     }
-  }, [walletBalance])
-
+  }, [walletBalance]);
 
   return (
     <div>
       <>
         <div
-          className={`navbartop fixed top-0 bg-1 z-[400] header_bg max-[1179px]:py-[16px] py-[12px] lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${isScrolled ? "bg-1" : ""
-            }`}
+          className={`navbartop fixed top-0 bg-1 z-[400] header_bg max-[1179px]:py-[16px] py-[12px] lg:px-[24px] px-4 w-full justify-between flex items-center text-white mx-auto  ${
+            isScrolled ? "bg-1" : ""
+          }`}
         >
           <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
             <div className="flex justify-between text-[rgb(255,255,255)] items-center max-[1179px]:hidden">
@@ -252,50 +252,55 @@ const Header = () => {
                 )}
                 <Link
                   href="/trade"
-                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "trade"
-                    ? "font-bold text-[#fff]  "
-                    : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
-                    }`}
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "trade"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
                   onClick={() => handleTabClick("trade")}
                 >
                   Trade
                 </Link>
                 <Link
                   href="/pool"
-                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "pool"
-                    ? "font-bold text-[#fff]  "
-                    : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
-                    }`}
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "pool"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
                   onClick={() => handleTabClick("pool")}
                 >
                   Pool
                 </Link>
                 <Link
                   href="/stake"
-                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "stake"
-                    ? "font-bold text-[#fff]  "
-                    : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
-                    }`}
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "stake"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
                   onClick={() => handleTabClick("stake")}
                 >
                   Stake
                 </Link>
                 <Link
                   href="/referral"
-                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "referral"
-                    ? "font-bold text-[#fff]  "
-                    : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
-                    }`}
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "referral"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
                   onClick={() => handleTabClick("referral")}
                 >
                   Referral
                 </Link>
                 <Link
                   href="/leaderboard"
-                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "leaderboard"
-                    ? "font-bold text-[#fff]  "
-                    : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
-                    }`}
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "leaderboard"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
                   onClick={() => handleTabClick("leaderboard")}
                 >
                   Leaderboard
@@ -303,10 +308,11 @@ const Header = () => {
                 <div className="w-[1px] h-[12px] bg-[#2A2A2A]"> </div>
                 <Link
                   href="/portfolio"
-                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "portfolio"
-                    ? "font-bold text-[#fff]  "
-                    : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
-                    }`}
+                  className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${
+                    activeTab === "portfolio"
+                      ? "font-bold text-[#fff]  "
+                      : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
+                  }`}
                   onClick={() => handleTabClick("portfolio")}
                 >
                   Portfolio
@@ -318,23 +324,26 @@ const Header = () => {
                   >
                     <Link
                       href=""
-                      className={`pool_font text-[#fff] text-xs flex items-center gap-1 transition-all duration-300 ${activeTab === "More"
-                        ? "font-bold text-[#fff]  "
-                        : "text-[#fff] font-medium "
-                        }`}
+                      className={`pool_font text-[#fff] text-xs flex items-center gap-1 transition-all duration-300 ${
+                        activeTab === "More"
+                          ? "font-bold text-[#fff]  "
+                          : "text-[#fff] font-medium "
+                      }`}
                       onClick={() => handleTabClick("More")}
                     >
                       More
                     </Link>
                     <RiArrowDownSFill
-                      className={` cursor-pointer ${testnet ? "transform rotate-180" : ""
-                        } w-4 h-4`}
+                      className={` cursor-pointer ${
+                        testnet ? "transform rotate-180" : ""
+                      } w-4 h-4`}
                       aria-hidden="true"
                     />
                   </div>
                   <div
-                    className={`${testnet ? "block" : "hidden"
-                      } absolute  mt-4 w-full  min-w-[376px] left-[-36px]`}
+                    className={`${
+                      testnet ? "block" : "hidden"
+                    } absolute  mt-4 w-full  min-w-[376px] left-[-36px]`}
                   >
                     <div className="flex">
                       <div className="bg-[#1B1B1B] min-w-[216px] py-4 px-[8px] rounded-l-[8px] border-[1px] border-solid border-[#25272A] ">
@@ -392,8 +401,9 @@ const Header = () => {
                 <div className="flex items-center gap-[22px] w-full">
                   <Link href="/stake">
                     <div
-                      className={`flex items-start gap-[8px]  btn py-[10px] px-3 ${showAnimationOnEarn ? "animated-bg" : ""
-                        }`}
+                      className={`flex items-start gap-[8px]  btn py-[10px] px-3 ${
+                        showAnimationOnEarn ? "animated-bg" : ""
+                      }`}
                     >
                       <Image
                         className="w-[14px]"
@@ -425,8 +435,7 @@ const Header = () => {
                             Portfolio Value
                           </span>
                           <span className="nav_font text-[#fff] font-medium text-[10px] ">
-                            {walletBalance?.data &&
-                              `$ ${ethToUsd}`}
+                            {walletBalance?.data && `$ ${ethToUsd}`}
                           </span>
                         </div>
                         <div className="w-[1px] h-[34px] bg-[#272727]"> </div>
@@ -457,8 +466,7 @@ const Header = () => {
                             Portfolio Value
                           </span>
                           <span className="nav_font text-[#fff] font-medium text-[10px] ">
-                            {walletBalance?.data &&
-                              `$ ${ethToUsd}`}
+                            {walletBalance?.data && `$ ${ethToUsd}`}
                           </span>
                         </div>
                         <div className="w-[1px] h-[34px] bg-[#272727]"> </div>
@@ -903,11 +911,16 @@ const Header = () => {
               </Link>
             </div>
             <div className="">
+              <Link href="/leaderboard" onClick={handleLink}>
+                Leaderboard
+              </Link>
+            </div>
+            <div className="py-4">
               <Link href="/portfolio" onClick={handleLink}>
                 Portfolio
               </Link>
             </div>
-            <div className="py-4">
+            <div className="">
               <div className="relative" ref={mobiledropdownRef}>
                 <div
                   className="flex items-center gap-1"
@@ -915,14 +928,16 @@ const Header = () => {
                 >
                   <Link href="">More</Link>
                   <RiArrowDownSFill
-                    className={` cursor-pointer ${showLangDrop ? "transform rotate-180" : ""
-                      } w-4 h-4`}
+                    className={` cursor-pointer ${
+                      showLangDrop ? "transform rotate-180" : ""
+                    } w-4 h-4`}
                     aria-hidden="true"
                   />
                 </div>
                 <div
-                  className={`${showLangDrop ? "block" : "hidden"
-                    } absolute  mt-4 w-full z-50  `}
+                  className={`${
+                    showLangDrop ? "block" : "hidden"
+                  } absolute  mt-4 w-full z-50  `}
                 >
                   <div className="flex">
                     <div className="bg-[#1B1B1B] min-w-[216px] max-[500px]:min-w-[160px] max-[343px]:min-w-[125px] py-4 px-[8px] rounded-l-[8px] border-[1px] border-solid border-[#25272A] ">
@@ -1010,8 +1025,7 @@ const Header = () => {
                         Portfolio Value
                       </span>
                       <span className="nav_font text-[#fff] font-medium text-xs ">
-                        {walletBalance?.data &&
-                          `$ ${ethToUsd} `}
+                        {walletBalance?.data && `$ ${ethToUsd} `}
                       </span>
                     </div>
                     <div className="w-[1px] h-[34px] bg-[#272727]"> </div>
@@ -1054,8 +1068,7 @@ const Header = () => {
                         Portfolio Value
                       </span>
                       <span className="nav_font text-[#fff] font-medium text-xs ">
-                        {walletBalance?.data &&
-                          `$ ${ethToUsd}`}
+                        {walletBalance?.data && `$ ${ethToUsd}`}
                       </span>
                     </div>
                     <div className="w-[1px] h-[34px] bg-[#272727]"> </div>
