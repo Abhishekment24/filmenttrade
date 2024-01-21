@@ -82,7 +82,7 @@ const Afterconnectpopup: React.FC<DetailsPopupProps> = ({
                     <p className="text-[20px]  text-[#fff] font-semibold pool_font">
                       {isConnected
                         ? "Connected to metamask"
-                        : isConnecting ? "Connecting to MetaMask" : <span className="text-red-400"> Request denied</span>}
+                        : "Connecting to metaMask"}
                     </p>
                   </div>
                 </Link>

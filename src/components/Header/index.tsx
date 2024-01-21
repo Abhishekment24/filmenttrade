@@ -190,7 +190,7 @@ const Header = () => {
     }
   };
   useEffect(() => {
-    if (isConnected) {
+    if (isConnected && chainId == InjectedChainId) {
       setTimeout(() => {
         setIsWalletOpen(false);
       }, 2000);
