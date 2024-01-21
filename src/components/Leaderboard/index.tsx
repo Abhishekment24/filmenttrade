@@ -31,7 +31,7 @@ const Leaderboard = () => {
     <>
       <section className="py-[120px] pool_bg lg:h-[60px] max-[1023px]:overflow-hidden ">
         <div className="container mx-auto max-[1279px]:px-4">
-          <div className="">
+          <div onClick={Opens} className="">
             <p className="pool_font text-[#fff] text-2xl font-semibold">
               Leaderboard
             </p>
@@ -135,11 +135,12 @@ const Leaderboard = () => {
           </div>
         </div>
       </section>
-      {/* <Failedorder
+     {/*} <Failedorder
         isOpen={openpopup}
         onClose={closePopup}
         failStatus="placed"
       />*/}
+      <Orderplace isOpen={openpopup} onClose={closePopup} orderStatus="placed" />
     </>
   );
 };

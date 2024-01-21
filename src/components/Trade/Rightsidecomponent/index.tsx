@@ -10,6 +10,9 @@ import { InjectedConnector } from "wagmi/connectors/injected";
 import Connectpopup from "@/components/Header/Walletpopup/Connectpopup";
 import Afterconnectpopup from "@/components/Header/Walletpopup/Afterconnectpopup";
 import Agreepopup from "@/components/Header/Walletpopup/Agreepopup";
+import Orderplace from "@/components/Commoncomponent/Alertpopup/Orderplace";
+import Postionpopup from "@/components/Commoncomponent/Alertpopup/Positioncreatedpopup";
+import Failedorder from "@/components/Commoncomponent/Alertpopup/Failedorder";
 interface RightProps {
   StakeOpenPopup: () => void;
   //formData: any;
@@ -71,8 +74,15 @@ const Rightsidecomponent: React.FC<RightProps> = ({
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
+  const [openpopup, setOpenpopup] = useState(false);
   const [isWalletOpen, setIsWalletOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const CloseAlert = () => {
+    setOpenpopup(false);
+  };
+  const Opens = () => {
+    setOpenpopup(true);
+  };
  const handleWalletConnect = () => {
    if (window.ethereum) {
      connect();
@@ -156,7 +166,11 @@ const Rightsidecomponent: React.FC<RightProps> = ({
               </button>
             ) : (
               <div className="flex items-center gap-[8px] w-full">
-                <div data-tooltip-id="my-tooltip5" className="w-[50%]">
+                <div
+                  onClick={Opens}
+                   data-tooltip-id="my-tooltip5"
+                  className="w-[50%]"
+                >
                   <button className=" items-center pool_font text-[#fff] w-[100%]  text-[15px] font-semibold btn_border  bg-[#059669] rounded-[6px]  py-[10px] px-[16px] tracking-[0.075px]">
                     Buy / Long
                   </button>
@@ -201,6 +215,16 @@ const Rightsidecomponent: React.FC<RightProps> = ({
 
       {/*  Agree Popup after connected */}
       <Agreepopup isOpen={isAgreeOpen} onClose={closeDelete} />
+      {/*} <Failedorder
+        isOpen={openpopup}
+        onClose={closePopup}
+        failStatus="placed"
+      />*/}
+      <Orderplace
+        isOpen={openpopup}
+        onClose={CloseAlert}
+        orderStatus="placed"
+      />
     </>
   );
 };
