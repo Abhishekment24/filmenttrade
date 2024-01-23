@@ -19,12 +19,12 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
 
   onClose,
 }) => {
-  let initialPosition = 100  // will be fetched from  API
+  let initialPosition = 100; // will be fetched from  API
   const [editPopupVisible, setEditPopupVisible] = useState(false);
   const [closePopupVisible, setClosePopupVisible] = useState(false);
   const [error, setError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [positionSize, setpositionSize] = useState(0.024)
+  const [positionSize, setpositionSize] = useState(0.024);
   //const [result, setResult] = useState<number | null>(null);
   const [isPlaceholderHidden, setIsPlaceholderHidden] = useState({
     collateralinput: false,
@@ -107,9 +107,9 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
         <>
           <div className="fixed inset-0 flex justify-center items-center z-[9999] bg-background/80 backdrop-blur-sm  bg-black opacity-90"></div>
           <div className="fixed inset-0  flex  items-center justify-center  text-center z-[9999]  top-[4%] ">
-            <div className="  manage_popup w-full max-w-[360px] transform  max-[1279px]:h-[610px] overflow-y-auto p-5 text-left align-middle shadow-xl transition-all ">
-              {!closePopupVisible ? (
-                <>
+            {!closePopupVisible ? (
+              <>
+                <div className="  manage_popup w-full max-w-[360px] transform  max-[1440px]:h-[610px] overflow-y-auto no-scrollbar p-5 text-left align-middle shadow-xl transition-all ">
                   <div className="flex items-center justify-between gap-2 ">
                     <div>
                       <p className="text-[#fff] text-[20px] font-semibold tracking-[0.1px] pool_font ">
@@ -140,12 +140,16 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                   {!editPopupVisible ? (
                     <>
                       <div
-                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${error || 0.95 * positionSize < +formsData.collateralinput || +formsData.collateralinput < positionSize / sliderValue
-                          ? "focus-within:border-[#D65454] border-[#D65454]"
-                          : isDisabled
+                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
+                          error ||
+                          0.95 * positionSize < +formsData.collateralinput ||
+                          +formsData.collateralinput <
+                            positionSize / sliderValue
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <span className="pool_font w-[100%] text-[#fff] text-xs font-medium ">
                           Collateral
@@ -154,9 +158,8 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           type="text"
                           name="collateralinput"
                           value={formsData.collateralinput}
-                          onChange={e => {
-
-                            handleInputChange(e)
+                          onChange={(e) => {
+                            handleInputChange(e);
                           }}
                           onFocus={() => handleInputFocus("collateralinput")}
                           onBlur={() => handleInputBlur("collateralinput")}
@@ -173,12 +176,13 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         </span>
                       </div>
                       <div
-                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${error
-                          ? "focus-within:border-[#D65454] border-[#D65454]"
-                          : isDisabled
+                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <span className="pool_font w-[100%] text-[#fff] text-xs font-medium ">
                           Leverage
@@ -200,12 +204,13 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                       </div>
 
                       <div
-                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${error
-                          ? "focus-within:border-[#D65454] border-[#D65454]"
-                          : isDisabled
+                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <span className="pool_font w-[100%] text-[#fff] text-xs font-medium ">
                           Take Profit
@@ -230,12 +235,13 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         </span>
                       </div>
                       <div
-                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${error
-                          ? "focus-within:border-[#D65454] border-[#D65454]"
-                          : isDisabled
+                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <span className="pool_font w-[100%] text-[#fff] text-xs font-medium ">
                           Stop Loss
@@ -266,12 +272,13 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         Update Leverage
                       </span>
                       <div
-                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${error
-                          ? "focus-within:border-[#D65454] border-[#D65454]"
-                          : isDisabled
+                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.06px]">
                           Leverage
@@ -525,6 +532,9 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                   </div>
                   {!editPopupVisible ? (
                     <>
+                      <button className="mb-2 items-center pool_font text-[#1F2937] w-full text-[15px] font-semibold  btn_one  py-[12px] px-[8px] tracking-[0.06px]">
+                        Update Position
+                      </button>
                       <button
                         onClick={toggleclosePopup}
                         className="items-center pool_font text-[#fff] w-[100%] text-[15px] font-semibold max-border bg-[#2B2B2B] rounded-[8px] py-[12px] px-[8px]"
@@ -535,9 +545,11 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                   ) : (
                     <></>
                   )}
-                </>
-              ) : (
-                <>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="  manage_popup w-full max-w-[360px] transform  overflow-y-auto no-scrollbar p-5 text-left align-middle shadow-xl transition-all ">
                   <div className="flex items-center justify-between gap-2 ">
                     <div>
                       <p className="text-[#fff] text-[20px] font-semibold tracking-[0.1px] pool_font ">
@@ -565,12 +577,13 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                     </button>
                   </div>
                   <div
-                    className={`bg-[#2B2B2B] border-[1px] border-solid border-[#363A41] rounded-[8px] flex items-center gap-3 mt-4 w-full px-4 h-[45px] ${error
-                      ? "focus-within:border-[#D65454] border-[#D65454]"
-                      : isDisabled
+                    className={`bg-[#2B2B2B] border-[1px] border-solid border-[#363A41] rounded-[8px] flex items-center gap-3 mt-4 w-full px-4 h-[45px] ${
+                      error
+                        ? "focus-within:border-[#D65454] border-[#D65454]"
+                        : isDisabled
                         ? "border-[#40E0D0]"
                         : "focus-within:border-[#40E0D0] border-gray-gray4"
-                      } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                    } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                   >
                     <span className="pool_font text-[#9CA3AF] text-xs font-medium tracking-[0.06px]">
                       Amount
@@ -630,14 +643,13 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                   >
                     Close Position
                   </button>
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            )}
           </div>
         </>
-      )
-      }
-    </div >
+      )}
+    </div>
   );
 };
 

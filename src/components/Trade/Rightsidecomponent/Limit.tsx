@@ -18,10 +18,10 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
   const [isChecked3, setIsChecked3] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [sliderValue, setSliderValue] = useState(20);
-  const [positionSize, setpositionSize] = useState(0.024)
-  const [limitCurrency, setLimitCurrency] = useState("$")
-  const [availableCollateral, setavailableCollateral] = useState("500")
-  const [profitCurrency, setprofitCurrency] = useState("$")
+  const [positionSize, setpositionSize] = useState(0.024);
+  const [limitCurrency, setLimitCurrency] = useState("$");
+  const [availableCollateral, setavailableCollateral] = useState("500");
+  const [profitCurrency, setprofitCurrency] = useState("$");
   const [isMenuOpen, setMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [error, setError] = useState(false);
@@ -44,7 +44,7 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
     sizeinput: "",
     Slippageinput: "",
   });
-  const minimumCollateral = 5
+  const minimumCollateral = 5;
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
 
@@ -103,7 +103,7 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
 
   const calculateBgColor = (sliderValue: number) => {
     // Example: Change color based on the value
-    const percentage = sliderValue
+    const percentage = sliderValue;
     return `linear-gradient(to right, #40E0D0 ${percentage}%, rgba(64, 224, 208, 0.1) ${percentage}%, rgba(64, 224, 208, 0.1) 100%), #1a1a1a`;
   };
 
@@ -113,12 +113,13 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
   return (
     <div className="px-4 pb-[100px]">
       <div
-        className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${error
-          ? "focus-within:border-[#D65454] border-[#D65454]"
-          : isDisabled
+        className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
+          error
+            ? "focus-within:border-[#D65454] border-[#D65454]"
+            : isDisabled
             ? "border-[#40E0D0]"
             : "focus-within:border-[#40E0D0] border-gray-gray4"
-          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
       >
         <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
           Price
@@ -142,12 +143,13 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
         </span>
       </div>
       <div
-        className={`input_field_bg flex items-center gap-3 mt-4 w-full px-4 h-[45px] ${error || +minimumCollateral > +formData.collateralinput
-          ? "focus-within:border-[#D65454] border-[#D65454]"
-          : isDisabled
+        className={`input_field_bg flex items-center gap-3 mt-4 w-full px-4 h-[45px] ${
+          error || +minimumCollateral > +formData.collateralinput
+            ? "focus-within:border-[#D65454] border-[#D65454]"
+            : isDisabled
             ? "border-[#40E0D0]"
             : "focus-within:border-[#40E0D0] border-gray-gray4"
-          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
       >
         <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
           Collateral
@@ -170,12 +172,17 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
       </div>
       <div className="flex justify-between items-center gap-3 my-4">
         <p className="pool_font text-xs font-normal tracking-[0.06px] text-[#9CA3AF]">
-          Available Collateral : <span className="text-[#fff]">${availableCollateral}</span>
+          Available Collateral :{" "}
+          <span className="text-[#fff]">${availableCollateral}</span>
         </p>
         <div className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[8px] max-border  bg-[#2B2B2B]">
-          <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]"
+          <p
+            className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]"
             onClick={() => {
-              setFormData({ ...formData, collateralinput: `${availableCollateral}` })
+              setFormData({
+                ...formData,
+                collateralinput: `${availableCollateral}`,
+              });
             }}
           >
             Max
@@ -183,12 +190,13 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
         </div>
       </div>
       <div
-        className={`input_field_bg flex items-center gap-3  w-full px-4 h-[45px] ${error
-          ? "focus-within:border-[#D65454] border-[#D65454]"
-          : isDisabled
+        className={`input_field_bg flex items-center gap-3  w-full px-4 h-[45px] ${
+          error
+            ? "focus-within:border-[#D65454] border-[#D65454]"
+            : isDisabled
             ? "border-[#40E0D0]"
             : "focus-within:border-[#40E0D0] border-gray-gray4"
-          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
       >
         <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.07px]">
           Leverage
@@ -199,9 +207,8 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
           value={sliderValue}
           className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
           placeholder="50"
-          onChange={e => {
-            if (e.target.value != ".")
-              setSliderValue(+e.target.value)
+          onChange={(e) => {
+            if (e.target.value != ".") setSliderValue(+e.target.value);
           }}
           disabled={isDisabled}
         />
@@ -209,7 +216,7 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
           x
         </span>
       </div>
-      <div className="mt-4">
+      <div className="">
         <input
           type="range"
           min="0"
@@ -217,10 +224,10 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
           step="1"
           value={sliderValue}
           onChange={handleSliderChange}
-          className="range-slider"
+          className="range-slider my-5"
           style={sliderStyle}
         />
-        <div className="flex mt-2 justify-between items-center gap-[18px]">
+        <div className="flex  justify-between items-center gap-[18px]">
           <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
             0x
           </span>
@@ -270,12 +277,13 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
             {isChecked1 && (
               <>
                 <div
-                  className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${error
-                    ? "focus-within:border-[#D65454] border-[#D65454]"
-                    : isDisabled
+                  className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
+                    error
+                      ? "focus-within:border-[#D65454] border-[#D65454]"
+                      : isDisabled
                       ? "border-[#40E0D0]"
                       : "focus-within:border-[#40E0D0] border-gray-gray4"
-                    } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                  } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
                     Take Profit
@@ -336,22 +344,24 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
                         <span className="sr-only">Use setting</span>
                         <span
                           aria-hidden="true"
-                          className={`${enabled
-                            ? "translate-x-6 bg-teal-900"
-                            : "translate-x-0 bg-white"
-                            }
+                          className={`${
+                            enabled
+                              ? "translate-x-6 bg-teal-900"
+                              : "translate-x-0 bg-white"
+                          }
             pointer-events-none inline-block h-[21px] w-[21px] transform rounded-full  shadow-lg ring-0 transition duration-200 ease-in-out`}
                         />
                       </Switch>
                     </div>
                   </div>
                   <div
-                    className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${error
-                      ? "focus-within:border-[#D65454] border-[#D65454]"
-                      : isDisabled
+                    className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
+                      error
+                        ? "focus-within:border-[#D65454] border-[#D65454]"
+                        : isDisabled
                         ? "border-[#40E0D0]"
                         : "focus-within:border-[#40E0D0] border-gray-gray4"
-                      } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                    } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                   >
                     <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
                       Stop Loss
@@ -375,12 +385,13 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
                   {enabled && (
                     <>
                       <div
-                        className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${error
-                          ? "focus-within:border-[#D65454] border-[#D65454]"
-                          : isDisabled
+                        className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
                           Limit
@@ -405,12 +416,13 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
                         </span>
                       </div>
                       <div
-                        className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${error
-                          ? "focus-within:border-[#D65454] border-[#D65454]"
-                          : isDisabled
+                        className={`input_field_bg flex items-center gap-3 my-4 w-full px-4 h-[45px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <span className="pool_font w-[100%] text-[#9CA3AF] text-sm font-medium ">
                           Size
@@ -600,8 +612,9 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
                   Adjust
                 </p>
                 <div
-                  className={`absolute top-[-135px] lg:z-[] pl-2  left-[-17px] ${isMenuOpen ? "block" : "hidden"
-                    }`}
+                  className={`absolute top-[-135px] lg:z-[] pl-2  left-[-17px] ${
+                    isMenuOpen ? "block" : "hidden"
+                  }`}
                 >
                   <div className=" icon-width three_dot p-4">
                     <div>
@@ -610,13 +623,15 @@ const Limit: React.FC<Limitprops> = ({ selectedPrice }) => {
                           Slippage Tolerance
                         </span>
                         <div
-                          className={`input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ${error
-                            ? "focus-within:border-[#D65454] border-[#D65454]"
-                            : isDisabled
+                          className={`input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ${
+                            error
+                              ? "focus-within:border-[#D65454] border-[#D65454]"
+                              : isDisabled
                               ? "border-[#40E0D0]"
                               : "focus-within:border-[#40E0D0] border-gray-gray4"
-                            } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""
-                            }`}
+                          } ${
+                            isDisabled ? "opacity-50 cursor-not-allowed" : ""
+                          }`}
                         >
                           <input
                             type="text"
