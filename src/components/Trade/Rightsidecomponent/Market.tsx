@@ -263,7 +263,7 @@ const Market: React.FC<MarketProps> = ({
             x
           </span>
         </div>
-        <div className="mt-4">
+        <div className="">
           <input
             type="range"
             min="0"
@@ -271,10 +271,10 @@ const Market: React.FC<MarketProps> = ({
             step="1"
             value={sliderValue}
             onChange={handleSliderChange}
-            className="range-slider"
+            className="range-slider my-5"
             style={sliderStyle}
           />
-          <div className="flex mt-2 justify-between items-center gap-[18px]">
+          <div className="flex  justify-between items-center gap-[18px]">
             <span className="pool_font text-[#6B7280] text-[10px] uppercase font-semibold tracking-[0.5px]">
               0x
             </span>

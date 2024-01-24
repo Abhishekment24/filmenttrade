@@ -69,7 +69,10 @@ const Agreepopup: React.FC<DetailsPopupProps> = ({ isOpen, onClose }) => {
                   </div>
                 </div>
               </div>
-              <div className="p-5 overflow-y-auto h-[300px]" onScroll={handleScroll}>
+
+             
+              <div className="p-5 overflow-y-auto h-[300px] no-scrollbar" onScroll={handleScroll}>
+
                 <p className="text-[#FFFFFF]  text-sm font-medium pool_font tracking-[0.07px] mb-6">
                   By accessing Filament, you agree to Filament’s{" "}
                   <Link href="">
