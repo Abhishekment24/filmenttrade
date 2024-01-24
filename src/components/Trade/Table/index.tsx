@@ -196,7 +196,7 @@ const Tablesection: React.FC<TablesProps> = ({
       />
 
       {/*  Agree Popup after connected */}
-      <Agreepopup isOpen={isAgreeOpen} onClose={closeDelete} />
+      {isAgreeOpen && <Agreepopup isOpen={isAgreeOpen} onClose={closeDelete} />}
     </>
   );
 };

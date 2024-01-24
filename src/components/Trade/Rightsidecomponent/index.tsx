@@ -224,7 +224,7 @@ const Rightsidecomponent: React.FC<RightProps> = ({
       />
 
       {/*  Agree Popup after connected */}
-      <Agreepopup isOpen={isAgreeOpen} onClose={closeDelete} />
+      {isAgreeOpen && <Agreepopup isOpen={isAgreeOpen} onClose={closeDelete} />}
       {/*} <Failedorder
         isOpen={openpopup}
         onClose={closePopup}

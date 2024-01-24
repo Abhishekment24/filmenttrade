@@ -70,18 +70,18 @@ const Overview: React.FC<walletProps> = ({
   handleNetworkChange,
   disconnectMetamask,
 }) => {
-     const { chains, isLoading, pendingChainId, switchNetwork } =
-       useSwitchNetwork();
+  const { chains, isLoading, pendingChainId, switchNetwork } =
+    useSwitchNetwork();
 
-     const walletDetails = useAccount();
-     console.log(chains, "<<<<thesearechains");
+  const walletDetails = useAccount();
+  console.log(chains, "<<<<thesearechains");
 
-     const { connect } = useConnect({
-       connector: new InjectedConnector(),
-     });
-     const { disconnect } = useDisconnect();
-     const [chainId, setchainId] = useState<any>(null);
-     const { address, isConnected, isConnecting } = useAccount();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+  const { disconnect } = useDisconnect();
+  const [chainId, setchainId] = useState<any>(null);
+  const { address, isConnected, isConnecting } = useAccount();
   const [selectedTab, setSelectedTab] = useState("portfolio");
   const [isWalletOpen, setIsWalletOpen] = useState(false);
   const [isAgreeOpen, setIsAgreeOpen] = useState(false);
@@ -198,11 +198,10 @@ const Overview: React.FC<walletProps> = ({
                     return (
                       <button
                         onClick={() => setSelectedTab(tab.key)}
-                        className={`py-[6px] px-[12px] pool_font rounded-[8px] font-normal text-base  ${
-                          tab.key == selectedTab
-                            ? " bg-[#1A1A1A] text-[#E8E8E8] "
-                            : "text-[#BABABA] "
-                        }`}
+                        className={`py-[6px] px-[12px] pool_font rounded-[8px] font-normal text-base  ${tab.key == selectedTab
+                          ? " bg-[#1A1A1A] text-[#E8E8E8] "
+                          : "text-[#BABABA] "
+                          }`}
                         key={index}
                       >
                         {tab.title}
@@ -295,7 +294,7 @@ const Overview: React.FC<walletProps> = ({
       />
 
       {/*  Agree Popup after connected */}
-      <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />
+      {isAgreeOpen && <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />}
     </>
   );
 };

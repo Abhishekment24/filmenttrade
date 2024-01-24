@@ -97,7 +97,7 @@ const Historys: React.FC<walletProps> = ({
       />
 
       {/*  Agree Popup after connected */}
-      <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />
+      {isAgreeOpen && <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />}
     </>
   );
 };
