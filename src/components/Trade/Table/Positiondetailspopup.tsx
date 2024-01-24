@@ -22,6 +22,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
   let initialPosition = 100; // will be fetched from  API
   const [editPopupVisible, setEditPopupVisible] = useState(false);
   const [closePopupVisible, setClosePopupVisible] = useState(false);
+  const [percentSelection, setpercentSelection] = useState<number | string>("")
   const [error, setError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [positionSize, setpositionSize] = useState(0.024);
@@ -604,15 +605,22 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                     </span>
                   </div>
                   <div className="flex items-center gap-[8px] justify-between w-full my-4">
-                    <div
-                      onClick={() => calculatePercentage(25)}
-                      className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B] w-[25%]"
-                    >
-                      <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
-                        25%
-                      </p>
-                    </div>
-                    <div
+                    {[25, 50, 75, 100].map((item, key) => {
+                      return <div key={key}
+                        onClick={() => {
+                          calculatePercentage(item)
+                          setpercentSelection(item)
+                        }}
+                        className={`cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border ${percentSelection == item ? "bg-[#40e0d0]" : "bg-[#2B2B2B]"}   w-[25%]`}
+
+                      >
+                        <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
+                          {item}%
+                        </p>
+                      </div>
+                    })}
+
+                    {/* <div
                       onClick={() => calculatePercentage(50)}
                       className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B] w-[25%]"
                     >
@@ -635,7 +643,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                       <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
                         100%
                       </p>
-                    </div>
+                    </div> */}
                   </div>
                   <button
                     onClick={onClose}

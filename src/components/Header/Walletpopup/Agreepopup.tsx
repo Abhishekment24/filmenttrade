@@ -8,11 +8,28 @@ import { Tooltip } from "react-tooltip";
 import { CiCircleQuestion } from "react-icons/ci";
 import Image from "next/image";
 import { FaRegCopy } from "react-icons/fa6";
+import { useDisconnect } from "wagmi";
 interface DetailsPopupProps {
   isOpen: boolean;
   onClose: () => void;
 }
 const Agreepopup: React.FC<DetailsPopupProps> = ({ isOpen, onClose }) => {
+  const [enableButton, setenableButton] = useState(false)
+  const { disconnect } = useDisconnect();
+  useEffect(() => {
+
+
+    return () => {
+      setenableButton(false)
+    }
+  }, [])
+
+  const handleScroll = (event: any) => {
+    const hitBottom = event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight;
+    if (hitBottom) {
+      setenableButton(true)
+    }
+  };
   return (
     <div>
       {isOpen && (
@@ -24,7 +41,13 @@ const Agreepopup: React.FC<DetailsPopupProps> = ({ isOpen, onClose }) => {
                 <div className=" justify-end flex p-5 relative">
                   <button
                     className="bg-[#1B1B1B]  border-[1px] border-solid border-[#323232] rounded-[4px] w-[34px] h-[34px] flex items-center justify-center"
-                    onClick={onClose}
+                    onClick={() => {
+
+                      onClose()
+                      disconnect()
+                      sessionStorage.clear()
+                    }
+                    }
                   >
                     <AiOutlineClose className="text-2xl text-white" />
                   </button>
@@ -46,7 +69,10 @@ const Agreepopup: React.FC<DetailsPopupProps> = ({ isOpen, onClose }) => {
                   </div>
                 </div>
               </div>
-              <div className="p-5 overflow-y-auto h-[300px] no-scrollbar">
+
+             
+              <div className="p-5 overflow-y-auto h-[300px] no-scrollbar" onScroll={handleScroll}>
+
                 <p className="text-[#FFFFFF]  text-sm font-medium pool_font tracking-[0.07px] mb-6">
                   By accessing Filament, you agree to Filament’s{" "}
                   <Link href="">
@@ -100,8 +126,12 @@ const Agreepopup: React.FC<DetailsPopupProps> = ({ isOpen, onClose }) => {
               <div className="p-5">
                 <Link href="/pool">
                   <button
+                    disabled={!enableButton}
                     onClick={onClose}
                     className="items-center w-full pool_font text-[#0B2B28] text-sm font-semibold  btn_one  py-[16px] px-[16px]"
+                    style={{
+                      background: enableButton ? "#40e0d0" : "gray"
+                    }}
                   >
                     Agree
                   </button>

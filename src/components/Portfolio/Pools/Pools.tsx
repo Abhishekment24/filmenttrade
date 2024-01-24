@@ -138,11 +138,10 @@ const Pools: React.FC<walletProps> = ({
                     return (
                       <button
                         onClick={() => setSelectedTab(tab.key)}
-                        className={`py-[6px] px-[12px] pool_font rounded-[8px] font-normal text-base  ${
-                          tab.key == selectedTab
-                            ? " bg-[#1A1A1A] text-[#E8E8E8] "
-                            : "text-[#BABABA] "
-                        }`}
+                        className={`py-[6px] px-[12px] pool_font rounded-[8px] font-normal text-base  ${tab.key == selectedTab
+                          ? " bg-[#1A1A1A] text-[#E8E8E8] "
+                          : "text-[#BABABA] "
+                          }`}
                         key={index}
                       >
                         {tab.title}
@@ -189,7 +188,7 @@ const Pools: React.FC<walletProps> = ({
       />
 
       {/*  Agree Popup after connected */}
-      <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />
+      {isAgreeOpen && <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />}
     </>
   );
 };

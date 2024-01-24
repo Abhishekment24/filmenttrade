@@ -50,42 +50,42 @@ const Perpetuals: React.FC<walletProps> = ({
   disconnectMetamask,
 }) => {
   const [selectedTab, setSelectedTab] = useState("value");
-    const { chains, isLoading, pendingChainId, switchNetwork } =
-      useSwitchNetwork();
+  const { chains, isLoading, pendingChainId, switchNetwork } =
+    useSwitchNetwork();
 
-    const walletDetails = useAccount();
-    console.log(chains, "<<<<thesearechains");
+  const walletDetails = useAccount();
+  console.log(chains, "<<<<thesearechains");
 
-    const { connect } = useConnect({
-      connector: new InjectedConnector(),
-    });
-    const { disconnect } = useDisconnect();
-    const [chainId, setchainId] = useState<any>(null);
-    const { address, isConnected, isConnecting } = useAccount();
-    const [isWalletOpen, setIsWalletOpen] = useState(false);
-    const [isAgreeOpen, setIsAgreeOpen] = useState(false);
-    const [isConnectOpen, setIsConnectOpen] = useState(false);
-    const handleWalletConnect = () => {
-      if (window.ethereum) {
-        connect();
-        setIsWalletOpen(true);
-        setIsAgreeOpen(false);
-        setIsConnectOpen(false);
-      } else {
-        alert("Install metamask");
-      }
-    };
-    const handleOpen = () => {
-      setIsConnectOpen(true);
-      setIsWalletOpen(false);
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+  const { disconnect } = useDisconnect();
+  const [chainId, setchainId] = useState<any>(null);
+  const { address, isConnected, isConnecting } = useAccount();
+  const [isWalletOpen, setIsWalletOpen] = useState(false);
+  const [isAgreeOpen, setIsAgreeOpen] = useState(false);
+  const [isConnectOpen, setIsConnectOpen] = useState(false);
+  const handleWalletConnect = () => {
+    if (window.ethereum) {
+      connect();
+      setIsWalletOpen(true);
       setIsAgreeOpen(false);
-    };
-
-    const handleClose = () => {
       setIsConnectOpen(false);
-      setIsWalletOpen(false);
-      setIsAgreeOpen(false);
-    };
+    } else {
+      alert("Install metamask");
+    }
+  };
+  const handleOpen = () => {
+    setIsConnectOpen(true);
+    setIsWalletOpen(false);
+    setIsAgreeOpen(false);
+  };
+
+  const handleClose = () => {
+    setIsConnectOpen(false);
+    setIsWalletOpen(false);
+    setIsAgreeOpen(false);
+  };
   return (
     <>
       <div className="flex flex-col gap-[4px]">
@@ -154,11 +154,10 @@ const Perpetuals: React.FC<walletProps> = ({
                     return (
                       <button
                         onClick={() => setSelectedTab(tab.key)}
-                        className={`py-[6px] px-[12px] pool_font rounded-[8px] font-normal text-base  ${
-                          tab.key == selectedTab
-                            ? " bg-[#1A1A1A] text-[#E8E8E8] "
-                            : "text-[#BABABA] "
-                        }`}
+                        className={`py-[6px] px-[12px] pool_font rounded-[8px] font-normal text-base  ${tab.key == selectedTab
+                          ? " bg-[#1A1A1A] text-[#E8E8E8] "
+                          : "text-[#BABABA] "
+                          }`}
                         key={index}
                       >
                         {tab.title}
@@ -206,7 +205,7 @@ const Perpetuals: React.FC<walletProps> = ({
       />
 
       {/*  Agree Popup after connected */}
-      <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />
+      {isAgreeOpen && <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />}
     </>
   );
 };

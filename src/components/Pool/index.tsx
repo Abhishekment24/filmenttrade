@@ -71,7 +71,7 @@ const Pool: React.FC<PoolProps> = ({
     collateralinput: "0.3636",
     profitinput: "0.250",
     stopinput: "0.015",
-    amount: "100",
+    amount: "",
   });
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -307,11 +307,10 @@ const Pool: React.FC<PoolProps> = ({
                         return (
                           <button
                             onClick={() => setSelectedTab(tab.key)}
-                            className={`py-5  pool_font font-semibold text-base  ${
-                              tab.key == selectedTab
-                                ? "  text-[#FFFFFF] border-b-[2px] border-[#FFFFFF] "
-                                : "text-[#BABABA] "
-                            }`}
+                            className={`py-5  pool_font font-semibold text-base  ${tab.key == selectedTab
+                              ? "  text-[#FFFFFF] border-b-[2px] border-[#FFFFFF] "
+                              : "text-[#BABABA] "
+                              }`}
                             key={index}
                           >
                             {tab.title}
@@ -449,7 +448,7 @@ const Pool: React.FC<PoolProps> = ({
                 </p>
                 <button
                   className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[34px] h-[34px] flex items-center justify-center"
-                  onClick={StakeOpenPopup}
+                  onClick={() => setIsStakeOpen(false)}
                 >
                   <AiOutlineClose className="text-2xl text-white" />
                 </button>
@@ -506,7 +505,8 @@ const Pool: React.FC<PoolProps> = ({
             </div>
           </div>
         </>
-      )}
+      )
+      }
       <DepositPupopup
         setAddValue={setAddValue}
         formsData={formsData}
@@ -545,7 +545,7 @@ const Pool: React.FC<PoolProps> = ({
       />
 
       {/*  Agree Popup after connected */}
-      <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />
+      {isAgreeOpen && <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />}
     </>
   );
 };

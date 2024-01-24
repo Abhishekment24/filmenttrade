@@ -36,18 +36,18 @@ const Stakepage: React.FC<StakeProps> = ({
   handleNetworkChange,
   disconnectMetamask,
 }) => {
-   const { chains, isLoading, pendingChainId, switchNetwork } =
-     useSwitchNetwork();
+  const { chains, isLoading, pendingChainId, switchNetwork } =
+    useSwitchNetwork();
 
-   const walletDetails = useAccount();
-   console.log(chains, "<<<<thesearechains");
+  const walletDetails = useAccount();
+  console.log(chains, "<<<<thesearechains");
 
-   const { connect } = useConnect({
-     connector: new InjectedConnector(),
-   });
-   const { disconnect } = useDisconnect();
-   const [chainId, setchainId] = useState<any>(null);
-   const { address, isConnected, isConnecting } = useAccount();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+  const { disconnect } = useDisconnect();
+  const [chainId, setchainId] = useState<any>(null);
+  const { address, isConnected, isConnecting } = useAccount();
   const [isVisible, setIsVisible] = useState(false);
   const [image, setImage] = useState("");
   const [error, setError] = useState(false);
@@ -56,33 +56,33 @@ const Stakepage: React.FC<StakeProps> = ({
   const [isUnStakeOpen, setIsUnStakeOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isStakeOpen, setIsStakeOpen] = useState(false);
-   const [isWalletOpen, setIsWalletOpen] = useState(false);
-   const [isAgreeOpen, setIsAgreeOpen] = useState(false);
-   const [isConnectOpen, setIsConnectOpen] = useState(false);
+  const [isWalletOpen, setIsWalletOpen] = useState(false);
+  const [isAgreeOpen, setIsAgreeOpen] = useState(false);
+  const [isConnectOpen, setIsConnectOpen] = useState(false);
   const [formsData, setFormsData] = useState({
-    amount: "100",
+    amount: "",
   });
-    const handleWalletConnect = () => {
-      if (window.ethereum) {
-        connect();
-        setIsWalletOpen(true);
-        setIsAgreeOpen(false);
-        setIsConnectOpen(false);
-      } else {
-        alert("Install metamask");
-      }
-    };
-    const handleOpen = () => {
-      setIsConnectOpen(true);
-      setIsWalletOpen(false);
+  const handleWalletConnect = () => {
+    if (window.ethereum) {
+      connect();
+      setIsWalletOpen(true);
       setIsAgreeOpen(false);
-    };
-
-    const handleClose = () => {
       setIsConnectOpen(false);
-      setIsWalletOpen(false);
-      setIsAgreeOpen(false);
-    };
+    } else {
+      alert("Install metamask");
+    }
+  };
+  const handleOpen = () => {
+    setIsConnectOpen(true);
+    setIsWalletOpen(false);
+    setIsAgreeOpen(false);
+  };
+
+  const handleClose = () => {
+    setIsConnectOpen(false);
+    setIsWalletOpen(false);
+    setIsAgreeOpen(false);
+  };
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const activeTab = urlParams.get("success");
@@ -413,7 +413,9 @@ const Stakepage: React.FC<StakeProps> = ({
                 </p>
                 <button
                   className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[34px] h-[34px] flex items-center justify-center"
-                  onClick={StakeOpenPopup}
+                  onClick={() => {
+                    setIsStakeOpen(false)
+                  }}
                 >
                   <AiOutlineClose className="text-2xl text-white" />
                 </button>
@@ -488,7 +490,9 @@ const Stakepage: React.FC<StakeProps> = ({
                 </p>
                 <button
                   className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[34px] h-[34px] flex items-center justify-center"
-                  onClick={StakeOpenPopup}
+                  onClick={() => {
+                    setIsUnStakeOpen(false)
+                  }}
                 >
                   <AiOutlineClose className="text-2xl text-white" />
                 </button>
@@ -571,7 +575,7 @@ const Stakepage: React.FC<StakeProps> = ({
       />
 
       {/*  Agree Popup after connected */}
-      <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />
+      {isAgreeOpen && <Agreepopup isOpen={isAgreeOpen} onClose={handleClose} />}
     </>
   );
 };

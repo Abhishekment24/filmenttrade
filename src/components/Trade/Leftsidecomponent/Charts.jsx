@@ -52,7 +52,7 @@ const GraphSection = ({ currencyState }) => {
     }
   }, [currencyState]);
   return (
-    <div className="tradingview-widget-container">
+    <div className="tradingview-widget-container custom-class" >
       <div id="tradingview_0396b" />
     </div>
   );

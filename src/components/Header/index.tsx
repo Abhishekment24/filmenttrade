@@ -869,7 +869,7 @@ const Header = () => {
         />
 
         {/*  Agree Popup after connected */}
-        <Agreepopup isOpen={isAgreeOpen} onClose={closePopup} />
+        {isAgreeOpen && <Agreepopup isOpen={isAgreeOpen} onClose={closePopup} />}
 
         {/*mobile viwe side menu  */}
         <div
