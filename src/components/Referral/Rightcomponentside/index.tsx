@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { mdata } from "@/components/Pool/Leftcomponentside/Data/data";
 import Line from "../../../../public/assest/Line.png";
 import Image from "next/image";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 const Rightcomponentside = () => {
   return (
     <>
@@ -15,7 +16,7 @@ const Rightcomponentside = () => {
           </p>
         </div>
         <Image className="w-[100%] my-5" priority src={Line} alt="line" />
-       
+
         <div className="">
           {mdata.map((item, index) => (
             <div
@@ -30,6 +31,17 @@ const Rightcomponentside = () => {
               </p>
             </div>
           ))}
+        </div>
+        <div className="">
+          <button className="items-center pool_font text-[#1F2937] w-full text-sm font-semibold  btn_one  py-[14px] px-[16px] tracking-[0.06px] my-5">
+            Claim Rewards
+          </button>
+          <div className="flex items-center gap-3  w-full bg-[#262729] px-[16px] py-2 rounded-[8px] border-[1px] border-solid border-[#3c3d3e]">
+            <AiOutlineInfoCircle className="text-[18px] text-[#9CA3AF] " />
+            <div className="text-sm text-[#9CA3AF] pool_font font-medium tracking-[0.07px]">
+              Unclaimed Rewards expire after 7 days
+            </div>
+          </div>
         </div>
       </div>
     </>
