@@ -70,7 +70,10 @@ const Connectpopup: React.FC<DetailsPopupProps> = ({
               </div>
               <p className="text-[#9CA3AF] text-xs font-medium pool_font ">
                 Can’t connect your wallet?{""}
-                <span className="text-[#40E0D0]"> Get Help</span>
+                <span className="text-[#40E0D0] cursor-pointer ">
+                  {" "}
+                  Get Help
+                </span>
               </p>
               <div className="my-[24px]">
                 <Image className="w-[100%]" priority src={Line} alt="line" />

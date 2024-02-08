@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Logo from "../../../public/assest/Logo.png";
+import Logo from "../../../public/assest/logo1.png";
 import Buttonicons from "../../../public/assest/Tether.png";
 import Metamaskicon from "../../../public/assest/metamaskicon.png";
 import Metamaskimg from "../../../public/assest/metamsakimgs.png";

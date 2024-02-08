@@ -124,7 +124,7 @@ const Agreepopup: React.FC<DetailsPopupProps> = ({ isOpen, onClose }) => {
                 </p>
               </div>
               <div className="p-5">
-                <Link href="/pool">
+                <Link href="/trade">
                   <button
                     disabled={!enableButton}
                     onClick={onClose}

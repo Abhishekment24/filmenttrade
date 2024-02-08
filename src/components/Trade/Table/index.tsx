@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import Positions from "../Table/positions";
+import Positions from "./positions";
 
 import Openorders from "./openorders";
 import History from "./history";

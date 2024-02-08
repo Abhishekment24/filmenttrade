@@ -208,9 +208,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         <Dropdown setCurrency={setColleteralCurrency} />
                         {/* <div className="w-[1px] h-[16px] bg-[#25272A]"> </div> */}
 
-                        <span>
-                          <MdEdit className="text-[#fff] text-[16px]" />
-                        </span>
+                        
                       </div>
                       <div
                         className={`bg-[#1F2023] flex  items-center gap-3 my-3 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${error
@@ -267,9 +265,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         <Dropdown setCurrency={setstopLossCurrency} />
                         {/* <div className="w-[1px] h-[16px] bg-[#25272A]"> </div> */}
 
-                        <span>
-                          <MdEdit className="text-[#fff] text-[16px]" />
-                        </span>
+                        
                       </div>
                       <div
                         className={`bg-[#1F2023] flex  items-center gap-3 mb-3 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${error
@@ -298,9 +294,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         <Dropdown setCurrency={settakeProfitCurrency} />
                         {/* <div className="w-[1px] h-[16px] bg-[#25272A]"> </div> */}
 
-                        <span>
-                          <MdEdit className="text-[#fff] text-[16px]" />
-                        </span>
+                       
                       </div>
                     </>
                   ) : (

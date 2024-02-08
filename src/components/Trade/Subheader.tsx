@@ -284,7 +284,7 @@ const Subheader: React.FC<headerInterFace> = ({
       >
         <div className="max-[1023px]:container lg:max-w-full lg:w-full mx-auto">
           <div className="flex justify-between text-[#fff] items-center max-[1023px]:hidden xl:gap-[14px] lg:gap-2">
-            <div className="flex items-center xl:gap-[14px] lg:gap-2">
+            <div className="flex items-center xl:gap-[12px] min-[1380px]:gap-[14px] lg:gap-2">
               <div
                 onClick={() => setshowLangDrop(!showLangDrop)}
                 className="flex cursor-pointer justify-between items-center xl:gap-[14px] lg:gap-2"
@@ -310,13 +310,15 @@ const Subheader: React.FC<headerInterFace> = ({
                     >
                       <div className="flex justify-between items-center gap-3">
                         <div
-                          className={`input_field_bg flex items-center gap-3 my-4 w-[100%] px-4 h-[45px] ${error
-                            ? "focus-within:border-[#D65454] border-[#D65454]"
-                            : isDisabled
+                          className={`input_field_bg flex items-center gap-3 my-4 w-[100%] px-4 h-[45px] ${
+                            error
+                              ? "focus-within:border-[#D65454] border-[#D65454]"
+                              : isDisabled
                               ? "border-[#40E0D0]"
                               : "focus-within:border-[#40E0D0] border-gray-gray4"
-                            } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""
-                            }`}
+                          } ${
+                            isDisabled ? "opacity-50 cursor-not-allowed" : ""
+                          }`}
                         >
                           <input
                             type="text"
@@ -342,10 +344,11 @@ const Subheader: React.FC<headerInterFace> = ({
                                   e.stopPropagation();
                                   setActiveTab(tab.key);
                                 }}
-                                className={`pool_font font-semibold text-sm  ${tab.key == activeTab
-                                  ? "py-[8.5px] text-[#40E0D0] border-b-[2px] border-[#40E0D0] w-[50%]"
-                                  : "text-[#E5E7EB] w-[50%] "
-                                  }`}
+                                className={`pool_font font-semibold text-sm  ${
+                                  tab.key == activeTab
+                                    ? "py-[8.5px] text-[#40E0D0] border-b-[2px] border-[#40E0D0] w-[50%]"
+                                    : "text-[#E5E7EB] w-[50%] "
+                                }`}
                                 key={index}
                               >
                                 {tab.title}
@@ -421,10 +424,11 @@ const Subheader: React.FC<headerInterFace> = ({
                                       </td>
 
                                       <td
-                                        className={`pool_font ${key === 0
-                                          ? "text-[#D65454]"
-                                          : "text-[#00CC99]"
-                                          } w-[88px] font-medium text-left px-3 py-2 text-xs tracking-[0.06px]`}
+                                        className={`pool_font ${
+                                          key === 0
+                                            ? "text-[#D65454]"
+                                            : "text-[#00CC99]"
+                                        } w-[88px] font-medium text-left px-3 py-2 text-xs tracking-[0.06px]`}
                                       >
                                         {item.change}%
                                       </td>
@@ -449,16 +453,16 @@ const Subheader: React.FC<headerInterFace> = ({
                                   <th className="text-left font-medium  px-2 py-2">
                                     Token
                                   </th>
-                                  <th className="text-right font-medium  px-2 py-2">
+                                  <th className="text-left font-medium  px-2 py-2">
                                     Price
                                   </th>
-                                  <th className="text-center font-medium px-2 py-2">
+                                  <th className="text-left font-medium px-2 py-2">
                                     8hr Funding
                                   </th>
                                   <th className="text-left font-medium px-2 py-2">
                                     Type
                                   </th>
-                                  <th className="text-center  font-medium px-2 py-2">
+                                  <th className="text-left  font-medium px-2 py-2">
                                     <div className="flex items-center gap-1">
                                       <span>Change</span>
                                       <span className="text-[#4B5563]">
@@ -468,7 +472,6 @@ const Subheader: React.FC<headerInterFace> = ({
                                   </th>
                                   <th className="text-left font-medium px-2 py-2">
                                     Open Interest
-
                                   </th>
                                 </tr>
                               </thead>
@@ -502,10 +505,10 @@ const Subheader: React.FC<headerInterFace> = ({
                                           </div>
                                         </div>
                                       </td>
-                                      <td className="text-right font-medium px-2 py-2">
+                                      <td className="text-left font-medium px-2 py-2">
                                         ${item.price}
                                       </td>
-                                      <td className="text-center font-medium px-2 py-2">
+                                      <td className="text-left font-medium px-2 py-2">
                                         {item.funding}%
                                       </td>
                                       <td className="text-left font-medium px-2 py-2">
@@ -515,10 +518,11 @@ const Subheader: React.FC<headerInterFace> = ({
                                       </td>
 
                                       <td
-                                        className={`pool_font ${key === 0
-                                          ? "text-[#D65454]"
-                                          : "text-[#00CC99]"
-                                          } w-[88px] font-medium text-center px-2 py-2 text-xs tracking-[0.06px]`}
+                                        className={`pool_font ${
+                                          key === 0
+                                            ? "text-[#D65454]"
+                                            : "text-[#00CC99]"
+                                        } w-[88px] font-medium text-left px-2 py-2 text-xs tracking-[0.06px]`}
                                       >
                                         {item.change}%
                                       </td>
@@ -551,9 +555,9 @@ const Subheader: React.FC<headerInterFace> = ({
                 </div>
                 <div className="w-[1px] h-[39px] bg-[#FFFFFF0D]"> </div>
                 <div className="">
-                  <span className="pool_font text-[#9CA3AF] font-light text_subheader1 text-xs tracking-[0.06px]">
+                  <p className="pool_font text-[#9CA3AF] font-light text_subheader1 text-xs tracking-[0.06px]">
                     24h change
-                  </span>
+                  </p>
                   <div className="flex items-center gap-[8px]">
                     <p className="wallet_connected_font text-[#10B981] font-medium text_subheader text-sm ">
                       +0.81%
@@ -564,19 +568,19 @@ const Subheader: React.FC<headerInterFace> = ({
                   </div>
                 </div>
                 <div className="">
-                  <span className="pool_font text-[#9CA3AF] font-light text-xs text_subheader1 tracking-[0.06px]">
+                  <p className="pool_font text-[#9CA3AF] font-light text-xs text_subheader1 tracking-[0.06px]">
                     24h volume
-                  </span>
+                  </p>
                   <p className="pool_font text-[#fff] font-medium text-sm text_subheader tracking-[0.07px]">
                     $24,363,353
                   </p>
                 </div>
-                <div className="">
-                  <div className="flex">
 
-                    <span className="pool_font text-[#9CA3AF] font-light text-xs  text_subheader1 tracking-[0.06px]">
+                <div className="">
+                  <div className="flex items-center gap-1">
+                    <p className="pool_font text-[#9CA3AF] font-light text-xs text_subheader1 tracking-[0.06px]">
                       Open Interest
-                    </span>
+                    </p>
                     <span data-tooltip-id="my-tooltip3">
                       <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base " />
                       <Tooltip id="my-tooltip3" className="tooltip_bg">
@@ -585,42 +589,39 @@ const Subheader: React.FC<headerInterFace> = ({
                             Open Interest
                           </h3>
                           <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                            The total outstanding in perpetual contracts for that market,
-                            denominated in the quote USDC
+                            The total outstanding in perpetual contracts for
+                            that market, denominated in the quote USDC
                           </p>
-
                         </div>
                       </Tooltip>
                     </span>
                   </div>
-
                   <p className="pool_font text-[#fff] font-medium text-sm text_subheader tracking-[0.07px]">
                     $228.48
                   </p>
                 </div>
                 <div className="">
-                  <span className="pool_font text-[#9CA3AF] font-light text-xs text_subheader1 tracking-[0.06px]">
+                  <p className="pool_font text-[#9CA3AF] font-light text-xs text_subheader1 tracking-[0.06px]">
                     Market Cap
-                  </span>
+                  </p>
                   <p className="pool_font text-[#fff] font-medium text-sm text_subheader tracking-[0.07px]">
                     $3,046K
                   </p>
                 </div>
                 <div className="w-[1px] h-[39px] bg-[#FFFFFF0D]"> </div>
                 <div className="">
-                  <span className="pool_font text-[#9CA3AF] font-light text-xs text_subheader1 tracking-[0.06px]">
+                  <p className="pool_font text-[#9CA3AF] font-light text-xs text_subheader1 tracking-[0.06px]">
                     Funding Rate
-                  </span>
+                  </p>
                   <p className="pool_font text-[#fff] font-medium text-sm text_subheader tracking-[0.07px]">
                     80.47%
                   </p>
                 </div>
-                <div className="">
-                  <div className="flex">
-
-                    <span className="pool_font text-[#9CA3AF] font-light text-xs text_subheader1 tracking-[0.06px]">
+                <div className="w-[150px]">
+                  <div className="flex items-center gap-1">
+                    <p className="pool_font text-[#9CA3AF] font-light text-xs text_subheader1 tracking-[0.06px]">
                       Funding / Countdown
-                    </span>
+                    </p>
                     <span data-tooltip-id="my-tooltip-funding">
                       <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base " />
                       <Tooltip id="my-tooltip-funding" className="tooltip_bg">
@@ -630,19 +631,18 @@ const Subheader: React.FC<headerInterFace> = ({
                           </h3>
                           <ul className="list-disc">
                             <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-
-                              Funding payments are made every hour and calculated algorithmically based on the index price and Time-Weighted Average Price (TWAP) of Filtrate on the Filament order book. The 1-hour and annualized rates display the current funding rate.
-
+                              Funding payments are made every hour and
+                              calculated algorithmically based on the index
+                              price and Time-Weighted Average Price (TWAP) of
+                              Filtrate on the Filament order book. The 1-hour
+                              and annualized rates display the current funding
+                              rate.
                             </li>
                             <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                              The countdown displays the time until the next funding payment.
-
+                              The countdown displays the time until the next
+                              funding payment.
                             </li>
-
-
-
                           </ul>
-
                         </div>
                       </Tooltip>
                     </span>
@@ -657,9 +657,9 @@ const Subheader: React.FC<headerInterFace> = ({
                   </div>
                 </div>
                 <div className="">
-                  <span className="pool_font text-[#9CA3AF] font-light text-xs text_subheader1 tracking-[0.06px]">
+                  <p className="pool_font text-[#9CA3AF] font-light text-xs text_subheader1 tracking-[0.06px]">
                     Borrowing Rate
-                  </span>
+                  </p>
                   <p className="pool_font text-[#fff] font-medium text-sm text_subheader tracking-[0.07px]">
                     80.47%
                   </p>
@@ -676,8 +676,9 @@ const Subheader: React.FC<headerInterFace> = ({
                 </span>
               </div>
               <div
-                className={`absolute top-[50px] lg:z-[99] pl-2  right-0 ${isMenuOpen ? "block" : "hidden"
-                  }`}
+                className={`absolute top-[50px] lg:z-[99] pl-2  right-0 ${
+                  isMenuOpen ? "block" : "hidden"
+                }`}
               >
                 <div className=" icon-width three_dot p-[24px] icon-height">
                   <span className="pool_font text-[#9CA3AF] mb-1 text-xs font-medium tracking-[0.06px]">
@@ -686,27 +687,33 @@ const Subheader: React.FC<headerInterFace> = ({
                   <ul className="grid gap-4 grid-cols-2 my-3">
                     <li
                       onClick={() => toggleLayout(false)}
-                      className={`cursor-pointer ${!TRADE_LAYOUT ? "right_bg" : "bg-[#171717]"
-                        } h-[120px] border-[1px] border-solid ${!TRADE_LAYOUT ? "border-[#40E0D0]" : "border-[#25272A]"
-                        }  rounded-[4px]`}
+                      className={`cursor-pointer ${
+                        !TRADE_LAYOUT ? "right_bg" : "bg-[#171717]"
+                      } h-[120px] border-[1px] border-solid ${
+                        !TRADE_LAYOUT ? "border-[#40E0D0]" : "border-[#25272A]"
+                      }  rounded-[4px]`}
                     >
                       <div
-                        className={`${!TRADE_LAYOUT ? " right_bg1" : "bg-[#171717]"
-                          } flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center`}
+                        className={`${
+                          !TRADE_LAYOUT ? " right_bg1" : "bg-[#171717]"
+                        } flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center`}
                       >
                         <div
-                          className={`w-[20px] h-[39px] ${!TRADE_LAYOUT ? "bg-[#40E0D0]" : "bg-[#4B5563]"
-                            }  rounded-[2px]`}
+                          className={`w-[20px] h-[39px] ${
+                            !TRADE_LAYOUT ? "bg-[#40E0D0]" : "bg-[#4B5563]"
+                          }  rounded-[2px]`}
                         ></div>
                         <div
-                          className={`w-[47px] h-[39px] ${!TRADE_LAYOUT ? "right_bg" : "bg-[#25272A]"
-                            }  rounded-[2px]`}
+                          className={`w-[47px] h-[39px] ${
+                            !TRADE_LAYOUT ? "right_bg" : "bg-[#25272A]"
+                          }  rounded-[2px]`}
                         ></div>
                       </div>
                       <div className=" text-center">
                         <span
-                          className={`pool_font ${!TRADE_LAYOUT ? "text-[#40E0D0]" : "text-white"
-                            }  text-xs font-medium tracking-[0.06px]`}
+                          className={`pool_font ${
+                            !TRADE_LAYOUT ? "text-[#40E0D0]" : "text-white"
+                          }  text-xs font-medium tracking-[0.06px]`}
                         >
                           Left Panel
                         </span>
@@ -714,27 +721,33 @@ const Subheader: React.FC<headerInterFace> = ({
                     </li>
                     <li
                       onClick={() => toggleLayout(true)}
-                      className={`${TRADE_LAYOUT ? "right_bg" : "bg-[#171717]"
-                        } h-[120px] border-[1px] border-solid  ${TRADE_LAYOUT ? "border-[#40E0D0]" : "border-[#25272A]"
-                        }  rounded-[4px]`}
+                      className={`${
+                        TRADE_LAYOUT ? "right_bg" : "bg-[#171717]"
+                      } h-[120px] border-[1px] border-solid  ${
+                        TRADE_LAYOUT ? "border-[#40E0D0]" : "border-[#25272A]"
+                      }  rounded-[4px]`}
                     >
                       <div
-                        className={`${TRADE_LAYOUT ? "right_bg1" : "bg-[#171717]"
-                          }  flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center`}
+                        className={`${
+                          TRADE_LAYOUT ? "right_bg1" : "bg-[#171717]"
+                        }  flex rounded-[4px] items-center gap-[4px] h-[90px] justify-center`}
                       >
                         <div
-                          className={`w-[47px] h-[39px] ${TRADE_LAYOUT ? "right_bg" : "bg-[#25272A]"
-                            }  rounded-[2px]`}
+                          className={`w-[47px] h-[39px] ${
+                            TRADE_LAYOUT ? "right_bg" : "bg-[#25272A]"
+                          }  rounded-[2px]`}
                         ></div>
                         <div
-                          className={`w-[20px] h-[39px] ${TRADE_LAYOUT ? "bg-[#40E0D0]" : "bg-[#4B5563]"
-                            }  rounded-[2px]`}
+                          className={`w-[20px] h-[39px] ${
+                            TRADE_LAYOUT ? "bg-[#40E0D0]" : "bg-[#4B5563]"
+                          }  rounded-[2px]`}
                         ></div>
                       </div>
                       <div className=" text-center">
                         <span
-                          className={`pool_font ${TRADE_LAYOUT ? "text-[#40E0D0]" : "text-white"
-                            }  text-xs font-medium tracking-[0.06px]`}
+                          className={`pool_font ${
+                            TRADE_LAYOUT ? "text-[#40E0D0]" : "text-white"
+                          }  text-xs font-medium tracking-[0.06px]`}
                         >
                           Right Panel
                         </span>
@@ -748,12 +761,13 @@ const Subheader: React.FC<headerInterFace> = ({
                         Slippage Tolerace
                       </span>
                       <div
-                        className={`input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ${error
-                          ? "focus-within:border-[#D65454] border-[#D65454]"
-                          : isDisabled
+                        className={`input_field_bg flex w-[40%] items-center gap-3   px-4  h-[38px] ${
+                          error
+                            ? "focus-within:border-[#D65454] border-[#D65454]"
+                            : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <input
                           type="text"

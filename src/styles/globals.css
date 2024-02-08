@@ -506,7 +506,7 @@ input[type="checkbox"]:checked {
     grid-template-columns: 70% 30%;
   }
   .grid-width {
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 65% 35%;
   }
   .portfolio_grids-width {
     grid-template-columns: 18% 82%;
@@ -523,7 +523,13 @@ input[type="checkbox"]:checked {
     grid-template-columns: 25% 75%;
   }
   .grid-width {
-    grid-template-columns: 78% 22%;
+    grid-template-columns: 74% 26%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .grid-width {
+    grid-template-columns: 1fr 260px !important;
   }
 }
 @media (min-width: 1700px) {
@@ -534,7 +540,7 @@ input[type="checkbox"]:checked {
     grid-template-columns: 400px 1fr;
   }
   .grid-width {
-    grid-template-columns: 1fr 230px;
+    grid-template-columns: 1fr 260px;
   }
   .table_width {
     width: -webkit-fill-available;
