@@ -78,7 +78,7 @@ const Trade: React.FC<Tradesprops> = ({
     setIsStakeOpen(true);
     setIsPopupOpen(false);
   };
-
+  console.log(currencyState, "<<<<currencyState")
   return (
     <>
       {error ? (
@@ -106,7 +106,7 @@ const Trade: React.FC<Tradesprops> = ({
                       <Leftsidecomponent isPageLoading={isPageLoading} currencyState={currencyState} />
                     </div>
                     <div className="">
-                      <Middlesidecomponent isPageLoading={isPageLoading} onPriceClick={handlePriceClick} />
+                      <Middlesidecomponent currencyState={currencyState} isPageLoading={isPageLoading} onPriceClick={handlePriceClick} />
                     </div>
                   </div>
                   <div>
@@ -115,6 +115,7 @@ const Trade: React.FC<Tradesprops> = ({
                       handleWalletConnect={handleWalletConnect}
                       InjectedChainId={InjectedChainId}
                       chainId={chainId}
+
                       handleNetworkChange={handleNetworkChange}
                       disconnectMetamask={disconnectMetamask}
                       // isConnected={isConnected}
@@ -161,7 +162,9 @@ const Trade: React.FC<Tradesprops> = ({
                       <Leftsidecomponent isPageLoading={isPageLoading} currencyState={currencyState} />
                     </div>
                     <div className="">
-                      <Middlesidecomponent isPageLoading={isPageLoading} onPriceClick={handlePriceClick} />
+                      <Middlesidecomponent
+                        currencyState={currencyState}
+                        isPageLoading={isPageLoading} onPriceClick={handlePriceClick} />
                     </div>
                   </div>
                   <div>

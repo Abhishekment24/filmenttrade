@@ -15,6 +15,15 @@ const Failedorder: React.FC<FaildorderProps> = ({
   onClose,
   failStatus,
 }) => {
+  useEffect(() => {
+
+
+    if (isOpen) {
+      setTimeout(() => {
+        onClose()
+      }, 5000);
+    }
+  }, [isOpen])
   return (
     <div>
       {isOpen && (

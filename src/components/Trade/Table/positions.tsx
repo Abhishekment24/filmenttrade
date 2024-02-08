@@ -227,31 +227,31 @@ const Positions = () => {
               <div className="text-left  px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
                 Type
               </div>
-              <div className=" text-center px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A]  ">
+              <div className=" text-left px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A]  ">
                 Position Size
               </div>
-              <div className="text-right px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A]  ">
+              <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A]  ">
                 Collateral
               </div>
-              <div className="text-right px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
+              <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
                 Leverage
               </div>
-              <div className="text-right px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
+              <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
                 Quantity
               </div>
-              <div className="text-right px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
+              <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
                 Entry Price
               </div>
-              <div className="text-center px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
+              <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
                 Take Profit
               </div>
-              <div className="text-center px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
+              <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
                 Stop Loss
               </div>
-              <div className="text-right px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
+              <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
                 PnL
               </div>
-              <div className="text-center px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
+              <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
                 Liquidation Price
               </div>
               <div className="text-right pl-2 pr-[25px]  py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
@@ -284,33 +284,33 @@ const Positions = () => {
                         <div className="text-left px-2 py-2 position-width table_width  border-b-[1px] border-solid border-[#25272A] ">
                           {data.type}
                         </div>
-                        <div className="text-center px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                        <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
                           {data.positionSize}
                         </div>
-                        <div className="text-right px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
+                        <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A] ">
                           {data.collateral}
                         </div>
-                        <div className="text-right px-2 py-2 position-width table_width border-b-[1px]  border-solid border-[#25272A]  ">
+                        <div className="text-left px-2 py-2 position-width table_width border-b-[1px]  border-solid border-[#25272A]  ">
                           {data.leverage}
                         </div>
-                        <div className="text-right px-2 py-2 position-width table_width border-b-[1px] border-solid  border-[#25272A] ">
+                        <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid  border-[#25272A] ">
                           {data.quantity}
                         </div>
-                        <div className="text-right px-2 py-2 position-width table_width border-b-[1px] border-solid  border-[#25272A] ">
+                        <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid  border-[#25272A] ">
                           {data.entryprice}
                         </div>
 
-                        <div className="text-center px-2 py-2 position-width table_width border-b-[1px] border-solid  border-[#25272A] ">
+                        <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid  border-[#25272A] ">
                           {data.takeprofit}
                         </div>
-                        <div className="text-center px-2 py-2 position-width table_width border-b-[1px] border-solid  border-[#25272A] ">
+                        <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid  border-[#25272A] ">
                           {data.stoploss}
                         </div>
-                        <div className="text-right flex flex-col text-[#00CC99] px-2 py-2 position-width table_width border-b-[1px]  border-solid border-[#25272A] ">
+                        <div className="text-left flex flex-col text-[#00CC99] px-2 py-2 position-width table_width border-b-[1px]  border-solid border-[#25272A] ">
                           {data.pnL}
                           <span className="text-[10px]">{data.pnlper}</span>
                         </div>
-                        <div className="text-center px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A]  ">
+                        <div className="text-left px-2 py-2 position-width table_width border-b-[1px] border-solid border-[#25272A]  ">
                           {data.liquidationprice}
                         </div>
                         <div className="text-right pl-2 pr-[25px] py-2 position-width table_width border-b-[1px] border-solid border-[#25272A]">

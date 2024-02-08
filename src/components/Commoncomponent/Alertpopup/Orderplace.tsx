@@ -15,6 +15,16 @@ const Orderplace: React.FC<OrderplaceProps> = ({
   onClose,
   orderStatus,
 }) => {
+  useEffect(() => {
+
+
+    if (isOpen) {
+      setTimeout(() => {
+        onClose()
+      }, 5000);
+    }
+  }, [isOpen])
+
   return (
     <div>
       {isOpen && (

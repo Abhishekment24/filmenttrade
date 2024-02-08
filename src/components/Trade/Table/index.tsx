@@ -16,6 +16,7 @@ import { SingleSkeleton } from "@/components/Commoncomponent/SkeletonLoader";
 interface TablesProps {
   //formData: any;
   isPageLoading: boolean,
+
   InjectedChainId: number;
   chainId: number;
 

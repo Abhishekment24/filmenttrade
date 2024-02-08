@@ -46,8 +46,7 @@ const Dropdown = () => {
                 <Listbox.Option
                   key={personIdx}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 px-4 ${
-                      active ? "bg-[#34363C] text-[#fff]" : "text-[#fff]"
+                    `relative cursor-default select-none py-2 px-4 ${active ? "bg-[#34363C] text-[#fff]" : "text-[#fff]"
                     }`
                   }
                   value={person}
@@ -55,9 +54,8 @@ const Dropdown = () => {
                   {({ selected }) => (
                     <>
                       <span
-                        className={`block truncate ${
-                          selected ? "font-medium" : "font-normal"
-                        }`}
+                        className={`block truncate ${selected ? "font-medium" : "font-normal"
+                          }`}
                       >
                         {person.name}
                       </span>

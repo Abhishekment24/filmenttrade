@@ -8,7 +8,9 @@ import { Tooltip } from "react-tooltip";
 import { CiCircleQuestion } from "react-icons/ci";
 import Image from "next/image";
 import { FaRegCopy } from "react-icons/fa6";
-
+import Orderplace from "@/components/Commoncomponent/Alertpopup/Orderplace";
+import { ClipLoader } from "react-spinners";
+import Dropdown from "../Rightsidecomponent/Dropdown";
 interface PositiondetailsPopupProps {
   isOpen: boolean;
 
@@ -20,8 +22,21 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
   onClose,
 }) => {
   let initialPosition = 100; // will be fetched from  API
+  const [isLoading, setIsLoading] = useState(false);
+  const [openpopup, setOpenpopup] = useState(false);
+  const closePopup = () => {
+    setOpenpopup(false);
+  };
+  const Opens = () => {
+    setOpenpopup(true);
+  };
+  const priceOfOrder = 1
+  const [popupVisible, setPopupVisible] = useState(false);
   const [editPopupVisible, setEditPopupVisible] = useState(false);
   const [closePopupVisible, setClosePopupVisible] = useState(false);
+  const [colleteralCurrency, setColleteralCurrency] = useState("$")
+  const [takeProfitCurrency, settakeProfitCurrency] = useState("$")
+  const [stopLossCurrenchy, setstopLossCurrency] = useState("$")
   const [percentSelection, setpercentSelection] = useState<number | string>("");
   const [error, setError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -79,7 +94,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
       }));
     }
   };
-  const [sliderValue, setSliderValue] = useState(10);
+  const [sliderValue, setSliderValue] = useState(1.1);
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSliderValue(parseInt(event.target.value, 10));
   };
@@ -101,6 +116,27 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
   };
   const handleSave = () => {
     toggleEditPopup();
+  };
+  const handleClose = () => {
+    setClosePopupVisible(false);
+    onClose();
+  };
+
+  const handleUpdatePosition = () => {
+    // Show loader
+    setIsLoading(true);
+    setOpenpopup(true);
+    // Simulate update process (replace setTimeout with actual update logic)
+    setTimeout(() => {
+      // Hide loader
+      setIsLoading(false);
+      // Show popup
+      setPopupVisible(true);
+      onClose()
+
+      // Automatically close popup after 5 seconds
+
+    }, 2000); // Simulated update time (2 seconds)
   };
   return (
     <div>
@@ -141,16 +177,15 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                   {!editPopupVisible ? (
                     <>
                       <div
-                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
-                          error ||
+                        className={`bg-[#1F2023] flex  items-center gap-3 mt-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${error ||
                           0.95 * positionSize < +formsData.collateralinput ||
                           +formsData.collateralinput <
-                            positionSize / sliderValue
-                            ? "focus-within:border-[#D65454] border-[#D65454]"
-                            : isDisabled
+                          positionSize / sliderValue
+                          ? "focus-within:border-[#D65454] border-[#D65454]"
+                          : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <span className="pool_font w-[100%] text-[#fff] text-xs font-medium ">
                           Collateral
@@ -170,20 +205,20 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           }
                           disabled={isDisabled}
                         />
-                        <div className="w-[1px] h-[16px] bg-[#25272A]"> </div>
+                        <Dropdown setCurrency={setColleteralCurrency} />
+                        {/* <div className="w-[1px] h-[16px] bg-[#25272A]"> </div> */}
 
                         <span>
                           <MdEdit className="text-[#fff] text-[16px]" />
                         </span>
                       </div>
                       <div
-                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
-                          error
-                            ? "focus-within:border-[#D65454] border-[#D65454]"
-                            : isDisabled
+                        className={`bg-[#1F2023] flex  items-center gap-3 my-3 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${error
+                          ? "focus-within:border-[#D65454] border-[#D65454]"
+                          : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <span className="pool_font w-[100%] text-[#fff] text-xs font-medium ">
                           Leverage
@@ -194,6 +229,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           className=" block w-[100%] pool_font text-[#fff] text-xs font-medium text-right h-[40px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                           disabled={isDisabled}
                         />
+
                         <div className="w-[1px] h-[16px] bg-[#25272A]"> </div>
 
                         <span
@@ -205,13 +241,12 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                       </div>
 
                       <div
-                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
-                          error
-                            ? "focus-within:border-[#D65454] border-[#D65454]"
-                            : isDisabled
+                        className={`bg-[#1F2023] flex  items-center gap-3 mb-3 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${error
+                          ? "focus-within:border-[#D65454] border-[#D65454]"
+                          : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <span className="pool_font w-[100%] text-[#fff] text-xs font-medium ">
                           Take Profit
@@ -229,20 +264,20 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           }
                           disabled={isDisabled}
                         />
-                        <div className="w-[1px] h-[16px] bg-[#25272A]"> </div>
+                        <Dropdown setCurrency={setstopLossCurrency} />
+                        {/* <div className="w-[1px] h-[16px] bg-[#25272A]"> </div> */}
 
                         <span>
                           <MdEdit className="text-[#fff] text-[16px]" />
                         </span>
                       </div>
                       <div
-                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
-                          error
-                            ? "focus-within:border-[#D65454] border-[#D65454]"
-                            : isDisabled
+                        className={`bg-[#1F2023] flex  items-center gap-3 mb-3 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${error
+                          ? "focus-within:border-[#D65454] border-[#D65454]"
+                          : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <span className="pool_font w-[100%] text-[#fff] text-xs font-medium ">
                           Stop Loss
@@ -260,7 +295,8 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           }
                           disabled={isDisabled}
                         />
-                        <div className="w-[1px] h-[16px] bg-[#25272A]"> </div>
+                        <Dropdown setCurrency={settakeProfitCurrency} />
+                        {/* <div className="w-[1px] h-[16px] bg-[#25272A]"> </div> */}
 
                         <span>
                           <MdEdit className="text-[#fff] text-[16px]" />
@@ -273,19 +309,19 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         Update Leverage
                       </span>
                       <div
-                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${
-                          error
-                            ? "focus-within:border-[#D65454] border-[#D65454]"
-                            : isDisabled
+                        className={`bg-[#1F2023] flex  items-center gap-3 my-4 w-[100%] px-3 rounded-[4px] h-[40px] border-[#25272A] border-solid border-[1px] ${error
+                          ? "focus-within:border-[#D65454] border-[#D65454]"
+                          : isDisabled
                             ? "border-[#40E0D0]"
                             : "focus-within:border-[#40E0D0] border-gray-gray4"
-                        } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                          } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <span className="pool_font text-[#9CA3AF] text-sm font-medium tracking-[0.06px]">
                           Leverage
                         </span>
                         <input
                           type="text"
+
                           value={sliderValue}
                           className=" block w-full pool_font text-[#fff] text-[15px] font-medium text-right h-[45px]  bg-transparent border-solid  outline-none focus:ring-0 placeholder-white"
                           disabled={isDisabled}
@@ -297,9 +333,9 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                       <div className="mt-3">
                         <input
                           type="range"
-                          min="0"
+                          min="1.1"
                           max="100"
-                          step="5"
+                          step="0.1"
                           value={sliderValue}
                           onChange={handleSliderChange}
                           className="range-slider"
@@ -341,7 +377,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                     </div>
                   )}
 
-                  <div className="my-5">
+                  <div className="my-3">
                     <div className="">
                       <div className="flex justify-between items-center gap-3 my-[8px]">
                         <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
@@ -349,7 +385,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         </p>
 
                         <p className="pool_font text-[#fff] text-xs font-normal tracking-[0.06px]">
-                          {positionSize} BTC
+                          {(+formsData.collateralinput * sliderValue) / priceOfOrder} BTC
                         </p>
                       </div>
                       <div className="flex justify-between items-center gap-3 my-[8px]">
@@ -393,7 +429,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         </p>
 
                         <p className="pool_font text-[#fff] text-xs font-normal tracking-[0.06px]">
-                          {formsData.collateralinput}USDT
+                          {formsData.collateralinput} USDT
                         </p>
                       </div>
                       <div className="flex justify-between items-center gap-3 my-[8px]">
@@ -402,7 +438,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         </p>
 
                         <p className="pool_font text-[#fff] text-xs font-normal tracking-[0.06px]">
-                          0.3636 USDT
+                          0.3636 USDC
                         </p>
                       </div>
                       <div className="flex justify-between items-center gap-3 my-[8px]">
@@ -411,7 +447,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         </p>
 
                         <p className="pool_font text-[#fff] text-xs font-normal tracking-[0.06px]">
-                          0.3636 USDT
+                          0.3636 USDC
                         </p>
                       </div>
                       <div className="flex justify-between items-center gap-3 my-[8px]">
@@ -448,7 +484,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           </span>
                         </div>
                         <p className="pool_font text-[#fff] text-xs font-normal tracking-[0.06px]">
-                          {formsData.profitinput} $
+                          {formsData.profitinput} USDC
                         </p>
                       </div>
                       <div className="flex justify-between items-center gap-3 my-[8px]">
@@ -457,7 +493,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         </p>
 
                         <p className="pool_font text-[#fff] text-xs font-normal tracking-[0.06px]">
-                          {formsData.stopinput} %
+                          {formsData.stopinput} USDC
                         </p>
                       </div>
                     </div>
@@ -469,7 +505,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                         </p>
 
                         <p className="pool_font text-[#fff] text-xs font-normal tracking-[0.06px]">
-                          100 USDC
+                          {+formsData.collateralinput * sliderValue} USDC
                         </p>
                       </div>
                       <div className="flex justify-between items-center gap-3 my-[8px]">
@@ -477,9 +513,9 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
                             Liquidation Price
                           </p>
-                          <span data-tooltip-id="my-tooltip3">
+                          <span data-tooltip-id="my-tooltip-liquidation">
                             <CiCircleQuestion className="text-[#9CA3AF] text-[12px]" />
-                            <Tooltip id="my-tooltip3" className="tooltip_bg">
+                            <Tooltip id="my-tooltip-liquidation" className="tooltip_bg">
                               <div className="w-[300px]">
                                 <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
                                   Est. Liq Price
@@ -525,7 +561,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           </div>
 
                           <p className="pool_font text-[#fff] text-xs font-normal tracking-[0.06px]">
-                            {item.description}
+                            {item.description} USDC
                           </p>
                         </div>
                       ))}
@@ -533,9 +569,23 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                   </div>
                   {!editPopupVisible ? (
                     <>
-                      <button className="mb-2 items-center pool_font text-[#1F2937] w-full text-[15px] font-semibold  btn_one  py-[12px] px-[8px] tracking-[0.06px]">
-                        Update Position
-                      </button>
+                      {/* {isLoading ? "Updating..." : "Update Position"} */}
+                      {isLoading ? (
+                        <div className="flex justify-center mb-4">
+                          <ClipLoader color="#40E0D0" size={28} />
+                        </div>
+                      ) : (
+                        <>
+                          <button
+                            className="mb-2 items-center pool_font text-[#1F2937] w-full text-[15px] font-semibold btn_one py-[12px] px-[8px] tracking-[0.06px]"
+                            onClick={handleUpdatePosition}
+                            disabled={isLoading} // Disable button while loading
+                          >
+                            Update Position
+                          </button>
+                        </>
+                      )}
+
                       <button
                         onClick={toggleclosePopup}
                         className="items-center pool_font text-[#fff] w-[100%] text-[15px] font-semibold max-border bg-[#2B2B2B] rounded-[8px] py-[12px] px-[8px]"
@@ -566,25 +616,24 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                           />
                         </div>
                         <p className="text-[#9CA3AF] pool_font text-xs font-medium tracking-[0.06px]">
-                          BTC/USDC - BUY
+                          BTC-Perp
                         </p>
                       </div>
                     </div>
                     <button
                       className="bg-[#1B1B1B] border-[1px] border-solid border-[#323232] rounded-[4px] w-[34px] h-[34px] flex items-center justify-center"
-                      onClick={onClose}
+                      onClick={handleClose}
                     >
                       <AiOutlineClose className="text-2xl text-white" />
                     </button>
                   </div>
                   <div
-                    className={`bg-[#2B2B2B] border-[1px] border-solid border-[#363A41] rounded-[8px] flex items-center gap-3 mt-4 w-full px-4 h-[45px] ${
-                      error
-                        ? "focus-within:border-[#D65454] border-[#D65454]"
-                        : isDisabled
+                    className={`bg-[#2B2B2B] border-[1px] border-solid border-[#363A41] rounded-[8px] flex items-center gap-3 mt-4 w-full px-4 h-[45px] ${error
+                      ? "focus-within:border-[#D65454] border-[#D65454]"
+                      : isDisabled
                         ? "border-[#40E0D0]"
                         : "focus-within:border-[#40E0D0] border-gray-gray4"
-                    } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                      } ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                   >
                     <span className="pool_font text-[#9CA3AF] text-xs font-medium tracking-[0.06px]">
                       Amount
@@ -613,11 +662,10 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                             calculatePercentage(item);
                             setpercentSelection(item);
                           }}
-                          className={`cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border ${
-                            percentSelection == item
-                              ? "bg-[#40e0d0]"
-                              : "bg-[#2B2B2B]"
-                          }   w-[25%]`}
+                          className={`cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border ${percentSelection == item
+                            ? "bg-[#40e0d0]"
+                            : "bg-[#2B2B2B]"
+                            }   w-[25%]`}
                         >
                           <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]">
                             {item}%
@@ -652,7 +700,7 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
                     </div> */}
                   </div>
                   <button
-                    onClick={onClose}
+                    onClick={handleClose}
                     className="items-center pool_font text-[#fff] w-[100%] text-[15px] font-semibold bg-[#C33F3F] btn_border rounded-[8px] py-[12px] px-[8px]"
                   >
                     Close Position
@@ -662,6 +710,13 @@ const Positiondetailspopup: React.FC<PositiondetailsPopupProps> = ({
             )}
           </div>
         </>
+      )}
+      {popupVisible && (
+        <Orderplace
+          isOpen={openpopup}
+          onClose={closePopup}
+          orderStatus="placed"
+        />
       )}
     </div>
   );

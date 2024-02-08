@@ -260,7 +260,7 @@ const Header = () => {
                   Trade
                 </Link>
                 <Link
-                  href="/"
+                  href="/pool"
                   className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "pool"
                     ? "font-bold text-[#fff]  "
                     : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
@@ -270,7 +270,7 @@ const Header = () => {
                   Pool
                 </Link>
                 <Link
-                  href="/"
+                  href="/stake"
                   className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "stake"
                     ? "font-bold text-[#fff]  "
                     : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
@@ -280,7 +280,7 @@ const Header = () => {
                   Stake
                 </Link>
                 <Link
-                  href="/"
+                  href="/referral"
                   className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "referral"
                     ? "font-bold text-[#fff]  "
                     : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
@@ -290,7 +290,7 @@ const Header = () => {
                   Referral
                 </Link>
                 <Link
-                  href="/"
+                  href="/leaderboard"
                   className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "leaderboard"
                     ? "font-bold text-[#fff]  "
                     : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
@@ -301,7 +301,7 @@ const Header = () => {
                 </Link>
                 <div className="w-[1px] h-[12px] bg-[#2A2A2A]"> </div>
                 <Link
-                  href="/"
+                  href="/portfolio"
                   className={`pool_font text-xs p-2 rounded-[4px]  transition-all duration-300 ${activeTab === "portfolio"
                     ? "font-bold text-[#fff]  "
                     : "text-[#fff] font-medium hover:bg-[#25272A]  active:bg-[#25272A]"
@@ -885,27 +885,27 @@ const Header = () => {
               </Link>
             </div>
             <div className="py-4">
-              <Link href="/" onClick={handleLink}>
+              <Link href="/pool" onClick={handleLink}>
                 Pool
               </Link>
             </div>
             <div className="">
-              <Link href="/" onClick={handleLink}>
+              <Link href="/stake" onClick={handleLink}>
                 Stake
               </Link>
             </div>
             <div className="py-4">
-              <Link href="/" onClick={handleLink}>
+              <Link href="/referral" onClick={handleLink}>
                 Referral
               </Link>
             </div>
             <div className="">
-              <Link href="/" onClick={handleLink}>
+              <Link href="/leaderboard" onClick={handleLink}>
                 Leaderboard
               </Link>
             </div>
             <div className="py-4">
-              <Link href="/" onClick={handleLink}>
+              <Link href="/portfolio" onClick={handleLink}>
                 Portfolio
               </Link>
             </div>

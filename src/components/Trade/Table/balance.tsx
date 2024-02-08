@@ -8,17 +8,15 @@ const Balance = () => {
           <thead>
             <tr className="pool_font text-xs font-medium border-b-[1px] border-solid border-[#25272A]  text-[#9CA3AF]">
               <th className="text-left font-medium  px-3 py-2">Token</th>
-              <th className="text-right font-medium  px-3 py-2">Quantity</th>
-              <th className="text-right font-medium px-3 py-2">
+              <th className="text-left font-medium  px-3 py-2">Quantity</th>
+              <th className="text-left font-medium px-3 py-2">
                 Staked Quantity
               </th>
-              <th className="text-right  font-medium px-3 py-2">
+              <th className="text-left  font-medium px-3 py-2">
                 LP Contribution
               </th>
-              <th className="text-right font-medium px-3 py-2">LP Tokens</th>
-              <th className="text-right font-medium px-3 py-2">
-                Current Price
-              </th>
+              <th className="text-left font-medium px-3 py-2">LP Tokens</th>
+              <th className="text-left font-medium px-3 py-2">Current Price</th>
               <th className="text-right font-medium px-3 py-2">Total Value</th>
             </tr>
           </thead>
@@ -39,19 +37,19 @@ const Balance = () => {
                     <td className="text-left  font-medium px-3 py-2">
                       {data.token}
                     </td>
-                    <td className="text-right  font-medium px-3 py-2">
+                    <td className="text-left  font-medium px-3 py-2">
                       {data.quantity}
                     </td>
-                    <td className="text-right  font-medium px-3 py-2">
+                    <td className="text-left  font-medium px-3 py-2">
                       {data.stakedquans}
                     </td>
-                    <td className="text-right  font-medium  px-3 py-2">
+                    <td className="text-left  font-medium  px-3 py-2">
                       {data.lpcontribution}
                     </td>
-                    <td className="text-right  font-medium px-3 py-2">
+                    <td className="text-left  font-medium px-3 py-2">
                       {data.lptokens}
                     </td>
-                    <td className="text-right  font-medium  px-3 py-2">
+                    <td className="text-left  font-medium  px-3 py-2">
                       {data.currentprice}
                     </td>
                     <td className="text-right  font-medium  px-3 py-2">

@@ -12,7 +12,7 @@ import Dropdown from "./Dropdown";
 interface MarketProps {
   isConnected: boolean;
   // formData: any;
-  isPageLoading: boolean,
+  isPageLoading: boolean;
 
   StakeOpenPopup: () => void;
 }
@@ -23,17 +23,17 @@ const Market: React.FC<MarketProps> = ({
   // formData,
 }) => {
   //const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const minimumCollateral = 5
+  const minimumCollateral = 5;
   const [isChecked1, setIsChecked1] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
-  const [positionSize, setpositionSize] = useState(0.024)
-  const [maximumCollateral, setmaximumCollateral] = useState(500)
+  const [positionSize, setpositionSize] = useState(0.024);
+  const [maximumCollateral, setmaximumCollateral] = useState(500);
 
   const [isVisible, setIsVisible] = useState(true);
-  const [limitCurrency, setLimitCurrency] = useState("$")
-  const [profitCurrency, setprofitCurrency] = useState("$")
+  const [limitCurrency, setLimitCurrency] = useState("$");
+  const [profitCurrency, setprofitCurrency] = useState("$");
   const [error, setError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -46,7 +46,7 @@ const Market: React.FC<MarketProps> = ({
     Slippageinput: false,
   });
   const [formsData, setFormsData] = useState({
-    collateralinput: "",
+    collateralinput: "1",
     profitinput: "",
     stopinput: "",
     limitinput: "",
@@ -54,15 +54,13 @@ const Market: React.FC<MarketProps> = ({
     Slippageinput: "",
   });
 
-
-
+  const priceOfOrder = 1
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
-
     if (isDisabled) {
       return; // Skip input change if the component is disabled
     }
-    const regex = /^[0-9.]+$/
+    const regex = /^[0-9.]+$/;
     // Check if the input value is valid (numeric)
     if (regex.test(value) || value === "") {
       setFormsData((prevFormData) => ({
@@ -106,21 +104,27 @@ const Market: React.FC<MarketProps> = ({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownRef]);
-  const [sliderValue, setSliderValue] = useState(20);
+  const [sliderValue, setSliderValue] = useState(1.1);
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
+  //const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  // let { value } = event.target;
+  //if (value == "1") return setSliderValue(1.1);
+  // if (value == "") setSliderValue(parseInt("0", 10));
+  // else if (+value > 100) setSliderValue(parseInt("100", 10));
+  // else setSliderValue(parseInt(value, 10));
+  //};
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let { value } = event.target
-    if (value == "") setSliderValue(parseInt("0", 10));
-    else if (+value > 100) setSliderValue(parseInt("100", 10));
-    else setSliderValue(parseInt(value, 10));
+    let { value } = event.target;
+    if (value === "") setSliderValue(0);
+    else if (+value > 100) setSliderValue(100);
+    else setSliderValue(parseFloat(value));
   };
-
   const calculateBgColor = (sliderValue: number) => {
     // Example: Change color based on the value
-    console.log(sliderValue, "<<<<< sliderValue")
-    const percentage = sliderValue
+    console.log(sliderValue, "<<<<< sliderValue");
+    const percentage = sliderValue;
     return `linear-gradient(to right, #40E0D0 ${percentage}%, rgba(64, 224, 208, 0.1) ${percentage}%, rgba(64, 224, 208, 0.1) 100%), #1a1a1a`;
   };
 
@@ -128,16 +132,13 @@ const Market: React.FC<MarketProps> = ({
     background: calculateBgColor(sliderValue),
   };
 
-
-
-
   return (
     <>
       <div className="px-4 pb-[100px]">
-
-
         <div
-          className={`input_field_bg flex items-center gap-3 mt-4  w-full px-4 h-[45px] ${+minimumCollateral > +formsData.collateralinput || error || +formsData.collateralinput > +maximumCollateral
+          className={`input_field_bg flex items-center gap-3 mt-4  w-full px-4 h-[45px] ${+minimumCollateral > +formsData.collateralinput ||
+            error ||
+            +formsData.collateralinput > +maximumCollateral
             ? "focus-within:border-[#D65454] border-[#D65454]"
             : isDisabled
               ? "border-[#40E0D0]"
@@ -151,10 +152,8 @@ const Market: React.FC<MarketProps> = ({
             type="text"
             name="collateralinput"
             value={formsData.collateralinput}
-
-            onChange={e => {
-
-              handleInputChange(e)
+            onChange={(e) => {
+              handleInputChange(e);
               // if (regex.test(value)) handleInputChange(e)
             }}
             placeholder={isPlaceholderHidden.collateralinput ? "" : "25.46"}
@@ -192,9 +191,13 @@ const Market: React.FC<MarketProps> = ({
                   //  onClick={StakeOpenPopup}
                   className="cursor-pointer rounded-[4px] flex justify-center items-center py-[4px] px-[6px] max-border  bg-[#2B2B2B]"
                 >
-                  <p className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]"
+                  <p
+                    className="pool_font text-xs font-medium tracking-[0.06px] text-[#FFFFFF]"
                     onClick={() => {
-                      setFormsData({ ...formsData, collateralinput: `${maximumCollateral}` })
+                      setFormsData({
+                        ...formsData,
+                        collateralinput: `${maximumCollateral}`,
+                      });
                     }}
                   >
                     Max
@@ -266,9 +269,9 @@ const Market: React.FC<MarketProps> = ({
         <div className="">
           <input
             type="range"
-            min="0"
+            min="1.1"
             max="100"
-            step="1"
+            step="0.1"
             value={sliderValue}
             onChange={handleSliderChange}
             className="range-slider my-5"
@@ -422,8 +425,8 @@ const Market: React.FC<MarketProps> = ({
                         disabled={isDisabled}
                       />
 
-                      <span className="pool_font text-[#9CA3AF] text-[15px] font-medium tracking-[0.075px]">
-                        %
+                      <span>
+                        <Dropdown setCurrency={setprofitCurrency} />
                       </span>
                     </div>
                     {enabled && (
@@ -535,7 +538,7 @@ const Market: React.FC<MarketProps> = ({
                 </p>
 
                 <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                  $2000
+                  {parseFloat(`${+formsData.collateralinput * +sliderValue / priceOfOrder}`)}
                 </p>
               </div>
               <div className="flex justify-between items-center gap-3 my-[4px]">
@@ -551,10 +554,8 @@ const Market: React.FC<MarketProps> = ({
                           Leverage
                         </h3>
                         <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                          Leverage changes the multiplier on your gains or
-                          losses increasing your leverage increases how much you
-                          would gain/loose on a trade with the same price
-                          movement
+                          Leverage changes the multiplier on your gains or losses. Increasing your leverage increases how much you would gain or lose on a trade with the same price movement.
+
                         </p>
                       </div>
                     </Tooltip>
@@ -578,19 +579,18 @@ const Market: React.FC<MarketProps> = ({
                         </h3>
                         <ul className="list-disc">
                           <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                            TP/SL are reduce only, which means that they can
-                            only close an existing postion, which means that
-                            they can only close an existing position
-                          </li>
-                          <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px] my-2">
-                            TP/SL are fill-or-kill stop market orders where
-                            excution is not guaranteed. if the orders cannot be
-                            filled within the slippage limits, then the order
-                            will not execute.
+
+                            TP/SL are reduce-only, meaning they can only close an existing position.
                           </li>
                           <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                            1CT must be enabled to use TP/SL
+
+                            These are fill-or-kill stop market orders where execution is not guaranteed. If the orders cannot be filled within the slippage limits, then the order will not execute.
                           </li>
+                          <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+
+                            1CT must be enabled to use TP/SL.
+                          </li>
+
                         </ul>
                       </div>
                     </Tooltip>
@@ -619,20 +619,19 @@ const Market: React.FC<MarketProps> = ({
                         </p>
                         <ul className="list-disc">
                           <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                            Stop orders are NOT conditional / linked to a
-                            position
+                            Stop orders are NOT conditional / linked to a position
                           </li>
                           <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px] my-2">
                             The trigger is executed on the oracle price
                           </li>
                           <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                            Stop orders are always executed in the direction
-                            that the price is moving
+                            Stop orders are always executed in the direction that
+                            the price is moving
                           </li>
                           <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px] my-2">
-                            Stop Market is Fill-or-Kill(Fok), meaning that is
-                            the order: does not fill entirely, it will be
-                            killed(no partial fills)
+                            Stop Market is Fill-or-Kill(Fok), meaning that is the
+                            order: does not fill entirely, it will be killed(no
+                            partial fills)
                           </li>
                           <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
                             Stop market orders use the same slippage as market
@@ -663,6 +662,19 @@ const Market: React.FC<MarketProps> = ({
                   >
                     Adjust
                   </p>
+                  <span data-tooltip-id="my-tooltipslippage">
+                    <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base" />
+                    <Tooltip id="my-tooltipslippage" className="tooltip_bg">
+                      <div className="w-[300px]">
+                        <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
+                          Slippage
+                        </h3>
+                        <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                          Average execution price compared to mid price is determined based on the current order book.
+                        </p>
+                      </div>
+                    </Tooltip>
+                  </span>
                   <div
                     className={`absolute top-[-135px] lg:z-[] pl-2  left-[-17px] ${isMenuOpen ? "block" : "hidden"
                       }`}
@@ -744,13 +756,20 @@ const Market: React.FC<MarketProps> = ({
                         <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
                           Funding
                         </h3>
-                        <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
-                          The total funding payments you have received(+) or
-                          paid(-) payments are made early in usdc.e the funding
-                          rate for the payments is calculated based on the
-                          difference between TWAP of filaments&apos;s large
-                          price and index price
-                        </p>
+                        {/* <p className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]"> */}
+                        <ul className="list-disc">
+                          <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+
+                            The total funding payments you have received (+) or paid (-) are made in USDC.
+                          </li>
+                          <li className="text-[10px] font-normal text-[#fff] pool_font tracking-[0.05px]">
+                            The funding rate for the payments is calculated based on the difference between the TWAP (Time-Weighted Average Price) of Filament large price and the index price.
+                          </li>
+
+                        </ul>
+
+
+                        {/* </p> */}
                       </div>
                     </Tooltip>
                   </span>
@@ -768,7 +787,7 @@ const Market: React.FC<MarketProps> = ({
                 </p>
 
                 <p className="pool_font text-[#FFF] text-xs font-normal tracking-[0.06px]">
-                  $1700
+                  {parseFloat(`${+formsData.collateralinput * +sliderValue}`)}
                 </p>
               </div>
               <div className="flex justify-between items-center gap-3 my-[4px]">
@@ -776,9 +795,9 @@ const Market: React.FC<MarketProps> = ({
                   <p className="pool_font text-[#9CA3AF] text-xs font-normal tracking-[0.06px]">
                     Liquidation Price
                   </p>
-                  <span data-tooltip-id="my-tooltip3">
+                  <span data-tooltip-id="my-tooltip-liquidation">
                     <CiCircleQuestion className="pool_font text-[#9CA3AF] text-base " />
-                    <Tooltip id="my-tooltip3" className="tooltip_bg">
+                    <Tooltip id="my-tooltip-liquidation" className="tooltip_bg">
                       <div className="w-[300px]">
                         <h3 className="text-xs font-bold text-[#FFFFFF] pool_font tracking-[0.06px] mb-2">
                           Est. Liq Price
@@ -828,7 +847,7 @@ const Market: React.FC<MarketProps> = ({
             </div>
           </div>
         )}
-      </div >
+      </div>
     </>
   );
 };

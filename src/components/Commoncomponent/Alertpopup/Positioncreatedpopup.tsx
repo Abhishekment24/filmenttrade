@@ -15,6 +15,13 @@ const Postionpopup: React.FC<PostionpopupProps> = ({
   onClose,
   positionStatus,
 }) => {
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        onClose()
+      }, 5000);
+    }
+  }, [isOpen])
   return (
     <div>
       {isOpen && (

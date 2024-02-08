@@ -15,6 +15,15 @@ const Failedpostion: React.FC<PostionpopupProps> = ({
   onClose,
   failpositionStatus,
 }) => {
+  useEffect(() => {
+
+
+    if (isOpen) {
+      setTimeout(() => {
+        onClose()
+      }, 5000);
+    }
+  }, [isOpen])
   return (
     <div>
       {isOpen && (

@@ -1,3 +1,4 @@
+import Coins from "../../../../public/assest/stake/Coins.png";
 export const tablepositionData = [
   {
     token: "BTC/USDC",
@@ -146,6 +147,7 @@ export const tablepoolData = [
 ];
 export const tablallocationData = [
   {
+    imgsrc: Coins,
     token: "USDC",
     percentage: "223.11/223.11",
     amountutilised: "223.11",
@@ -153,6 +155,7 @@ export const tablallocationData = [
     borrowingrate: "223.11",
   },
   {
+    imgsrc: Coins,
     token: "USDC",
     percentage: "223.11/223.11",
     amountutilised: "223.11",
@@ -165,13 +168,13 @@ export const tablerwardData = [
   {
     date: "1 Jan 2023",
     rewardtype: "Monthly Referral Reward",
-     type: "",
+    type: "",
     rewardvalue: "0.2525 FLP",
   },
   {
     date: "28 Dec 2023",
     rewardtype: "One-time Referral Reward",
-   type: "Referred 3536...36dgd",
+    type: "Referred 3536...36dgd",
     rewardvalue: "0.2525 FLP",
   },
 ];

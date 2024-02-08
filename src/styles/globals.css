@@ -655,6 +655,14 @@ input[type="checkbox"]:checked {
     display: none;
   }
 }
+@media (max-width: 1100px) {
+  .text_subheader {
+   font-size: 12px !important;
+  }
+  .text_subheader1 {
+   font-size: 10px !important;
+  }
+}
 @media (max-width: 1023px) {
   .pool_bg {
     height: auto;
